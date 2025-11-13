@@ -41,7 +41,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         {
             SetDeviceBodyValues();
             byte code = 0;
-            if (!byte.TryParse(txt_code.Text.Trim(), out code)) code = 0;
+            //if (!byte.TryParse(txt_code.Text.Trim(), out code)) code = 0;
 
             Event?.Invoke(this, EventDatas = new UserControlEventArgs(_dataValuesList, _totalDataBytesLength, code));
             MessageBox.Show("Apply!!!");
@@ -71,7 +71,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
             _dataValuesList.AddRange(new List<byte[]>
             {
-                GetStringsToByteArray(txt_code.Text.Trim(), 1),
+                //GetStringsToByteArray(txt_code.Text.Trim(), 1),
                 //GetStringsToByteArray(txt_idx.Text.Trim(), 2),
                 //GetStringsToByteArray(txt_deviceNumber.Text.Trim(), 4),
                 //GetStringsToByteArray(txt_year.Text.Trim(), 1),
