@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver8.DeviceBodyVer8"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel"
+             xmlns:m="clr-namespace:SimReeferMiddlewareSystemWPF.Model"
+             mc:Ignorable="d" Height="1129" Width="849">
+    <!--<UserControl.DataContext>
+        <vm:DeviceBodyViewModel/>
+    </UserControl.DataContext>-->
+    <Grid Margin="0,0,64,-61" Background="GreenYellow">
+        
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="code"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="idx"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="deviceNumber"/>
+
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Code}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Index}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding DeviceNumber}"/>
+
+
+        <Grid Grid.Row="3" Background="AliceBlue">
+         <Button Command="{Binding ToApplyCommand}" Content="적용" />
+
+        </Grid>
+
+        <Grid Grid.Row="3" Grid.Column="1" Background="AliceBlue">
+            <Button Command="{Binding ToProtocolCommand}" Content="Back" />
+
+        </Grid>
+
+
+    </Grid>
+</UserControl>

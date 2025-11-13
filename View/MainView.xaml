@@ -1,0 +1,24 @@
+﻿<Window x:Class="SimReeferMiddlewareSystemWPF.View.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver8"
+        xmlns:viewmodel="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel"
+        mc:Ignorable="d"
+        Title="MainView" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewmodel:ProtocolViewModel}">
+            <local:ProtocolVer8/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:DeviceBodyViewModel}">
+            <local:DeviceBodyVer8/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:SetupInfoViewModel}">
+            <local:SetupInfoVer8/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <ContentControl Content="{Binding CurrentViewModel}"/>
+    </Grid>
+</Window>
