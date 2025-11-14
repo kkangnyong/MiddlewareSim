@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver8"
         xmlns:viewmodel="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        Title="MainView" Height="800" Width="1024">
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewmodel:ProtocolViewModel}">
             <local:ProtocolVer8/>
@@ -19,6 +19,37 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <ContentControl Content="{Binding CurrentViewModel}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Height="70" Background="Aqua" VerticalAlignment="Top">
+            <!--<TextBlock Text="Option" FontSize="10"/>-->
+            <Menu Name="menu1" Height="20" VerticalAlignment="Top">
+                <Menu.BitmapEffect>
+                    <DropShadowBitmapEffect/>
+                </Menu.BitmapEffect>
+                <MenuItem Header="Menu" Background="Olive" VerticalAlignment="Top">
+                    <MenuItem Header="submenu1"/>
+                    <Separator/>
+                    <MenuItem Header="submenu2"/>
+                    <!--<MenuItem.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="submenu1"/>
+                            <Separator/>
+                            <MenuItem Header="submenu2"/>
+                        </ContextMenu>
+                    </MenuItem.ContextMenu>-->
+                </MenuItem>
+            </Menu>
+        </Grid>
+        <Grid Grid.Row="1">
+            <TextBlock Text="Body" FontSize="10"/>
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </Grid>
+        <Grid Grid.Row="2" Height="150" Background="LightGoldenrodYellow">
+            <TextBlock Text="Received Message" FontSize="10"/>
+        </Grid>
     </Grid>
 </Window>
