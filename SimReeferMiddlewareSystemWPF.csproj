@@ -9,7 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Util\" />
+    <Compile Remove="Util\**" />
+    <EmbeddedResource Remove="Util\**" />
+    <None Remove="Util\**" />
+    <Page Remove="Util\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="View\ProtocolVer\Ver10\" />
     <Folder Include="View\ProtocolVer\Ver9\" />
   </ItemGroup>
