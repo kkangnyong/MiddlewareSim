@@ -10,14 +10,17 @@
 
   <ItemGroup>
     <Compile Remove="Util\**" />
+    <Compile Remove="View\ProtocolVer\Ver10\**" />
+    <Compile Remove="View\ProtocolVer\Ver9\**" />
     <EmbeddedResource Remove="Util\**" />
+    <EmbeddedResource Remove="View\ProtocolVer\Ver10\**" />
+    <EmbeddedResource Remove="View\ProtocolVer\Ver9\**" />
     <None Remove="Util\**" />
+    <None Remove="View\ProtocolVer\Ver10\**" />
+    <None Remove="View\ProtocolVer\Ver9\**" />
     <Page Remove="Util\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="View\ProtocolVer\Ver10\" />
-    <Folder Include="View\ProtocolVer\Ver9\" />
+    <Page Remove="View\ProtocolVer\Ver10\**" />
+    <Page Remove="View\ProtocolVer\Ver9\**" />
   </ItemGroup>
 
   <ItemGroup>
