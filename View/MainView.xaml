@@ -21,7 +21,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
-            <RowDefinition/>
+            <RowDefinition />
             <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Height="70" Background="Aqua" VerticalAlignment="Top">
@@ -34,13 +34,6 @@
                     <MenuItem Header="submenu1"/>
                     <Separator/>
                     <MenuItem Header="submenu2"/>
-                    <!--<MenuItem.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="submenu1"/>
-                            <Separator/>
-                            <MenuItem Header="submenu2"/>
-                        </ContextMenu>
-                    </MenuItem.ContextMenu>-->
                 </MenuItem>
             </Menu>
         </Grid>
