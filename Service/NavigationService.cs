@@ -23,6 +23,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(DeviceBodyViewModel));
                     break;
                 case NaviType.DeviceInfoView:
+                    CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(DeviceInfoViewModel));
                     break;
                 case NaviType.ReeferBodyView:
                     break;

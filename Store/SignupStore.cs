@@ -2,8 +2,9 @@
 
 namespace SimReeferMiddlewareSystemWPF.Store
 {
-    public class DeviceBodyStore
+    public class SignupStore
     {
-        public DeviceBodyModel CurrentDeviceBody { get; set; }
+        public DeviceInfoModel? CurrentDeviceInfo { get; set; }
+
     }
 }

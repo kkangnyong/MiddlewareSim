@@ -9,7 +9,7 @@
     <!--<UserControl.DataContext>
         <vm:ProtocolViewModel/>
     </UserControl.DataContext>-->
-    <Grid Margin="0,0,41,10" Background="AliceBlue">
+    <Grid Margin="0,0,0,0" Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -19,29 +19,63 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
-            <Border BorderBrush="Black" BorderThickness="1"/>
-            <TextBlock Text="DeviceBody" FontSize="30"/>
-            <Button Command="{Binding ToDeviceBodyCommand}" Content="DeviceBody" VerticalAlignment="Bottom" Margin="5"/>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Stretch">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <TextBlock Text="DeviceInfo" FontSize="30"/>
+                <ContentControl Content="{Binding CurrentDeviceInfoViewModel}" Margin="0,0,0,0"/>
+            </Grid>
+            <Grid Grid.Row="1" VerticalAlignment="Bottom" Height="30">
+                <Button Command="{Binding ToDeviceInfoCommand}" Content="DeviceInfo" VerticalAlignment="Bottom" Margin="5"/>
+            </Grid>
         </Grid>
         <Grid Grid.Column="1">
-            <Border BorderBrush="Black" BorderThickness="1"/>
-            <TextBlock Text="SetupInfo" FontSize="30"/>
-            <Button Command="{Binding ToSetupInfoCommand}" Content="SetupInfo" VerticalAlignment="Bottom" Margin="5"/>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Stretch">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <TextBlock Text="SetupInfo" FontSize="30"/>
+            </Grid>
+            <Grid Grid.Row="1" VerticalAlignment="Bottom" Height="30">
+                <Button Command="" Content="SetupInfo" VerticalAlignment="Bottom" Margin="5"/>
+            </Grid>
         </Grid>
         <Grid Grid.Column="2">
             <Border BorderBrush="Black" BorderThickness="1"/>
-            <TextBlock Text="Start Data" FontSize="30"/>
-            <Button Content="Start Data" VerticalAlignment="Center" Margin="5" Height="147"/>
+                <TextBlock Text="Start Data" FontSize="30"/>
+                <Button Content="Start Data" VerticalAlignment="Center" Margin="5" Height="147"/>
         </Grid>
         <Grid Grid.Column="3">
-            <Border BorderBrush="Black" BorderThickness="1"/>
-            <TextBlock Text="DeviceData" FontSize="30"/>
-            <Button Content="Device Data" VerticalAlignment="Bottom" Margin="5" />
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Stretch">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <TextBlock Text="DeviceData" FontSize="30"/>
+                <ContentControl Content="{Binding CurrentDeviceBodyViewModel}"/>
+            </Grid>
+            <Grid Grid.Row="1" VerticalAlignment="Bottom" Height="30">
+                <Button Content="Device Data" VerticalAlignment="Bottom" Margin="5" />
+            </Grid>
         </Grid>
         <Grid Grid.Column="4">
-            <Border BorderBrush="Black" BorderThickness="1"/>
-            <TextBlock Text="ReeferData" FontSize="30"/>
-            <Button Content="Reefer Data" VerticalAlignment="Bottom" Margin="5" />
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Stretch">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <TextBlock Text="ReeferData" FontSize="30"/>
+            </Grid>
+            <Grid Grid.Row="1" VerticalAlignment="Bottom" Height="30">
+                <Button Content="Reefer Data" VerticalAlignment="Bottom" Margin="5" />
+            </Grid>
         </Grid>
         <Grid Grid.Column="5">
             <Border BorderBrush="Black" BorderThickness="1"/>

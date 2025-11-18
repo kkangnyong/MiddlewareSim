@@ -11,11 +11,14 @@
         <DataTemplate DataType="{x:Type viewmodel:ProtocolViewModel}">
             <local:ProtocolVer8/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodel:DeviceBodyViewModel}">
-            <local:DeviceBodyVer8/>
+        <DataTemplate DataType="{x:Type viewmodel:DeviceInfoViewModel}">
+            <local:DeviceInfoVer8/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodel:SetupInfoViewModel}">
             <local:SetupInfoVer8/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:DeviceBodyViewModel}">
+            <local:DeviceBodyVer8/>
         </DataTemplate>
     </Window.Resources>
     <Grid>
