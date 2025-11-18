@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel"
-             xmlns:m="clr-namespace:SimReeferMiddlewareSystemWPF.Model"
              mc:Ignorable="d">
+             <!--xmlns:m="clr-namespace:SimReeferMiddlewareSystemWPF.Model"-->
     <UserControl.Resources>
-        <m:DeviceInfoModel x:Key="DeviceInfoModel"/>
+        <vm:DeviceInfoViewModel x:Key="DeviceInfoViewModel"/>
         <Style x:Key="MyTextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -15,7 +15,7 @@
         </Style>
     </UserControl.Resources>
     <UserControl.DataContext>
-        <Binding Source="{StaticResource DeviceInfoModel}"/>
+        <Binding Source="{StaticResource DeviceInfoViewModel}"/>
     </UserControl.DataContext>
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <Grid Margin="0,0,540,0" Background="DarkSlateBlue">

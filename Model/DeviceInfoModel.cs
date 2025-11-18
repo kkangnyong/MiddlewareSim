@@ -1,4 +1,5 @@
 ﻿using SimReeferMiddlewareSystemWPF.Inteface;
+using SimReeferMiddlewareSystemWPF.Store;
 using SimReeferMiddlewareSystemWPF.ViewModel;
 
 namespace SimReeferMiddlewareSystemWPF.Model

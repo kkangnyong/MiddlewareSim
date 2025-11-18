@@ -107,23 +107,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\SEC\\.nuget\\packages\\": {},
+    "C:\\Users\\we301\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\work\\MiddlewareSimWPF\\SimReeferMiddlewareSystemWPF.csproj",
+      "projectUniqueName": "C:\\work\\MiddlewareSim\\SimReeferMiddlewareSystemWPF.csproj",
       "projectName": "SimReeferMiddlewareSystemWPF",
-      "projectPath": "D:\\work\\MiddlewareSimWPF\\SimReeferMiddlewareSystemWPF.csproj",
-      "packagesPath": "C:\\Users\\SEC\\.nuget\\packages\\",
-      "outputPath": "D:\\work\\MiddlewareSimWPF\\obj\\",
+      "projectPath": "C:\\work\\MiddlewareSim\\SimReeferMiddlewareSystemWPF.csproj",
+      "packagesPath": "C:\\Users\\we301\\.nuget\\packages\\",
+      "outputPath": "C:\\work\\MiddlewareSim\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\SEC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\we301\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -180,7 +180,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

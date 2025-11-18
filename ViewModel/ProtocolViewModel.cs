@@ -2,7 +2,6 @@
 using SimReeferMiddlewareSystemWPF.Inteface;
 using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Model;
-using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -16,7 +15,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private readonly IModelData _modelDataService;
         private readonly IDeviceInfo _modelInfo;
         private readonly SignupStore _signupStore;
-        private DeviceInfoModel CurrentDeviceInfoModel => _signupStore.CurrentDeviceInfo;
+        private DeviceInfoViewModel CurrentDeviceInfoModel => _signupStore.CurrentDeviceInfo;
         public ICommand ToDeviceInfoCommand { get; set; }
         //public ICommand ToSetupInfoCommand { get; set; }
 
@@ -33,20 +32,18 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private void ToDeviceInfo(object _)
         {
             Console.WriteLine(CurrentDeviceInfoModel);
-            _signupStore.CurrentDeviceInfo = new Model.DeviceInfoModel { DeviceNumber = _modelInfo.DeviceNumber };
+            //_signupStore.CurrentDeviceInfo = new Model.DeviceInfoModel { DeviceNumber = _modelInfo.DeviceNumber };
             //_navigationService.Navigate(Service.NaviType.DeviceBodyView);
             _messageBoxService.ShowInfo(_modelInfo.DeviceNumber.ToString(), "Save");
             _modelDataService.SetDeviceInfoValues(new List<byte[]> {
                 //_modelDataService.GetStringsToByteArray(),
 
             });
-
-            CurrentDeviceInfoModel.PropertyChanged += CurrentDeviceInfoModel_PropertyChanged;
         }
 
-        private void CurrentDeviceInfoModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        private void CurrentDeviceInfoChanged(DeviceInfoViewModel deviceInfoModel)
         {
-            Console.WriteLine();
+            Console.WriteLine(deviceInfoModel.DeviceNumber);
         }
 
         //private void ToSetupInfo(object _)
@@ -59,6 +56,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         public ProtocolViewModel(IMessageBoxService messageBoxService, IModelData modelDataService, IDeviceInfo modelInfo, SignupStore signupStore)
         {
             _signupStore = signupStore;
+            _signupStore.CurrentDeviceInfoChanged += CurrentDeviceInfoChanged;
             _modelInfo = modelInfo;
             _messageBoxService = messageBoxService;
             ToDeviceInfoCommand = new RelayCommand<object>(ToDeviceInfo);
