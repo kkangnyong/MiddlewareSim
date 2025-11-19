@@ -1,6 +1,6 @@
 ﻿namespace SimReeferMiddlewareSystemWPF.Inteface
 {
-    public interface IReeferBody : IEvent
+    public interface IReeferBody
     {
         void SetReeferBodyValues();
     }

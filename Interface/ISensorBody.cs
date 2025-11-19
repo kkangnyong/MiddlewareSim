@@ -1,6 +1,6 @@
 ﻿namespace SimReeferMiddlewareSystemWPF.Inteface
 {
-    public interface ISensorBody : IEvent
+    public interface ISensorBody
     {
         void SetSensorBodyValues();
     }

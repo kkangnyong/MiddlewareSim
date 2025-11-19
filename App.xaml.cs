@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SimReeferMiddlewareSystemWPF.Inteface;
 using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Service;
@@ -39,13 +38,10 @@ namespace SimReeferMiddlewareSystemWPF
             services.AddSingleton<IMessageBoxService, MessageBoxService>();
             services.AddSingleton<IModelData, ModelDataService>();
 
-            //Model
-            services.AddSingleton<DeviceInfoModel>();
-
             //ViewModels
             services.AddSingleton<MainViewModel>();
-            services.AddTransient<ProtocolViewModel>();
-            services.AddTransient<DeviceInfoViewModel>();
+            services.AddSingleton<ProtocolViewModel>();
+            services.AddSingleton<DeviceInfoViewModel>();
             services.AddSingleton<SetupInfoViewModel>();
             services.AddSingleton<DeviceBodyViewModel>();
             services.AddSingleton<ReeferBodyViewModel>();

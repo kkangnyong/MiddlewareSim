@@ -2,7 +2,7 @@
 {
     public class DeviceInfoModel
     {
-        private char _code;
+        private int _code = 0;
         private int _deviceNumber = 6002032;
         private byte _major = 3;
         private byte _minor = 5;
@@ -42,7 +42,7 @@
         private string _voltage = "4.19";
         private bool _isCharging = true;
 
-        public char Code
+        public int Code
         {
             get { return _code; }
             set

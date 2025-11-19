@@ -1,6 +1,6 @@
 ﻿namespace SimReeferMiddlewareSystemWPF.Inteface
 {
-    public interface ISetupInfo : IEvent
+    public interface ISetupInfo
     {
         void SetSetupInfoValues();
     }

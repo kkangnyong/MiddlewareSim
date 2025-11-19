@@ -22,7 +22,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         }
 
 
-        public char Code
+        public int Code
         {
             get { return DeviceInfoModel.Code; }
             set

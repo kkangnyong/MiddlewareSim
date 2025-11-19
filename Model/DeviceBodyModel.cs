@@ -1,6 +1,6 @@
 ﻿namespace SimReeferMiddlewareSystemWPF.Model
 {
-    public class DeviceBodyModel : ModelBase
+    public class DeviceBodyModel
     {
         public char Code { get; set; }
         public ushort Index { get; set; } = 1;
