@@ -40,9 +40,10 @@
             <Grid Grid.Row="0" VerticalAlignment="Stretch">
                 <Border BorderBrush="Black" BorderThickness="1"/>
                 <TextBlock Text="SetupInfo" FontSize="30"/>
+                <ContentControl Content="{Binding CurrentSetupInfoViewModel}" Margin="0,0,0,0"/>
             </Grid>
             <Grid Grid.Row="1" VerticalAlignment="Bottom" Height="30">
-                <Button Command="" Content="SetupInfo" VerticalAlignment="Bottom" Margin="5"/>
+                <Button Command="{Binding ToSetupInfoCommand}" Content="SetupInfo" VerticalAlignment="Bottom" Margin="5"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="2">

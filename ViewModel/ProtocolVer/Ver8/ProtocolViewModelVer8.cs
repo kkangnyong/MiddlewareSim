@@ -12,15 +12,23 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
         private readonly IMessageBoxService _messageBoxService;
         private readonly IModelData _modelDataService;
         private readonly DeviceInfoStore _deviceInfoStore;
+        private readonly SetupInfoStore _setupInfoStore;
         private readonly DeviceBodyStore _deviceBodyStore;
         private DeviceInfoModel CurrentDeviceInfoModel => _deviceInfoStore._currentDeviceInfo;
+        private SetupInfoModel CurrentSetupInfoModel => _setupInfoStore._currentSetupInfo;
         private DeviceBodyModel CurrentDeviceBodyModel => _deviceBodyStore._currentDeviceBody;
         public ICommand ToDeviceInfoCommand { get; set; }
+        public ICommand ToSetupInfoCommand { get; set; }
         public ICommand ToDeviceBodyCommand { get; set; }
 
         public INotifyPropertyChanged? CurrentDeviceInfoViewModel
         {
             get { return (ViewModelBase)App.Current.Services.GetService(typeof(DeviceInfoViewModelVer8)); }
+        }
+
+        public INotifyPropertyChanged? CurrentSetupInfoViewModel
+        {
+            get { return (ViewModelBase)App.Current.Services.GetService(typeof(SetupInfoViewModelVer8)); }
         }
 
         public INotifyPropertyChanged? CurrentDeviceBodyViewModel
@@ -72,6 +80,30 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.IsCharging ? "1" : "0", 1),
             });
         }
+
+        private void ToSetupInfo(object _)
+        {
+            _modelDataService.SetDataValues(new List<byte[]>
+            {
+                _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.Code.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.CCPR.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.CommPeriod.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.GpsTimeout.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.GpsStableTime.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.WireConnTimeOut.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.RetryCount.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.RcCount.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.TotalStandbyCount.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.AccelShockUpper.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.SetTempLower.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.SetTempUpper.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.HumidLower.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.HumidUpper.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.StateChangeAlarm.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.CutOffVoltage.ToString().Trim(), 2),
+            });
+        }
+
         private void ToDeviceBody(object _)
         {
             _modelDataService.SetDataValues(new List<byte[]>
@@ -113,13 +145,18 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
 
         public ProtocolViewModelVer8() { }
 
-        public ProtocolViewModelVer8(IMessageBoxService messageBoxService, IModelData modelData, DeviceInfoStore deviceInfoStore, DeviceBodyStore deviceBodyStore)
+        public ProtocolViewModelVer8(IMessageBoxService messageBoxService, IModelData modelData, 
+            DeviceInfoStore deviceInfoStore, 
+            SetupInfoStore setupInfoStore, 
+            DeviceBodyStore deviceBodyStore)
         {
             _messageBoxService = messageBoxService;
             _modelDataService = modelData;
             _deviceInfoStore = deviceInfoStore;
+            _setupInfoStore = setupInfoStore;
             _deviceBodyStore = deviceBodyStore;
             ToDeviceInfoCommand = new RelayCommand<object>(ToDeviceInfo);
+            ToSetupInfoCommand = new RelayCommand<object>(ToSetupInfo);
             ToDeviceBodyCommand = new RelayCommand<object>(ToDeviceBody);
             _modelDataService._dataValuesList = new List<byte[]>();
         }

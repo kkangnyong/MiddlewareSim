@@ -33,6 +33,7 @@ namespace SimReeferMiddlewareSystemWPF
             services.AddSingleton<MainNavigationStore>();
             services.AddSingleton<DeviceInfoStore>();
             services.AddSingleton<DeviceBodyStore>();
+            services.AddSingleton<SetupInfoStore>();
 
             //Service
             services.AddSingleton<INavigationService, NavigationService>();
