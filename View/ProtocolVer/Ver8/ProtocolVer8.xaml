@@ -48,8 +48,8 @@
         </Grid>
         <Grid Grid.Column="2">
             <Border BorderBrush="Black" BorderThickness="1"/>
-                <TextBlock Text="Start Data" FontSize="30"/>
-                <Button Content="Start Data" VerticalAlignment="Center" Margin="5" Height="147"/>
+            <TextBlock Text="Start Data" FontSize="30"/>
+            <Button Command="{Binding ToStartDataCommand}" Content="Start Data" VerticalAlignment="Center" Margin="5" Height="147"/>
         </Grid>
         <Grid Grid.Column="3">
             <Grid.RowDefinitions>
@@ -73,15 +73,17 @@
             <Grid Grid.Row="0" VerticalAlignment="Stretch">
                 <Border BorderBrush="Black" BorderThickness="1"/>
                 <TextBlock Text="ReeferData" FontSize="30"/>
+                <ContentControl Content="{Binding CurrentReeferBodyViewModel}"/>
             </Grid>
             <Grid Grid.Row="1" VerticalAlignment="Bottom" Height="30">
-                <Button Content="Reefer Data" VerticalAlignment="Bottom" Margin="5" />
+                <Button Command="{Binding ToReeferBodyCommand}" Content="Reefer Data" VerticalAlignment="Bottom" Margin="5" />
             </Grid>
         </Grid>
         <Grid Grid.Column="5">
             <Border BorderBrush="Black" BorderThickness="1"/>
             <TextBlock Text="Start Command" FontSize="30"/>
-            <Button Content="Start Command" VerticalAlignment="Center" Margin="5" Height="147"/>
+            <Button Command="{Binding ToStartCommandCommand}" Content="Start Command" VerticalAlignment="Center" Margin="5" Height="147"/>
         </Grid>
     </Grid>
 </UserControl>
+    

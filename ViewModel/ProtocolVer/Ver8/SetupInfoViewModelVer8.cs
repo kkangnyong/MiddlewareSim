@@ -28,6 +28,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (SetupInfoModel.Code != null)
                 {
                     SetupInfoModel.Code = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -39,6 +40,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (SetupInfoModel.CCPR != null)
                 {
                     SetupInfoModel.CCPR = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -50,6 +52,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (SetupInfoModel.CommPeriod != null)
                 {
                     SetupInfoModel.CommPeriod = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -61,6 +64,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (SetupInfoModel.GpsTimeout != null)
                 {
                     SetupInfoModel.GpsTimeout = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -72,6 +76,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (SetupInfoModel.GpsStableTime != null)
                 {
                     SetupInfoModel.GpsStableTime = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -83,6 +88,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (SetupInfoModel.WireConnTimeOut != null)
                 {
                     SetupInfoModel.WireConnTimeOut = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -94,6 +100,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (SetupInfoModel.RetryCount != null)
                 {
                     SetupInfoModel.RetryCount = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -105,6 +112,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (SetupInfoModel.RcCount != null)
                 {
                     SetupInfoModel.RcCount = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -116,6 +124,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (SetupInfoModel.TotalStandbyCount != null)
                 {
                     SetupInfoModel.TotalStandbyCount = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -127,6 +136,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (SetupInfoModel.AccelShockUpper != null)
                 {
                     SetupInfoModel.AccelShockUpper = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -138,6 +148,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (SetupInfoModel.SetTempLower != null)
                 {
                     SetupInfoModel.SetTempLower = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -149,6 +160,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (SetupInfoModel.SetTempUpper != null)
                 {
                     SetupInfoModel.SetTempUpper = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -160,6 +172,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (SetupInfoModel.HumidLower != null)
                 {
                     SetupInfoModel.HumidLower = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -171,6 +184,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (SetupInfoModel.HumidUpper != null)
                 {
                     SetupInfoModel.HumidUpper = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -182,6 +196,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (SetupInfoModel.StateChangeAlarm != null)
                 {
                     SetupInfoModel.StateChangeAlarm = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -193,6 +208,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (SetupInfoModel.CutOffVoltage != null)
                 {
                     SetupInfoModel.CutOffVoltage = value;
+                    OnPropertyChanged();
                 }
             }
         }

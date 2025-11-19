@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "GpTArB5unLc=",
+  "dgSpecHash": "NAgb8c3x140=",
   "success": true,
-  "projectFilePath": "D:\\work\\MiddlewareSimWPF\\SimReeferMiddlewareSystemWPF.csproj",
+  "projectFilePath": "C:\\work\\MiddlewareSim\\SimReeferMiddlewareSystemWPF.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\SEC\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.10\\microsoft.extensions.dependencyinjection.9.0.10.nupkg.sha512",
-    "C:\\Users\\SEC\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.10\\microsoft.extensions.dependencyinjection.abstractions.9.0.10.nupkg.sha512"
+    "C:\\Users\\we301\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.10\\microsoft.extensions.dependencyinjection.9.0.10.nupkg.sha512",
+    "C:\\Users\\we301\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.10\\microsoft.extensions.dependencyinjection.abstractions.9.0.10.nupkg.sha512"
   ],
   "logs": []
 }

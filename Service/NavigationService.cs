@@ -27,9 +27,10 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(DeviceInfoViewModelVer8));
                     break;
                 case NaviType.ReeferBodyView:
+                    CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(ReeferBodyViewModelVer8));
                     break;
                 case NaviType.SetupInfoView:
-                    CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(SetupInfoModel));
+                    CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(SetupInfoViewModelVer8));
                     break;
                 default:
                     CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(ProtocolViewModelVer8));

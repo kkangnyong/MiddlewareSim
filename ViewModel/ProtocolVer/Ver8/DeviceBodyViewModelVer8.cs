@@ -28,6 +28,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.Code != null)
                 {
                     DeviceBodyModel.Code = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -39,6 +40,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.Index != null)
                 {
                     DeviceBodyModel.Index = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -50,6 +52,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.DeviceNumber != null)
                 {
                     DeviceBodyModel.DeviceNumber = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -61,6 +64,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.Year != null)
                 {
                     DeviceBodyModel.Year = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -72,6 +76,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.Month != null)
                 {
                     DeviceBodyModel.Month = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -83,6 +88,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.Day != null)
                 {
                     DeviceBodyModel.Day = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -94,6 +100,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.Hour != null)
                 {
                     DeviceBodyModel.Hour = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -105,6 +112,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.Min != null)
                 {
                     DeviceBodyModel.Min = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -116,6 +124,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.Second != null)
                 {
                     DeviceBodyModel.Second = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -127,6 +136,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.GPSEnable != null)
                 {
                     DeviceBodyModel.GPSEnable = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -138,6 +148,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.LatDegree != null)
                 {
                     DeviceBodyModel.LatDegree = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -149,6 +160,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.LatDegreePoint1 != null)
                 {
                     DeviceBodyModel.LatDegreePoint1 = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -160,6 +172,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.LatDegreePoint2 != null)
                 {
                     DeviceBodyModel.LatDegreePoint2 = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -171,6 +184,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.LatDegreePoint3 != null)
                 {
                     DeviceBodyModel.LatDegreePoint3 = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -182,6 +196,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.NS != null)
                 {
                     DeviceBodyModel.NS = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -193,6 +208,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.LongDegree != null)
                 {
                     DeviceBodyModel.LongDegree = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -204,6 +220,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.LongDegreePoint1 != null)
                 {
                     DeviceBodyModel.LongDegreePoint1 = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -215,6 +232,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.LongDegreePoint2 != null)
                 {
                     DeviceBodyModel.LongDegreePoint2 = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -226,6 +244,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.LongDegreePoint3 != null)
                 {
                     DeviceBodyModel.LongDegreePoint3 = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -237,6 +256,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.EW != null)
                 {
                     DeviceBodyModel.EW = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -248,6 +268,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.Speed != null)
                 {
                     DeviceBodyModel.Speed = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -259,6 +280,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.MaxSpeed != null)
                 {
                     DeviceBodyModel.MaxSpeed = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -270,6 +292,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.IsCharging != null)
                 {
                     DeviceBodyModel.IsCharging = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -281,6 +304,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.Battery != null)
                 {
                     DeviceBodyModel.Battery = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -292,6 +316,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.Temp != null)
                 {
                     DeviceBodyModel.Temp = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -303,6 +328,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.AcclX != null)
                 {
                     DeviceBodyModel.AcclX = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -314,6 +340,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.AcclY != null)
                 {
                     DeviceBodyModel.AcclY = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -325,6 +352,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.AcclZ != null)
                 {
                     DeviceBodyModel.AcclZ = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -336,6 +364,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.Alarm != null)
                 {
                     DeviceBodyModel.Alarm = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -347,6 +376,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.GeofenceInOutIndex != null)
                 {
                     DeviceBodyModel.GeofenceInOutIndex = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -358,6 +388,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.GeofenceInOutState != null)
                 {
                     DeviceBodyModel.GeofenceInOutState = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -369,6 +400,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.CommCode != null)
                 {
                     DeviceBodyModel.CommCode = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -380,6 +412,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.Rsrp != null)
                 {
                     DeviceBodyModel.Rsrp = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -391,6 +424,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.Rscp != null)
                 {
                     DeviceBodyModel.Rscp = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -402,6 +436,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.Rssi != null)
                 {
                     DeviceBodyModel.Rssi = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -413,6 +448,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 if (DeviceBodyModel.MobileErrorCode != null)
                 {
                     DeviceBodyModel.MobileErrorCode = value;
+                    OnPropertyChanged();
                 }
             }
         }

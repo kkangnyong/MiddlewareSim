@@ -291,7 +291,7 @@
             {
                 if (_ccpr != null)
                 {
-                    _deviceNumber = value;
+                    _ccpr = value;
                 }
             }
         }

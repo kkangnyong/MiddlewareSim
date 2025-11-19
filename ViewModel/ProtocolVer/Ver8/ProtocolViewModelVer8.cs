@@ -14,12 +14,17 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
         private readonly DeviceInfoStore _deviceInfoStore;
         private readonly SetupInfoStore _setupInfoStore;
         private readonly DeviceBodyStore _deviceBodyStore;
+        private readonly ReeferBodyStore _reeferBodyStore;
         private DeviceInfoModel CurrentDeviceInfoModel => _deviceInfoStore._currentDeviceInfo;
         private SetupInfoModel CurrentSetupInfoModel => _setupInfoStore._currentSetupInfo;
         private DeviceBodyModel CurrentDeviceBodyModel => _deviceBodyStore._currentDeviceBody;
+        private ReeferBodyModel CurrentReeferBodyModel => _reeferBodyStore._currentReeferBody;
         public ICommand ToDeviceInfoCommand { get; set; }
         public ICommand ToSetupInfoCommand { get; set; }
         public ICommand ToDeviceBodyCommand { get; set; }
+        public ICommand ToReeferBodyCommand { get; set; }
+        public ICommand ToStartDataCommand { get; set; }
+        public ICommand ToStartCommandCommand { get; set; }
 
         public INotifyPropertyChanged? CurrentDeviceInfoViewModel
         {
@@ -34,6 +39,11 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
         public INotifyPropertyChanged? CurrentDeviceBodyViewModel
         {
             get { return (ViewModelBase)App.Current.Services.GetService(typeof(DeviceBodyViewModelVer8)); }
+        }
+
+        public INotifyPropertyChanged? CurrentReeferBodyViewModel
+        {
+            get { return (ViewModelBase)App.Current.Services.GetService(typeof(ReeferBodyViewModelVer8)); }
         }
 
         private void ToDeviceInfo(object _)
@@ -143,21 +153,80 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
             });
         }
 
+        private void ToReeferBody(object _)
+        {
+            _modelDataService.SetDataValues(new List<byte[]>
+            {
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.ContainerSN.ToString().Trim(), 11, true),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Sp.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Ss.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Dss.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Rs.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Eos.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Ambs.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Dchs.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Sgs.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Tintern.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Tfc.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.AirExchange.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.TotalCurrent.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Usda1.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Usda2.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Usda3.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Cts.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Humid.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.HumiditySet.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.O2.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.O2Set.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Co2.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Co2Set.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.ModeType.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Hrp.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Lrp.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Phase3Voltage.ToString().Trim(), 3),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Phase3Current.ToString().Trim(), 6),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Pt.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Ifc.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.DefrostInter.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.IsoStatus.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Status.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Alarms.ToString().Trim(), 16),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.PrivateAlarms.ToString().Trim(), 32),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Controller.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.HwVer.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.SwVer.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.EtcCode.ToString().Trim(), 1)
+            });
+        }
+
+        private void ToStartData(object _) 
+        {
+        }
+
+        private void ToStartCommand(object _)
+        {
+        }
+
         public ProtocolViewModelVer8() { }
 
         public ProtocolViewModelVer8(IMessageBoxService messageBoxService, IModelData modelData, 
             DeviceInfoStore deviceInfoStore, 
             SetupInfoStore setupInfoStore, 
-            DeviceBodyStore deviceBodyStore)
+            DeviceBodyStore deviceBodyStore,
+            ReeferBodyStore reeferBodyStore)
         {
             _messageBoxService = messageBoxService;
             _modelDataService = modelData;
             _deviceInfoStore = deviceInfoStore;
             _setupInfoStore = setupInfoStore;
             _deviceBodyStore = deviceBodyStore;
+            _reeferBodyStore = reeferBodyStore;
             ToDeviceInfoCommand = new RelayCommand<object>(ToDeviceInfo);
             ToSetupInfoCommand = new RelayCommand<object>(ToSetupInfo);
             ToDeviceBodyCommand = new RelayCommand<object>(ToDeviceBody);
+            ToReeferBodyCommand = new RelayCommand<object>(ToReeferBody);
+            ToStartDataCommand = new RelayCommand<object>(ToStartData);
+            ToStartCommandCommand = new RelayCommand<object>(ToStartCommand);
             _modelDataService._dataValuesList = new List<byte[]>();
         }
     }

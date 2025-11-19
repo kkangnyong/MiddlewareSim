@@ -20,6 +20,9 @@
         <DataTemplate DataType="{x:Type viewmodel:DeviceBodyViewModelVer8}">
             <local:DeviceBodyVer8/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:ReeferBodyViewModelVer8}">
+            <local:ReeferBodyVer8/>
+        </DataTemplate>
         <Style x:Key="MyTextStyle" TargetType="MenuItem">
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="Bold"/>
