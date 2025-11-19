@@ -6,6 +6,9 @@
         public int TotalDataBytesLength { get; private set; }
         public string? DataBytesToString { get; private set; }
         public bool IsLastData { get; private set; }
+        public string Name { get; private set; }
+        public object OldValue { get; private set; }
+        public object Value { get; private set; }
         public UserControlEventArgs(List<byte[]> dataBytesList, int totalDataBytesLength, byte code = 0) 
         { 
             DataBytesList = dataBytesList;
@@ -13,11 +16,18 @@
             if (code > 0) IsLastData = ((code & 0x10) == 0x10);
         }
 
-        public UserControlEventArgs(string dataBytesToString, int totalDataBytesLength, byte code = 0)
+        //public UserControlEventArgs(string dataBytesToString, int totalDataBytesLength, byte code = 0)
+        //{
+        //    DataBytesToString = dataBytesToString;
+        //    TotalDataBytesLength = totalDataBytesLength;
+        //    if (code > 0) IsLastData = ((code & 0x10) == 0x10);
+        //}
+
+        public UserControlEventArgs(string name, object oldValue, object value)
         {
-            DataBytesToString = dataBytesToString;
-            TotalDataBytesLength = totalDataBytesLength;
-            if (code > 0) IsLastData = ((code & 0x10) == 0x10);
+            Name = name;
+            OldValue = oldValue;
+            Value = value;
         }
     }
 }

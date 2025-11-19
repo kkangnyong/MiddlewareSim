@@ -1,29 +1,70 @@
 ﻿using SimReeferMiddlewareSystemWPF.Inteface;
-using SimReeferMiddlewareSystemWPF.Interface;
-using System.ComponentModel;
+using SimReeferMiddlewareSystemWPF.Model;
+using SimReeferMiddlewareSystemWPF.Store;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel
 {
     public class DeviceInfoViewModel : ViewModelBase, IDeviceInfo
     {
-        private readonly IMessageBoxService _messageService;
-        private readonly IModelData _modelDataService;
-        private readonly IDeviceInfo _modelInfo;
+        private static DeviceInfoViewModel _instance;
+        public static DeviceInfoViewModel Instance { get { if (_instance == null) _instance = new DeviceInfoViewModel(); return _instance; }  }
+
+        private DeviceInfoStore _deviceInfoStore;
+        private event EventHandler<UserControlEventArgs> _deviceChanged;
 
         public DeviceInfoViewModel() { }
 
-        public DeviceInfoViewModel(IMessageBoxService messageService, IModelData modelDataService, IDeviceInfo modelInfo) 
+        public DeviceInfoViewModel(DeviceInfoStore deviceInfoStore) 
         {
-            _messageService = messageService;
-            _modelDataService = modelDataService;
-            _modelInfo = modelInfo;
-
-            PropertyChanged += DeviceInfoViewModel_PropertyChanged;
+            Instance._deviceInfoStore = deviceInfoStore;
+            Instance._deviceChanged += DeviceInfoViewModel_deviceChanged;
+            Instance._deviceInfoStore._currentDeviceInfo = new DeviceInfoModel();
         }
 
-        private void DeviceInfoViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        private void DeviceInfoViewModel_deviceChanged(object? sender, UserControlEventArgs e)
         {
-            Console.WriteLine(e.PropertyName);
+            Console.WriteLine(e.OldValue + "" + e.Value);
+            if (e == null || string.IsNullOrEmpty(e.Name))
+            {
+                return;
+            }
+
+            DeviceInfoModel deviceInfoModel = Instance._deviceInfoStore._currentDeviceInfo;
+
+            if (e.Name.Equals(nameof(Code)))
+            {
+                deviceInfoModel.Code = (char)e.Value;
+            }
+            else
+            if (e.Name.Equals(nameof(DeviceNumber)))
+            {
+                deviceInfoModel.DeviceNumber = (int)e.Value;
+            }
+            else
+            if (e.Name.Equals(nameof(Major)))
+            {
+                deviceInfoModel.Major = (byte)e.Value;
+            }
+            else
+            if (e.Name.Equals(nameof(Minor)))
+            {
+                deviceInfoModel.Minor = (byte)e.Value;
+            }
+            else
+            if (e.Name.Equals(nameof(Revision)))
+            {
+                deviceInfoModel.Revision = (byte)e.Value;
+            }
+
+            Instance._deviceInfoStore._currentDeviceInfo = deviceInfoModel;
+        }
+
+        private void OnChanged(UserControlEventArgs args)
+        {
+            if (Instance._deviceChanged != null)
+            {
+                Instance._deviceChanged(this, args);
+            }
         }
 
         private char _code;
@@ -73,8 +114,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             {
                 if (_code != null)
                 {
+                    char oldValue = _code;
                     _code = value;
                     OnPropertyChanged();
+                    Instance.OnChanged(new UserControlEventArgs(nameof(Code), oldValue, value));
                 }
             }
         }
@@ -85,8 +128,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             {
                 if (_deviceNumber != null)
                 {
+                    int oldValue = _deviceNumber;
                     _deviceNumber = value;
                     OnPropertyChanged();
+                    Instance.OnChanged(new UserControlEventArgs(nameof(DeviceNumber), oldValue, value));
                 }
             }
         }
@@ -97,8 +142,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             {
                 if (_major != null)
                 {
+                    byte oldValue = _major;
                     _major = value;
                     OnPropertyChanged();
+                    Instance.OnChanged(new UserControlEventArgs(nameof(Major), oldValue, value));
                 }
             }
         }
@@ -109,8 +156,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             {
                 if (_minor != null)
                 {
+                    byte oldValue = _minor;
                     _minor = value;
                     OnPropertyChanged();
+                    Instance.OnChanged(new UserControlEventArgs(nameof(Minor), oldValue, value));
                 }
             }
         }
@@ -121,8 +170,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             {
                 if (_revision != null)
                 {
+                    byte oldValue = _revision;
                     _revision = value;
                     OnPropertyChanged();
+                    Instance.OnChanged(new UserControlEventArgs(nameof(Revision), oldValue, value));
                 }
             }
         }
@@ -356,12 +407,12 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         }
         public byte GpsTimeout
         {
-            get { return _gpsStableTime; }
+            get { return _gpsTimeout; }
             set
             {
-                if (_gpsStableTime != null)
+                if (_gpsTimeout != null)
                 {
-                    _gpsStableTime = value;
+                    _gpsTimeout = value;
                     OnPropertyChanged();
                 }
             }

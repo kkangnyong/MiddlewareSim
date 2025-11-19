@@ -32,7 +32,7 @@ namespace SimReeferMiddlewareSystemWPF
 
             //Store
             services.AddSingleton<MainNavigationStore>();
-            services.AddSingleton<SignupStore>();
+            services.AddSingleton<DeviceInfoStore>();
 
             //Service
             services.AddSingleton<INavigationService, NavigationService>();
@@ -40,12 +40,12 @@ namespace SimReeferMiddlewareSystemWPF
             services.AddSingleton<IModelData, ModelDataService>();
 
             //Model
-            services.AddSingleton<IDeviceInfo, DeviceInfoModel>();
+            services.AddSingleton<DeviceInfoModel>();
 
             //ViewModels
             services.AddSingleton<MainViewModel>();
-            services.AddSingleton<ProtocolViewModel>();
-            services.AddSingleton<DeviceInfoViewModel>();
+            services.AddTransient<ProtocolViewModel>();
+            services.AddTransient<DeviceInfoViewModel>();
             services.AddSingleton<SetupInfoViewModel>();
             services.AddSingleton<DeviceBodyViewModel>();
             services.AddSingleton<ReeferBodyViewModel>();
