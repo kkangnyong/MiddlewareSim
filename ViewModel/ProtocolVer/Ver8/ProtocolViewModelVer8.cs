@@ -5,29 +5,32 @@ using SimReeferMiddlewareSystemWPF.Store;
 using System.ComponentModel;
 using System.Windows.Input;
 
-namespace SimReeferMiddlewareSystemWPF.ViewModel
+namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
 {
-    public class ProtocolViewModel : ViewModelBase
+    public class ProtocolViewModelVer8 : ViewModelBase
     {
         private readonly IMessageBoxService _messageBoxService;
         private readonly IModelData _modelDataService;
         private readonly DeviceInfoStore _deviceInfoStore;
+        private readonly DeviceBodyStore _deviceBodyStore;
         private DeviceInfoModel CurrentDeviceInfoModel => _deviceInfoStore._currentDeviceInfo;
+        private DeviceBodyModel CurrentDeviceBodyModel => _deviceBodyStore._currentDeviceBody;
         public ICommand ToDeviceInfoCommand { get; set; }
+        public ICommand ToDeviceBodyCommand { get; set; }
 
         public INotifyPropertyChanged? CurrentDeviceInfoViewModel
         {
-            get { return (ViewModelBase)App.Current.Services.GetService(typeof(DeviceInfoViewModel)); }
+            get { return (ViewModelBase)App.Current.Services.GetService(typeof(DeviceInfoViewModelVer8)); }
         }
 
         public INotifyPropertyChanged? CurrentDeviceBodyViewModel
         {
-            get { return (ViewModelBase)App.Current.Services.GetService(typeof(DeviceBodyViewModel)); }
+            get { return (ViewModelBase)App.Current.Services.GetService(typeof(DeviceBodyViewModelVer8)); }
         }
 
         private void ToDeviceInfo(object _)
         {
-            _modelDataService.SetDeviceInfoValues(new List<byte[]>
+            _modelDataService.SetDataValues(new List<byte[]>
             {
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.Code.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.DeviceNumber.ToString().Trim(), 4),
@@ -69,15 +72,55 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.IsCharging ? "1" : "0", 1),
             });
         }
-
-        public ProtocolViewModel() { }
-
-        public ProtocolViewModel(IMessageBoxService messageBoxService, IModelData modelData, DeviceInfoStore deviceInfoStore)
+        private void ToDeviceBody(object _)
         {
-            _deviceInfoStore = deviceInfoStore;
+            _modelDataService.SetDataValues(new List<byte[]>
+            {
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Code.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Index.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.DeviceNumber.ToString().Trim(), 4),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Year.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Month.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Day.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Hour.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Min.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Second.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.GPSEnable.ToString().Trim(), 1, true),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.LatDegree.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.LatDegreePoint1.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.LatDegreePoint2.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.LatDegreePoint3.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.NS.ToString().Trim(), 1, true),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.LongDegree.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.LongDegreePoint1.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.LongDegreePoint2.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.LongDegreePoint3.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.EW.ToString().Trim(), 1, true),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Speed.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.MaxSpeed.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.IsCharging ? "1" : "0", 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Battery.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Temp.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.AcclX.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.AcclY.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.AcclZ.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Alarm.ToString().Trim(), 4),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.GeofenceInOutIndex.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.GeofenceInOutState.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.CommCode.ToString().Trim(), 1)
+            });
+        }
+
+        public ProtocolViewModelVer8() { }
+
+        public ProtocolViewModelVer8(IMessageBoxService messageBoxService, IModelData modelData, DeviceInfoStore deviceInfoStore, DeviceBodyStore deviceBodyStore)
+        {
             _messageBoxService = messageBoxService;
             _modelDataService = modelData;
+            _deviceInfoStore = deviceInfoStore;
+            _deviceBodyStore = deviceBodyStore;
             ToDeviceInfoCommand = new RelayCommand<object>(ToDeviceInfo);
+            ToDeviceBodyCommand = new RelayCommand<object>(ToDeviceBody);
             _modelDataService._dataValuesList = new List<byte[]>();
         }
     }

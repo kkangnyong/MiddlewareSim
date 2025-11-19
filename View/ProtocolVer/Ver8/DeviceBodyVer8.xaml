@@ -3,11 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:vm="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel"
-             xmlns:m="clr-namespace:SimReeferMiddlewareSystemWPF.Model"
+             xmlns:vm="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8"
              mc:Ignorable="d">
     <UserControl.Resources>
-        <m:DeviceBodyModel x:Key="DeviceBodyModel"/>
+        <vm:DeviceBodyViewModelVer8 x:Key="DeviceBodyViewModelVer8"/>
         <Style x:Key="MyTextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -15,7 +14,7 @@
         </Style>
     </UserControl.Resources>
     <UserControl.DataContext>
-        <Binding Source="{StaticResource DeviceBodyModel}"/>
+        <Binding Source="{StaticResource DeviceBodyViewModelVer8}"/>
     </UserControl.DataContext>
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
         <Grid Margin="0,0,540,0" Background="GreenYellow">

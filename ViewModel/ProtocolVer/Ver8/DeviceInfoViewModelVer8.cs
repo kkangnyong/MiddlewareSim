@@ -1,12 +1,12 @@
 ﻿using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Store;
 
-namespace SimReeferMiddlewareSystemWPF.ViewModel
+namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
 {
-    public class DeviceInfoViewModel : ViewModelBase
+    public class DeviceInfoViewModelVer8 : ViewModelBase
     {
-        private static DeviceInfoViewModel _instance;
-        public static DeviceInfoViewModel Instance { get { if (_instance == null) _instance = new DeviceInfoViewModel(); return _instance; }  }
+        private static DeviceInfoViewModelVer8 _instance;
+        public static DeviceInfoViewModelVer8 Instance { get { if (_instance == null) _instance = new DeviceInfoViewModelVer8(); return _instance; }  }
 
         private DeviceInfoStore _deviceInfoStore;
         //private event EventHandler<UserControlEventArgs> _deviceChanged;
@@ -14,9 +14,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private DeviceInfoModel _deviceInfoModel;
         public DeviceInfoModel DeviceInfoModel { get { if (_deviceInfoModel == null) _deviceInfoModel = Instance._deviceInfoStore._currentDeviceInfo = new DeviceInfoModel(); return _deviceInfoModel; } }
 
-        public DeviceInfoViewModel() { }
+        public DeviceInfoViewModelVer8() { }
 
-        public DeviceInfoViewModel(DeviceInfoStore deviceInfoStore) 
+        public DeviceInfoViewModelVer8(DeviceInfoStore deviceInfoStore) 
         {
             Instance._deviceInfoStore = deviceInfoStore;
         }

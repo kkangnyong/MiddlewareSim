@@ -2,6 +2,7 @@
 using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Store;
 using SimReeferMiddlewareSystemWPF.ViewModel;
+using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8;
 using System.ComponentModel;
 
 namespace SimReeferMiddlewareSystemWPF.Service
@@ -20,10 +21,10 @@ namespace SimReeferMiddlewareSystemWPF.Service
             switch (type)
             {
                 case NaviType.DeviceBodyView:
-                    CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(DeviceBodyViewModel));
+                    CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(DeviceBodyViewModelVer8));
                     break;
                 case NaviType.DeviceInfoView:
-                    CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(DeviceInfoViewModel));
+                    CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(DeviceInfoViewModelVer8));
                     break;
                 case NaviType.ReeferBodyView:
                     break;
@@ -31,7 +32,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(SetupInfoModel));
                     break;
                 default:
-                    CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(ProtocolViewModel));
+                    CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(ProtocolViewModelVer8));
                     break;
             }
         }

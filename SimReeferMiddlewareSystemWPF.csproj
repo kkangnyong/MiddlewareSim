@@ -10,21 +10,20 @@
 
   <ItemGroup>
     <Compile Remove="Util\**" />
-    <Compile Remove="View\ProtocolVer\Ver10\**" />
-    <Compile Remove="View\ProtocolVer\Ver9\**" />
     <EmbeddedResource Remove="Util\**" />
-    <EmbeddedResource Remove="View\ProtocolVer\Ver10\**" />
-    <EmbeddedResource Remove="View\ProtocolVer\Ver9\**" />
     <None Remove="Util\**" />
-    <None Remove="View\ProtocolVer\Ver10\**" />
-    <None Remove="View\ProtocolVer\Ver9\**" />
     <Page Remove="Util\**" />
-    <Page Remove="View\ProtocolVer\Ver10\**" />
-    <Page Remove="View\ProtocolVer\Ver9\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModel\ProtocolVer\Ver9\" />
+    <Folder Include="ViewModel\ProtocolVer\Ver10\" />
+    <Folder Include="View\ProtocolVer\Ver10\" />
+    <Folder Include="View\ProtocolVer\Ver9\" />
   </ItemGroup>
 
 </Project>

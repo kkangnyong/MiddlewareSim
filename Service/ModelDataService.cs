@@ -9,7 +9,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
         public List<byte[]>? _dataValuesList { get; set; }
         public int _totalDataBytesLength = 0;
 
-        public void SetDeviceInfoValues(List<byte[]> dataList)
+        public void SetDataValues(List<byte[]> dataList)
         {
             if (_dataValuesList != null && _dataValuesList.Count > 0)
             {

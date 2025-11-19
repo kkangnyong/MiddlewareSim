@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SimReeferMiddlewareSystemWPF.Interface;
-using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
 using SimReeferMiddlewareSystemWPF.View;
 using SimReeferMiddlewareSystemWPF.ViewModel;
+using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8;
 using System.Windows;
 
 namespace SimReeferMiddlewareSystemWPF
@@ -32,6 +32,7 @@ namespace SimReeferMiddlewareSystemWPF
             //Store
             services.AddSingleton<MainNavigationStore>();
             services.AddSingleton<DeviceInfoStore>();
+            services.AddSingleton<DeviceBodyStore>();
 
             //Service
             services.AddSingleton<INavigationService, NavigationService>();
@@ -40,11 +41,11 @@ namespace SimReeferMiddlewareSystemWPF
 
             //ViewModels
             services.AddSingleton<MainViewModel>();
-            services.AddSingleton<ProtocolViewModel>();
-            services.AddSingleton<DeviceInfoViewModel>();
-            services.AddSingleton<SetupInfoViewModel>();
-            services.AddSingleton<DeviceBodyViewModel>();
-            services.AddSingleton<ReeferBodyViewModel>();
+            services.AddSingleton<ProtocolViewModelVer8>();
+            services.AddSingleton<DeviceInfoViewModelVer8>();
+            services.AddSingleton<SetupInfoViewModelVer8>();
+            services.AddSingleton<DeviceBodyViewModelVer8>();
+            services.AddSingleton<ReeferBodyViewModelVer8>();
 
             //Views
             services.AddSingleton(s => new MainView()

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver8"
-             xmlns:vm="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel"
+             xmlns:vm="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8"
              mc:Ignorable="d">
     <!--<UserControl.DataContext>
         <vm:ProtocolViewModel/>
@@ -61,7 +61,7 @@
                 <ContentControl Content="{Binding CurrentDeviceBodyViewModel}"/>
             </Grid>
             <Grid Grid.Row="1" VerticalAlignment="Bottom" Height="30">
-                <Button Content="Device Data" VerticalAlignment="Bottom" Margin="5" />
+                <Button Command="{Binding ToDeviceBodyCommand}" Content="Device Data" VerticalAlignment="Bottom" Margin="5" />
             </Grid>
         </Grid>
         <Grid Grid.Column="4">

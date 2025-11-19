@@ -4,20 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver8"
-        xmlns:viewmodel="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel"
+        xmlns:viewmodel="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8"
         mc:Ignorable="d"
         Title="MainView" Height="800" MinWidth="1850">
     <Window.Resources>
-        <DataTemplate DataType="{x:Type viewmodel:ProtocolViewModel}">
+        <DataTemplate DataType="{x:Type viewmodel:ProtocolViewModelVer8}">
             <local:ProtocolVer8/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodel:DeviceInfoViewModel}">
+        <DataTemplate DataType="{x:Type viewmodel:DeviceInfoViewModelVer8}">
             <local:DeviceInfoVer8/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodel:SetupInfoViewModel}">
+        <DataTemplate DataType="{x:Type viewmodel:SetupInfoViewModelVer8}">
             <local:SetupInfoVer8/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodel:DeviceBodyViewModel}">
+        <DataTemplate DataType="{x:Type viewmodel:DeviceBodyViewModelVer8}">
             <local:DeviceBodyVer8/>
         </DataTemplate>
         <Style x:Key="MyTextStyle" TargetType="MenuItem">
