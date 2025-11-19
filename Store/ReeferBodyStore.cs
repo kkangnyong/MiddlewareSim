@@ -2,8 +2,8 @@
 
 namespace SimReeferMiddlewareSystemWPF.Store
 {
-    public class SetupInfoStore
+    public class ReeferBodyStore
     {
-        public SetupInfoModel? _currentSetupInfo;
+        public ReeferBodyModel? _currentReeferBody;
     }
 }
