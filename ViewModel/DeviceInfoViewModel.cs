@@ -1,586 +1,493 @@
-﻿using SimReeferMiddlewareSystemWPF.Inteface;
-using SimReeferMiddlewareSystemWPF.Model;
+﻿using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Store;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel
 {
-    public class DeviceInfoViewModel : ViewModelBase, IDeviceInfo
+    public class DeviceInfoViewModel : ViewModelBase
     {
         private static DeviceInfoViewModel _instance;
         public static DeviceInfoViewModel Instance { get { if (_instance == null) _instance = new DeviceInfoViewModel(); return _instance; }  }
 
         private DeviceInfoStore _deviceInfoStore;
-        private event EventHandler<UserControlEventArgs> _deviceChanged;
+        //private event EventHandler<UserControlEventArgs> _deviceChanged;
+
+        private DeviceInfoModel _deviceInfoModel;
+        public DeviceInfoModel DeviceInfoModel { get { if (_deviceInfoModel == null) _deviceInfoModel = Instance._deviceInfoStore._currentDeviceInfo = new DeviceInfoModel(); return _deviceInfoModel; } }
 
         public DeviceInfoViewModel() { }
 
         public DeviceInfoViewModel(DeviceInfoStore deviceInfoStore) 
         {
             Instance._deviceInfoStore = deviceInfoStore;
-            Instance._deviceChanged += DeviceInfoViewModel_deviceChanged;
-            Instance._deviceInfoStore._currentDeviceInfo = new DeviceInfoModel();
         }
 
-        private void DeviceInfoViewModel_deviceChanged(object? sender, UserControlEventArgs e)
-        {
-            Console.WriteLine(e.OldValue + "" + e.Value);
-            if (e == null || string.IsNullOrEmpty(e.Name))
-            {
-                return;
-            }
-
-            DeviceInfoModel deviceInfoModel = Instance._deviceInfoStore._currentDeviceInfo;
-
-            if (e.Name.Equals(nameof(Code)))
-            {
-                deviceInfoModel.Code = (char)e.Value;
-            }
-            else
-            if (e.Name.Equals(nameof(DeviceNumber)))
-            {
-                deviceInfoModel.DeviceNumber = (int)e.Value;
-            }
-            else
-            if (e.Name.Equals(nameof(Major)))
-            {
-                deviceInfoModel.Major = (byte)e.Value;
-            }
-            else
-            if (e.Name.Equals(nameof(Minor)))
-            {
-                deviceInfoModel.Minor = (byte)e.Value;
-            }
-            else
-            if (e.Name.Equals(nameof(Revision)))
-            {
-                deviceInfoModel.Revision = (byte)e.Value;
-            }
-
-            Instance._deviceInfoStore._currentDeviceInfo = deviceInfoModel;
-        }
-
-        private void OnChanged(UserControlEventArgs args)
-        {
-            if (Instance._deviceChanged != null)
-            {
-                Instance._deviceChanged(this, args);
-            }
-        }
-
-        private char _code;
-        private int _deviceNumber = 6002032;
-        private byte _major = 3;
-        private byte _minor = 5;
-        private byte _revision = 19;
-        private int _dbgIdCode = 272131126;
-        private int _pwrCSR = 8;
-        private int _rccCSR = 474022658;
-        private int _flashSR = 14;
-        private int _flashOBR = 16253098;
-        private int _lwdgSR = 0;
-        private short _curStandbyCount = 0;
-        private int _lastGeofenceIndex = -1;
-        private string _usimIMSI = "234500084385731";
-        private short _rssi = -55;
-        private string _iccid = "23450008438731";
-        private int _mccmnc = 45008;
-        private short _lac = 3157;
-        private int _cellID = 0;
-        private string _wireType = "FDD LTE";
-        private string _activeBand = "LTE BAND 3";
-        private string _cellOperator = "KT ONOMONDO";
-        private byte _ccpr = 1;
-        private ushort _commPeriod = 5;
-        private byte _gpsTimeout = 180;
-        private byte _gpsStableTime = 30;
-        private byte _wireConnTimeout = 60;
-        private byte _retryCount = 3;
-        private byte _rcCount = 6;
-        private ushort _totalStandbyCount = 0;
-        private byte _accelShockUpper = 4;
-        private ushort _setTempLower = 28483;
-        private ushort _setTempUpper = 17657;
-        private ushort _humidLower = 0;
-        private ushort _humidUpper = 65535;
-        private ushort _stateChangedAlarm = 65535;
-        private string _cutOffVoltage = "3.40";
-        private string _voltage = "4.19";
-        private bool _isCharging = true;
 
         public char Code
         {
-            get { return _code; }
+            get { return DeviceInfoModel.Code; }
             set
             {
-                if (_code != null)
+                if (DeviceInfoModel.Code != null)
                 {
-                    char oldValue = _code;
-                    _code = value;
+                    DeviceInfoModel.Code = value;
                     OnPropertyChanged();
-                    Instance.OnChanged(new UserControlEventArgs(nameof(Code), oldValue, value));
                 }
             }
         }
         public int DeviceNumber
         {
-            get { return _deviceNumber; }
+            get { return DeviceInfoModel.DeviceNumber; }
             set
             {
-                if (_deviceNumber != null)
+                if (DeviceInfoModel.DeviceNumber != null)
                 {
-                    int oldValue = _deviceNumber;
-                    _deviceNumber = value;
+                    //int oldValue = DeviceInfoModel.DeviceNumber;
+                    DeviceInfoModel.DeviceNumber = value;
                     OnPropertyChanged();
-                    Instance.OnChanged(new UserControlEventArgs(nameof(DeviceNumber), oldValue, value));
+                    //Instance.OnChanged(new UserControlEventArgs(nameof(DeviceNumber), oldValue, value));
                 }
             }
         }
         public byte Major
         {
-            get { return _major; }
+            get { return DeviceInfoModel.Major; }
             set
             {
-                if (_major != null)
+                if (DeviceInfoModel.Major != null)
                 {
-                    byte oldValue = _major;
-                    _major = value;
+                    DeviceInfoModel.Major = value;
                     OnPropertyChanged();
-                    Instance.OnChanged(new UserControlEventArgs(nameof(Major), oldValue, value));
                 }
             }
         }
         public byte Minor
         {
-            get { return _minor; }
+            get { return DeviceInfoModel.Minor; }
             set
             {
-                if (_minor != null)
+                if (DeviceInfoModel.Minor != null)
                 {
-                    byte oldValue = _minor;
-                    _minor = value;
+                    DeviceInfoModel.Minor = value;
                     OnPropertyChanged();
-                    Instance.OnChanged(new UserControlEventArgs(nameof(Minor), oldValue, value));
                 }
             }
         }
         public byte Revision
         {
-            get { return _revision; }
+            get { return DeviceInfoModel.Revision; }
             set
             {
-                if (_revision != null)
+                if (DeviceInfoModel.Revision != null)
                 {
-                    byte oldValue = _revision;
-                    _revision = value;
+                    DeviceInfoModel.Revision = value;
                     OnPropertyChanged();
-                    Instance.OnChanged(new UserControlEventArgs(nameof(Revision), oldValue, value));
                 }
             }
         }
         public int DbgIdCode
         {
-            get { return _dbgIdCode; }
+            get { return DeviceInfoModel.DbgIdCode; }
             set
             {
-                if (_dbgIdCode != null)
+                if (DeviceInfoModel.DbgIdCode != null)
                 {
-                    _dbgIdCode = value;
+                    DeviceInfoModel.DbgIdCode = value;
                     OnPropertyChanged();
                 }
             }
         }
         public int PwrCSR
         {
-            get { return _pwrCSR; }
+            get { return DeviceInfoModel.PwrCSR; }
             set
             {
-                if (_pwrCSR != null)
+                if (DeviceInfoModel.PwrCSR != null)
                 {
-                    _pwrCSR = value;
+                    DeviceInfoModel.PwrCSR = value;
                     OnPropertyChanged();
                 }
             }
         }
         public int RccCSR
         {
-            get { return _rccCSR; }
+            get { return DeviceInfoModel.RccCSR; }
             set
             {
-                if (_rccCSR != null)
+                if (DeviceInfoModel.RccCSR != null)
                 {
-                    _rccCSR = value;
+                    DeviceInfoModel.RccCSR = value;
                     OnPropertyChanged();
                 }
             }
         }
         public int FlashSR
         {
-            get { return _flashSR; }
+            get { return DeviceInfoModel.FlashSR; }
             set
             {
-                if (_flashSR != null)
+                if (DeviceInfoModel.FlashSR != null)
                 {
-                    _flashSR = value;
+                    DeviceInfoModel.FlashSR = value;
                     OnPropertyChanged();
                 }
             }
         }
         public int FlashOBR
         {
-            get { return _flashOBR; }
+            get { return DeviceInfoModel.FlashOBR; }
             set
             {
-                if (_flashOBR != null)
+                if (DeviceInfoModel.FlashOBR != null)
                 {
-                    _flashOBR = value;
+                    DeviceInfoModel.FlashOBR = value;
                     OnPropertyChanged();
                 }
             }
         }
         public int LwdgSR
         {
-            get { return _lwdgSR; }
+            get { return DeviceInfoModel.LwdgSR; }
             set
             {
-                if (_lwdgSR != null)
+                if (DeviceInfoModel.LwdgSR != null)
                 {
-                    _lwdgSR = value;
+                    DeviceInfoModel.LwdgSR = value;
                     OnPropertyChanged();
                 }
             }
         }
         public short CurStandbyCount
         {
-            get { return _curStandbyCount; }
+            get { return DeviceInfoModel.CurStandbyCount; }
             set
             {
-                if (_curStandbyCount != null)
+                if (DeviceInfoModel.CurStandbyCount != null)
                 {
-                    _curStandbyCount = value;
+                    DeviceInfoModel.CurStandbyCount = value;
                     OnPropertyChanged();
                 }
             }
         }
         public int LastGeofenceIndex
         {
-            get { return _lastGeofenceIndex; }
+            get { return DeviceInfoModel.LastGeofenceIndex; }
             set
             {
-                if (_lastGeofenceIndex != null)
+                if (DeviceInfoModel.LastGeofenceIndex != null)
                 {
-                    _lastGeofenceIndex = value;
+                    DeviceInfoModel.LastGeofenceIndex = value;
                     OnPropertyChanged();
                 }
             }
         }
         public string UsimIMSI
         {
-            get { return _usimIMSI; }
+            get { return DeviceInfoModel.UsimIMSI; }
             set
             {
-                if (_usimIMSI != null)
+                if (DeviceInfoModel.UsimIMSI != null)
                 {
-                    _usimIMSI = value;
+                    DeviceInfoModel.UsimIMSI = value;
                     OnPropertyChanged();
                 }
             }
         }
         public short Rssi
         {
-            get { return _rssi; }
+            get { return DeviceInfoModel.Rssi; }
             set
             {
-                if (_rssi != null)
+                if (DeviceInfoModel.Rssi != null)
                 {
-                    _rssi = value;
+                    DeviceInfoModel.Rssi = value;
                     OnPropertyChanged();
                 }
             }
         }
         public string Iccid
         {
-            get { return _iccid; }
+            get { return DeviceInfoModel.Iccid; }
             set
             {
-                if (_iccid != null)
+                if (DeviceInfoModel.Iccid != null)
                 {
-                    _iccid = value;
+                    DeviceInfoModel.Iccid = value;
                     OnPropertyChanged();
                 }
             }
         }
         public int MCCMNC
         {
-            get { return _mccmnc; }
+            get { return DeviceInfoModel.MCCMNC; }
             set
             {
-                if (_mccmnc != null)
+                if (DeviceInfoModel.MCCMNC != null)
                 {
-                    _mccmnc = value;
+                    DeviceInfoModel.MCCMNC = value;
                     OnPropertyChanged();
                 }
             }
         }
         public short Lac
         {
-            get { return _lac; }
+            get { return DeviceInfoModel.Lac; }
             set
             {
-                if (_lac != null)
+                if (DeviceInfoModel.Lac != null)
                 {
-                    _lac = value;
+                    DeviceInfoModel.Lac = value;
                     OnPropertyChanged();
                 }
             }
         }
         public int CellID
         {
-            get { return _cellID; }
+            get { return DeviceInfoModel.CellID; }
             set
             {
-                if (_cellID != null)
+                if (DeviceInfoModel.CellID != null)
                 {
-                    _cellID = value;
+                    DeviceInfoModel.CellID = value;
                     OnPropertyChanged();
                 }
             }
         }
         public string WireType
         {
-            get { return _wireType; }
+            get { return DeviceInfoModel.WireType; }
             set
             {
-                if (_wireType != null)
+                if (DeviceInfoModel.WireType != null)
                 {
-                    _wireType = value;
+                    DeviceInfoModel.WireType = value;
                     OnPropertyChanged();
                 }
             }
         }
         public string ActiveBand
         {
-            get { return _activeBand; }
+            get { return DeviceInfoModel.ActiveBand; }
             set
             {
-                if (_activeBand != null)
+                if (DeviceInfoModel.ActiveBand != null)
                 {
-                    _activeBand = value;
+                    DeviceInfoModel.ActiveBand = value;
                     OnPropertyChanged();
                 }
             }
         }
         public string CellOperator
         {
-            get { return _cellOperator; }
+            get { return DeviceInfoModel.CellOperator; }
             set
             {
-                if (_cellOperator != null)
+                if (DeviceInfoModel.CellOperator != null)
                 {
-                    _cellOperator = value;
+                    DeviceInfoModel.CellOperator = value;
                     OnPropertyChanged();
                 }
             }
         }
         public byte Ccpr
         {
-            get { return _ccpr; }
+            get { return DeviceInfoModel.Ccpr; }
             set
             {
-                if (_ccpr != null)
+                if (DeviceInfoModel.Ccpr != null)
                 {
-                    _deviceNumber = value;
+                    DeviceInfoModel.Ccpr = value;
                     OnPropertyChanged();
                 }
             }
         }
         public ushort CommPeriod
         {
-            get { return _commPeriod; }
+            get { return DeviceInfoModel.CommPeriod; }
             set
             {
-                if (_commPeriod != null)
+                if (DeviceInfoModel.CommPeriod != null)
                 {
-                    _commPeriod = value;
+                    DeviceInfoModel.CommPeriod = value;
                     OnPropertyChanged();
                 }
             }
         }
         public byte GpsTimeout
         {
-            get { return _gpsTimeout; }
+            get { return DeviceInfoModel.GpsTimeout; }
             set
             {
-                if (_gpsTimeout != null)
+                if (DeviceInfoModel.GpsTimeout != null)
                 {
-                    _gpsTimeout = value;
+                    DeviceInfoModel.GpsTimeout = value;
                     OnPropertyChanged();
                 }
             }
         }
         public byte GpsStableTime
         {
-            get { return _gpsStableTime; }
+            get { return DeviceInfoModel.GpsStableTime; }
             set
             {
-                if (_gpsStableTime != null)
+                if (DeviceInfoModel.GpsStableTime != null)
                 {
-                    _gpsStableTime = value;
+                    DeviceInfoModel.GpsStableTime = value;
                     OnPropertyChanged();
                 }
             }
         }
         public byte WireConnTimeout
         {
-            get { return _wireConnTimeout; }
+            get { return DeviceInfoModel.WireConnTimeout; }
             set
             {
-                if (_wireConnTimeout != null)
+                if (DeviceInfoModel.WireConnTimeout != null)
                 {
-                    _wireConnTimeout = value;
+                    DeviceInfoModel.WireConnTimeout = value;
                     OnPropertyChanged();
                 }
             }
         }
         public byte RetryCount
         {
-            get { return _retryCount; }
+            get { return DeviceInfoModel.RetryCount; }
             set
             {
-                if (_retryCount != null)
+                if (DeviceInfoModel.RetryCount != null)
                 {
-                    _retryCount = value;
+                    DeviceInfoModel.RetryCount = value;
                     OnPropertyChanged();
                 }
             }
         }
         public byte RcCount
         {
-            get { return _rcCount; }
+            get { return DeviceInfoModel.RcCount; }
             set
             {
-                if (_rcCount != null)
+                if (DeviceInfoModel.RcCount != null)
                 {
-                    _rcCount = value;
+                    DeviceInfoModel.RcCount = value;
                     OnPropertyChanged();
                 }
             }
         }
         public ushort TotalStandbyCount
         {
-            get { return _totalStandbyCount; }
+            get { return DeviceInfoModel.TotalStandbyCount; }
             set
             {
-                if (_totalStandbyCount != null)
+                if (DeviceInfoModel.TotalStandbyCount != null)
                 {
-                    _totalStandbyCount = value;
+                    DeviceInfoModel.TotalStandbyCount = value;
                     OnPropertyChanged();
                 }
             }
         }
         public byte AccelShockUpper
         {
-            get { return _accelShockUpper; }
+            get { return DeviceInfoModel.AccelShockUpper; }
             set
             {
-                if (_accelShockUpper != null)
+                if (DeviceInfoModel.AccelShockUpper != null)
                 {
-                    _accelShockUpper = value;
+                    DeviceInfoModel.AccelShockUpper = value;
                     OnPropertyChanged();
                 }
             }
         }
         public ushort SetTempLower
         {
-            get { return _setTempLower; }
+            get { return DeviceInfoModel.SetTempLower; }
             set
             {
-                if (_setTempLower != null)
+                if (DeviceInfoModel.SetTempLower != null)
                 {
-                    _setTempLower = value;
+                    DeviceInfoModel.SetTempLower = value;
                     OnPropertyChanged();
                 }
             }
         }
         public ushort SetTempUpper
         {
-            get { return _setTempUpper; }
+            get { return DeviceInfoModel.SetTempUpper; }
             set
             {
-                if (_setTempUpper != null)
+                if (DeviceInfoModel.SetTempUpper != null)
                 {
-                    _setTempUpper = value;
+                    DeviceInfoModel.SetTempUpper = value;
                     OnPropertyChanged();
                 }
             }
         }
         public ushort HumidLower
         {
-            get { return _humidLower; }
+            get { return DeviceInfoModel.HumidLower; }
             set
             {
-                if (_humidLower != null)
+                if (DeviceInfoModel.HumidLower != null)
                 {
-                    _humidLower = value;
+                    DeviceInfoModel.HumidLower = value;
                     OnPropertyChanged();
                 }
             }
         }
         public ushort HumidUpper
         {
-            get { return _humidUpper; }
+            get { return DeviceInfoModel.HumidUpper; }
             set
             {
-                if (_humidUpper != null)
+                if (DeviceInfoModel.HumidUpper != null)
                 {
-                    _humidUpper = value;
+                    DeviceInfoModel.HumidUpper = value;
                     OnPropertyChanged();
                 }
             }
         }
         public ushort StateChangedAlarm
         {
-            get { return _stateChangedAlarm; }
+            get { return DeviceInfoModel.StateChangedAlarm; }
             set
             {
-                if (_stateChangedAlarm != null)
+                if (DeviceInfoModel.StateChangedAlarm != null)
                 {
-                    _stateChangedAlarm = value;
+                    DeviceInfoModel.StateChangedAlarm = value;
                     OnPropertyChanged();
                 }
             }
         }
         public string CutOffVoltage
         {
-            get { return _cutOffVoltage; }
+            get { return DeviceInfoModel.CutOffVoltage; }
             set
             {
-                if (_cutOffVoltage != null)
+                if (DeviceInfoModel.CutOffVoltage != null)
                 {
-                    _cutOffVoltage = value;
+                    DeviceInfoModel.CutOffVoltage = value;
                     OnPropertyChanged();
                 }
             }
         }
         public string Voltage
         {
-            get { return _voltage; }
+            get { return DeviceInfoModel.Voltage; }
             set
             {
-                if (_voltage != null)
+                if (DeviceInfoModel.Voltage != null)
                 {
-                    _voltage = value;
+                    DeviceInfoModel.Voltage = value;
                     OnPropertyChanged();
                 }
             }
         }
         public bool IsCharging
         {
-            get { return _isCharging; }
+            get { return DeviceInfoModel.IsCharging; }
             set
             {
-                if (_isCharging != null)
+                if (DeviceInfoModel.IsCharging != null)
                 {
-                    _isCharging = value;
+                    DeviceInfoModel.IsCharging = value;
                     OnPropertyChanged();
                 }
             }

@@ -16,18 +16,18 @@
             if (code > 0) IsLastData = ((code & 0x10) == 0x10);
         }
 
-        //public UserControlEventArgs(string dataBytesToString, int totalDataBytesLength, byte code = 0)
-        //{
-        //    DataBytesToString = dataBytesToString;
-        //    TotalDataBytesLength = totalDataBytesLength;
-        //    if (code > 0) IsLastData = ((code & 0x10) == 0x10);
-        //}
-
-        public UserControlEventArgs(string name, object oldValue, object value)
+        public UserControlEventArgs(string dataBytesToString, int totalDataBytesLength, byte code = 0)
         {
-            Name = name;
-            OldValue = oldValue;
-            Value = value;
+            DataBytesToString = dataBytesToString;
+            TotalDataBytesLength = totalDataBytesLength;
+            if (code > 0) IsLastData = ((code & 0x10) == 0x10);
         }
+
+        //public UserControlEventArgs(string name, object oldValue, object value)
+        //{
+        //    Name = name;
+        //    OldValue = oldValue;
+        //    Value = value;
+        //}
     }
 }

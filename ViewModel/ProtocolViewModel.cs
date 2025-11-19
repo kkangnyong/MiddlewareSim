@@ -1,5 +1,4 @@
 ﻿using SimReeferMiddlewareSystemWPF.Command;
-using SimReeferMiddlewareSystemWPF.Inteface;
 using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Store;
@@ -28,11 +27,14 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
         private void ToDeviceInfo(object _)
         {
-            Console.WriteLine(CurrentDeviceInfoModel.DeviceNumber);
-            _messageBoxService.ShowInfo($"{CurrentDeviceInfoModel.DeviceNumber},{CurrentDeviceInfoModel.Major},{CurrentDeviceInfoModel.Minor},{CurrentDeviceInfoModel.Revision}", "Save");
             _modelDataService.SetDeviceInfoValues(new List<byte[]>
             {
-
+                _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.Code.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.DeviceNumber.ToString().Trim(), 4),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.Major.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.Minor.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.Revision.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.DbgIdCode.ToString().Trim(), 4),
             });
         }
 
