@@ -13,6 +13,8 @@ namespace SimReeferMiddlewareSystemWPF.Service
         private SocketAsyncEventArgs sendArgs { get; set; }
         private readonly string ACK_00 = "2B-56-EF-BF-BD-36-EF-BF-BD-72-6E-5D-EF-BF-BD-EF-BF-BD-74-EF-BF-BD-D6-A2";
         protected byte[] SeedKey { get; } = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5];
+        public Action? SocketAsyncCompleted { get; set; }
+        public Action<string>? SocketAsyncError { get; set; }
 
         public void Connection(string _ip, ushort _port)
         {
@@ -46,10 +48,12 @@ namespace SimReeferMiddlewareSystemWPF.Service
             {
                 //MessageBox.Show($"Socket 연결 정보가 잘 못 되었습니다.\r\n{ex.ToString()}", "Server disconnected", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Console.WriteLine($"Socket Exception: {ex.ToString()}");
+                SocketAsyncError?.Invoke($"Socket Exception: {ex.ToString()}");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Another Exception: {ex.ToString()}");
+                SocketAsyncError?.Invoke($"Another Exception: {ex.ToString()}");
             }
         }
 
@@ -62,9 +66,11 @@ namespace SimReeferMiddlewareSystemWPF.Service
                 //{
                 //    btn_connect.Enabled = true;
                 //});
+                SocketAsyncError?.Invoke(args.SocketError.ToString());
                 return;
             }
 
+            SocketAsyncCompleted?.Invoke();
             sendArgs = new SocketAsyncEventArgs();
             sendArgs.Completed += Args_SendCompleted;
 

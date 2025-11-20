@@ -40,7 +40,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private void ToConnect(object _)
         {
             _tcpSocketService.Connection(ServerConnectionModel.IP, ServerConnectionModel.Port);
-            _messageBoxService.ShowInfo("Connect!!", "Server");
+
+            //LoadingWindow loading = new LoadingWindow();
+            //loading.Show();
         }
 
         private void ToDisconnect(object _)
@@ -57,11 +59,23 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             Instance._serverConnectionInfoStore = serverConnectionStore;
             _messageBoxService = messageBoxService;
             _tcpSocketService = tcpSocketService;
+            _tcpSocketService.SocketAsyncCompleted += SocketAsyncCompleted;
+            _tcpSocketService.SocketAsyncError += SocketAsyncError;
             _mainNavigationStore = mainNavigationStore;
             _mainNavigationStore.CurrentViewModelChanged += CurrentViewModelChanged;
             navigationService.Navigate(NaviType.ProtocolView);
             ToConnectCommand = new RelayCommand<object>(ToConnect);
             ToDisconnectCommand = new RelayCommand<object>(ToDisconnect);
+        }
+
+        private void SocketAsyncCompleted()
+        {
+            _messageBoxService.ShowInfo("Connect!!", "Server");
+        }
+
+        private void SocketAsyncError(string error)
+        {
+            _messageBoxService.ShowInfo($"Connect Error!! - {error}", "Server");
         }
 
         private void CurrentViewModelChanged()
