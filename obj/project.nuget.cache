@@ -1,11 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "GpTArB5unLc=",
+  "dgSpecHash": "AY7kxo4vReg=",
   "success": true,
   "projectFilePath": "D:\\work\\MiddlewareSimWPF\\SimReeferMiddlewareSystemWPF.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\SEC\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.10\\microsoft.extensions.dependencyinjection.9.0.10.nupkg.sha512",
-    "C:\\Users\\SEC\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.10\\microsoft.extensions.dependencyinjection.abstractions.9.0.10.nupkg.sha512"
+    "C:\\Users\\SEC\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.10\\microsoft.extensions.dependencyinjection.abstractions.9.0.10.nupkg.sha512",
+    "C:\\Users\\SEC\\.nuget\\packages\\mythosia\\1.2.0\\mythosia.1.2.0.nupkg.sha512",
+    "C:\\Users\\SEC\\.nuget\\packages\\mythosia.integrity\\1.2.0\\mythosia.integrity.1.2.0.nupkg.sha512",
+    "C:\\Users\\SEC\\.nuget\\packages\\mythosia.security.cryptography\\1.1.0\\mythosia.security.cryptography.1.1.0.nupkg.sha512",
+    "C:\\Users\\SEC\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

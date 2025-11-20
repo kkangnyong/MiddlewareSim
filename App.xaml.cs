@@ -36,12 +36,13 @@ namespace SimReeferMiddlewareSystemWPF
             services.AddSingleton<DeviceBodyStore>();
             services.AddSingleton<ReeferBodyStore>();
             services.AddSingleton<SensorBodyStore>();
+            services.AddSingleton<ServerConnectionStore>();
 
             //Service
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IMessageBoxService, MessageBoxService>();
             services.AddSingleton<IModelDataService, ModelDataService>();
-            services.AddSingleton<ITcpSocketService, TcpSocketService>();
+            services.AddScoped<ITcpSocketService, TcpSocketService>();
 
             //ViewModels
             services.AddSingleton<MainViewModel>();

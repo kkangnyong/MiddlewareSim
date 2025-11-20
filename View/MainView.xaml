@@ -86,13 +86,13 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="IP:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
-                <TextBox Grid.Column="1" Text="dev.swinnus.com" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
+                <TextBox Grid.Column="1" Text="{Binding IP}" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
                 <TextBlock Grid.Column="2" Text="PORT:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
-                <TextBox Grid.Column="3" Text="14000" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
+                <TextBox Grid.Column="3" Text="{Binding Port}" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
                 <TextBlock Grid.Column="4" Text="VERSION:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
-                <TextBox Grid.Column="5" Text="0.8.0.0" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
-                <Button Grid.Column="6" Content="Connect" Style="{StaticResource MyButtonStyle}" Margin="3,0,3,0"/>
-                <Button Grid.Column="7" Content="Disconnect" Style="{StaticResource MyButtonStyle}" Margin="3,0,3,0"/>
+                <TextBox Grid.Column="5" Text="{Binding ProtocolVersion}" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
+                <Button Grid.Column="6" Command="{Binding ToConnectCommand}" Content="Connect" Style="{StaticResource MyButtonStyle}" Margin="3,0,3,0"/>
+                <Button Grid.Column="7" Command="{Binding ToDisconnectCommand}" Content="Disconnect" Style="{StaticResource MyButtonStyle}" Margin="3,0,3,0"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">

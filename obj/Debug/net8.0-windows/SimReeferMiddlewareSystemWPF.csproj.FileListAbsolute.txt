@@ -72,3 +72,7 @@ D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\refint\SimReeferMiddlewareSyst
 D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\SimReeferMiddlewareSystemWPF.pdb
 D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\SimReeferMiddlewareSystemWPF.genruntimeconfig.cache
 D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\ref\SimReeferMiddlewareSystemWPF.dll
+D:\work\MiddlewareSimWPF\bin\Debug\net8.0-windows\Mythosia.dll
+D:\work\MiddlewareSimWPF\bin\Debug\net8.0-windows\Mythosia.Integrity.dll
+D:\work\MiddlewareSimWPF\bin\Debug\net8.0-windows\Mythosia.Security.Cryptography.dll
+D:\work\MiddlewareSimWPF\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
