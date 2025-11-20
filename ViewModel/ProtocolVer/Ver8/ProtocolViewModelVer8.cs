@@ -10,7 +10,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
     public class ProtocolViewModelVer8 : ViewModelBase
     {
         private readonly IMessageBoxService _messageBoxService;
-        private readonly IModelData _modelDataService;
+        private readonly IModelDataService _modelDataService;
         private readonly DeviceInfoStore _deviceInfoStore;
         private readonly SetupInfoStore _setupInfoStore;
         private readonly DeviceBodyStore _deviceBodyStore;
@@ -207,9 +207,20 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
         {
         }
 
+        private void Initialize()
+        {
+            ToDeviceInfoCommand = new RelayCommand<object>(ToDeviceInfo);
+            ToSetupInfoCommand = new RelayCommand<object>(ToSetupInfo);
+            ToDeviceBodyCommand = new RelayCommand<object>(ToDeviceBody);
+            ToReeferBodyCommand = new RelayCommand<object>(ToReeferBody);
+            ToStartDataCommand = new RelayCommand<object>(ToStartData);
+            ToStartCommandCommand = new RelayCommand<object>(ToStartCommand);
+            _modelDataService._dataValuesList = new List<byte[]>();
+        }
+
         public ProtocolViewModelVer8() { }
 
-        public ProtocolViewModelVer8(IMessageBoxService messageBoxService, IModelData modelData, 
+        public ProtocolViewModelVer8(IMessageBoxService messageBoxService, IModelDataService modelData, 
             DeviceInfoStore deviceInfoStore, 
             SetupInfoStore setupInfoStore, 
             DeviceBodyStore deviceBodyStore,
@@ -221,13 +232,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
             _setupInfoStore = setupInfoStore;
             _deviceBodyStore = deviceBodyStore;
             _reeferBodyStore = reeferBodyStore;
-            ToDeviceInfoCommand = new RelayCommand<object>(ToDeviceInfo);
-            ToSetupInfoCommand = new RelayCommand<object>(ToSetupInfo);
-            ToDeviceBodyCommand = new RelayCommand<object>(ToDeviceBody);
-            ToReeferBodyCommand = new RelayCommand<object>(ToReeferBody);
-            ToStartDataCommand = new RelayCommand<object>(ToStartData);
-            ToStartCommandCommand = new RelayCommand<object>(ToStartCommand);
-            _modelDataService._dataValuesList = new List<byte[]>();
+            Initialize();
         }
     }
 }

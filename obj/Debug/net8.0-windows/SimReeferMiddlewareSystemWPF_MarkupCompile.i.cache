@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\work\MiddlewareSim\obj\Debug\net8.0-windows\
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\
 SimReeferMiddlewareSystemWPF
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
-C:\work\MiddlewareSim\App.xaml
+D:\work\MiddlewareSimWPF\App.xaml
 62003588393
 
-38-885676570
-200-1472524663
+41-319559774
+2001593102552
 View\MainView.xaml;View\ProtocolVer\Ver8\DeviceBodyVer8.xaml;View\ProtocolVer\Ver8\DeviceInfoVer8.xaml;View\ProtocolVer\Ver8\ProtocolVer8.xaml;View\ProtocolVer\Ver8\ReeferBodyVer8.xaml;View\ProtocolVer\Ver8\SetupInfoVer8.xaml;
 
 False

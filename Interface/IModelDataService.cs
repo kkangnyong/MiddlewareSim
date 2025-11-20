@@ -1,6 +1,6 @@
 ﻿namespace SimReeferMiddlewareSystemWPF.Interface
 {
-    public interface IModelData
+    public interface IModelDataService
     {
         void SetDataValues(List<byte[]> dataList);
         string ConvertToByteString(string msg, ushort length, bool isString);

@@ -59,6 +59,8 @@ D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\View\ProtocolVer\Ver8\Protocol
 D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\View\ProtocolVer\Ver8\ReeferBodyVer8.baml
 D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\View\ProtocolVer\Ver8\SetupInfoVer8.baml
 D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\SimReeferMiddlewareSystemWPF.g.resources
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\SimReeferMiddlewareSystemWPF.Properties.Resources.resources
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\SimReeferMiddlewareSystemWPF.csproj.GenerateResource.cache
 D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\SimReeferMiddlewareSystemWPF.GeneratedMSBuildEditorConfig.editorconfig
 D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\SimReeferMiddlewareSystemWPF.AssemblyInfoInputs.cache
 D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\SimReeferMiddlewareSystemWPF.AssemblyInfo.cs

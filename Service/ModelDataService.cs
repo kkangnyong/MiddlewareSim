@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace SimReeferMiddlewareSystemWPF.Service
 {
-    public class ModelDataService : IModelData
+    public class ModelDataService : IModelDataService
     {
         public List<byte[]>? _dataValuesList { get; set; }
         public int _totalDataBytesLength = 0;
