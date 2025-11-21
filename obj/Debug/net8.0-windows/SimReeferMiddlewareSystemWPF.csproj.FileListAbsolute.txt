@@ -82,3 +82,15 @@ D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\UIControl\LoadingControl.baml
 D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\UIControl\CompleteControl.g.cs
 D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\UIControl\CompleteControl.baml
 D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\SimReeferMiddlewareSystemWPF_Content.g.cs
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\View\ProtocolVer\Ver9\DeviceBodyVer9.g.cs
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\View\ProtocolVer\Ver9\DeviceInfoVer9.g.cs
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\View\ProtocolVer\Ver9\ProtocolVer9.g.cs
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\View\ProtocolVer\Ver9\ReeferBodyVer9.g.cs
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\View\ProtocolVer\Ver9\SensorBodyVer9.g.cs
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\View\ProtocolVer\Ver9\SetupInfoVer9.g.cs
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\View\ProtocolVer\Ver9\DeviceBodyVer9.baml
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\View\ProtocolVer\Ver9\DeviceInfoVer9.baml
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\View\ProtocolVer\Ver9\ProtocolVer9.baml
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\View\ProtocolVer\Ver9\ReeferBodyVer9.baml
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\View\ProtocolVer\Ver9\SensorBodyVer9.baml
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\View\ProtocolVer\Ver9\SetupInfoVer9.baml

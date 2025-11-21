@@ -7,6 +7,7 @@
         DeviceBodyView, 
         DeviceInfoView, 
         ReeferBodyView, 
-        SetupInfoView
+        SetupInfoView,
+        SensorBodyView
     }
 }

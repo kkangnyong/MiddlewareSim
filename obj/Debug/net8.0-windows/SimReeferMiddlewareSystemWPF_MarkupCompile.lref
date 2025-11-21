@@ -1,4 +1,4 @@
-﻿D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
+﻿
 
 FD:\work\MiddlewareSimWPF\UIControl\CompleteControl.xaml;;
 FD:\work\MiddlewareSimWPF\UIControl\LoadingControl.xaml;;
@@ -8,4 +8,10 @@ FD:\work\MiddlewareSimWPF\View\ProtocolVer\Ver8\DeviceInfoVer8.xaml;;
 FD:\work\MiddlewareSimWPF\View\ProtocolVer\Ver8\ProtocolVer8.xaml;;
 FD:\work\MiddlewareSimWPF\View\ProtocolVer\Ver8\ReeferBodyVer8.xaml;;
 FD:\work\MiddlewareSimWPF\View\ProtocolVer\Ver8\SetupInfoVer8.xaml;;
+FD:\work\MiddlewareSimWPF\View\ProtocolVer\Ver9\DeviceBodyVer9.xaml;;
+FD:\work\MiddlewareSimWPF\View\ProtocolVer\Ver9\DeviceInfoVer9.xaml;;
+FD:\work\MiddlewareSimWPF\View\ProtocolVer\Ver9\ProtocolVer9.xaml;;
+FD:\work\MiddlewareSimWPF\View\ProtocolVer\Ver9\ReeferBodyVer9.xaml;;
+FD:\work\MiddlewareSimWPF\View\ProtocolVer\Ver9\SensorBodyVer9.xaml;;
+FD:\work\MiddlewareSimWPF\View\ProtocolVer\Ver9\SetupInfoVer9.xaml;;
 

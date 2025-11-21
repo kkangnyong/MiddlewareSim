@@ -54,7 +54,7 @@ namespace SimReeferMiddlewareSystemWPF.UIControl {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SimReeferMiddlewareSystemWPF;V1.0.0.0;component/uicontrol/completecontrol.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SimReeferMiddlewareSystemWPF;component/uicontrol/completecontrol.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\UIControl\CompleteControl.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

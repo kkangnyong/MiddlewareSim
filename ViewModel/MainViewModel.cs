@@ -4,9 +4,11 @@ using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8;
+using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel
 {
@@ -26,6 +28,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 }
             }
         }
+        private readonly INavigationService _navigationService;
         private readonly IMessageBoxService _messageBoxService;
         private readonly ITcpSocketService _tcpSocketService;
         private readonly MainNavigationStore? _mainNavigationStore;
@@ -42,6 +45,12 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
         private ProtocolViewModelVer8 _protocolver8;
         public ProtocolViewModelVer8 ProtocolVer8 { get { if (_protocolver8 == null) _protocolver8 = new ProtocolViewModelVer8(); return _protocolver8; } }
+
+        private ProtocolViewModelVer9 _protocolver9;
+        public ProtocolViewModelVer9 ProtocolVer9 { get { if (_protocolver9 == null) _protocolver9 = new ProtocolViewModelVer9(); return _protocolver9; } }
+
+        //private ProtocolViewModelVer10 _protocolver10;
+        //public ProtocolViewModelVer10 ProtocolVer10 { get { if (_protocolver10 == null) _protocolver10 = new ProtocolViewModelVer10(); return _protocolver10; } }
 
 
         private static Version? _fileVersion = Assembly.GetExecutingAssembly().GetName().Version;
@@ -67,7 +76,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             _tcpSocketService = tcpSocketService;
             _mainNavigationStore = mainNavigationStore;
             Initialize();
-            navigationService.Navigate(NaviType.ProtocolView);
+            _navigationService = navigationService;
+            _navigationService.Navigate(NaviType.ProtocolView, ProtocolVersion);
         }
 
         private void Initialize()
@@ -96,19 +106,53 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         {
             ToLoadImage = "/Resources/Check_Mark.png";
             IsEnabled = false;
-            ProtocolVer8.Instance.IsDeviceInfoEnabled = true;
+            if (ProtocolVersion.Equals(_protocolVerList[0]))
+            {
+                ProtocolVer8.Instance.IsDeviceInfoEnabled = true;
+            }
+            else if (ProtocolVersion.Equals(_protocolVerList[1]))
+            {
+                ProtocolVer9.Instance.IsDeviceInfoEnabled = true;
+            }
+            else if (ProtocolVersion.Equals(_protocolVerList[2]))
+            {
+                //ProtocolVer10.Instance.IsDeviceInfoEnabled = true;
+            }
         }
 
         private void SocketAsyncDisconnected()
         {
             ToLoadImage = string.Empty;
             IsEnabled = true;
-            ProtocolVer8.Instance.IsDeviceInfoEnabled = false;
-            ProtocolVer8.Instance.IsSetupInfoEnabled = false;
-            ProtocolVer8.Instance.IsStartDataEnabled = false;
-            ProtocolVer8.Instance.IsDeviceDataEnabled = false;
-            ProtocolVer8.Instance.IsReeferDataEnabled = false;
-            ProtocolVer8.Instance.IsStartCommandEnabled = false;
+            if (ProtocolVersion.Equals(_protocolVerList[0]))
+            {
+                ProtocolVer8.Instance.IsDeviceInfoEnabled = false;
+                ProtocolVer8.Instance.IsSetupInfoEnabled = false;
+                ProtocolVer8.Instance.IsStartDataEnabled = false;
+                ProtocolVer8.Instance.IsDeviceDataEnabled = false;
+                ProtocolVer8.Instance.IsReeferDataEnabled = false;
+                ProtocolVer8.Instance.IsStartCommandEnabled = false;
+            }
+            else if (ProtocolVersion.Equals(_protocolVerList[1]))
+            {
+                ProtocolVer9.Instance.IsDeviceInfoEnabled = false;
+                ProtocolVer9.Instance.IsSetupInfoEnabled = false;
+                ProtocolVer9.Instance.IsStartDataEnabled = false;
+                ProtocolVer9.Instance.IsDeviceDataEnabled = false;
+                ProtocolVer9.Instance.IsReeferDataEnabled = false;
+                ProtocolVer9.Instance.IsSensorDataEnabled = false;
+                ProtocolVer9.Instance.IsStartCommandEnabled = false;
+            }
+            else if (ProtocolVersion.Equals(_protocolVerList[2]))
+            {
+                //ProtocolVer10.Instance.IsDeviceInfoEnabled = false;
+                //ProtocolVer10.Instance.IsSetupInfoEnabled = false;
+                //ProtocolVer10.Instance.IsStartDataEnabled = false;
+                //ProtocolVer10.Instance.IsDeviceDataEnabled = false;
+                //ProtocolVer10.Instance.IsReeferDataEnabled = false;
+                //ProtocolVer10.Instance.IsSensorDataEnabled = false;
+                //ProtocolVer10.Instance.IsStartCommandEnabled = false;
+            }
         }
 
         private void SocketAsyncError(string error)
@@ -223,6 +267,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 {
                     ServerConnectionModel.ProtocolVersion = value;
                     OnPropertyChanged();
+                    _navigationService.Navigate(NaviType.ProtocolView, ProtocolVersion);
                 }
             }
         }

@@ -44,10 +44,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModel\ProtocolVer\Ver9\" />
     <Folder Include="ViewModel\ProtocolVer\Ver10\" />
     <Folder Include="View\ProtocolVer\Ver10\" />
-    <Folder Include="View\ProtocolVer\Ver9\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -70,6 +68,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Update="UIControl\CompleteControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ProtocolVer\Ver9\DeviceBodyVer9.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ProtocolVer\Ver9\DeviceInfoVer9.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ProtocolVer\Ver9\ProtocolVer9.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ProtocolVer\Ver9\SensorBodyVer9.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ProtocolVer\Ver9\ReeferBodyVer9.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ProtocolVer\Ver9\SetupInfoVer9.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
