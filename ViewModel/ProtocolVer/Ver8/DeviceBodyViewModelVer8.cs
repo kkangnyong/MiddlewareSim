@@ -6,7 +6,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
     public class DeviceBodyViewModelVer8 : ViewModelBase
     {
         private static DeviceBodyViewModelVer8 _instance;
-        public static DeviceBodyViewModelVer8 Instance { get { if (_instance == null) _instance = new DeviceBodyViewModelVer8(); return _instance; } }
+        public DeviceBodyViewModelVer8 Instance { get { if (_instance == null) _instance = new DeviceBodyViewModelVer8(); return _instance; } }
 
         private DeviceBodyStore _deviceBodyStore;
 
@@ -17,6 +17,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
 
         public DeviceBodyViewModelVer8(DeviceBodyStore deviceBodyStore)
         {
+            _instance = this;
             Instance._deviceBodyStore = deviceBodyStore;
         }
 

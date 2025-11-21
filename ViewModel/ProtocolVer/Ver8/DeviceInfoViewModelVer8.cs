@@ -6,7 +6,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
     public class DeviceInfoViewModelVer8 : ViewModelBase
     {
         private static DeviceInfoViewModelVer8 _instance;
-        public static DeviceInfoViewModelVer8 Instance { get { if (_instance == null) _instance = new DeviceInfoViewModelVer8(); return _instance; }  }
+        public DeviceInfoViewModelVer8 Instance { get { if (_instance == null) _instance = new DeviceInfoViewModelVer8(); return _instance; }  }
 
         private DeviceInfoStore _deviceInfoStore;
         //private event EventHandler<UserControlEventArgs> _deviceChanged;
@@ -18,6 +18,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
 
         public DeviceInfoViewModelVer8(DeviceInfoStore deviceInfoStore) 
         {
+            _instance = this;
             Instance._deviceInfoStore = deviceInfoStore;
         }
 

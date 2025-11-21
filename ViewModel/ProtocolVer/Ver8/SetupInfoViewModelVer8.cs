@@ -6,7 +6,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
     public class SetupInfoViewModelVer8 : ViewModelBase
     {
         private static SetupInfoViewModelVer8 _instance;
-        public static SetupInfoViewModelVer8 Instance { get { if (_instance == null) _instance = new SetupInfoViewModelVer8(); return _instance; } }
+        public SetupInfoViewModelVer8 Instance { get { if (_instance == null) _instance = new SetupInfoViewModelVer8(); return _instance; } }
 
         private SetupInfoStore _setupInfoStore;
 
@@ -17,6 +17,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
 
         public SetupInfoViewModelVer8(SetupInfoStore setupInfoStore)
         {
+            _instance = this;
             Instance._setupInfoStore = setupInfoStore;
         }
 

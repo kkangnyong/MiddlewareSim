@@ -45,12 +45,15 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
         {
             get { return (ViewModelBase)App.Current.Services.GetService(typeof(ReeferBodyViewModelVer8)); }
         }
-        private bool _isDeviceInfoEnabled { get; set; } = true;
+        private bool _isDeviceInfoEnabled { get; set; } = false;
         private bool _isSetupInfoEnabled { get; set; } = false;
         private bool _isStartDataEnabled { get; set; } = false;
         private bool _isDeviceDataEnabled { get; set; } = false;
         private bool _isReeferDataEnabled { get; set; } = false;
         private bool _isStartCommandEnabled { get; set; } = false;
+
+        private static ProtocolViewModelVer8 _instance;
+        public ProtocolViewModelVer8 Instance { get { if (_instance == null) _instance = new ProtocolViewModelVer8(); return _instance; } }
 
         public ProtocolViewModelVer8() { }
 
@@ -60,6 +63,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
             DeviceBodyStore deviceBodyStore,
             ReeferBodyStore reeferBodyStore)
         {
+            _instance = this;
             _messageBoxService = messageBoxService;
             _modelDataService = modelData;
             _deviceInfoStore = deviceInfoStore;

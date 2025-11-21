@@ -6,7 +6,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
     public class ReeferBodyViewModelVer8 : ViewModelBase
     {
         private static ReeferBodyViewModelVer8 _instance;
-        public static ReeferBodyViewModelVer8 Instance { get { if (_instance == null) _instance = new ReeferBodyViewModelVer8(); return _instance; } }
+        public ReeferBodyViewModelVer8 Instance { get { if (_instance == null) _instance = new ReeferBodyViewModelVer8(); return _instance; } }
 
         private ReeferBodyStore _reeferBodyStore;
 
@@ -17,6 +17,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
 
         public ReeferBodyViewModelVer8(ReeferBodyStore reeferBodyStore)
         {
+            _instance = this;
             Instance._reeferBodyStore = reeferBodyStore;
         }
 

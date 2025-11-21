@@ -3,6 +3,8 @@ using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
+using SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver8;
+using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -37,6 +39,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
         private ServerConnectionModel _serverConnectionModel;
         public ServerConnectionModel ServerConnectionModel { get { if (_serverConnectionModel == null) _serverConnectionModel = Instance._serverConnectionInfoStore._currentServerConnectionInfo = new ServerConnectionModel(); return _serverConnectionModel; } }
+
+        private ProtocolViewModelVer8 _protocolver8;
+        public ProtocolViewModelVer8 ProtocolVer8 { get { if (_protocolver8 == null) _protocolver8 = new ProtocolViewModelVer8(); return _protocolver8; } }
 
         private string _imagePath { get; set; } = string.Empty;
         private string _companyImagePath { get; set; } = string.Empty;
@@ -86,12 +91,19 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         {
             ToLoadImage = "/Resources/Check_Mark.png";
             IsEnabled = false;
+            ProtocolVer8.Instance.IsDeviceInfoEnabled = true;
         }
 
         private void SocketAsyncDisconnected()
         {
             ToLoadImage = string.Empty;
             IsEnabled = true;
+            ProtocolVer8.Instance.IsDeviceInfoEnabled = false;
+            ProtocolVer8.Instance.IsSetupInfoEnabled = false;
+            ProtocolVer8.Instance.IsStartDataEnabled = false;
+            ProtocolVer8.Instance.IsDeviceDataEnabled = false;
+            ProtocolVer8.Instance.IsReeferDataEnabled = false;
+            ProtocolVer8.Instance.IsStartCommandEnabled = false;
         }
 
         private void SocketAsyncError(string error)
