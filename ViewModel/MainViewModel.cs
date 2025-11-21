@@ -5,6 +5,7 @@ using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8;
 using System.ComponentModel;
+using System.Reflection;
 using System.Windows.Input;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel
@@ -42,9 +43,13 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private ProtocolViewModelVer8 _protocolver8;
         public ProtocolViewModelVer8 ProtocolVer8 { get { if (_protocolver8 == null) _protocolver8 = new ProtocolViewModelVer8(); return _protocolver8; } }
 
+
+        private static Version? _fileVersion = Assembly.GetExecutingAssembly().GetName().Version;
+        private string _title { get; set; } = $"EyeCargo Reefer Middleware Simulator -Ver {_fileVersion?.Major}.{_fileVersion?.Minor}.{_fileVersion?.Build}";
         private string _imagePath { get; set; } = string.Empty;
         private string _companyImagePath { get; set; } = string.Empty;
         private bool _isEnabled { get; set; } = true;
+        private List<string> _protocolVerList { get; set; } = new List<string>() { "0.8.0.0", "0.9.0.0", "0.10.0.0" };
 
         public MainViewModel() { }
 
@@ -118,7 +123,18 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             CurrentViewModel = _mainNavigationStore?.CurrentViewModel;
         }
 
-        private List<string> _protocolVerList { get; set; } = new List<string>() { "0.8.0.0", "0.9.0.0", "0.10.0.0" };
+        public string TitleVersion
+        {
+            get { return _title; }
+            set
+            {
+                if (_title != null)
+                {
+                    _title = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public List<string> ProtocolVerList 
         {

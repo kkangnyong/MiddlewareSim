@@ -11,10 +11,8 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("S-Winnus")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("SimReeferMiddlewareSystemWPF")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyCopyrightAttribute("S-Winnus")]
-[assembly: System.Reflection.AssemblyDescriptionAttribute("EyeCargo Reefer Middleware Simulator")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2f414b879a13924471b1ac1f6443fa1a9baf0959")]
 [assembly: System.Reflection.AssemblyProductAttribute("SimReeferMiddlewareSystemWPF")]
