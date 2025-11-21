@@ -11,6 +11,11 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
+        <Style x:Key="MyTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
     </UserControl.Resources>
     <Grid Margin="0,0,0,0" Background="White">
         <Grid.ColumnDefinitions>
@@ -23,69 +28,99 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
                 <RowDefinition/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Stretch">
+            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
                 <Border BorderBrush="Black" BorderThickness="1"/>
-                <TextBlock Text="DeviceInfo" FontSize="30"/>
+                <TextBlock Text="1. Device Info" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
+            </Grid>
+            <Grid Grid.Row="1">
                 <ContentControl Content="{Binding CurrentDeviceInfoViewModel}" Margin="0,0,0,0"/>
             </Grid>
-            <Grid Grid.Row="1" VerticalAlignment="Bottom">
-                <Button Command="{Binding ToDeviceInfoCommand}" Content="Send Device Info Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+            <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Button IsEnabled="{Binding IsDeviceInfoEnabled}" Command="{Binding ToDeviceInfoCommand}" Content="Send Device Info Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
                 <RowDefinition/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Stretch">
+            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
                 <Border BorderBrush="Black" BorderThickness="1"/>
-                <TextBlock Text="SetupInfo" FontSize="30"/>
+                <TextBlock Text="2. Setup Info" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
+            </Grid>
+            <Grid Grid.Row="1">
                 <ContentControl Content="{Binding CurrentSetupInfoViewModel}" Margin="0,0,0,0"/>
             </Grid>
-            <Grid Grid.Row="1" VerticalAlignment="Bottom">
-                <Button Command="{Binding ToSetupInfoCommand}" Content="Send Setup Info Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+            <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Button IsEnabled="{Binding IsSetupInfoEnabled}" Command="{Binding ToSetupInfoCommand}" Content="Send Setup Info Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="2">
-            <Border BorderBrush="Black" BorderThickness="1"/>
-            <TextBlock Text="Start Data" FontSize="30"/>
-            <Button Command="{Binding ToStartDataCommand}" Content="Send Start Data Packet" VerticalAlignment="Center" Margin="5" Height="147" Style="{StaticResource MyButtonTextStyle}"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <TextBlock Text="3. Start Data" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <Button IsEnabled="{Binding IsStartDataEnabled}" Command="{Binding ToStartDataCommand}" Content="Send Start Data Packet" VerticalAlignment="Center" Margin="5" Height="147" Style="{StaticResource MyButtonTextStyle}"/>
+            </Grid>
         </Grid>
         <Grid Grid.Column="3">
             <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
                 <RowDefinition/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Stretch">
+            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
                 <Border BorderBrush="Black" BorderThickness="1"/>
-                <TextBlock Text="DeviceData" FontSize="30"/>
+                <TextBlock Text="4. Device Data" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
+            </Grid>
+            <Grid Grid.Row="1">
                 <ContentControl Content="{Binding CurrentDeviceBodyViewModel}"/>
             </Grid>
-            <Grid Grid.Row="1" VerticalAlignment="Bottom">
-                <Button Command="{Binding ToDeviceBodyCommand}" Content="Send Device Data Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+            <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Button IsEnabled="{Binding IsDeviceDataEnabled}" Command="{Binding ToDeviceBodyCommand}" Content="Send Device Data Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="4">
             <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
                 <RowDefinition/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Stretch">
+            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
                 <Border BorderBrush="Black" BorderThickness="1"/>
-                <TextBlock Text="ReeferData" FontSize="30"/>
+                <TextBlock Text="5. Reefer Data" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
+            </Grid>
+            <Grid Grid.Row="1">
                 <ContentControl Content="{Binding CurrentReeferBodyViewModel}"/>
             </Grid>
-            <Grid Grid.Row="1" VerticalAlignment="Bottom">
-                <Button Command="{Binding ToReeferBodyCommand}" Content="Send Reefer Data Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+            <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Button IsEnabled="{Binding IsReeferDataEnabled}" Command="{Binding ToReeferBodyCommand}" Content="Send Reefer Data Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="5">
-            <Border BorderBrush="Black" BorderThickness="1"/>
-            <TextBlock Text="Start Command" FontSize="30"/>
-            <Button Command="{Binding ToStartCommandCommand}" Content="Send Start Command" VerticalAlignment="Center" Margin="5" Height="147" Style="{StaticResource MyButtonTextStyle}"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <TextBlock Text="6. Start Command" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <Button IsEnabled="{Binding IsStartCommandEnabled}" Command="{Binding ToStartCommandCommand}" Content="Send Start Command" VerticalAlignment="Center" Margin="5" Height="147" Style="{StaticResource MyButtonTextStyle}"/>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

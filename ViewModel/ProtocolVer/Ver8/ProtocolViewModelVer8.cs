@@ -45,6 +45,12 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
         {
             get { return (ViewModelBase)App.Current.Services.GetService(typeof(ReeferBodyViewModelVer8)); }
         }
+        private bool _isDeviceInfoEnabled { get; set; } = true;
+        private bool _isSetupInfoEnabled { get; set; } = false;
+        private bool _isStartDataEnabled { get; set; } = false;
+        private bool _isDeviceDataEnabled { get; set; } = false;
+        private bool _isReeferDataEnabled { get; set; } = false;
+        private bool _isStartCommandEnabled { get; set; } = false;
 
         public ProtocolViewModelVer8() { }
 
@@ -117,6 +123,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.Voltage.ToString().Trim(), 2),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.IsCharging ? "1" : "0", 1),
             });
+            IsDeviceInfoEnabled = false;
+            IsSetupInfoEnabled = true;
         }
 
         private void ToSetupInfo(object _)
@@ -140,10 +148,14 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.StateChangeAlarm.ToString().Trim(), 2),
                 _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.CutOffVoltage.ToString().Trim(), 2),
             });
+            IsSetupInfoEnabled = false;
+            IsStartDataEnabled = true;
         }
 
         private void ToStartData(object _)
         {
+            IsStartDataEnabled = false;
+            IsDeviceDataEnabled = true;
         }
 
         private void ToDeviceBody(object _)
@@ -183,6 +195,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.GeofenceInOutState.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.CommCode.ToString().Trim(), 1)
             });
+            IsDeviceDataEnabled = false;
+            IsReeferDataEnabled = true;
         }
 
         private void ToReeferBody(object _)
@@ -229,10 +243,92 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.SwVer.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.EtcCode.ToString().Trim(), 1)
             });
+            IsReeferDataEnabled = false;
+            IsStartCommandEnabled = true;
         }
 
         private void ToStartCommand(object _)
         {
+            IsStartCommandEnabled = false;
+            IsDeviceInfoEnabled = true;
+        }
+
+        public bool IsDeviceInfoEnabled
+        {
+            get { return _isDeviceInfoEnabled; }
+            set
+            {
+                if (_isDeviceInfoEnabled != null)
+                {
+                    _isDeviceInfoEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsSetupInfoEnabled
+        {
+            get { return _isSetupInfoEnabled; }
+            set
+            {
+                if (_isSetupInfoEnabled != null)
+                {
+                    _isSetupInfoEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsStartDataEnabled
+        {
+            get { return _isStartDataEnabled; }
+            set
+            {
+                if (_isStartDataEnabled != null)
+                {
+                    _isStartDataEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsDeviceDataEnabled
+        {
+            get { return _isDeviceDataEnabled; }
+            set
+            {
+                if (_isDeviceDataEnabled != null)
+                {
+                    _isDeviceDataEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsReeferDataEnabled
+        {
+            get { return _isReeferDataEnabled; }
+            set
+            {
+                if (_isReeferDataEnabled != null)
+                {
+                    _isReeferDataEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsStartCommandEnabled
+        {
+            get { return _isStartCommandEnabled; }
+            set
+            {
+                if (_isStartCommandEnabled != null)
+                {
+                    _isStartCommandEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
         }
     }
 }

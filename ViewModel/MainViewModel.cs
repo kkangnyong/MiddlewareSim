@@ -39,6 +39,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         public ServerConnectionModel ServerConnectionModel { get { if (_serverConnectionModel == null) _serverConnectionModel = Instance._serverConnectionInfoStore._currentServerConnectionInfo = new ServerConnectionModel(); return _serverConnectionModel; } }
 
         private string _imagePath { get; set; } = string.Empty;
+        private string _companyImagePath { get; set; } = string.Empty;
         private bool _isEnabled { get; set; } = true;
 
         public MainViewModel(INavigationService navigationService,
@@ -49,6 +50,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ServerConnectionStore serverConnectionStore)
         {
             Instance = this;
+            ToCompanyImage = "/Resources/Swinnus.png";
             _serverConnectionInfoStore = serverConnectionStore;
             _messageBoxService = messageBoxService;
             _tcpSocketService = tcpSocketService;
@@ -112,6 +114,19 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 if (_isEnabled != null)
                 {
                     _isEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        
+        public string ToCompanyImage
+        {
+            get { return _companyImagePath; }
+            set
+            {
+                if (_companyImagePath != null)
+                {
+                    _companyImagePath = value;
                     OnPropertyChanged();
                 }
             }
