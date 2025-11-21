@@ -119,7 +119,7 @@
             </Grid>
             <Grid Grid.Row="1">
                 <Border BorderBrush="Black" BorderThickness="1"/>
-                <Button IsEnabled="{Binding IsStartCommandEnabled}" Command="{Binding ToStartCommandCommand}" Content="Send Start Command" VerticalAlignment="Center" Margin="5" Height="147" Style="{StaticResource MyButtonTextStyle}"/>
+                <Button IsEnabled="{Binding IsStartCommandEnabled}" Command="{Binding ToStartCommandCommand}" Content="Send Start Command Packet" VerticalAlignment="Center" Margin="5" Height="147" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
     </Grid>

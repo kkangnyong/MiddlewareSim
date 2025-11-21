@@ -27,17 +27,17 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         }
         private readonly IMessageBoxService _messageBoxService;
         private readonly ITcpSocketService _tcpSocketService;
-        private readonly IUIControlService _uiControlService;
         private readonly MainNavigationStore? _mainNavigationStore;
         public ICommand ToConnectCommand { get; set; }
         public ICommand ToDisconnectCommand { get; set; }
 
-        public static MainViewModel Instance { get; set; }
+        public static MainViewModel _instance { get; set; }
+        public MainViewModel Instance { get { if (_instance == null) _instance = new MainViewModel(); return _instance; } }
 
         private ServerConnectionStore _serverConnectionInfoStore;
 
         private ServerConnectionModel _serverConnectionModel;
-        public ServerConnectionModel ServerConnectionModel { get { if (_serverConnectionModel == null) _serverConnectionModel = Instance._serverConnectionInfoStore._currentServerConnectionInfo = new ServerConnectionModel(); return _serverConnectionModel; } }
+        public ServerConnectionModel ServerConnectionModel { get { if (_serverConnectionModel == null) _serverConnectionModel = _instance._serverConnectionInfoStore._currentServerConnectionInfo = new ServerConnectionModel(); return _serverConnectionModel; } }
 
         private ProtocolViewModelVer8 _protocolver8;
         public ProtocolViewModelVer8 ProtocolVer8 { get { if (_protocolver8 == null) _protocolver8 = new ProtocolViewModelVer8(); return _protocolver8; } }
@@ -46,6 +46,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private string _companyImagePath { get; set; } = string.Empty;
         private bool _isEnabled { get; set; } = true;
 
+        public MainViewModel() { }
+
         public MainViewModel(INavigationService navigationService,
             IMessageBoxService messageBoxService,
             ITcpSocketService tcpSocketService,
@@ -53,12 +55,11 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             MainNavigationStore mainNavigationStore,
             ServerConnectionStore serverConnectionStore)
         {
-            Instance = this;
+            _instance = this;
             ToCompanyImage = "/Resources/Swinnus.png";
             _serverConnectionInfoStore = serverConnectionStore;
             _messageBoxService = messageBoxService;
             _tcpSocketService = tcpSocketService;
-            _uiControlService = uIControlService;
             _mainNavigationStore = mainNavigationStore;
             Initialize();
             navigationService.Navigate(NaviType.ProtocolView);
@@ -115,6 +116,21 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private void CurrentViewModelChanged()
         {
             CurrentViewModel = _mainNavigationStore?.CurrentViewModel;
+        }
+
+        private List<string> _protocolVerList { get; set; } = new List<string>() { "0.8.0.0", "0.9.0.0", "0.10.0.0" };
+
+        public List<string> ProtocolVerList 
+        {
+            get { return _protocolVerList; }
+            set 
+            {
+                if (_protocolVerList != null)
+                {
+                    _protocolVerList = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public bool IsEnabled
