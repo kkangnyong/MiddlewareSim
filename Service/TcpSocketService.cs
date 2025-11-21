@@ -13,7 +13,8 @@ namespace SimReeferMiddlewareSystemWPF.Service
         private SocketAsyncEventArgs sendArgs { get; set; }
         private readonly string ACK_00 = "2B-56-EF-BF-BD-36-EF-BF-BD-72-6E-5D-EF-BF-BD-EF-BF-BD-74-EF-BF-BD-D6-A2";
         protected byte[] SeedKey { get; } = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5];
-        public Action? SocketAsyncCompleted { get; set; }
+        public Action? SocketAsyncConnected { get; set; }
+        public Action? SocketAsyncDisconnected { get; set; }
         public Action<string>? SocketAsyncError { get; set; }
 
         public void Connection(string _ip, ushort _port)
@@ -70,7 +71,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                 return;
             }
 
-            SocketAsyncCompleted?.Invoke();
+            SocketAsyncConnected?.Invoke();
             sendArgs = new SocketAsyncEventArgs();
             sendArgs.Completed += Args_SendCompleted;
 
@@ -197,6 +198,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     //    BeginInvokeWork(_manualSendForm.GetRecievedmsgBox, () => { _manualSendForm.GetRecievedmsgBox.Text = "Disconnected to server!!!\r\nPlease reconnect to the server."; });
                     //}
                     //BeginInvokeWork(txt_recievedmsg, () => { txt_recievedmsg.Text = "Disconnected to server!!!\r\nPlease reconnect to the server."; });
+                    SocketAsyncDisconnected?.Invoke();
                     Disconnection();
                 }
             }

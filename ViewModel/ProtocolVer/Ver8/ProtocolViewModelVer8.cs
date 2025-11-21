@@ -46,6 +46,34 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
             get { return (ViewModelBase)App.Current.Services.GetService(typeof(ReeferBodyViewModelVer8)); }
         }
 
+        public ProtocolViewModelVer8() { }
+
+        public ProtocolViewModelVer8(IMessageBoxService messageBoxService, IModelDataService modelData,
+            DeviceInfoStore deviceInfoStore,
+            SetupInfoStore setupInfoStore,
+            DeviceBodyStore deviceBodyStore,
+            ReeferBodyStore reeferBodyStore)
+        {
+            _messageBoxService = messageBoxService;
+            _modelDataService = modelData;
+            _deviceInfoStore = deviceInfoStore;
+            _setupInfoStore = setupInfoStore;
+            _deviceBodyStore = deviceBodyStore;
+            _reeferBodyStore = reeferBodyStore;
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            ToDeviceInfoCommand = new RelayCommand<object>(ToDeviceInfo);
+            ToSetupInfoCommand = new RelayCommand<object>(ToSetupInfo);
+            ToDeviceBodyCommand = new RelayCommand<object>(ToDeviceBody);
+            ToReeferBodyCommand = new RelayCommand<object>(ToReeferBody);
+            ToStartDataCommand = new RelayCommand<object>(ToStartData);
+            ToStartCommandCommand = new RelayCommand<object>(ToStartCommand);
+            _modelDataService._dataValuesList = new List<byte[]>();
+        }
+
         private void ToDeviceInfo(object _)
         {
             _modelDataService.SetDataValues(new List<byte[]>
@@ -112,6 +140,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.StateChangeAlarm.ToString().Trim(), 2),
                 _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.CutOffVoltage.ToString().Trim(), 2),
             });
+        }
+
+        private void ToStartData(object _)
+        {
         }
 
         private void ToDeviceBody(object _)
@@ -199,40 +231,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
             });
         }
 
-        private void ToStartData(object _) 
-        {
-        }
-
         private void ToStartCommand(object _)
         {
-        }
-
-        private void Initialize()
-        {
-            ToDeviceInfoCommand = new RelayCommand<object>(ToDeviceInfo);
-            ToSetupInfoCommand = new RelayCommand<object>(ToSetupInfo);
-            ToDeviceBodyCommand = new RelayCommand<object>(ToDeviceBody);
-            ToReeferBodyCommand = new RelayCommand<object>(ToReeferBody);
-            ToStartDataCommand = new RelayCommand<object>(ToStartData);
-            ToStartCommandCommand = new RelayCommand<object>(ToStartCommand);
-            _modelDataService._dataValuesList = new List<byte[]>();
-        }
-
-        public ProtocolViewModelVer8() { }
-
-        public ProtocolViewModelVer8(IMessageBoxService messageBoxService, IModelDataService modelData, 
-            DeviceInfoStore deviceInfoStore, 
-            SetupInfoStore setupInfoStore, 
-            DeviceBodyStore deviceBodyStore,
-            ReeferBodyStore reeferBodyStore)
-        {
-            _messageBoxService = messageBoxService;
-            _modelDataService = modelData;
-            _deviceInfoStore = deviceInfoStore;
-            _setupInfoStore = setupInfoStore;
-            _deviceBodyStore = deviceBodyStore;
-            _reeferBodyStore = reeferBodyStore;
-            Initialize();
         }
     }
 }

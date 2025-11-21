@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver8"
         xmlns:viewmodel="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
         Title="MainView" Height="800" MinWidth="1850">
     <Window.Resources>
@@ -23,22 +24,22 @@
         <DataTemplate DataType="{x:Type viewmodel:ReeferBodyViewModelVer8}">
             <local:ReeferBodyVer8/>
         </DataTemplate>
-        <Style x:Key="MyTextStyle" TargetType="MenuItem">
+        <Style x:Key="MyTextStyle" TargetType="{x:Type MenuItem}">
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
-        <Style x:Key="MyTextBlockStyle" TargetType="TextBlock">
+        <Style x:Key="MyTextBlockStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
-        <Style x:Key="MyButtonStyle" TargetType="Button">
+        <Style x:Key="MyButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
-        <Style x:Key="MyTextBoxStyle" TargetType="TextBox">
+        <Style x:Key="MyTextBoxStyle" TargetType="{x:Type TextBox}">
             <Setter Property="FontSize" Value="17"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
@@ -58,19 +59,21 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Height="50" VerticalAlignment="Top" Background="AliceBlue" >
-                <Menu Name="menu1" VerticalAlignment="Center">
+            <Grid Grid.Row="0" Height="50" VerticalAlignment="Top" Background="White" >
+                <Menu x:Name="menu1" VerticalAlignment="Center">
                     <Menu.BitmapEffect>
                         <DropShadowBitmapEffect/>
                     </Menu.BitmapEffect>
                     <MenuItem Header="Menu" Background="White" VerticalAlignment="Top" Style="{StaticResource MyTextStyle}">
-                        <MenuItem Header="submenu1"/>
+                        <MenuItem Header="Send Manual Packet"/>
                         <Separator/>
-                        <MenuItem Header="submenu2"/>
+                        <MenuItem Header="ID Server"/>
+                        <Separator/>
+                        <MenuItem Header="FOTA Server"/>
                     </MenuItem>
                 </Menu>
             </Grid>
-            <Grid Grid.Row="1" VerticalAlignment="Stretch" Background="Aqua" >
+            <Grid Grid.Row="1" VerticalAlignment="Stretch" Background="White" Name="TopGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30"/>
                     <ColumnDefinition Width="210"/>
@@ -80,7 +83,7 @@
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="80"/>
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="60"/>
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -90,9 +93,10 @@
                 <TextBlock Grid.Column="2" Text="PORT:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
                 <TextBox Grid.Column="3" Text="{Binding Port}" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
                 <TextBlock Grid.Column="4" Text="VERSION:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
-                <TextBox Grid.Column="5" Text="{Binding ProtocolVersion}" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
-                <Button Grid.Column="6" Command="{Binding ToConnectCommand}" Content="Connect" Style="{StaticResource MyButtonStyle}" Margin="3,0,3,0"/>
+                <TextBox Grid.Column="5" Text="{Binding ProtocolVersion}" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black" Margin="3,0,3,0"/>
+                <Button Grid.Column="6" Command="{Binding ToConnectCommand}" IsEnabled="{Binding IsEnabled}" Content="Connect" Style="{StaticResource MyButtonStyle}" Margin="3,0,3,0"/>
                 <Button Grid.Column="7" Command="{Binding ToDisconnectCommand}" Content="Disconnect" Style="{StaticResource MyButtonStyle}" Margin="3,0,3,0"/>
+                <Image Grid.Column="8" gif:ImageBehavior.AnimatedSource="{Binding ToLoadImage}" Margin="3,0,3,0"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">

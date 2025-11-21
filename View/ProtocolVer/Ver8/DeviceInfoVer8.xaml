@@ -18,7 +18,7 @@
         <Binding Source="{StaticResource DeviceInfoViewModelVer8}"/>
     </UserControl.DataContext>
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
-        <Grid Margin="0,0,540,0" Background="DarkSlateBlue">
+        <Grid Margin="0,0,540,0" Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>

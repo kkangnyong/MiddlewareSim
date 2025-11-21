@@ -5,7 +5,8 @@
         void Connection(string _ip, ushort _port);
         void Disconnection();
         bool SendMsg(byte[] messages, bool isVer, bool isAddCrc);
-        Action? SocketAsyncCompleted { get; set; }
+        Action? SocketAsyncConnected { get; set; }
+        Action? SocketAsyncDisconnected { get; set; }
         Action<string>? SocketAsyncError { get; set; }
     }
 }

@@ -76,3 +76,8 @@ D:\work\MiddlewareSimWPF\bin\Debug\net8.0-windows\Mythosia.dll
 D:\work\MiddlewareSimWPF\bin\Debug\net8.0-windows\Mythosia.Integrity.dll
 D:\work\MiddlewareSimWPF\bin\Debug\net8.0-windows\Mythosia.Security.Cryptography.dll
 D:\work\MiddlewareSimWPF\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
+D:\work\MiddlewareSimWPF\bin\Debug\net8.0-windows\WpfAnimatedGif.dll
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\UIControl\LoadingControl.g.cs
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\UIControl\LoadingControl.baml
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\UIControl\CompleteControl.g.cs
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\UIControl\CompleteControl.baml

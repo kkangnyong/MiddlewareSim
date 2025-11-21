@@ -26,6 +26,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         }
         private readonly IMessageBoxService _messageBoxService;
         private readonly ITcpSocketService _tcpSocketService;
+        private readonly IUIControlService _uiControlService;
         private readonly MainNavigationStore? _mainNavigationStore;
         public ICommand ToConnectCommand { get; set; }
         public ICommand ToDisconnectCommand { get; set; }
@@ -37,45 +38,65 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private ServerConnectionModel _serverConnectionModel;
         public ServerConnectionModel ServerConnectionModel { get { if (_serverConnectionModel == null) _serverConnectionModel = Instance._serverConnectionInfoStore._currentServerConnectionInfo = new ServerConnectionModel(); return _serverConnectionModel; } }
 
-        private void ToConnect(object _)
-        {
-            _tcpSocketService.Connection(ServerConnectionModel.IP, ServerConnectionModel.Port);
+        private string _imagePath { get; set; } = string.Empty;
+        private bool _isEnabled { get; set; } = true;
 
-            //LoadingWindow loading = new LoadingWindow();
-            //loading.Show();
-        }
-
-        private void ToDisconnect(object _)
-        {
-            _tcpSocketService.Disconnection();
-            _messageBoxService.ShowInfo("Disconnect!!", "Server");
-        }
-
-        public MainViewModel(INavigationService navigationService, IMessageBoxService messageBoxService, ITcpSocketService tcpSocketService, 
-            MainNavigationStore mainNavigationStore, 
+        public MainViewModel(INavigationService navigationService,
+            IMessageBoxService messageBoxService,
+            ITcpSocketService tcpSocketService,
+            IUIControlService uIControlService,
+            MainNavigationStore mainNavigationStore,
             ServerConnectionStore serverConnectionStore)
         {
             Instance = this;
-            Instance._serverConnectionInfoStore = serverConnectionStore;
+            _serverConnectionInfoStore = serverConnectionStore;
             _messageBoxService = messageBoxService;
             _tcpSocketService = tcpSocketService;
-            _tcpSocketService.SocketAsyncCompleted += SocketAsyncCompleted;
-            _tcpSocketService.SocketAsyncError += SocketAsyncError;
+            _uiControlService = uIControlService;
             _mainNavigationStore = mainNavigationStore;
-            _mainNavigationStore.CurrentViewModelChanged += CurrentViewModelChanged;
+            Initialize();
             navigationService.Navigate(NaviType.ProtocolView);
+        }
+
+        private void Initialize()
+        {
+            _tcpSocketService.SocketAsyncConnected += SocketAsyncConnected;
+            _tcpSocketService.SocketAsyncDisconnected += SocketAsyncDisconnected;
+            _tcpSocketService.SocketAsyncError += SocketAsyncError;
+            _mainNavigationStore.CurrentViewModelChanged += CurrentViewModelChanged;
             ToConnectCommand = new RelayCommand<object>(ToConnect);
             ToDisconnectCommand = new RelayCommand<object>(ToDisconnect);
         }
 
-        private void SocketAsyncCompleted()
+        private void ToConnect(object _)
         {
-            _messageBoxService.ShowInfo("Connect!!", "Server");
+            ToLoadImage = "/Resources/Spinner_3.gif";
+            _tcpSocketService.Connection(ServerConnectionModel.IP, ServerConnectionModel.Port);
+        }
+
+        private void ToDisconnect(object _)
+        {
+            ToLoadImage = string.Empty;
+            _tcpSocketService.Disconnection();
+        }
+
+        private void SocketAsyncConnected()
+        {
+            ToLoadImage = "/Resources/Check_Mark.png";
+            IsEnabled = false;
+        }
+
+        private void SocketAsyncDisconnected()
+        {
+            ToLoadImage = string.Empty;
+            IsEnabled = true;
         }
 
         private void SocketAsyncError(string error)
         {
-            _messageBoxService.ShowInfo($"Connect Error!! - {error}", "Server");
+            ToLoadImage = "/Resources/Cancel.png";
+            IsEnabled = true;
+            _messageBoxService.ShowError($"Connect Error!! - {error}", "Server");
         }
 
         private void CurrentViewModelChanged()
@@ -83,6 +104,31 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             CurrentViewModel = _mainNavigationStore?.CurrentViewModel;
         }
 
+        public bool IsEnabled
+        {
+            get { return _isEnabled; }
+            set
+            {
+                if (_isEnabled != null)
+                {
+                    _isEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string ToLoadImage
+        {
+            get  { return _imagePath; }
+            set
+            {
+                if (_imagePath != null)
+                {
+                    _imagePath = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public string IP
         {

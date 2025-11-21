@@ -59,5 +59,35 @@ namespace SimReeferMiddlewareSystemWPF.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static byte[] Cancel {
+            get {
+                object obj = ResourceManager.GetObject("Cancel", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static byte[] Check_Mark {
+            get {
+                object obj = ResourceManager.GetObject("Check_Mark", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static byte[] Spinner_3 {
+            get {
+                object obj = ResourceManager.GetObject("Spinner_3", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
