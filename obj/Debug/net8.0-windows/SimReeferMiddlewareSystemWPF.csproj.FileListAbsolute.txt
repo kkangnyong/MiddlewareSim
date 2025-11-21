@@ -81,3 +81,4 @@ D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\UIControl\LoadingControl.g.cs
 D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\UIControl\LoadingControl.baml
 D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\UIControl\CompleteControl.g.cs
 D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\UIControl\CompleteControl.baml
+D:\work\MiddlewareSimWPF\obj\Debug\net8.0-windows\SimReeferMiddlewareSystemWPF_Content.g.cs

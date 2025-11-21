@@ -83,6 +83,16 @@ namespace SimReeferMiddlewareSystemWPF.Properties {
         /// <summary>
         ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static byte[] Defrosting3 {
+            get {
+                object obj = ResourceManager.GetObject("Defrosting3", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static byte[] Spinner_3 {
             get {
                 object obj = ResourceManager.GetObject("Spinner_3", resourceCulture);

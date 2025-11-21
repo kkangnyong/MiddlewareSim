@@ -32,7 +32,7 @@
                 <ContentControl Content="{Binding CurrentDeviceInfoViewModel}" Margin="0,0,0,0"/>
             </Grid>
             <Grid Grid.Row="1" VerticalAlignment="Bottom">
-                <Button Command="{Binding ToDeviceInfoCommand}" Content="Device Info Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+                <Button Command="{Binding ToDeviceInfoCommand}" Content="Send Device Info Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="1">
@@ -46,13 +46,13 @@
                 <ContentControl Content="{Binding CurrentSetupInfoViewModel}" Margin="0,0,0,0"/>
             </Grid>
             <Grid Grid.Row="1" VerticalAlignment="Bottom">
-                <Button Command="{Binding ToSetupInfoCommand}" Content="Setup Info Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+                <Button Command="{Binding ToSetupInfoCommand}" Content="Send Setup Info Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="2">
             <Border BorderBrush="Black" BorderThickness="1"/>
             <TextBlock Text="Start Data" FontSize="30"/>
-            <Button Command="{Binding ToStartDataCommand}" Content="Start Data Packet" VerticalAlignment="Center" Margin="5" Height="147" Style="{StaticResource MyButtonTextStyle}"/>
+            <Button Command="{Binding ToStartDataCommand}" Content="Send Start Data Packet" VerticalAlignment="Center" Margin="5" Height="147" Style="{StaticResource MyButtonTextStyle}"/>
         </Grid>
         <Grid Grid.Column="3">
             <Grid.RowDefinitions>
@@ -65,7 +65,7 @@
                 <ContentControl Content="{Binding CurrentDeviceBodyViewModel}"/>
             </Grid>
             <Grid Grid.Row="1" VerticalAlignment="Bottom">
-                <Button Command="{Binding ToDeviceBodyCommand}" Content="Device Data Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+                <Button Command="{Binding ToDeviceBodyCommand}" Content="Send Device Data Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="4">
@@ -79,13 +79,13 @@
                 <ContentControl Content="{Binding CurrentReeferBodyViewModel}"/>
             </Grid>
             <Grid Grid.Row="1" VerticalAlignment="Bottom">
-                <Button Command="{Binding ToReeferBodyCommand}" Content="Reefer Data Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+                <Button Command="{Binding ToReeferBodyCommand}" Content="Send Reefer Data Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="5">
             <Border BorderBrush="Black" BorderThickness="1"/>
             <TextBlock Text="Start Command" FontSize="30"/>
-            <Button Command="{Binding ToStartCommandCommand}" Content="Start Command" VerticalAlignment="Center" Margin="5" Height="147" Style="{StaticResource MyButtonTextStyle}"/>
+            <Button Command="{Binding ToStartCommandCommand}" Content="Send Start Command" VerticalAlignment="Center" Margin="5" Height="147" Style="{StaticResource MyButtonTextStyle}"/>
         </Grid>
     </Grid>
 </UserControl>
