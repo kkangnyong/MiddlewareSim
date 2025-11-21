@@ -45,7 +45,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
 
         private static Version? _fileVersion = Assembly.GetExecutingAssembly().GetName().Version;
-        private string _title { get; set; } = $"EyeCargo Reefer Middleware Simulator -Ver {_fileVersion?.Major}.{_fileVersion?.Minor}.{_fileVersion?.Build}";
+        private string _title { get; set; } = $"EyeCargo Reefer Middleware Simulator - v{_fileVersion?.Major}.{_fileVersion?.Minor}.{_fileVersion?.Build}";
         private string _imagePath { get; set; } = string.Empty;
         private string _companyImagePath { get; set; } = string.Empty;
         private bool _isEnabled { get; set; } = true;

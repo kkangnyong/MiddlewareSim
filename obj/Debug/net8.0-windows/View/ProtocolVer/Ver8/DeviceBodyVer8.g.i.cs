@@ -53,8 +53,8 @@ namespace SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver8 {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SimReeferMiddlewareSystemWPF;component/view/protocolver/ver8/devicebodyver8.xaml" +
-                    "", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SimReeferMiddlewareSystemWPF;V1.0.0.0;component/view/protocolver/ver8/devicebody" +
+                    "ver8.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\View\ProtocolVer\Ver8\DeviceBodyVer8.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
