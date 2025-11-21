@@ -254,7 +254,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
         private void ToStartCommand(object _)
         {
             IsStartCommandEnabled = false;
-            IsDeviceInfoEnabled = true;
         }
 
         public bool IsDeviceInfoEnabled
