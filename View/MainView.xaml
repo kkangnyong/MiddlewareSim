@@ -3,26 +3,46 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver8"
-        xmlns:viewmodel="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8"
+        xmlns:local8="clr-namespace:SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver8"
+        xmlns:viewmodel8="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8"
+        xmlns:local9="clr-namespace:SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver9"
+        xmlns:viewmodel9="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
         Title="{Binding TitleVersion}" Height="800" MinWidth="1850">
     <Window.Resources>
-        <DataTemplate DataType="{x:Type viewmodel:ProtocolViewModelVer8}">
-            <local:ProtocolVer8/>
+        <DataTemplate DataType="{x:Type viewmodel8:ProtocolViewModelVer8}">
+            <local8:ProtocolVer8/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodel:DeviceInfoViewModelVer8}">
-            <local:DeviceInfoVer8/>
+        <DataTemplate DataType="{x:Type viewmodel8:DeviceInfoViewModelVer8}">
+            <local8:DeviceInfoVer8/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodel:SetupInfoViewModelVer8}">
-            <local:SetupInfoVer8/>
+        <DataTemplate DataType="{x:Type viewmodel8:SetupInfoViewModelVer8}">
+            <local8:SetupInfoVer8/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodel:DeviceBodyViewModelVer8}">
-            <local:DeviceBodyVer8/>
+        <DataTemplate DataType="{x:Type viewmodel8:DeviceBodyViewModelVer8}">
+            <local8:DeviceBodyVer8/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodel:ReeferBodyViewModelVer8}">
-            <local:ReeferBodyVer8/>
+        <DataTemplate DataType="{x:Type viewmodel8:ReeferBodyViewModelVer8}">
+            <local8:ReeferBodyVer8/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel9:ProtocolViewModelVer9}">
+            <local9:ProtocolVer9/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel9:DeviceInfoViewModelVer9}">
+            <local9:DeviceInfoVer9/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel9:SetupInfoViewModelVer9}">
+            <local9:SetupInfoVer9/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel9:DeviceBodyViewModelVer9}">
+            <local9:DeviceBodyVer9/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel9:ReeferBodyViewModelVer9}">
+            <local9:ReeferBodyVer9/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel9:SensorBodyViewModelVer9}">
+            <local9:SensorBodyVer9/>
         </DataTemplate>
         <Style x:Key="MyMenuStyle" TargetType="{x:Type MenuItem}">
             <Setter Property="FontSize" Value="15"/>
