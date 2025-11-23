@@ -7,3 +7,16 @@
 /.gitignore
 /.gitignore
 /.gitignore
+/.vs/ProjectEvaluation/simreefermiddlewaresystemwpf.metadata.v9.bin
+/.vs/ProjectEvaluation/simreefermiddlewaresystemwpf.projects.v9.bin
+/.gitignore
+/.vs/ProjectEvaluation/simreefermiddlewaresystemwpf.strings.v9.bin
+/obj/Debug/net8.0-windows/SimReeferMiddlewareSystemWPF.AssemblyInfo.cs
+/obj/Debug/net8.0-windows/SimReeferMiddlewareSystemWPF.AssemblyInfoInputs.cache
+/obj/Debug/net8.0-windows/SimReeferMiddlewareSystemWPF_MarkupCompile.i.cache
+/obj/Debug/net8.0-windows/View/ProtocolVer/Ver9/DeviceBodyVer9.g.i.cs
+/obj/Debug/net8.0-windows/View/ProtocolVer/Ver9/DeviceInfoVer9.g.i.cs
+/obj/Debug/net8.0-windows/View/ProtocolVer/Ver9/ProtocolVer9.g.i.cs
+/obj/Debug/net8.0-windows/View/ProtocolVer/Ver9/ReeferBodyVer9.g.i.cs
+/obj/Debug/net8.0-windows/View/ProtocolVer/Ver9/SensorBodyVer9.g.i.cs
+/obj/Debug/net8.0-windows/View/ProtocolVer/Ver9/SetupInfoVer9.g.i.cs
