@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver8"
              mc:Ignorable="d">
     <UserControl.Resources>
-        <Style x:Key="MyButtonTextStyle" TargetType="Button">
+        <Style x:Key="MyButtonTextStyle" TargetType="{x:Type Button}">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
-        <Style x:Key="MyTextStyle" TargetType="TextBlock">
+        <Style x:Key="MyTextStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>

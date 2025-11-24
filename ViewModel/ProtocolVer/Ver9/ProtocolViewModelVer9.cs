@@ -4,7 +4,6 @@ using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Store;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
@@ -22,7 +21,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         private SetupInfoModel CurrentSetupInfoModel => _setupInfoStore._currentSetupInfo;
         private DeviceBodyModel CurrentDeviceBodyModel => _deviceBodyStore._currentDeviceBody;
         private ReeferBodyModel CurrentReeferBodyModel => _reeferBodyStore._currentReeferBody;
-        private SensorBodyModel CurrentSensorBodyModel => _sensorBodyStore._currentSensorBody;
         public ICommand ToDeviceInfoCommand { get; set; }
         public ICommand ToSetupInfoCommand { get; set; }
         public ICommand ToDeviceBodyCommand { get; set; }
@@ -70,6 +68,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
 
         private SensorBodyViewModelVer9 _sensorBodyVer9;
         public SensorBodyViewModelVer9 SensorBodyVer9 { get { if (_sensorBodyVer9 == null) _sensorBodyVer9 = new SensorBodyViewModelVer9(); return _sensorBodyVer9.Instance; } }
+        private List<short> _countSensorDataList { get; set; } = new List<short>() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        private short? _countSensorData { get; set; } = 0;
+        public ObservableCollection<INotifyPropertyChanged> ItemsCollection { get; set; }
 
         public ProtocolViewModelVer9() { }
 
@@ -90,7 +91,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
             _sensorBodyStore = sensorBodyStore;
             Initialize();
         }
-        public ObservableCollection<string> ItemsCollection { get; set; }
 
         private void Initialize()
         {
@@ -103,28 +103,39 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
             ToStartCommandCommand = new RelayCommand<object>(ToStartCommand);
             ToAddSensorDataCommand = new RelayCommand<object>(ToAddSensorData);
             _modelDataService._dataValuesList = new List<byte[]>();
-            ItemsCollection = new ObservableCollection<string>();
+            ItemsCollection = new ObservableCollection<INotifyPropertyChanged>();
         }
+
         private void ToAddSensorData(object _)
         {
             ItemsCollection.Clear();
-            for (int index = 0; index < 2; index++)
+            for (int index = 0; index < CountSensorData; index++)
             {
-                //ItemsCollection.Add($"CurrentSensorBodyViewModel");
-                ItemsCollection.Add($"Button {index}");
-                GridRowNo = (short)index;
+                ItemsCollection.Add(CurrentSensorBodyViewModel);
             }
         }
 
-        private short _gridRowNo { get; set; } = 2;
-        public short GridRowNo
+        public short? CountSensorData
         {
-            get { return _gridRowNo; }
+            get { return _countSensorData; }
             set
             {
-                if (_gridRowNo != null)
+                if (_countSensorData != null)
                 {
-                    _gridRowNo = value;
+                    _countSensorData = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public List<short> CountSensorDataList
+        {
+            get { return _countSensorDataList; }
+            set
+            {
+                if (_countSensorDataList != null)
+                {
+                    _countSensorDataList = value;
                     OnPropertyChanged();
                 }
             }

@@ -6,15 +6,22 @@
              xmlns:local="clr-namespace:SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver9"
              mc:Ignorable="d">
     <UserControl.Resources>
-        <Style x:Key="MyButtonTextStyle" TargetType="Button">
+        <Style x:Key="MyButtonTextStyle" TargetType="{x:Type Button}">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
-        <Style x:Key="MyTextStyle" TargetType="TextBlock">
+        <Style x:Key="MyTextStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+        <Style x:Key="MyComboBoxStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
     </UserControl.Resources>
     <Grid Margin="0,0,0,0" Background="White">
@@ -112,6 +119,7 @@
         <Grid Grid.Column="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
@@ -120,22 +128,25 @@
                 <TextBlock Text="6. Sensor Data" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
             </Grid>
             <Grid Grid.Row="1">
-                <ContentControl Content="{Binding CurrentSensorBodyViewModel}"/>
-                <!--<StackPanel>
-                    <Button Content="Add" Command="{Binding ToAddSensorDataCommand}"/>--><!--
-                    <ItemsControl x:Name="MyItems" ItemsSource="{Binding ItemsCollection}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <ContentControl Content="{Binding CurrentSensorBodyViewModel}"/>
-                                --><!--<TextBlock Text="AAAAAAAAAAAAAAAAAAAAAAA" Background="Red" Margin="3" />-->
-                                <!--<Button Content="{Binding GridRowNo}"/>-->
-                                <!--<Button Content="{Binding Path=., Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>--><!--
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Grid.Column="0" SelectedItem="{Binding CountSensorData}" ItemsSource="{Binding CountSensorDataList}" Style="{StaticResource MyComboBoxStyle}" />
+                <Button Grid.Column="1" Content="Add" Command="{Binding ToAddSensorDataCommand}"/>
             </Grid>
-            <Grid Grid.Row="2" VerticalAlignment="Bottom">
+            <Grid Grid.Row="2">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
+                <ItemsControl x:Name="MyItems" ItemsSource="{Binding ItemsCollection}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl Content="{Binding Path=., Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+            <Grid Grid.Row="3" VerticalAlignment="Bottom">
                 <Button IsEnabled="{Binding IsSensorDataEnabled}" Command="{Binding ToSensorBodyCommand}" Content="Send Sensor Data Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
