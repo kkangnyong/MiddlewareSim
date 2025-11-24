@@ -22,6 +22,7 @@
 /obj/Debug/net8.0-windows/View/ProtocolVer/Ver9/SetupInfoVer9.g.i.cs
 
 ##folders
+**/obj/
 Debug/
 Release/
 x64/
