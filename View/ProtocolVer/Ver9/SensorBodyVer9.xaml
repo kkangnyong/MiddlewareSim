@@ -62,8 +62,8 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="130"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="containerSN" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>

@@ -94,6 +94,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         {
             ToLoadImage = "/Resources/Spinner_3.gif";
             _tcpSocketService.Connection(ServerConnectionModel.IP, ServerConnectionModel.Port);
+            IsEnabled = false;
         }
 
         private void ToDisconnect(object _)
@@ -105,7 +106,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private void SocketAsyncConnected()
         {
             ToLoadImage = "/Resources/Check_Mark.png";
-            IsEnabled = false;
             if (ProtocolVersion.Equals(_protocolVerList[0]))
             {
                 ProtocolVer8.Instance.IsDeviceInfoEnabled = true;
