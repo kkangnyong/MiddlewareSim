@@ -47,14 +47,14 @@ namespace SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver9 {
         /// InitializeComponent
         /// </summary>
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "9.0.11.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "9.0.6.0")]
         public void InitializeComponent() {
             if (_contentLoaded) {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SimReeferMiddlewareSystemWPF;V1.0.0.0;component/view/protocolver/ver9/sensorbody" +
-                    "ver9.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SimReeferMiddlewareSystemWPF;component/view/protocolver/ver9/sensorbodyver9.xaml" +
+                    "", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\View\ProtocolVer\Ver9\SensorBodyVer9.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
@@ -64,7 +64,7 @@ namespace SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver9 {
         }
         
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "9.0.11.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "9.0.6.0")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
