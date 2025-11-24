@@ -121,6 +121,19 @@
             </Grid>
             <Grid Grid.Row="1">
                 <ContentControl Content="{Binding CurrentSensorBodyViewModel}"/>
+                <!--<StackPanel>
+                    <Button Content="Add" Command="{Binding ToAddSensorDataCommand}"/>--><!--
+                    <ItemsControl x:Name="MyItems" ItemsSource="{Binding ItemsCollection}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <ContentControl Content="{Binding CurrentSensorBodyViewModel}"/>
+                                --><!--<TextBlock Text="AAAAAAAAAAAAAAAAAAAAAAA" Background="Red" Margin="3" />-->
+                                <!--<Button Content="{Binding GridRowNo}"/>-->
+                                <!--<Button Content="{Binding Path=., Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>--><!--
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel-->
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
                 <Button IsEnabled="{Binding IsSensorDataEnabled}" Command="{Binding ToSensorBodyCommand}" Content="Send Sensor Data Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>

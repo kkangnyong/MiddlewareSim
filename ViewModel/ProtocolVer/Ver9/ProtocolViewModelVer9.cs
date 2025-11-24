@@ -2,7 +2,9 @@
 using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Store;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
@@ -27,7 +29,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         public ICommand ToReeferBodyCommand { get; set; }
         public ICommand ToSensorBodyCommand { get; set; }
         public ICommand ToStartDataCommand { get; set; }
-        public ICommand ToStartCommandCommand { get; set; }
+        public ICommand ToStartCommandCommand { get; set; }        
+        public ICommand ToAddSensorDataCommand { get; set; }
 
         public INotifyPropertyChanged? CurrentDeviceInfoViewModel
         {
@@ -53,6 +56,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         {
             get { return (ViewModelBase)App.Current.Services.GetService(typeof(SensorBodyViewModelVer9)); }
         }
+
         private bool _isDeviceInfoEnabled { get; set; } = false;
         private bool _isSetupInfoEnabled { get; set; } = false;
         private bool _isStartDataEnabled { get; set; } = false;
@@ -63,6 +67,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
 
         private static ProtocolViewModelVer9 _instance;
         public ProtocolViewModelVer9 Instance { get { if (_instance == null) _instance = new ProtocolViewModelVer9(); return _instance; } }
+
+        private SensorBodyViewModelVer9 _sensorBodyVer9;
+        public SensorBodyViewModelVer9 SensorBodyVer9 { get { if (_sensorBodyVer9 == null) _sensorBodyVer9 = new SensorBodyViewModelVer9(); return _sensorBodyVer9.Instance; } }
 
         public ProtocolViewModelVer9() { }
 
@@ -83,6 +90,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
             _sensorBodyStore = sensorBodyStore;
             Initialize();
         }
+        public ObservableCollection<string> ItemsCollection { get; set; }
 
         private void Initialize()
         {
@@ -93,7 +101,33 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
             ToSensorBodyCommand = new RelayCommand<object>(ToSensorBody);
             ToStartDataCommand = new RelayCommand<object>(ToStartData);
             ToStartCommandCommand = new RelayCommand<object>(ToStartCommand);
+            ToAddSensorDataCommand = new RelayCommand<object>(ToAddSensorData);
             _modelDataService._dataValuesList = new List<byte[]>();
+            ItemsCollection = new ObservableCollection<string>();
+        }
+        private void ToAddSensorData(object _)
+        {
+            ItemsCollection.Clear();
+            for (int index = 0; index < 2; index++)
+            {
+                //ItemsCollection.Add($"CurrentSensorBodyViewModel");
+                ItemsCollection.Add($"Button {index}");
+                GridRowNo = (short)index;
+            }
+        }
+
+        private short _gridRowNo { get; set; } = 2;
+        public short GridRowNo
+        {
+            get { return _gridRowNo; }
+            set
+            {
+                if (_gridRowNo != null)
+                {
+                    _gridRowNo = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         private void ToDeviceInfo(object _)

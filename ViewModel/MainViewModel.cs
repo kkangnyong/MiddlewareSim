@@ -8,7 +8,6 @@ using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Input;
-using System.Windows.Navigation;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel
 {
