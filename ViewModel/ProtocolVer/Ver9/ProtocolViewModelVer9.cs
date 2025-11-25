@@ -66,8 +66,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         private static ProtocolViewModelVer9 _instance;
         public ProtocolViewModelVer9 Instance { get { if (_instance == null) _instance = new ProtocolViewModelVer9(); return _instance; } }
 
-        private SensorBodyViewModelVer9 _sensorBodyVer9;
-        public SensorBodyViewModelVer9 SensorBodyVer9 { get { if (_sensorBodyVer9 == null) _sensorBodyVer9 = new SensorBodyViewModelVer9(); return _sensorBodyVer9.Instance; } }
+        private MainViewModel _mainView;
+        public MainViewModel MainView { get { if (_mainView == null) _mainView = new MainViewModel(); return _mainView.Instance; } }
         private List<short> _countSensorDataList { get; set; } = new List<short>() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         private short? _countSensorData { get; set; } = 0;
         public ObservableCollection<INotifyPropertyChanged> ItemsCollection { get; set; }
@@ -90,6 +90,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
             _reeferBodyStore = reeferBodyStore;
             _sensorBodyStore = sensorBodyStore;
             Initialize();
+
+            //MainView._tcpSocketService.Disconnection();
         }
 
         private void Initialize()
@@ -103,6 +105,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
             ToStartCommandCommand = new RelayCommand<object>(ToStartCommand);
             ToAddSensorDataCommand = new RelayCommand<object>(ToAddSensorData);
             _modelDataService._dataValuesList = new List<byte[]>();
+            _modelDataService._sensorBodyList = new List<List<byte[]>>();
             ItemsCollection = new ObservableCollection<INotifyPropertyChanged>();
         }
 
@@ -221,9 +224,14 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
 
         private void ToDeviceBody(object _)
         {
-            _modelDataService.SetDataValues(new List<byte[]>
+            if (_modelDataService._dataValuesList != null && _modelDataService._dataValuesList.Count > 0)
             {
-                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Code.ToString().Trim(), 1),
+                _modelDataService._dataValuesList.Clear();
+                _modelDataService._totalDataBytesLength = 0;
+            }
+
+            _modelDataService.SetDataJsonValues(new List<byte[]>
+            {
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Index.ToString().Trim(), 2),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.DeviceNumber.ToString().Trim(), 4),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Year.ToString().Trim(), 1),
@@ -255,14 +263,19 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.GeofenceInOutIndex.ToString().Trim(), 2),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.GeofenceInOutState.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.CommCode.ToString().Trim(), 1)
-            });
+            }, 0, CurrentDeviceBodyModel.Code.ToString().Trim());
             IsDeviceDataEnabled = false;
             IsReeferDataEnabled = true;
         }
 
         private void ToReeferBody(object _)
         {
-            _modelDataService.SetDataValues(new List<byte[]>
+            if (_modelDataService._dataValuesList != null && _modelDataService._dataValuesList.Count > 0)
+            {
+                _modelDataService._dataValuesList.Clear();
+                _modelDataService._totalDataBytesLength = 0;
+            }
+            _modelDataService.SetDataJsonValues(new List<byte[]>
             {
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.ContainerSN.ToString().Trim(), 11, true),
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Sp.ToString().Trim(), 2),
@@ -303,55 +316,34 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.HwVer.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.SwVer.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.EtcCode.ToString().Trim(), 1)
-            });
+            }, 1);
             IsReeferDataEnabled = false;
             IsSensorDataEnabled = true;
         }
 
         private void ToSensorBody(object _)
         {
-            _modelDataService.SetDataValues(new List<byte[]>
+            if (_modelDataService._dataValuesList != null && _modelDataService._dataValuesList.Count > 0)
             {
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.ContainerSN.ToString().Trim(), 11, true),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Sp.ToString().Trim(), 2),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Ss.ToString().Trim(), 2),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Dss.ToString().Trim(), 2),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Rs.ToString().Trim(), 2),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Eos.ToString().Trim(), 2),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Ambs.ToString().Trim(), 2),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Dchs.ToString().Trim(), 2),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Sgs.ToString().Trim(), 2),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Tintern.ToString().Trim(), 1),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Tfc.ToString().Trim(), 1),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.AirExchange.ToString().Trim(), 1),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.TotalCurrent.ToString().Trim(), 1),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Usda1.ToString().Trim(), 2),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Usda2.ToString().Trim(), 2),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Usda3.ToString().Trim(), 2),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Cts.ToString().Trim(), 2),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Humid.ToString().Trim(), 2),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.HumiditySet.ToString().Trim(), 1),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.O2.ToString().Trim(), 1),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.O2Set.ToString().Trim(), 1),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Co2.ToString().Trim(), 1),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Co2Set.ToString().Trim(), 1),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.ModeType.ToString().Trim(), 1),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Hrp.ToString().Trim(), 2),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Lrp.ToString().Trim(), 2),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Phase3Voltage.ToString().Trim(), 3),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Phase3Current.ToString().Trim(), 6),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Pt.ToString().Trim(), 2),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Ifc.ToString().Trim(), 1),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.DefrostInter.ToString().Trim(), 1),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.IsoStatus.ToString().Trim(), 1),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Status.ToString().Trim(), 1),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Alarms.ToString().Trim(), 16),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.PrivateAlarms.ToString().Trim(), 32),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.Controller.ToString().Trim(), 1),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.HwVer.ToString().Trim(), 1),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.SwVer.ToString().Trim(), 1),
-                //_modelDataService.GetStringsToByteArray(CurrentSensorBodyModel.EtcCode.ToString().Trim(), 1)
-            });
+                _modelDataService._dataValuesList.Clear();
+                _modelDataService._totalDataBytesLength = 0;
+            }
+
+            foreach (INotifyPropertyChanged item in ItemsCollection)
+            {
+                SensorBodyViewModelVer9 sensor = (SensorBodyViewModelVer9)item;
+                _modelDataService._dataValuesList.AddRange(new List<byte[]> {
+                    _modelDataService.GetStringsToByteArray(sensor.Date, 3),
+                    _modelDataService.GetStringsToByteArray(sensor.Time, 3),
+                    _modelDataService.GetStringsToByteArray(sensor.ActivePower, 7, true),
+                    _modelDataService.GetStringsToByteArray(sensor.AccumulatedPower, 10, true),
+                    _modelDataService.GetStringsToByteArray(sensor.Error, 6, true)
+                });
+                _modelDataService._sensorBodyList.Add(_modelDataService._dataValuesList);
+            }
+
+            _modelDataService.SetDataJsonValues(_modelDataService._dataValuesList, 2);
+
             IsSensorDataEnabled = false;
             IsStartCommandEnabled = true;
         }

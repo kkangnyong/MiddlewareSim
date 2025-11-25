@@ -29,7 +29,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         }
         private readonly INavigationService _navigationService;
         private readonly IMessageBoxService _messageBoxService;
-        private readonly ITcpSocketService _tcpSocketService;
+        public readonly ITcpSocketService _tcpSocketService;
         private readonly MainNavigationStore? _mainNavigationStore;
         public ICommand ToConnectCommand { get; set; }
         public ICommand ToDisconnectCommand { get; set; }

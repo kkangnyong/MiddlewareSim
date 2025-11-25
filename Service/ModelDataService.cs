@@ -1,4 +1,5 @@
 ﻿using SimReeferMiddlewareSystemWPF.Interface;
+using System;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -7,7 +8,10 @@ namespace SimReeferMiddlewareSystemWPF.Service
     public class ModelDataService : IModelDataService
     {
         public List<byte[]>? _dataValuesList { get; set; }
-        public int _totalDataBytesLength = 0;
+        public string _dataValuesToJsonString { get; set; }
+        public List<List<byte[]>> _sensorBodyList { get; set; }
+
+        public int _totalDataBytesLength { get; set; } = 0;
 
         public void SetDataValues(List<byte[]> dataList)
         {
@@ -18,6 +22,72 @@ namespace SimReeferMiddlewareSystemWPF.Service
             }
 
             _dataValuesList?.AddRange(dataList);
+        }
+
+        public void SetDataJsonValues(List<byte[]> dataList, short type, string code = "")
+        {
+            if (type == 2)
+            {
+                if (dataList.Count <= 0)
+                {
+                    string replaceText = _dataValuesToJsonString;
+                    _dataValuesToJsonString = replaceText.Remove(replaceText.Length - 1, 1).Insert(replaceText.Length - 1, "}");
+                    return;
+                }
+
+                _dataValuesToJsonString += " \"sen\": [";
+                byte[] resultBytes = new byte[_totalDataBytesLength];
+                byte[] tempBytes = resultBytes;
+                int index = 0;
+                foreach (List<byte[]> dataBytes in _sensorBodyList)
+                {
+                    int dataLength = 0;
+                    int tempByteindex = 0;
+                    foreach (byte[] data in dataBytes)
+                    {
+                        Array.Copy(data, 0, resultBytes, dataLength, data.Length);
+                        dataLength += data.Length;
+                    }
+                    foreach (byte b in resultBytes)
+                    {
+                        if (b > 0)
+                        {
+                            tempBytes[tempByteindex++] = b;
+                        }
+                    }
+                    Array.Resize(ref tempBytes, tempByteindex);
+                    resultBytes = tempBytes;
+
+                    _dataValuesToJsonString += "{\"d\": \"" + $"{Convert.ToBase64String(resultBytes)}\", \"i\": {index}" + ", \"t\": 1}";
+                    if (index < _sensorBodyList.Count - 1)
+                    {
+                        _dataValuesToJsonString += ", ";
+                    }
+                    index++;
+                }
+                _dataValuesToJsonString += "]}";
+            }
+            else
+            {
+                _dataValuesList?.AddRange(dataList);
+
+                byte[] resultBytes = new byte[_totalDataBytesLength];
+                int index = 0;
+                foreach (byte[] dataBytes in _dataValuesList)
+                {
+                    Array.Copy(dataBytes, 0, resultBytes, index, dataBytes.Length);
+                    index += dataBytes.Length;
+                }
+
+                if (type == 0)
+                {
+                    _dataValuesToJsonString = "{\"cod\": " + $"{code}" + ", \"dev\": " + $"\"{Convert.ToBase64String(resultBytes)}\"";
+                }
+                else if (type == 1)
+                {
+                    _dataValuesToJsonString += ", \"ref\": " + $"\"{Convert.ToBase64String(resultBytes)}\"" + ",";
+                }
+            }
         }
 
         public string ConvertToByteString(string msg, ushort length, bool isString)
