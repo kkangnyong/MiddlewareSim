@@ -13,6 +13,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         private DeviceBodyModel _deviceBodyModel;
         public DeviceBodyModel DeviceBodyModel { get { if (_deviceBodyModel == null) _deviceBodyModel = Instance._deviceBodyStore._currentDeviceBody = new DeviceBodyModel(); return _deviceBodyModel; } }
 
+        private ProtocolViewModelVer9 _protocolver9;
+        public ProtocolViewModelVer9 ProtocolVer9 { get { if (_protocolver9 == null) _protocolver9 = new ProtocolViewModelVer9(); return _protocolver9.Instance; } }
+
         public DeviceBodyViewModelVer9() { }
 
         public DeviceBodyViewModelVer9(DeviceBodyStore deviceBodyStore)
@@ -30,6 +33,22 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
                 {
                     DeviceBodyModel.Code = value;
                     OnPropertyChanged();
+
+                    ProtocolVer9.ContentSendStartCommand = "(End) " + ProtocolVer9.ContentSendStartCommand;
+                    if (DeviceBodyModel.Code == 1)
+                    {
+                        ProtocolVer9.IsStartDataEnabled = false;
+                        ProtocolVer9.ContentSendDeviceData = "(1) " + ProtocolVer9.ContentSendDeviceData;
+                        ProtocolVer9.ContentSendReeferData = "(2) " + ProtocolVer9.ContentSendReeferData;
+                        ProtocolVer9.ContentSendSensorData = "(3) " + ProtocolVer9.ContentSendSensorData;
+                    }
+                    else
+                    {
+                        ProtocolVer9.ContentSendStartData = "(1) " + ProtocolVer9.ContentSendStartData;
+                        ProtocolVer9.ContentSendDeviceData = "(2) " + ProtocolVer9.ContentSendDeviceData;
+                        ProtocolVer9.ContentSendReeferData = "(3) " + ProtocolVer9.ContentSendReeferData;
+                        ProtocolVer9.ContentSendSensorData = "(4) " + ProtocolVer9.ContentSendSensorData;
+                    }
                 }
             }
         }

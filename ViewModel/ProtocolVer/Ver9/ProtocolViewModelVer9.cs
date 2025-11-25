@@ -305,21 +305,21 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
             }, 0, CurrentDeviceBodyModel.Code.ToString().Trim());
 
             InitButtonContent();
-            ContentSendStartCommand = "(End) " + ContentSendStartCommand;
-            if (CurrentDeviceBodyModel.Code == 1)
-            {
-                IsStartDataEnabled = false;
-                ContentSendDeviceData = "(1) " + ContentSendDeviceData;
-                ContentSendReeferData = "(2) " + ContentSendReeferData;
-                ContentSendSensorData = "(3) " + ContentSendSensorData;
-            }
-            else
-            {
-                ContentSendStartData = "(1) " + ContentSendStartData;
-                ContentSendDeviceData = "(2) " + ContentSendDeviceData;
-                ContentSendReeferData = "(3) " + ContentSendReeferData;
-                ContentSendSensorData = "(4) " + ContentSendSensorData;
-            }
+            //ContentSendStartCommand = "(End) " + ContentSendStartCommand;
+            //if (CurrentDeviceBodyModel.Code == 1)
+            //{
+            //    IsStartDataEnabled = false;
+            //    ContentSendDeviceData = "(1) " + ContentSendDeviceData;
+            //    ContentSendReeferData = "(2) " + ContentSendReeferData;
+            //    ContentSendSensorData = "(3) " + ContentSendSensorData;
+            //}
+            //else
+            //{
+            //    ContentSendStartData = "(1) " + ContentSendStartData;
+            //    ContentSendDeviceData = "(2) " + ContentSendDeviceData;
+            //    ContentSendReeferData = "(3) " + ContentSendReeferData;
+            //    ContentSendSensorData = "(4) " + ContentSendSensorData;
+            //}
             IsDeviceDataEnabled = false;
             IsReeferDataEnabled = true;
         }
