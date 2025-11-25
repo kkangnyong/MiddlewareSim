@@ -7,6 +7,7 @@ using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9;
 using System.ComponentModel;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel
@@ -43,10 +44,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         public ServerConnectionModel ServerConnectionModel { get { if (_serverConnectionModel == null) _serverConnectionModel = _instance._serverConnectionInfoStore._currentServerConnectionInfo = new ServerConnectionModel(); return _serverConnectionModel; } }
 
         private ProtocolViewModelVer8 _protocolver8;
-        public ProtocolViewModelVer8 ProtocolVer8 { get { if (_protocolver8 == null) _protocolver8 = new ProtocolViewModelVer8(); return _protocolver8; } }
+        public ProtocolViewModelVer8 ProtocolVer8 { get { if (_protocolver8 == null) _protocolver8 = new ProtocolViewModelVer8(); return _protocolver8.Instance; } }
 
         private ProtocolViewModelVer9 _protocolver9;
-        public ProtocolViewModelVer9 ProtocolVer9 { get { if (_protocolver9 == null) _protocolver9 = new ProtocolViewModelVer9(); return _protocolver9; } }
+        public ProtocolViewModelVer9 ProtocolVer9 { get { if (_protocolver9 == null) _protocolver9 = new ProtocolViewModelVer9(); return _protocolver9.Instance; } }
 
         //private ProtocolViewModelVer10 _protocolver10;
         //public ProtocolViewModelVer10 ProtocolVer10 { get { if (_protocolver10 == null) _protocolver10 = new ProtocolViewModelVer10(); return _protocolver10; } }
@@ -84,6 +85,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             _tcpSocketService.SocketAsyncConnected += SocketAsyncConnected;
             _tcpSocketService.SocketAsyncDisconnected += SocketAsyncDisconnected;
             _tcpSocketService.SocketAsyncError += SocketAsyncError;
+            _tcpSocketService.NoSynchronizationSetupInfo += NoSynchronizationSetupInfo;
+            _tcpSocketService.SynchronizationSetupInfo += SynchronizationSetupInfo;
             _mainNavigationStore.CurrentViewModelChanged += CurrentViewModelChanged;
             ToConnectCommand = new RelayCommand<object>(ToConnect);
             ToDisconnectCommand = new RelayCommand<object>(ToDisconnect);
@@ -98,12 +101,37 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
         private void ToDisconnect(object _)
         {
-            ToLoadImage = string.Empty;
             _tcpSocketService.Disconnection();
+            ToLoadImage = string.Empty;
+            IsEnabled = true;
+            ProtocolVer8.Dispose();
+            ProtocolVer9.Dispose();
+        }
+
+        private void NoSynchronizationSetupInfo()
+        {
+        }
+
+        private void SynchronizationSetupInfo()
+        {
+            ProtocolVer8.IsSetupInfoEnabled = true;
+            ProtocolVer9.IsSetupInfoEnabled = true;
         }
 
         private void SocketAsyncConnected()
         {
+            string[] strings = ProtocolVersion.Split(new string[] { ",", ".", "\t", " " }, StringSplitOptions.RemoveEmptyEntries);
+            byte[] msgBytes = new byte[strings.Length];
+
+            //프로토콜 버전 전송 시
+            if (Regex.IsMatch(ProtocolVersion, @"^[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}$"))
+            {
+                byte[] stringsTobytes = strings.Select(byte.Parse).ToArray();
+                Array.Copy(stringsTobytes, 0, msgBytes, 0, stringsTobytes.Length);
+            }
+
+            if (!_tcpSocketService.SendMsg(msgBytes, true, false)) return;
+
             ToLoadImage = "/Resources/Check_Mark.png";
             if (ProtocolVersion.Equals(_protocolVerList[0]))
             {
@@ -123,35 +151,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         {
             ToLoadImage = string.Empty;
             IsEnabled = true;
-            if (ProtocolVersion.Equals(_protocolVerList[0]))
-            {
-                ProtocolVer8.Instance.IsDeviceInfoEnabled = false;
-                ProtocolVer8.Instance.IsSetupInfoEnabled = false;
-                ProtocolVer8.Instance.IsStartDataEnabled = false;
-                ProtocolVer8.Instance.IsDeviceDataEnabled = false;
-                ProtocolVer8.Instance.IsReeferDataEnabled = false;
-                ProtocolVer8.Instance.IsStartCommandEnabled = false;
-            }
-            else if (ProtocolVersion.Equals(_protocolVerList[1]))
-            {
-                ProtocolVer9.Instance.IsDeviceInfoEnabled = false;
-                ProtocolVer9.Instance.IsSetupInfoEnabled = false;
-                ProtocolVer9.Instance.IsStartDataEnabled = false;
-                ProtocolVer9.Instance.IsDeviceDataEnabled = false;
-                ProtocolVer9.Instance.IsReeferDataEnabled = false;
-                ProtocolVer9.Instance.IsSensorDataEnabled = false;
-                ProtocolVer9.Instance.IsStartCommandEnabled = false;
-            }
-            else if (ProtocolVersion.Equals(_protocolVerList[2]))
-            {
-                //ProtocolVer10.Instance.IsDeviceInfoEnabled = false;
-                //ProtocolVer10.Instance.IsSetupInfoEnabled = false;
-                //ProtocolVer10.Instance.IsStartDataEnabled = false;
-                //ProtocolVer10.Instance.IsDeviceDataEnabled = false;
-                //ProtocolVer10.Instance.IsReeferDataEnabled = false;
-                //ProtocolVer10.Instance.IsSensorDataEnabled = false;
-                //ProtocolVer10.Instance.IsStartCommandEnabled = false;
-            }
+            ProtocolVer8.Dispose();
+            ProtocolVer9.Dispose();
         }
 
         private void SocketAsyncError(string error)

@@ -2,7 +2,7 @@
 {
     public class DeviceBodyModel
     {
-        private int _code = 0;
+        private int _code = 17;
         private ushort _index = 1;
         private int _deviceNumber = 6002032;
         private byte _year = 25;

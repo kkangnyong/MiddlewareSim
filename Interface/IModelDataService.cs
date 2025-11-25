@@ -2,6 +2,7 @@
 {
     public interface IModelDataService
     {
+        void InitGenericData();
         void SetDataValues(List<byte[]> dataList);
         void SetDataJsonValues(List<byte[]> dataList, short type, string code = "");
         string ConvertToByteString(string msg, ushort length, bool isString);

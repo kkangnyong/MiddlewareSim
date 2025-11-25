@@ -84,8 +84,22 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
             _modelDataService._dataValuesList = new List<byte[]>();
         }
 
+        public void Dispose()
+        {
+            if (_modelDataService == null) return;
+            _modelDataService.InitGenericData();
+
+            IsDeviceInfoEnabled = false;
+            IsSetupInfoEnabled = false;
+            IsStartDataEnabled = false;
+            IsDeviceDataEnabled = false;
+            IsReeferDataEnabled = false;
+            IsStartCommandEnabled = false;
+        }
+
         private void ToDeviceInfo(object _)
         {
+            _modelDataService.InitGenericData();
             _modelDataService.SetDataValues(new List<byte[]>
             {
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.Code.ToString().Trim(), 1),
@@ -128,11 +142,11 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.IsCharging ? "1" : "0", 1),
             });
             IsDeviceInfoEnabled = false;
-            IsSetupInfoEnabled = true;
         }
 
         private void ToSetupInfo(object _)
         {
+            _modelDataService.InitGenericData();
             _modelDataService.SetDataValues(new List<byte[]>
             {
                 _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.Code.ToString().Trim(), 1),
@@ -158,12 +172,12 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
 
         private void ToStartData(object _)
         {
-            IsStartDataEnabled = false;
             IsDeviceDataEnabled = true;
         }
 
         private void ToDeviceBody(object _)
         {
+            _modelDataService.InitGenericData();
             _modelDataService.SetDataValues(new List<byte[]>
             {
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Code.ToString().Trim(), 1),
@@ -205,6 +219,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
 
         private void ToReeferBody(object _)
         {
+            _modelDataService.InitGenericData();
             _modelDataService.SetDataValues(new List<byte[]>
             {
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.ContainerSN.ToString().Trim(), 11, true),
@@ -253,7 +268,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
 
         private void ToStartCommand(object _)
         {
-            IsStartCommandEnabled = false;
         }
 
         public bool IsDeviceInfoEnabled

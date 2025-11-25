@@ -28,11 +28,11 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="230"/>
+            <ColumnDefinition Width="240"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="250"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
@@ -79,7 +79,7 @@
             </Grid>
             <Grid Grid.Row="1">
                 <Border BorderBrush="Black" BorderThickness="1"/>
-                <Button IsEnabled="{Binding IsStartDataEnabled}" Command="{Binding ToStartDataCommand}" Content="Send Start Data Packet" VerticalAlignment="Center" Margin="5" Height="147" Style="{StaticResource MyButtonTextStyle}"/>
+                <Button IsEnabled="{Binding IsStartDataEnabled}" Command="{Binding ToStartDataCommand}" Content="{Binding ContentSendStartData}" VerticalAlignment="Center" Margin="5" Height="147" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="3">
@@ -96,7 +96,7 @@
                 <ContentControl Content="{Binding CurrentDeviceBodyViewModel}"/>
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
-                <Button IsEnabled="{Binding IsDeviceDataEnabled}" Command="{Binding ToDeviceBodyCommand}" Content="Send Device Data Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+                <Button IsEnabled="{Binding IsDeviceDataEnabled}" Command="{Binding ToDeviceBodyCommand}" Content="{Binding ContentSendDeviceData}" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="4">
@@ -113,7 +113,7 @@
                 <ContentControl Content="{Binding CurrentReeferBodyViewModel}"/>
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
-                <Button IsEnabled="{Binding IsReeferDataEnabled}" Command="{Binding ToReeferBodyCommand}" Content="Send Reefer Data Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+                <Button IsEnabled="{Binding IsReeferDataEnabled}" Command="{Binding ToReeferBodyCommand}" Content="{Binding ContentSendReeferData}" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="5">
@@ -147,7 +147,7 @@
                 </ScrollViewer>
             </Grid>
             <Grid Grid.Row="3" VerticalAlignment="Bottom">
-                <Button IsEnabled="{Binding IsSensorDataEnabled}" Command="{Binding ToSensorBodyCommand}" Content="Send Sensor Data Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+                <Button IsEnabled="{Binding IsSensorDataEnabled}" Command="{Binding ToSensorBodyCommand}" Content="{Binding ContentSendSensorData}" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="6">
@@ -161,7 +161,7 @@
             </Grid>
             <Grid Grid.Row="1">
                 <Border BorderBrush="Black" BorderThickness="1"/>
-                <Button IsEnabled="{Binding IsStartCommandEnabled}" Command="{Binding ToStartCommandCommand}" Content="Send Start Command Packet" VerticalAlignment="Center" Margin="5" Height="147" Style="{StaticResource MyButtonTextStyle}"/>
+                <Button IsEnabled="{Binding IsStartCommandEnabled}" Command="{Binding ToStartCommandCommand}" Content="{Binding ContentSendStartCommand}" VerticalAlignment="Center" Margin="5" Height="147" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
     </Grid>

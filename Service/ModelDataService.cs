@@ -13,14 +13,17 @@ namespace SimReeferMiddlewareSystemWPF.Service
 
         public int _totalDataBytesLength { get; set; } = 0;
 
-        public void SetDataValues(List<byte[]> dataList)
+        public void InitGenericData()
         {
             if (_dataValuesList != null && _dataValuesList.Count > 0)
             {
                 _dataValuesList.Clear();
                 _totalDataBytesLength = 0;
             }
+        }
 
+        public void SetDataValues(List<byte[]> dataList)
+        {
             _dataValuesList?.AddRange(dataList);
         }
 
