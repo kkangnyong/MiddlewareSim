@@ -1,7 +1,6 @@
 ﻿using SimReeferMiddlewareSystemWPF.Command;
 using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Model;
-using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -132,10 +131,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
             IsReeferDataEnabled = false;
             IsSensorDataEnabled = false;
             IsStartCommandEnabled = false;
-            InitButtonContent();
         }
 
-        private void InitButtonContent()
+        public void InitButtonContent()
         {
             ContentSendStartData = "Send Start Data Packet";
             ContentSendDeviceData = "Send Device Data Packet";
@@ -305,21 +303,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
             }, 0, CurrentDeviceBodyModel.Code.ToString().Trim());
 
             InitButtonContent();
-            //ContentSendStartCommand = "(End) " + ContentSendStartCommand;
-            //if (CurrentDeviceBodyModel.Code == 1)
-            //{
-            //    IsStartDataEnabled = false;
-            //    ContentSendDeviceData = "(1) " + ContentSendDeviceData;
-            //    ContentSendReeferData = "(2) " + ContentSendReeferData;
-            //    ContentSendSensorData = "(3) " + ContentSendSensorData;
-            //}
-            //else
-            //{
-            //    ContentSendStartData = "(1) " + ContentSendStartData;
-            //    ContentSendDeviceData = "(2) " + ContentSendDeviceData;
-            //    ContentSendReeferData = "(3) " + ContentSendReeferData;
-            //    ContentSendSensorData = "(4) " + ContentSendSensorData;
-            //}
             IsDeviceDataEnabled = false;
             IsReeferDataEnabled = true;
         }
@@ -410,6 +393,25 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
             });
             _tcpSocketService.BuildSendMessage(_modelDataService._totalDataBytesLength, _modelDataService._dataValuesList);
             _tcpSocketService.Disconnection();
+        }
+
+        public void SetButtonContent(short? code)
+        {
+            ContentSendStartCommand = "(End) " + ContentSendStartCommand;
+            if (code == 1)
+            {
+                IsStartDataEnabled = false;
+                ContentSendDeviceData = "(1) " + ContentSendDeviceData;
+                ContentSendReeferData = "(2) " + ContentSendReeferData;
+                ContentSendSensorData = "(3) " + ContentSendSensorData;
+            }
+            else
+            {
+                ContentSendStartData = "(1) " + ContentSendStartData;
+                ContentSendDeviceData = "(2) " + ContentSendDeviceData;
+                ContentSendReeferData = "(3) " + ContentSendReeferData;
+                ContentSendSensorData = "(4) " + ContentSendSensorData;
+            }
         }
 
         public string ContentSendStartData

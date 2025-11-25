@@ -2,7 +2,7 @@
 {
     public class DeviceBodyModel
     {
-        private int _code = 17;
+        private short? _code = 17;
         private ushort _index = 1;
         private int _deviceNumber = 6002032;
         private byte _year = 25;
@@ -39,7 +39,7 @@
         private short _rssi = 0;
         private ushort _mobileErrorCode = 1001;
 
-        public int Code
+        public short? Code
         {
             get { return _code; }
             set

@@ -100,7 +100,7 @@
             <TextBlock Grid.Row="34" Grid.Column="0" Text="rssi" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="35" Grid.Column="0" Text="mobileErrorCode" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
 
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Code}" Margin="3"/>
+            <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding Code}" ItemsSource="{Binding CodeList}" Margin="3"/>
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Index}" Margin="3"/>
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding DeviceNumber}" Margin="3"/>
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Year}" Margin="3"/>

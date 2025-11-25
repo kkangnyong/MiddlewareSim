@@ -1,4 +1,5 @@
 ﻿using SimReeferMiddlewareSystemWPF.Model;
+using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
@@ -16,6 +17,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         private ProtocolViewModelVer9 _protocolver9;
         public ProtocolViewModelVer9 ProtocolVer9 { get { if (_protocolver9 == null) _protocolver9 = new ProtocolViewModelVer9(); return _protocolver9.Instance; } }
 
+        private List<short> _codeList { get; set; } = new List<short>() { (short)CodeType.CommonData, (short)CodeType.LastData };
+
         public DeviceBodyViewModelVer9() { }
 
         public DeviceBodyViewModelVer9(DeviceBodyStore deviceBodyStore)
@@ -24,31 +27,36 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
             Instance._deviceBodyStore = deviceBodyStore;
         }
 
-        public int Code
+        public List<short> CodeList
         {
-            get { return DeviceBodyModel.Code; }
+            get { return _codeList; }
+            set
+            {
+                if (_codeList != null)
+                {
+                    _codeList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public short? Code
+        {
+            get
+            {
+                ProtocolVer9.InitButtonContent();
+                ProtocolVer9.SetButtonContent(DeviceBodyModel.Code);
+
+                return DeviceBodyModel.Code; 
+            }
             set
             {
                 if (DeviceBodyModel.Code != null)
                 {
+                    ProtocolVer9.InitButtonContent();
                     DeviceBodyModel.Code = value;
                     OnPropertyChanged();
-
-                    ProtocolVer9.ContentSendStartCommand = "(End) " + ProtocolVer9.ContentSendStartCommand;
-                    if (DeviceBodyModel.Code == 1)
-                    {
-                        ProtocolVer9.IsStartDataEnabled = false;
-                        ProtocolVer9.ContentSendDeviceData = "(1) " + ProtocolVer9.ContentSendDeviceData;
-                        ProtocolVer9.ContentSendReeferData = "(2) " + ProtocolVer9.ContentSendReeferData;
-                        ProtocolVer9.ContentSendSensorData = "(3) " + ProtocolVer9.ContentSendSensorData;
-                    }
-                    else
-                    {
-                        ProtocolVer9.ContentSendStartData = "(1) " + ProtocolVer9.ContentSendStartData;
-                        ProtocolVer9.ContentSendDeviceData = "(2) " + ProtocolVer9.ContentSendDeviceData;
-                        ProtocolVer9.ContentSendReeferData = "(3) " + ProtocolVer9.ContentSendReeferData;
-                        ProtocolVer9.ContentSendSensorData = "(4) " + ProtocolVer9.ContentSendSensorData;
-                    }
+                    ProtocolVer9.SetButtonContent(DeviceBodyModel.Code);
                 }
             }
         }
