@@ -1,5 +1,4 @@
 ﻿using SimReeferMiddlewareSystemWPF.Interface;
-using System;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -12,6 +11,8 @@ namespace SimReeferMiddlewareSystemWPF.Service
         public List<List<byte[]>> _sensorBodyList { get; set; }
 
         public int _totalDataBytesLength { get; set; } = 0;
+        private byte[]? _tempDataValuesToBytes { get; set; }
+        public byte[]? _resultDataValuesToBytes { get; set; }
 
         public void InitGenericData()
         {
@@ -20,6 +21,10 @@ namespace SimReeferMiddlewareSystemWPF.Service
                 _dataValuesList.Clear();
                 _totalDataBytesLength = 0;
             }
+            if (_sensorBodyList != null && _sensorBodyList.Count > 0)
+            {
+                _sensorBodyList.Clear();
+            }
         }
 
         public void SetDataValues(List<byte[]> dataList)
@@ -27,9 +32,51 @@ namespace SimReeferMiddlewareSystemWPF.Service
             _dataValuesList?.AddRange(dataList);
         }
 
+        public void SetDataByteValues(List<byte[]> dataList, short type)
+        {
+            _dataValuesList?.AddRange(dataList);
+
+            if (type == (short)DataType.Device)
+            {
+                if (_resultDataValuesToBytes != null && _resultDataValuesToBytes.Length > 0)
+                {
+                    _resultDataValuesToBytes = null;
+                }
+                _tempDataValuesToBytes = new byte[_totalDataBytesLength];
+
+                int index = 0;
+                foreach (byte[] dataBytes in _dataValuesList)
+                {
+                    Array.Copy(dataBytes, 0, _tempDataValuesToBytes, index, dataBytes.Length);
+                    index += dataBytes.Length;
+                }
+            }
+            else
+            {
+                if (_tempDataValuesToBytes == null || _tempDataValuesToBytes.Length <= 0)
+                {
+                    return;
+                }
+
+                int index = 0;
+                _resultDataValuesToBytes = new byte[_totalDataBytesLength + _tempDataValuesToBytes.Length];
+
+                Array.Copy(_tempDataValuesToBytes, 0, _resultDataValuesToBytes, index, _tempDataValuesToBytes.Length);
+
+                index = _tempDataValuesToBytes.Length;
+
+                foreach (byte[] dataBytes in _dataValuesList)
+                {
+                    Array.Copy(dataBytes, 0, _resultDataValuesToBytes, index, dataBytes.Length);
+                    index += dataBytes.Length;
+                }
+                _tempDataValuesToBytes = null;
+            }
+        }
+
         public void SetDataJsonValues(List<byte[]> dataList, short type, short? code = (short)CodeType.LastData)
         {
-            if (type == 2)
+            if (type == (short)DataType.Sensor)
             {
                 if (dataList.Count <= 0)
                 {
@@ -82,11 +129,11 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     index += dataBytes.Length;
                 }
 
-                if (type == 0)
+                if (type == (short)DataType.Device)
                 {
                     _dataValuesToJsonString = "{\"cod\": " + $"{code}" + ", \"dev\": " + $"\"{Convert.ToBase64String(resultBytes)}\"";
                 }
-                else if (type == 1)
+                else if (type == (short)DataType.Reefer)
                 {
                     _dataValuesToJsonString += ", \"ref\": " + $"\"{Convert.ToBase64String(resultBytes)}\"" + ",";
                 }

@@ -9,7 +9,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
         public DeviceInfoViewModelVer8 Instance { get { if (_instance == null) _instance = new DeviceInfoViewModelVer8(); return _instance; }  }
 
         private DeviceInfoStore _deviceInfoStore;
-        //private event EventHandler<UserControlEventArgs> _deviceChanged;
 
         private DeviceInfoModel _deviceInfoModel;
         public DeviceInfoModel DeviceInfoModel { get { if (_deviceInfoModel == null) _deviceInfoModel = Instance._deviceInfoStore._currentDeviceInfo = new DeviceInfoModel(); return _deviceInfoModel; } }
@@ -42,10 +41,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
             {
                 if (DeviceInfoModel.DeviceNumber != null)
                 {
-                    //int oldValue = DeviceInfoModel.DeviceNumber;
                     DeviceInfoModel.DeviceNumber = value;
                     OnPropertyChanged();
-                    //Instance.OnChanged(new UserControlEventArgs(nameof(DeviceNumber), oldValue, value));
                 }
             }
         }

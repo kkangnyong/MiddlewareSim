@@ -45,7 +45,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
             get
             {
                 ProtocolVer9.SetButtonContent(DeviceBodyModel.Code);
-
                 return DeviceBodyModel.Code; 
             }
             set

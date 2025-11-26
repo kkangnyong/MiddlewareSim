@@ -1,8 +1,6 @@
 ﻿using Mythosia.Integrity.CRC;
 using Mythosia.Security.Cryptography;
 using SimReeferMiddlewareSystemWPF.Interface;
-using SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver8;
-using SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver9;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;

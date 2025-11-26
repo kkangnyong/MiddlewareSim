@@ -1,8 +1,10 @@
 ﻿using SimReeferMiddlewareSystemWPF.Command;
 using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Model;
+using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
 using System.ComponentModel;
+using System.Text;
 using System.Windows.Input;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
@@ -52,8 +54,18 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
         private bool _isReeferDataEnabled { get; set; } = false;
         private bool _isStartCommandEnabled { get; set; } = false;
 
+        private string _contentSendStartData { get; set; } = "Send Start Data Packet";
+        private string _contentSendDeviceData { get; set; } = "Send Device Data Packet";
+        private string _contentSendReeferData { get; set; } = "Send Reefer Data Packet";
+        private string _contentSendStartCommand { get; set; } = "Send Start Command Packet";
+
         private static ProtocolViewModelVer8 _instance;
         public ProtocolViewModelVer8 Instance { get { if (_instance == null) _instance = new ProtocolViewModelVer8(); return _instance; } }
+
+        private MainViewModel _mainView;
+        public MainViewModel MainView { get { if (_mainView == null) _mainView = new MainViewModel(); return _mainView.Instance; } }
+
+        private ITcpSocketService _tcpSocketService { get { return MainView._tcpSocketService; } }
 
         public ProtocolViewModelVer8() { }
 
@@ -82,6 +94,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
             ToStartDataCommand = new RelayCommand<object>(ToStartData);
             ToStartCommandCommand = new RelayCommand<object>(ToStartCommand);
             _modelDataService._dataValuesList = new List<byte[]>();
+            if (CurrentDeviceBodyModel != null) SetButtonContent(CurrentDeviceBodyModel.Code);
         }
 
         public void Dispose()
@@ -95,6 +108,14 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
             IsDeviceDataEnabled = false;
             IsReeferDataEnabled = false;
             IsStartCommandEnabled = false;
+        }
+
+        public void InitButtonContent()
+        {
+            ContentSendStartData = "Send Start Data Packet";
+            ContentSendDeviceData = "Send Device Data Packet";
+            ContentSendReeferData = "Send Reefer Data Packet";
+            ContentSendStartCommand = "Send Start Command Packet";
         }
 
         private void ToDeviceInfo(object _)
@@ -141,6 +162,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.Voltage.ToString().Trim(), 2),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.IsCharging ? "1" : "0", 1),
             });
+            _tcpSocketService.BuildSendMessage(_modelDataService._totalDataBytesLength, _modelDataService._dataValuesList);
             IsDeviceInfoEnabled = false;
         }
 
@@ -166,19 +188,28 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.StateChangeAlarm.ToString().Trim(), 2),
                 _modelDataService.GetStringsToByteArray(CurrentSetupInfoModel.CutOffVoltage.ToString().Trim(), 2),
             });
+            _tcpSocketService.BuildSendMessage(_modelDataService._totalDataBytesLength, _modelDataService._dataValuesList);
             IsSetupInfoEnabled = false;
             IsStartDataEnabled = true;
         }
 
         private void ToStartData(object _)
         {
+            _modelDataService.InitGenericData();
+            string sequence = "start data";
+            _modelDataService.SetDataValues(new List<byte[]>
+            {
+                _modelDataService.GetStringsToByteArray(sequence, (ushort)sequence.Length, false, true)
+            });
+            _tcpSocketService.BuildSendMessage(_modelDataService._totalDataBytesLength, _modelDataService._dataValuesList);
             IsDeviceDataEnabled = true;
+            SetButtonContent(CurrentDeviceBodyModel.Code);
         }
 
         private void ToDeviceBody(object _)
         {
             _modelDataService.InitGenericData();
-            _modelDataService.SetDataValues(new List<byte[]>
+            _modelDataService.SetDataByteValues(new List<byte[]>
             {
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Code.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Index.ToString().Trim(), 2),
@@ -212,7 +243,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.GeofenceInOutIndex.ToString().Trim(), 2),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.GeofenceInOutState.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.CommCode.ToString().Trim(), 1)
-            });
+            }, (short)DataType.Device);
             IsDeviceDataEnabled = false;
             IsReeferDataEnabled = true;
         }
@@ -220,7 +251,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
         private void ToReeferBody(object _)
         {
             _modelDataService.InitGenericData();
-            _modelDataService.SetDataValues(new List<byte[]>
+            _modelDataService.SetDataByteValues(new List<byte[]>
             {
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.ContainerSN.ToString().Trim(), 11, true),
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.Sp.ToString().Trim(), 2),
@@ -261,13 +292,103 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.HwVer.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.SwVer.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.EtcCode.ToString().Trim(), 1)
-            });
+            }, (short)DataType.Reefer);
+
+            _tcpSocketService.RepeatDataSendOption(_modelDataService._resultDataValuesToBytes);
+
+            if (CurrentDeviceBodyModel.Code == 1) IsDeviceDataEnabled = true;
             IsReeferDataEnabled = false;
             IsStartCommandEnabled = true;
         }
 
         private void ToStartCommand(object _)
         {
+            _modelDataService.InitGenericData();
+            string sequence = "start command";
+            _modelDataService.SetDataValues(new List<byte[]>
+            {
+                _modelDataService.GetStringsToByteArray(sequence, (ushort)sequence.Length, false, true)
+            });
+            _tcpSocketService.BuildSendMessage(_modelDataService._totalDataBytesLength, _modelDataService._dataValuesList);
+            _tcpSocketService.Disconnection();
+        }
+
+        public void SetButtonContent(short? code)
+        {
+            InitButtonContent();
+            ContentSendStartCommand = "(End) " + ContentSendStartCommand;
+            if (code == 1)
+            {
+                if (IsDeviceDataEnabled) IsStartDataEnabled = false;
+                ContentSendDeviceData = "(1) " + ContentSendDeviceData;
+                ContentSendReeferData = "(2) " + ContentSendReeferData;
+            }
+            else
+            {
+                if (!IsStartDataEnabled && IsStartCommandEnabled)
+                {
+                    ContentSendDeviceData = "(1) " + ContentSendDeviceData;
+                    ContentSendReeferData = "(2) " + ContentSendReeferData;
+                }
+                else
+                {
+                    ContentSendStartData = "(1) " + ContentSendStartData;
+                    ContentSendDeviceData = "(2) " + ContentSendDeviceData;
+                    ContentSendReeferData = "(3) " + ContentSendReeferData;
+                }
+            }
+        }
+
+        public string ContentSendStartData
+        {
+            get { return _contentSendStartData; }
+            set
+            {
+                if (_contentSendStartData != null)
+                {
+                    _contentSendStartData = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string ContentSendDeviceData
+        {
+            get { return _contentSendDeviceData; }
+            set
+            {
+                if (_contentSendDeviceData != null)
+                {
+                    _contentSendDeviceData = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string ContentSendReeferData
+        {
+            get { return _contentSendReeferData; }
+            set
+            {
+                if (_contentSendReeferData != null)
+                {
+                    _contentSendReeferData = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string ContentSendStartCommand
+        {
+            get { return _contentSendStartCommand; }
+            set
+            {
+                if (_contentSendStartCommand != null)
+                {
+                    _contentSendStartCommand = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public bool IsDeviceInfoEnabled

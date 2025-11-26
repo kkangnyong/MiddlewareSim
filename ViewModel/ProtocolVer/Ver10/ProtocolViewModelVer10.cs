@@ -1,6 +1,7 @@
 ﻿using SimReeferMiddlewareSystemWPF.Command;
 using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Model;
+using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9;
 using System.Collections.ObjectModel;
@@ -189,6 +190,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.Major.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.Minor.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.Revision.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.BLEMajor.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.BLEMinor.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.BLERevision.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.DbgIdCode.ToString().Trim(), 4),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.PwrCSR.ToString().Trim(), 4),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.RccCSR.ToString().Trim(), 4),
@@ -198,7 +202,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.CurStandbyCount.ToString().Trim(), 2),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.LastGeofenceIndex.ToString().Trim(), 4),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.UsimIMSI.ToString().Trim(), 20, true),
-                _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.Rssi.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.Iccid.ToString().Trim(), 20, true),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.MCCMNC.ToString().Trim(), 4),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.Lac.ToString().Trim(), 2),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceInfoModel.CellID.ToString().Trim(), 4),
@@ -302,8 +306,12 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Alarm.ToString().Trim(), 4),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.GeofenceInOutIndex.ToString().Trim(), 2),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.GeofenceInOutState.ToString().Trim(), 1),
-                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.CommCode.ToString().Trim(), 1)
-            }, 0, CurrentDeviceBodyModel.Code);
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.CommCode.ToString().Trim(), 1),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Rsrp.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Rscp.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.Rssi.ToString().Trim(), 2),
+                _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.MobileErrorCode.ToString().Trim(), 2)
+            }, (short)DataType.Device, CurrentDeviceBodyModel.Code);
 
             IsDeviceDataEnabled = false;
             IsReeferDataEnabled = true;
@@ -353,7 +361,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.HwVer.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.SwVer.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.EtcCode.ToString().Trim(), 1)
-            }, 1);
+            }, (short)DataType.Reefer);
             IsReeferDataEnabled = false;
             IsSensorDataEnabled = true;
         }
@@ -376,7 +384,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
                 _modelDataService._sensorBodyList.Add(_modelDataService._dataValuesList);
             }
 
-            _modelDataService.SetDataJsonValues(_modelDataService._dataValuesList, 2);
+            _modelDataService.SetDataJsonValues(_modelDataService._dataValuesList, (short)DataType.Sensor);
 
             _tcpSocketService.RepeatDataSendOption(Encoding.UTF8.GetBytes(_modelDataService._dataValuesToJsonString));
 

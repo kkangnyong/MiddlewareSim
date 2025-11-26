@@ -1,6 +1,7 @@
 ﻿using SimReeferMiddlewareSystemWPF.Command;
 using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Model;
+using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -17,7 +18,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         private readonly SetupInfoStore _setupInfoStore;
         private readonly DeviceBodyStore _deviceBodyStore;
         private readonly ReeferBodyStore _reeferBodyStore;
-        private readonly SensorBodyStore _sensorBodyStore;
         private DeviceInfoModel CurrentDeviceInfoModel => _deviceInfoStore._currentDeviceInfo;
         private SetupInfoModel CurrentSetupInfoModel => _setupInfoStore._currentSetupInfo;
         private DeviceBodyModel CurrentDeviceBodyModel => _deviceBodyStore._currentDeviceBody;
@@ -64,7 +64,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         private bool _isSensorDataEnabled { get; set; } = false;
         private bool _isStartCommandEnabled { get; set; } = false;
 
-
         private string _contentSendStartData { get; set; } = "Send Start Data Packet";
         private string _contentSendDeviceData { get; set; } = "Send Device Data Packet";
         private string _contentSendReeferData { get; set; } = "Send Reefer Data Packet";
@@ -88,8 +87,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
             DeviceInfoStore deviceInfoStore,
             SetupInfoStore setupInfoStore,
             DeviceBodyStore deviceBodyStore,
-            ReeferBodyStore reeferBodyStore,
-            SensorBodyStore sensorBodyStore)
+            ReeferBodyStore reeferBodyStore)
         {
             _instance = this;
             _messageBoxService = messageBoxService;
@@ -98,7 +96,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
             _setupInfoStore = setupInfoStore;
             _deviceBodyStore = deviceBodyStore;
             _reeferBodyStore = reeferBodyStore;
-            _sensorBodyStore = sensorBodyStore;
             Initialize();
         }
 
@@ -115,7 +112,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
             _modelDataService._dataValuesList = new List<byte[]>();
             _modelDataService._sensorBodyList = new List<List<byte[]>>();
             ItemsCollection = new ObservableCollection<INotifyPropertyChanged>();
-            SetButtonContent(CurrentDeviceBodyModel.Code);
+            if (CurrentDeviceBodyModel != null) SetButtonContent(CurrentDeviceBodyModel.Code);
         }
 
         public void Dispose()
@@ -302,7 +299,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.GeofenceInOutIndex.ToString().Trim(), 2),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.GeofenceInOutState.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.CommCode.ToString().Trim(), 1)
-            }, 0, CurrentDeviceBodyModel.Code);
+            }, (short)DataType.Device, CurrentDeviceBodyModel.Code);
 
             IsDeviceDataEnabled = false;
             IsReeferDataEnabled = true;
@@ -352,7 +349,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.HwVer.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.SwVer.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.EtcCode.ToString().Trim(), 1)
-            }, 1);
+            }, (short)DataType.Reefer);
             IsReeferDataEnabled = false;
             IsSensorDataEnabled = true;
         }
@@ -375,7 +372,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
                 _modelDataService._sensorBodyList.Add(_modelDataService._dataValuesList);
             }
 
-            _modelDataService.SetDataJsonValues(_modelDataService._dataValuesList, 2);
+            _modelDataService.SetDataJsonValues(_modelDataService._dataValuesList, (short)DataType.Sensor);
 
             _tcpSocketService.RepeatDataSendOption(Encoding.UTF8.GetBytes(_modelDataService._dataValuesToJsonString));
 

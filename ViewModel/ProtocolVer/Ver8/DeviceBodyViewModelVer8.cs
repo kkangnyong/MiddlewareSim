@@ -1,6 +1,8 @@
 ﻿using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
+using SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver9;
+using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
 {
@@ -13,6 +15,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
 
         private DeviceBodyModel _deviceBodyModel;
         public DeviceBodyModel DeviceBodyModel { get { if (_deviceBodyModel == null) _deviceBodyModel = Instance._deviceBodyStore._currentDeviceBody = new DeviceBodyModel(); return _deviceBodyModel; } }
+
+        private ProtocolViewModelVer8 _protocolver8;
+        public ProtocolViewModelVer8 ProtocolVer8 { get { if (_protocolver8 == null) _protocolver8 = new ProtocolViewModelVer8(); return _protocolver8.Instance; } }
 
         private List<short> _codeList { get; set; } = new List<short>() { (short)CodeType.CommonData, (short)CodeType.LastData };
 
@@ -39,13 +44,18 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
 
         public short? Code
         {
-            get { return DeviceBodyModel.Code; }
+            get
+            {
+                ProtocolVer8.SetButtonContent(DeviceBodyModel.Code); 
+                return DeviceBodyModel.Code; 
+            }
             set
             {
                 if (DeviceBodyModel.Code != null)
                 {
                     DeviceBodyModel.Code = value;
                     OnPropertyChanged();
+                    ProtocolVer8.SetButtonContent(DeviceBodyModel.Code);
                 }
             }
         }

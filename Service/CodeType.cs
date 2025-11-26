@@ -11,4 +11,14 @@ namespace SimReeferMiddlewareSystemWPF.Service
         [Description("Last")]
         LastData = 17
     }
+
+    public enum DataType
+    {
+        [Description("Device")]
+        Device = 0,
+        [Description("Reefer")]
+        Reefer = 1,
+        [Description("Sensor")]
+        Sensor = 2
+    }
 }
