@@ -120,6 +120,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
         private void SocketAsyncConnected()
         {
+            CurrentViewModel = null;
+            _navigationService.Navigate(NaviType.ProtocolView, ProtocolVersion);
             string[] strings = ProtocolVersion.Split(new string[] { ",", ".", "\t", " " }, StringSplitOptions.RemoveEmptyEntries);
             byte[] msgBytes = new byte[strings.Length];
 

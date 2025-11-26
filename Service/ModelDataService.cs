@@ -27,7 +27,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
             _dataValuesList?.AddRange(dataList);
         }
 
-        public void SetDataJsonValues(List<byte[]> dataList, short type, string code = "")
+        public void SetDataJsonValues(List<byte[]> dataList, short type, short? code = (short)CodeType.LastData)
         {
             if (type == 2)
             {

@@ -115,6 +115,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
             _modelDataService._dataValuesList = new List<byte[]>();
             _modelDataService._sensorBodyList = new List<List<byte[]>>();
             ItemsCollection = new ObservableCollection<INotifyPropertyChanged>();
+            SetButtonContent(CurrentDeviceBodyModel.Code);
         }
 
         public void Dispose()
@@ -262,6 +263,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
             });
             _tcpSocketService.BuildSendMessage(_modelDataService._totalDataBytesLength, _modelDataService._dataValuesList);
             IsDeviceDataEnabled = true;
+            SetButtonContent(CurrentDeviceBodyModel.Code);
         }
 
         private void ToDeviceBody(object _)
@@ -300,9 +302,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.GeofenceInOutIndex.ToString().Trim(), 2),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.GeofenceInOutState.ToString().Trim(), 1),
                 _modelDataService.GetStringsToByteArray(CurrentDeviceBodyModel.CommCode.ToString().Trim(), 1)
-            }, 0, CurrentDeviceBodyModel.Code.ToString().Trim());
+            }, 0, CurrentDeviceBodyModel.Code);
 
-            InitButtonContent();
             IsDeviceDataEnabled = false;
             IsReeferDataEnabled = true;
         }
@@ -397,20 +398,30 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
 
         public void SetButtonContent(short? code)
         {
+            InitButtonContent();
             ContentSendStartCommand = "(End) " + ContentSendStartCommand;
             if (code == 1)
             {
-                IsStartDataEnabled = false;
+                if (IsDeviceDataEnabled) IsStartDataEnabled = false;
                 ContentSendDeviceData = "(1) " + ContentSendDeviceData;
                 ContentSendReeferData = "(2) " + ContentSendReeferData;
                 ContentSendSensorData = "(3) " + ContentSendSensorData;
             }
             else
             {
-                ContentSendStartData = "(1) " + ContentSendStartData;
-                ContentSendDeviceData = "(2) " + ContentSendDeviceData;
-                ContentSendReeferData = "(3) " + ContentSendReeferData;
-                ContentSendSensorData = "(4) " + ContentSendSensorData;
+                if (!IsStartDataEnabled && IsStartCommandEnabled)
+                {
+                    ContentSendDeviceData = "(1) " + ContentSendDeviceData;
+                    ContentSendReeferData = "(2) " + ContentSendReeferData;
+                    ContentSendSensorData = "(3) " + ContentSendSensorData;
+                }
+                else
+                {
+                    ContentSendStartData = "(1) " + ContentSendStartData;
+                    ContentSendDeviceData = "(2) " + ContentSendDeviceData;
+                    ContentSendReeferData = "(3) " + ContentSendReeferData;
+                    ContentSendSensorData = "(4) " + ContentSendSensorData;
+                }
             }
         }
 
