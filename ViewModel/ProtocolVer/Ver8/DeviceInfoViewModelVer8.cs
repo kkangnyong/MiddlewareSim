@@ -205,18 +205,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 }
             }
         }
-        public string Iccid
-        {
-            get { return DeviceInfoModel.Iccid; }
-            set
-            {
-                if (DeviceInfoModel.Iccid != null)
-                {
-                    DeviceInfoModel.Iccid = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
         public int MCCMNC
         {
             get { return DeviceInfoModel.MCCMNC; }

@@ -422,53 +422,5 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 }
             }
         }
-        public short Rsrp
-        {
-            get { return DeviceBodyModel.Rsrp; }
-            set
-            {
-                if (DeviceBodyModel.Rsrp != null)
-                {
-                    DeviceBodyModel.Rsrp = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        public short Rscp
-        {
-            get { return DeviceBodyModel.Rscp; }
-            set
-            {
-                if (DeviceBodyModel.Rscp != null)
-                {
-                    DeviceBodyModel.Rscp = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        public short Rssi
-        {
-            get { return DeviceBodyModel.Rssi; }
-            set
-            {
-                if (DeviceBodyModel.Rssi != null)
-                {
-                    DeviceBodyModel.Rssi = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        public ushort MobileErrorCode
-        {
-            get { return DeviceBodyModel.MobileErrorCode; }
-            set
-            {
-                if (DeviceBodyModel.MobileErrorCode != null)
-                {
-                    DeviceBodyModel.MobileErrorCode = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
     }
 }

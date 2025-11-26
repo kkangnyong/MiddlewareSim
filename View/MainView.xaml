@@ -7,6 +7,8 @@
         xmlns:viewmodel8="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8"
         xmlns:local9="clr-namespace:SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver9"
         xmlns:viewmodel9="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9"
+        xmlns:local10="clr-namespace:SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver10"
+        xmlns:viewmodel10="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
         Title="{Binding TitleVersion}" Height="800" MinWidth="1850">
@@ -43,6 +45,24 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodel9:SensorBodyViewModelVer9}">
             <local9:SensorBodyVer9/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel10:ProtocolViewModelVer10}">
+            <local10:ProtocolVer10/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel10:DeviceInfoViewModelVer10}">
+            <local10:DeviceInfoVer10/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel10:SetupInfoViewModelVer10}">
+            <local10:SetupInfoVer10/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel10:DeviceBodyViewModelVer10}">
+            <local10:DeviceBodyVer10/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel10:ReeferBodyViewModelVer10}">
+            <local10:ReeferBodyVer10/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel10:SensorBodyViewModelVer10}">
+            <local10:SensorBodyVer10/>
         </DataTemplate>
         <Style x:Key="MyMenuStyle" TargetType="{x:Type MenuItem}">
             <Setter Property="FontSize" Value="15"/>

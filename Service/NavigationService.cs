@@ -3,6 +3,7 @@ using SimReeferMiddlewareSystemWPF.Store;
 using SimReeferMiddlewareSystemWPF.ViewModel;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9;
+using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10;
 using System.ComponentModel;
 
 namespace SimReeferMiddlewareSystemWPF.Service
@@ -32,6 +33,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     }
                     else if (protocolVer.Equals(_protocolVerList[2]))
                     {
+                        CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(DeviceBodyViewModelVer10));
                     }
                     break;
                 case NaviType.DeviceInfoView:
@@ -45,6 +47,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     }
                     else if (protocolVer.Equals(_protocolVerList[2]))
                     {
+                        CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(DeviceInfoViewModelVer10));
                     }
                     break;
                 case NaviType.ReeferBodyView:
@@ -58,6 +61,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     }
                     else if (protocolVer.Equals(_protocolVerList[2]))
                     {
+                        CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(ReeferBodyViewModelVer10));
                     }
                     break;
                 case NaviType.SetupInfoView:
@@ -71,6 +75,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     }
                     else if (protocolVer.Equals(_protocolVerList[2]))
                     {
+                        CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(SetupInfoViewModelVer10));
                     }
                     break;
                 case NaviType.SensorBodyView:
@@ -80,6 +85,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     }
                     else if (protocolVer.Equals(_protocolVerList[2]))
                     {
+                        CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(SensorBodyViewModelVer10));
                     }
                     break;
                 default:
@@ -93,6 +99,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     }
                     else if (protocolVer.Equals(_protocolVerList[2]))
                     {
+                        CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(ProtocolViewModelVer10));
                     }
                     break;
             }

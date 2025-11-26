@@ -1,0 +1,169 @@
+﻿<UserControl x:Class="SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver10.ProtocolVer10"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver10"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="MyButtonTextStyle" TargetType="{x:Type Button}">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+        <Style x:Key="MyTextStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+        <Style x:Key="MyComboBoxStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="0,0,0,0" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="240"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <TextBlock Text="1. Device Info" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <ContentControl Content="{Binding CurrentDeviceInfoViewModel}" Margin="0,0,0,0"/>
+            </Grid>
+            <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Button IsEnabled="{Binding IsDeviceInfoEnabled}" Command="{Binding ToDeviceInfoCommand}" Content="Send Device Info Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <TextBlock Text="2. Setup Info" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <ContentControl Content="{Binding CurrentSetupInfoViewModel}" Margin="0,0,0,0"/>
+            </Grid>
+            <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Button IsEnabled="{Binding IsSetupInfoEnabled}" Command="{Binding ToSetupInfoCommand}" Content="Send Setup Info Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <TextBlock Text="3. Start Data" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <Button IsEnabled="{Binding IsStartDataEnabled}" Command="{Binding ToStartDataCommand}" Content="{Binding ContentSendStartData}" VerticalAlignment="Center" Margin="5" Height="147" Style="{StaticResource MyButtonTextStyle}"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <TextBlock Text="4. Device Data" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <ContentControl Content="{Binding CurrentDeviceBodyViewModel}"/>
+            </Grid>
+            <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Button IsEnabled="{Binding IsDeviceDataEnabled}" Command="{Binding ToDeviceBodyCommand}" Content="{Binding ContentSendDeviceData}" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <TextBlock Text="5. Reefer Data" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <ContentControl Content="{Binding CurrentReeferBodyViewModel}"/>
+            </Grid>
+            <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Button IsEnabled="{Binding IsReeferDataEnabled}" Command="{Binding ToReeferBodyCommand}" Content="{Binding ContentSendReeferData}" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <TextBlock Text="6. Sensor Data" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Grid.Column="0" SelectedItem="{Binding CountSensorData}" ItemsSource="{Binding CountSensorDataList}" Style="{StaticResource MyComboBoxStyle}" />
+                <Button Grid.Column="1" Content="Add" Command="{Binding ToAddSensorDataCommand}"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
+                <ItemsControl x:Name="MyItems" ItemsSource="{Binding ItemsCollection}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                                <ContentControl Content="{Binding Path=., Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="SensorDatas"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+            <Grid Grid.Row="3" VerticalAlignment="Bottom">
+                <Button IsEnabled="{Binding IsSensorDataEnabled}" Command="{Binding ToSensorBodyCommand}" Content="{Binding ContentSendSensorData}" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <TextBlock Text="7. Start Command" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <Button IsEnabled="{Binding IsStartCommandEnabled}" Command="{Binding ToStartCommandCommand}" Content="{Binding ContentSendStartCommand}" VerticalAlignment="Center" Margin="5" Height="147" Style="{StaticResource MyButtonTextStyle}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
+    

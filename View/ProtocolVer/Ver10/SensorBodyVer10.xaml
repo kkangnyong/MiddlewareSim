@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver10.SensorBodyVer10"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <vm:SensorBodyViewModelVer10 x:Key="SensorBodyViewModelVer10"/>
+        <Style x:Key="MyTextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+    </UserControl.Resources>
+    <!--<UserControl.DataContext>
+        <Binding Source="{StaticResource SensorBodyViewModelVer10}"/>
+    </UserControl.DataContext>-->
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
+        <Grid Margin="0,0,540,0" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            
+            <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="date" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="time" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="activePower" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="accumulatedPower" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="error" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Date}" Margin="3"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Time}" Margin="3"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ActivePower}" Margin="3"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding AccumulatedPower}" Margin="3"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Error}" Margin="3"/>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

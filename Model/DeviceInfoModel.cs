@@ -7,6 +7,9 @@
         private byte _major = 3;
         private byte _minor = 5;
         private byte _revision = 19;
+        private byte _bleMajor = 3;
+        private byte _bleMinor = 1;
+        private byte _bleRevision = 4;
         private int _dbgIdCode = 272131126;
         private int _pwrCSR = 8;
         private int _rccCSR = 474022658;
@@ -17,7 +20,7 @@
         private int _lastGeofenceIndex = -1;
         private string _usimIMSI = "234500084385731";
         private short _rssi = -55;
-        private string _iccid = "23450008438731";
+        private string _iccid = "234500084385731";
         private int _mccmnc = 45008;
         private short _lac = 3157;
         private int _cellID = 0;
@@ -94,6 +97,39 @@
                 if (_revision != null)
                 {
                     _revision = value;
+                }
+            }
+        }
+        public byte BLEMajor
+        {
+            get { return _bleMajor; }
+            set
+            {
+                if (_bleMajor != null)
+                {
+                    _bleMajor = value;
+                }
+            }
+        }
+        public byte BLEMinor
+        {
+            get { return _bleMinor; }
+            set
+            {
+                if (_bleMinor != null)
+                {
+                    _bleMinor = value;
+                }
+            }
+        }
+        public byte BLERevision
+        {
+            get { return _bleRevision; }
+            set
+            {
+                if (_bleRevision != null)
+                {
+                    _bleRevision = value;
                 }
             }
         }

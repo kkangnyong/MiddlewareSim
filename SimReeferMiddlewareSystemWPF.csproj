@@ -44,11 +44,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModel\ProtocolVer\Ver10\" />
-    <Folder Include="View\ProtocolVer\Ver10\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Resources\Cancel.png" />
     <Resource Include="Resources\Check_Mark.png" />
     <Resource Include="Resources\Defrosting3.ico" />
@@ -68,6 +63,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Update="UIControl\CompleteControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ProtocolVer\Ver10\DeviceBodyVer10.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ProtocolVer\Ver10\DeviceInfoVer10.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ProtocolVer\Ver10\ProtocolVer10.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ProtocolVer\Ver10\ReeferBodyVer10.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ProtocolVer\Ver10\SensorBodyVer10.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ProtocolVer\Ver10\SetupInfoVer10.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\ProtocolVer\Ver9\DeviceBodyVer9.xaml.cs">

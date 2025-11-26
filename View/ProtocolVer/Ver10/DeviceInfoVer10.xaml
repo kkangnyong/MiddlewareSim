@@ -1,0 +1,156 @@
+﻿<UserControl x:Class="SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver10.DeviceInfoVer10"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10"
+             mc:Ignorable="d">
+             <!--xmlns:m="clr-namespace:SimReeferMiddlewareSystemWPF.Model"-->
+    <UserControl.Resources>
+        <vm:DeviceInfoViewModelVer10 x:Key="DeviceInfoViewModelVer10"/>
+        <Style x:Key="MyTextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <Binding Source="{StaticResource DeviceInfoViewModelVer10}"/>
+    </UserControl.DataContext>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
+        <Grid Margin="0,0,540,0" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="code" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="deviceNumber" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="major" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="minor" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="revision" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="bleMajor" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="bleMinor" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="7" Grid.Column="0" Text="bleRevision" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="8" Grid.Column="0" Text="dbgIdCode" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="9" Grid.Column="0" Text="pwrCSR" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="10" Grid.Column="0" Text="rccCSR" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="11" Grid.Column="0" Text="flashSR" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="12" Grid.Column="0" Text="flashOBR" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="13" Grid.Column="0" Text="lwdgSR" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="14" Grid.Column="0" Text="curStandbyCount" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="15" Grid.Column="0" Text="lastGeofenceIndex" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="16" Grid.Column="0" Text="usimIMSI" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="17" Grid.Column="0" Text="iccid" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="18" Grid.Column="0" Text="mccmnc" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="19" Grid.Column="0" Text="lac" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="20" Grid.Column="0" Text="cellID" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="21" Grid.Column="0" Text="wireType" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="22" Grid.Column="0" Text="activeBand" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="23" Grid.Column="0" Text="cellOperator" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="24" Grid.Column="0" Text="ccpr" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="25" Grid.Column="0" Text="commPeriod" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="26" Grid.Column="0" Text="gpsTimeout" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="27" Grid.Column="0" Text="gpsStableTime" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="28" Grid.Column="0" Text="wireConnTimeout" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="29" Grid.Column="0" Text="retryCount" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="30" Grid.Column="0" Text="rcCount" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="31" Grid.Column="0" Text="totalStandbyCount" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="32" Grid.Column="0" Text="accelShockUpper" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="33" Grid.Column="0" Text="setTempLower" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="34" Grid.Column="0" Text="setTempUpper" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="35" Grid.Column="0" Text="humidLower" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="36" Grid.Column="0" Text="humidUpper" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="37" Grid.Column="0" Text="stateChangedAlarm" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="38" Grid.Column="0" Text="cutOffVoltage" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="39" Grid.Column="0" Text="voltage" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="40" Grid.Column="0" Text="isCharging" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Code}" Margin="3"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding DeviceNumber}" Margin="3"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Major}" Margin="3"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Minor}" Margin="3"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Revision}" Margin="3"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding BLEMajor}" Margin="3"/>
+            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding BLEMinor}" Margin="3"/>
+            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding BLERevision}" Margin="3"/>
+            <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding DbgIdCode}" Margin="3"/>
+            <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding PwrCSR}" Margin="3"/>
+            <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding RccCSR}" Margin="3"/>
+            <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding FlashSR}" Margin="3"/>
+            <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding FlashOBR}" Margin="3"/>
+            <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding LwdgSR}" Margin="3"/>
+            <TextBox Grid.Row="14" Grid.Column="1" Text="{Binding CurStandbyCount}" Margin="3"/>
+            <TextBox Grid.Row="15" Grid.Column="1" Text="{Binding LastGeofenceIndex}" Margin="3"/>
+            <TextBox Grid.Row="16" Grid.Column="1" Text="{Binding UsimIMSI}" Margin="3"/>
+            <TextBox Grid.Row="17" Grid.Column="1" Text="{Binding Iccid}" Margin="3"/>
+            <TextBox Grid.Row="18" Grid.Column="1" Text="{Binding MCCMNC}" Margin="3"/>
+            <TextBox Grid.Row="19" Grid.Column="1" Text="{Binding Lac}" Margin="3"/>
+            <TextBox Grid.Row="20" Grid.Column="1" Text="{Binding CellID}" Margin="3"/>
+            <TextBox Grid.Row="21" Grid.Column="1" Text="{Binding WireType}" Margin="3"/>
+            <TextBox Grid.Row="22" Grid.Column="1" Text="{Binding ActiveBand}" Margin="3"/>
+            <TextBox Grid.Row="23" Grid.Column="1" Text="{Binding CellOperator}" Margin="3"/>
+            <TextBox Grid.Row="24" Grid.Column="1" Text="{Binding Ccpr}" Margin="3"/>
+            <TextBox Grid.Row="25" Grid.Column="1" Text="{Binding CommPeriod}" Margin="3"/>
+            <TextBox Grid.Row="26" Grid.Column="1" Text="{Binding GpsTimeout}" Margin="3"/>
+            <TextBox Grid.Row="27" Grid.Column="1" Text="{Binding GpsStableTime}" Margin="3"/>
+            <TextBox Grid.Row="28" Grid.Column="1" Text="{Binding WireConnTimeout}" Margin="3"/>
+            <TextBox Grid.Row="29" Grid.Column="1" Text="{Binding RetryCount}" Margin="3"/>
+            <TextBox Grid.Row="30" Grid.Column="1" Text="{Binding RcCount}" Margin="3"/>
+            <TextBox Grid.Row="31" Grid.Column="1" Text="{Binding TotalStandbyCount}" Margin="3"/>
+            <TextBox Grid.Row="32" Grid.Column="1" Text="{Binding AccelShockUpper}" Margin="3"/>
+            <TextBox Grid.Row="33" Grid.Column="1" Text="{Binding SetTempLower}" Margin="3"/>
+            <TextBox Grid.Row="34" Grid.Column="1" Text="{Binding SetTempUpper}" Margin="3"/>
+            <TextBox Grid.Row="35" Grid.Column="1" Text="{Binding HumidLower}" Margin="3"/>
+            <TextBox Grid.Row="36" Grid.Column="1" Text="{Binding HumidUpper}" Margin="3"/>
+            <TextBox Grid.Row="37" Grid.Column="1" Text="{Binding StateChangedAlarm}" Margin="3"/>
+            <TextBox Grid.Row="38" Grid.Column="1" Text="{Binding CutOffVoltage}" Margin="3"/>
+            <TextBox Grid.Row="39" Grid.Column="1" Text="{Binding Voltage}" Margin="3"/>
+            <TextBox Grid.Row="40" Grid.Column="1" Text="{Binding IsCharging}" Margin="3"/>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

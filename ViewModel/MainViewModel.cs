@@ -5,6 +5,7 @@ using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9;
+using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10;
 using System.ComponentModel;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -49,8 +50,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private ProtocolViewModelVer9 _protocolver9;
         public ProtocolViewModelVer9 ProtocolVer9 { get { if (_protocolver9 == null) _protocolver9 = new ProtocolViewModelVer9(); return _protocolver9.Instance; } }
 
-        //private ProtocolViewModelVer10 _protocolver10;
-        //public ProtocolViewModelVer10 ProtocolVer10 { get { if (_protocolver10 == null) _protocolver10 = new ProtocolViewModelVer10(); return _protocolver10; } }
+        private ProtocolViewModelVer10 _protocolver10;
+        public ProtocolViewModelVer10 ProtocolVer10 { get { if (_protocolver10 == null) _protocolver10 = new ProtocolViewModelVer10(); return _protocolver10; } }
 
 
         private static Version? _fileVersion = Assembly.GetExecutingAssembly().GetName().Version;
@@ -106,6 +107,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             IsEnabled = true;
             ProtocolVer8.Dispose();
             ProtocolVer9.Dispose();
+            ProtocolVer10.Dispose();
         }
 
         private void NoSynchronizationSetupInfo()
@@ -116,6 +118,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         {
             ProtocolVer8.IsSetupInfoEnabled = true;
             ProtocolVer9.IsSetupInfoEnabled = true;
+            ProtocolVer10.IsSetupInfoEnabled = true;
         }
 
         private void SocketAsyncConnected()
@@ -145,7 +148,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
             else if (ProtocolVersion.Equals(_protocolVerList[2]))
             {
-                //ProtocolVer10.Instance.IsDeviceInfoEnabled = true;
+                ProtocolVer10.Instance.IsDeviceInfoEnabled = true;
             }
         }
 

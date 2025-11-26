@@ -1,12 +1,12 @@
-﻿<UserControl x:Class="SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver8.DeviceBodyVer8"
+﻿<UserControl x:Class="SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver10.DeviceBodyVer10"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:vm="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8"
+             xmlns:vm="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10"
              mc:Ignorable="d">
     <UserControl.Resources>
-        <vm:DeviceBodyViewModelVer8 x:Key="DeviceBodyViewModelVer8"/>
+        <vm:DeviceBodyViewModelVer10 x:Key="DeviceBodyViewModelVer10"/>
         <Style x:Key="MyTextBlockStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -14,7 +14,7 @@
         </Style>
     </UserControl.Resources>
     <UserControl.DataContext>
-        <Binding Source="{StaticResource DeviceBodyViewModelVer8}"/>
+        <Binding Source="{StaticResource DeviceBodyViewModelVer10}"/>
     </UserControl.DataContext>
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
         <Grid Margin="0,0,540,0" Background="White">
@@ -52,11 +52,15 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="130"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="code" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
@@ -91,6 +95,10 @@
             <TextBlock Grid.Row="29" Grid.Column="0" Text="geofenceInOutIndex" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="30" Grid.Column="0" Text="geofenceInOutState" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="31" Grid.Column="0" Text="commCode" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="32" Grid.Column="0" Text="rsrp" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="33" Grid.Column="0" Text="rscp" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="34" Grid.Column="0" Text="rssi" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="35" Grid.Column="0" Text="mobileErrorCode" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
 
             <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding Code}" ItemsSource="{Binding CodeList}" Margin="3"/>
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Index}" Margin="3"/>
@@ -124,6 +132,10 @@
             <TextBox Grid.Row="29" Grid.Column="1" Text="{Binding GeofenceInOutIndex}" Margin="3"/>
             <TextBox Grid.Row="30" Grid.Column="1" Text="{Binding GeofenceInOutState}" Margin="3"/>
             <TextBox Grid.Row="31" Grid.Column="1" Text="{Binding CommCode}" Margin="3"/>
+            <TextBox Grid.Row="32" Grid.Column="1" Text="{Binding Rsrp}" Margin="3"/>
+            <TextBox Grid.Row="33" Grid.Column="1" Text="{Binding Rscp}" Margin="3"/>
+            <TextBox Grid.Row="34" Grid.Column="1" Text="{Binding Rssi}" Margin="3"/>
+            <TextBox Grid.Row="35" Grid.Column="1" Text="{Binding MobileErrorCode}" Margin="3"/>
 
         </Grid>
     </ScrollViewer>

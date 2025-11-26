@@ -1,12 +1,12 @@
 ﻿using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Store;
 
-namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
+namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
 {
-    public class DeviceInfoViewModelVer9 : ViewModelBase
+    public class DeviceInfoViewModelVer10 : ViewModelBase
     {
-        private static DeviceInfoViewModelVer9 _instance;
-        public DeviceInfoViewModelVer9 Instance { get { if (_instance == null) _instance = new DeviceInfoViewModelVer9(); return _instance; }  }
+        private static DeviceInfoViewModelVer10 _instance;
+        public DeviceInfoViewModelVer10 Instance { get { if (_instance == null) _instance = new DeviceInfoViewModelVer10(); return _instance; }  }
 
         private DeviceInfoStore _deviceInfoStore;
         //private event EventHandler<UserControlEventArgs> _deviceChanged;
@@ -14,9 +14,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         private DeviceInfoModel _deviceInfoModel;
         public DeviceInfoModel DeviceInfoModel { get { if (_deviceInfoModel == null) _deviceInfoModel = Instance._deviceInfoStore._currentDeviceInfo = new DeviceInfoModel(); return _deviceInfoModel; } }
 
-        public DeviceInfoViewModelVer9() { }
+        public DeviceInfoViewModelVer10() { }
 
-        public DeviceInfoViewModelVer9(DeviceInfoStore deviceInfoStore) 
+        public DeviceInfoViewModelVer10(DeviceInfoStore deviceInfoStore) 
         {
             _instance = this;
             Instance._deviceInfoStore = deviceInfoStore;
@@ -81,6 +81,42 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
                 if (DeviceInfoModel.Revision != null)
                 {
                     DeviceInfoModel.Revision = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public byte BLEMajor
+        {
+            get { return DeviceInfoModel.BLEMajor; }
+            set
+            {
+                if (DeviceInfoModel.BLEMajor != null)
+                {
+                    DeviceInfoModel.BLEMajor = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public byte BLEMinor
+        {
+            get { return DeviceInfoModel.BLEMinor; }
+            set
+            {
+                if (DeviceInfoModel.BLEMinor != null)
+                {
+                    DeviceInfoModel.BLEMinor = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public byte BLERevision
+        {
+            get { return DeviceInfoModel.BLERevision; }
+            set
+            {
+                if (DeviceInfoModel.BLERevision != null)
+                {
+                    DeviceInfoModel.BLERevision = value;
                     OnPropertyChanged();
                 }
             }
@@ -201,6 +237,18 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
                 if (DeviceInfoModel.Rssi != null)
                 {
                     DeviceInfoModel.Rssi = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string Iccid
+        {
+            get { return DeviceInfoModel.Iccid; }
+            set
+            {
+                if (DeviceInfoModel.Iccid != null)
+                {
+                    DeviceInfoModel.Iccid = value;
                     OnPropertyChanged();
                 }
             }

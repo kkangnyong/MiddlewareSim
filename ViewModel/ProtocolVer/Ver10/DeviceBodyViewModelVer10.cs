@@ -2,26 +2,26 @@
 using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
 
-namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
+namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
 {
-    public class DeviceBodyViewModelVer9 : ViewModelBase
+    public class DeviceBodyViewModelVer10 : ViewModelBase
     {
-        private static DeviceBodyViewModelVer9 _instance;
-        public DeviceBodyViewModelVer9 Instance { get { if (_instance == null) _instance = new DeviceBodyViewModelVer9(); return _instance; } }
+        private static DeviceBodyViewModelVer10 _instance;
+        public DeviceBodyViewModelVer10 Instance { get { if (_instance == null) _instance = new DeviceBodyViewModelVer10(); return _instance; } }
 
         private DeviceBodyStore _deviceBodyStore;
 
         private DeviceBodyModel _deviceBodyModel;
         public DeviceBodyModel DeviceBodyModel { get { if (_deviceBodyModel == null) _deviceBodyModel = Instance._deviceBodyStore._currentDeviceBody = new DeviceBodyModel(); return _deviceBodyModel; } }
 
-        private ProtocolViewModelVer9 _protocolver9;
-        public ProtocolViewModelVer9 ProtocolVer9 { get { if (_protocolver9 == null) _protocolver9 = new ProtocolViewModelVer9(); return _protocolver9.Instance; } }
+        private ProtocolViewModelVer10 _protocolver10;
+        public ProtocolViewModelVer10 ProtocolVer10 { get { if (_protocolver10 == null) _protocolver10 = new ProtocolViewModelVer10(); return _protocolver10.Instance; } }
 
         private List<short> _codeList { get; set; } = new List<short>() { (short)CodeType.CommonData, (short)CodeType.LastData };
 
-        public DeviceBodyViewModelVer9() { }
+        public DeviceBodyViewModelVer10() { }
 
-        public DeviceBodyViewModelVer9(DeviceBodyStore deviceBodyStore)
+        public DeviceBodyViewModelVer10(DeviceBodyStore deviceBodyStore)
         {
             _instance = this;
             Instance._deviceBodyStore = deviceBodyStore;
@@ -44,7 +44,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         {
             get
             {
-                ProtocolVer9.SetButtonContent(DeviceBodyModel.Code);
+                ProtocolVer10.SetButtonContent(DeviceBodyModel.Code);
 
                 return DeviceBodyModel.Code; 
             }
@@ -54,7 +54,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
                 {
                     DeviceBodyModel.Code = value;
                     OnPropertyChanged();
-                    ProtocolVer9.SetButtonContent(DeviceBodyModel.Code);
+                    ProtocolVer10.SetButtonContent(DeviceBodyModel.Code);
                 }
             }
         }
@@ -426,6 +426,54 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
                 if (DeviceBodyModel.CommCode != null)
                 {
                     DeviceBodyModel.CommCode = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public short Rsrp
+        {
+            get { return DeviceBodyModel.Rsrp; }
+            set
+            {
+                if (DeviceBodyModel.Rsrp != null)
+                {
+                    DeviceBodyModel.Rsrp = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public short Rscp
+        {
+            get { return DeviceBodyModel.Rscp; }
+            set
+            {
+                if (DeviceBodyModel.Rscp != null)
+                {
+                    DeviceBodyModel.Rscp = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public short Rssi
+        {
+            get { return DeviceBodyModel.Rssi; }
+            set
+            {
+                if (DeviceBodyModel.Rssi != null)
+                {
+                    DeviceBodyModel.Rssi = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public ushort MobileErrorCode
+        {
+            get { return DeviceBodyModel.MobileErrorCode; }
+            set
+            {
+                if (DeviceBodyModel.MobileErrorCode != null)
+                {
+                    DeviceBodyModel.MobileErrorCode = value;
                     OnPropertyChanged();
                 }
             }

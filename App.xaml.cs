@@ -6,6 +6,7 @@ using SimReeferMiddlewareSystemWPF.View;
 using SimReeferMiddlewareSystemWPF.ViewModel;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9;
+using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10;
 using System.Windows;
 
 namespace SimReeferMiddlewareSystemWPF
@@ -48,6 +49,7 @@ namespace SimReeferMiddlewareSystemWPF
 
             //ViewModels
             services.AddSingleton<MainViewModel>();
+
             services.AddTransient<ProtocolViewModelVer8>();
             services.AddTransient<DeviceInfoViewModelVer8>();
             services.AddTransient<SetupInfoViewModelVer8>();
@@ -61,12 +63,12 @@ namespace SimReeferMiddlewareSystemWPF
             services.AddTransient<ReeferBodyViewModelVer9>();
             services.AddTransient<SensorBodyViewModelVer9>();
 
-            //services.AddTransient<ProtocolViewModelVer10>();
-            //services.AddTransient<DeviceInfoViewModelVer10>();
-            //services.AddTransient<SetupInfoViewModelVer10>();
-            //services.AddTransient<DeviceBodyViewModelVer10>();
-            //services.AddTransient<ReeferBodyViewModelVer10>();
-            //services.AddTransient<SensorBodyViewModelVer10>();
+            services.AddTransient<ProtocolViewModelVer10>();
+            services.AddTransient<DeviceInfoViewModelVer10>();
+            services.AddTransient<SetupInfoViewModelVer10>();
+            services.AddTransient<DeviceBodyViewModelVer10>();
+            services.AddTransient<ReeferBodyViewModelVer10>();
+            services.AddTransient<SensorBodyViewModelVer10>();
 
             //Views
             services.AddSingleton(s => new MainView()
