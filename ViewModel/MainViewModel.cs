@@ -51,7 +51,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         public ProtocolViewModelVer9 ProtocolVer9 { get { if (_protocolver9 == null) _protocolver9 = new ProtocolViewModelVer9(); return _protocolver9.Instance; } }
 
         private ProtocolViewModelVer10 _protocolver10;
-        public ProtocolViewModelVer10 ProtocolVer10 { get { if (_protocolver10 == null) _protocolver10 = new ProtocolViewModelVer10(); return _protocolver10; } }
+        public ProtocolViewModelVer10 ProtocolVer10 { get { if (_protocolver10 == null) _protocolver10 = new ProtocolViewModelVer10(); return _protocolver10.Instance; } }
 
 
         private static Version? _fileVersion = Assembly.GetExecutingAssembly().GetName().Version;

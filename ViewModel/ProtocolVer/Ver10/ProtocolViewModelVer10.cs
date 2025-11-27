@@ -3,7 +3,6 @@ using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
-using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
@@ -19,7 +18,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
         private readonly SetupInfoStore _setupInfoStore;
         private readonly DeviceBodyStore _deviceBodyStore;
         private readonly ReeferBodyStore _reeferBodyStore;
-        private readonly SensorBodyStore _sensorBodyStore;
         private DeviceInfoModel CurrentDeviceInfoModel => _deviceInfoStore._currentDeviceInfo;
         private SetupInfoModel CurrentSetupInfoModel => _setupInfoStore._currentSetupInfo;
         private DeviceBodyModel CurrentDeviceBodyModel => _deviceBodyStore._currentDeviceBody;
@@ -66,7 +64,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
         private bool _isSensorDataEnabled { get; set; } = false;
         private bool _isStartCommandEnabled { get; set; } = false;
 
-
         private string _contentSendStartData { get; set; } = "Send Start Data Packet";
         private string _contentSendDeviceData { get; set; } = "Send Device Data Packet";
         private string _contentSendReeferData { get; set; } = "Send Reefer Data Packet";
@@ -90,8 +87,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
             DeviceInfoStore deviceInfoStore,
             SetupInfoStore setupInfoStore,
             DeviceBodyStore deviceBodyStore,
-            ReeferBodyStore reeferBodyStore,
-            SensorBodyStore sensorBodyStore)
+            ReeferBodyStore reeferBodyStore)
         {
             _instance = this;
             _messageBoxService = messageBoxService;
@@ -100,7 +96,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
             _setupInfoStore = setupInfoStore;
             _deviceBodyStore = deviceBodyStore;
             _reeferBodyStore = reeferBodyStore;
-            _sensorBodyStore = sensorBodyStore;
             Initialize();
         }
 
@@ -372,7 +367,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
 
             foreach (INotifyPropertyChanged item in ItemsCollection)
             {
-                SensorBodyViewModelVer9 sensor = (SensorBodyViewModelVer9)item;
+                SensorBodyViewModelVer10 sensor = (SensorBodyViewModelVer10)item;
                 _modelDataService._dataValuesList.Clear();
                 _modelDataService._dataValuesList.AddRange(new List<byte[]> {
                     _modelDataService.GetStringsToByteArray(sensor.Date, 3),
