@@ -99,6 +99,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
             <RowDefinition />
+            <RowDefinition Height="3"/>
             <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Height="72" VerticalAlignment="Top" Background="AliceBlue">
@@ -152,9 +153,26 @@
         <Grid Grid.Row="1" Background="AliceBlue">
             <ContentControl Content="{Binding CurrentViewModel}"/>
         </Grid>
-        <Grid Grid.Row="2" Height="150" Background="LightGoldenrodYellow">
-            <Border BorderBrush="Black" BorderThickness="1"/>
-            <TextBlock Text="Received Message" FontSize="10"/>
+        <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" Height="3" Margin="0" Background="AliceBlue" />
+        <Grid Grid.Row="3" HorizontalAlignment="Stretch" Background="LightGoldenrodYellow">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <TextBlock Text=" Received Message" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource MyTextBlockStyle}"/>
+            </Grid>
+            <Grid Grid.Row="1" Background="AliceBlue">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <RichTextBox Margin="5" IsReadOnly="True">
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text="{Binding ReceivedMessage}"/>
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

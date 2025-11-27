@@ -60,6 +60,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private string _companyImagePath { get; set; } = string.Empty;
         private bool _isEnabled { get; set; } = true;
         private List<string> _protocolVerList { get; set; } = new List<string>() { "0.8.0.0", "0.9.0.0", "0.10.0.0" };
+        private string _recievedMessage { get; set; } = "Test Message";
 
         public MainViewModel() { }
 
@@ -171,6 +172,20 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         {
             CurrentViewModel = _mainNavigationStore?.CurrentViewModel;
         }
+        
+        public string ReceivedMessage
+        {
+            get { return _recievedMessage; }
+            set
+            {
+                if (_recievedMessage != null)
+                {
+                    _recievedMessage = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
 
         public string TitleVersion
         {
