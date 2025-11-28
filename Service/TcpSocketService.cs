@@ -18,6 +18,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
         public Action<string>? SocketAsyncError { get; set; }
         public Action? NoSynchronizationSetupInfo { get; set; }
         public Action? SynchronizationSetupInfo { get; set; }
+        public Action<string>? RecievedByteToString { get; set; }
 
         public void Connection(string _ip, ushort _port)
         {
@@ -101,12 +102,17 @@ namespace SimReeferMiddlewareSystemWPF.Service
         {
             try
             {
+                string recvData1 = Encoding.UTF8.GetString(args.Buffer, args.Offset, args.BytesTransferred);
                 if (args.BytesTransferred > 0 && args.SocketError == SocketError.Success)
                 {
                     string recvData = Encoding.UTF8.GetString(args.Buffer, args.Offset, args.BytesTransferred);
                     byte[] bytes = Encoding.UTF8.GetBytes(recvData);
                     string recvDataBytesToString = BitConverter.ToString(bytes);
 
+                    if (!string.IsNullOrEmpty(recvDataBytesToString))
+                    {
+                        RecievedByteToString?.Invoke(recvDataBytesToString);
+                    }
                     //BeginInvokeWork(txt_recievedmsg, () => { txt_recievedmsg.Text = recvDataBytesToString; });
                     //최초 프로토콜 버전을 전송할 때 Ack: 01을 받은 후 진입 해당응답은 SeedKey 적용이 안되어있음(Protocol을 정해야하는 최초 시퀀스이기에 SeedKey적용이 없는것으로 판단)
                     if (recvDataBytesToString.Equals("01"))

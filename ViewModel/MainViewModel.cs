@@ -60,7 +60,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private string _companyImagePath { get; set; } = string.Empty;
         private bool _isEnabled { get; set; } = true;
         private List<string> _protocolVerList { get; set; } = new List<string>() { "0.8.0.0", "0.9.0.0", "0.10.0.0" };
-        private string _recievedMessage { get; set; } = "Test Message";
+        private string _recievedMessage { get; set; } = "Message";
 
         public MainViewModel() { }
 
@@ -89,6 +89,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             _tcpSocketService.SocketAsyncError += SocketAsyncError;
             _tcpSocketService.NoSynchronizationSetupInfo += NoSynchronizationSetupInfo;
             _tcpSocketService.SynchronizationSetupInfo += SynchronizationSetupInfo;
+            _tcpSocketService.RecievedByteToString += RecievedByteToString;
             _mainNavigationStore.CurrentViewModelChanged += CurrentViewModelChanged;
             ToConnectCommand = new RelayCommand<object>(ToConnect);
             ToDisconnectCommand = new RelayCommand<object>(ToDisconnect);
@@ -161,6 +162,12 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ProtocolVer9.Dispose();
         }
 
+        private void RecievedByteToString(string msg)
+        {
+            //_messageBoxService.ShowError($"{msg}", "Server");
+            ReceivedMessage = msg;
+        }
+
         private void SocketAsyncError(string error)
         {
             ToLoadImage = "/Resources/Cancel.png";
@@ -185,7 +192,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 }
             }
         }
-
 
         public string TitleVersion
         {
