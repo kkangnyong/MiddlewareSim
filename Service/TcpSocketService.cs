@@ -1,6 +1,7 @@
 ﻿using Mythosia.Integrity.CRC;
 using Mythosia.Security.Cryptography;
 using SimReeferMiddlewareSystemWPF.Interface;
+using System.Buffers.Binary;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -18,7 +19,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
         public Action<string>? SocketAsyncError { get; set; }
         public Action? NoSynchronizationSetupInfo { get; set; }
         public Action? SynchronizationSetupInfo { get; set; }
-        public Action<string>? RecievedByteToString { get; set; }
+        public Action<byte[]>? RecievedByteToString { get; set; }
 
         public void Connection(string _ip, ushort _port)
         {
@@ -102,7 +103,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
         {
             try
             {
-                string recvData1 = Encoding.UTF8.GetString(args.Buffer, args.Offset, args.BytesTransferred);
+                //string recvData1 = Encoding.UTF8.GetString(args.Buffer, args.Offset, args.BytesTransferred);
                 if (args.BytesTransferred > 0 && args.SocketError == SocketError.Success)
                 {
                     string recvData = Encoding.UTF8.GetString(args.Buffer, args.Offset, args.BytesTransferred);
@@ -111,7 +112,28 @@ namespace SimReeferMiddlewareSystemWPF.Service
 
                     if (!string.IsNullOrEmpty(recvDataBytesToString))
                     {
-                        RecievedByteToString?.Invoke(recvDataBytesToString);
+                        if (bytes.Length <= 1)
+                        {
+                            RecievedByteToString?.Invoke(bytes);
+                        }
+                        else
+                        {
+                            var crcLength = 4;
+                            var originalPacket = bytes.Take(bytes.Length - crcLength).ToArray();
+
+                            var crc = originalPacket.CRC32();
+                            if (BitConverter.IsLittleEndian) crc = BinaryPrimitives.ReverseEndianness(crc); // 로컬엔디안이 리틀엔디안일 경우 빅엔디안 형태로 변환
+
+                            // <순서의 변화 없이> 읽음 (네트워크 엔디안 그대로)
+                            var crcInPacket = BitConverter.ToUInt32(bytes.TakeLast(crcLength).ToArray());
+                            //if (crc != crcInPacket) throw new Exception($"The crc value is not corrected. The calculated crc value is {crc}");
+
+                            bytes = originalPacket;
+
+                            var datas = bytes.DecryptSEED(SeedKey).ToArray();
+
+                            RecievedByteToString?.Invoke(bytes);
+                        }
                     }
                     //BeginInvokeWork(txt_recievedmsg, () => { txt_recievedmsg.Text = recvDataBytesToString; });
                     //최초 프로토콜 버전을 전송할 때 Ack: 01을 받은 후 진입 해당응답은 SeedKey 적용이 안되어있음(Protocol을 정해야하는 최초 시퀀스이기에 SeedKey적용이 없는것으로 판단)

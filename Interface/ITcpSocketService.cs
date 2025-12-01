@@ -12,6 +12,6 @@
         Action<string>? SocketAsyncError { get; set; }
         Action? NoSynchronizationSetupInfo { get; set; }
         Action? SynchronizationSetupInfo { get; set; }
-        Action<string>? RecievedByteToString { get; set; }
+        Action<byte[]>? RecievedByteToString { get; set; }
     }
 }

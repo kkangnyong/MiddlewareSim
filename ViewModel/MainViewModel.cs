@@ -10,6 +10,9 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
+using System.Text;
+using Mythosia.Security.Cryptography;
+using Mythosia;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel
 {
@@ -161,11 +164,48 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ProtocolVer8.Dispose();
             ProtocolVer9.Dispose();
         }
+        protected byte[] SeedKey { get; } = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5];
 
-        private void RecievedByteToString(string msg)
+        private void RecievedByteToString(byte[] msgBytes)
         {
+            //string a = Encoding.ASCII.GetString(msgBytes);
+            //Console.WriteLine();
             //_messageBoxService.ShowError($"{msg}", "Server");
-            ReceivedMessage = msg;
+            //if (msgBytes[0] == 1)
+            //{
+            //    return;
+            //}
+            //var result = msgBytes.DecryptSEED(SeedKey).ToArray();
+            Console.WriteLine();
+            //result.ToEncodedString(Encoding.UTF8);
+
+            //Console.WriteLine();
+            //char[] result = new char[msg.Length / 2];
+            //int hexIndex = 0;
+            //Encoding.UTF8.GetString(msg);
+            //for (int i = 0; i < result.Length; i++)
+            //{
+            //    result[i] = (char)(ParseHexDigit(msg[hexIndex++]) * 16 + ParseHexDigit(msg[hexIndex++]));
+            //}
+            //ReceivedMessage = new string(result);
+        }
+
+        static int ParseHexDigit(char c)
+        {
+            if (c >= '0' && c <= '9')
+            {
+                return c - '0';
+            }
+            if (c >= 'a' && c <= 'f')
+            {
+                return c - 'a' + 10;
+            }
+            if (c >= 'A' && c <= 'F')
+            {
+                return c - 'A' + 10;
+            }
+            return 45;
+            //throw new ArgumentException("Invalid hex character");
         }
 
         private void SocketAsyncError(string error)
