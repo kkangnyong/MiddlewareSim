@@ -94,6 +94,11 @@
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
+        <Style x:Key="MyRichTextBoxStyle" TargetType="{x:Type RichTextBox}">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -165,7 +170,7 @@
             </Grid>
             <Grid Grid.Row="1" Background="AliceBlue">
                 <Border BorderBrush="Black" BorderThickness="1"/>
-                <RichTextBox Margin="5" IsReadOnly="True">
+                <RichTextBox Margin="5" IsReadOnly="True" Style="{StaticResource MyRichTextBoxStyle}">
                     <FlowDocument>
                         <Paragraph>
                             <Run Text="{Binding ReceivedMessage}"/>
