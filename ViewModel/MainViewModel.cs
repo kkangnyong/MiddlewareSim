@@ -35,6 +35,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private readonly INavigationService _navigationService;
         private readonly IMessageBoxService _messageBoxService;
         public readonly ITcpSocketService _tcpSocketService;
+        public readonly ITableBuilderService _tableBuilderService;
         private readonly MainNavigationStore? _mainNavigationStore;
         public ICommand ToConnectCommand { get; set; }
         public ICommand ToDisconnectCommand { get; set; }
@@ -70,7 +71,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         public MainViewModel(INavigationService navigationService,
             IMessageBoxService messageBoxService,
             ITcpSocketService tcpSocketService,
-            IUIControlService uIControlService,
+            ITableBuilderService tableBuilderService,
             MainNavigationStore mainNavigationStore,
             ServerConnectionStore serverConnectionStore)
         {
@@ -79,6 +80,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             _serverConnectionInfoStore = serverConnectionStore;
             _messageBoxService = messageBoxService;
             _tcpSocketService = tcpSocketService;
+            _tableBuilderService = tableBuilderService;
             _mainNavigationStore = mainNavigationStore;
             Initialize();
             _navigationService = navigationService;
@@ -168,6 +170,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
         private void RecievedByteToString(byte[] msgBytes)
         {
+
+
+            string test = _tableBuilderService.ToString(msgBytes, true, "ccpr", "Interval", "GPS timeout", "GPS stable time", "comm connection timeout", "comm retry count", "accel upper", "Cut Off Voltage");
             //string a = Encoding.ASCII.GetString(msgBytes);
             //Console.WriteLine();
             //_messageBoxService.ShowError($"{msg}", "Server");
@@ -176,7 +181,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             //    return;
             //}
             //var result = msgBytes.DecryptSEED(SeedKey).ToArray();
-            Console.WriteLine();
+            Console.WriteLine(test);
             //result.ToEncodedString(Encoding.UTF8);
 
             //Console.WriteLine();
