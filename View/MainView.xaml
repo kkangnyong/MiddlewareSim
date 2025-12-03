@@ -105,7 +105,7 @@
             <RowDefinition Height="75"/>
             <RowDefinition />
             <RowDefinition Height="3"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="270"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Height="72" VerticalAlignment="Top" Background="AliceBlue">
             <Grid.RowDefinitions>
@@ -169,14 +169,31 @@
                 <TextBlock Text=" Received Message" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource MyTextBlockStyle}"/>
             </Grid>
             <Grid Grid.Row="1" Background="AliceBlue">
-                <Border BorderBrush="Black" BorderThickness="1"/>
-                <RichTextBox Margin="5" IsReadOnly="True" Style="{StaticResource MyRichTextBoxStyle}">
-                    <FlowDocument>
-                        <Paragraph>
-                            <Run Text="{Binding ReceivedMessage}"/>
-                        </Paragraph>
-                    </FlowDocument>
-                </RichTextBox>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="170"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" VerticalAlignment="Top" Background="Blue" Height="170">
+                    <Border BorderBrush="Black" BorderThickness="1"/>
+                    <RichTextBox Margin="5" IsReadOnly="True" Style="{StaticResource MyRichTextBoxStyle}">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="{Binding ReceivedMessage}"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                </Grid>
+                <Grid Grid.Row="1" VerticalAlignment="Stretch" Background="Red">
+                    <Border BorderBrush="Black" BorderThickness="1"/>
+                    <RichTextBox Margin="5" IsReadOnly="True" Style="{StaticResource MyRichTextBoxStyle}">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="{Binding ReceivedRawMessage}"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>                    
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

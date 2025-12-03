@@ -5,9 +5,8 @@ namespace SimReeferMiddlewareSystemWPF.Service
 {
     public class TableBuilderService : ITableBuilderService
     {
-        public string ToString(byte[] target, bool withTitle = true, params string[] exceptProperties)
+        public string ToString(byte[] values, params string[] headers)
         {
-            //var properties = target.GetType().GetProperties();
             var columns = new List<string>();
             var datas = new List<object>();
             var tableData = new List<List<object>>()
@@ -16,20 +15,16 @@ namespace SimReeferMiddlewareSystemWPF.Service
             };
 
             int i = 0;
-            foreach (var property in target)
+            foreach (var header in headers)
             {
-                //if (exceptProperties.Contains(property.Name)) continue;
-
-                columns.Add(exceptProperties[i]);
-                datas.Add(property);
+                columns.Add(header);
+                datas.Add(values[i]);
                 i++;
             }
 
             var result = ConsoleTableBuilder.From(tableData)
                                             .WithColumn(columns)
                                             .WithFormat(ConsoleTableBuilderFormat.Alternative);
-
-            if (withTitle) result = result.WithTitle(target.GetType().Name);
 
             return ToTableString(result);
         }

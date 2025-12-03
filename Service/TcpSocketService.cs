@@ -121,30 +121,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                             recvRaw[i] = recvBytes[i];
                         }
                         var datas = recvRaw.DecryptSEED(SeedKey).ToArray();
-                        //var stringData = datas.ToHexStringL();
-                        //string entryData = Encoding.Default.GetString(datas);
-                        //    if (bytes.Length <= 1)
-                        //    {
-                        //        RecievedByteToString?.Invoke(bytes);
-                        //    }
-                        //    else
-                        //    {
-                        //        var crcLength = 4;
-                        //        var originalPacket = bytes.Take(bytes.Length - crcLength).ToArray();
-
-                        //        var crc = originalPacket.CRC32();
-                        //        if (BitConverter.IsLittleEndian) crc = BinaryPrimitives.ReverseEndianness(crc); // 로컬엔디안이 리틀엔디안일 경우 빅엔디안 형태로 변환
-
-                        //        // <순서의 변화 없이> 읽음 (네트워크 엔디안 그대로)
-                        //        var crcInPacket = BitConverter.ToUInt32(bytes.TakeLast(crcLength).ToArray());
-                        //        //if (crc != crcInPacket) throw new Exception($"The crc value is not corrected. The calculated crc value is {crc}");
-
-                        //        bytes = originalPacket;
-
-                        //        //var datas = bytes.DecryptSEED(SeedKey).ToArray();
-
                         RecievedByteToString?.Invoke(datas);
-                        //}
                     }
                     //BeginInvokeWork(txt_recievedmsg, () => { txt_recievedmsg.Text = recvDataBytesToString; });
                     //최초 프로토콜 버전을 전송할 때 Ack: 01을 받은 후 진입 해당응답은 SeedKey 적용이 안되어있음(Protocol을 정해야하는 최초 시퀀스이기에 SeedKey적용이 없는것으로 판단)

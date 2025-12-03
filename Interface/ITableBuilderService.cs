@@ -2,6 +2,6 @@
 {
     public interface ITableBuilderService
     {
-        string ToString(byte[] target, bool withTitle = true, params string[] exceptProperties);
+        string ToString(byte[] values, params string[] headers);
     }
 }

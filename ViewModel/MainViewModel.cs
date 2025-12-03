@@ -65,6 +65,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private bool _isEnabled { get; set; } = true;
         private List<string> _protocolVerList { get; set; } = new List<string>() { "0.8.0.0", "0.9.0.0", "0.10.0.0" };
         private string _recievedMessage { get; set; } = "Message";
+        private string _recievedRawMessage { get; set; } = "Raw Message";
 
         public MainViewModel() { }
 
@@ -85,6 +86,11 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             Initialize();
             _navigationService = navigationService;
             _navigationService.Navigate(NaviType.ProtocolView, ProtocolVersion);
+
+            //byte[] msgBytes = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x03, 0x02 };
+            //string test = _tableBuilderService.ToString(msgBytes, "ccpr", "Interval", "GPS timeout", "GPS stable time", "comm connection timeout", "comm retry count", "accel upper", "Cut Off Voltage");
+            //ReceivedMessage = test;
+            //ReceivedRawMessage = BitConverter.ToString(msgBytes);
         }
 
         private void Initialize()
@@ -170,47 +176,13 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
         private void RecievedByteToString(byte[] msgBytes)
         {
+            //byte[] msgBytes = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x03, 0x02 };
+            //string test = _tableBuilderService.ToString(msgBytes, "ccpr", "Interval", "GPS timeout", "GPS stable time", "comm connection timeout", "comm retry count", "accel upper", "Cut Off Voltage");
+            //ReceivedMessage = test;
+            //ReceivedRawMessage = BitConverter.ToString(msgBytes);
 
-
-            string test = _tableBuilderService.ToString(msgBytes, true, "ccpr", "Interval", "GPS timeout", "GPS stable time", "comm connection timeout", "comm retry count", "accel upper", "Cut Off Voltage");
-            //string a = Encoding.ASCII.GetString(msgBytes);
-            //Console.WriteLine();
-            //_messageBoxService.ShowError($"{msg}", "Server");
-            //if (msgBytes[0] == 1)
-            //{
-            //    return;
-            //}
-            //var result = msgBytes.DecryptSEED(SeedKey).ToArray();
-            Console.WriteLine(test);
-            //result.ToEncodedString(Encoding.UTF8);
-
-            //Console.WriteLine();
-            //char[] result = new char[msg.Length / 2];
-            //int hexIndex = 0;
-            //Encoding.UTF8.GetString(msg);
-            //for (int i = 0; i < result.Length; i++)
-            //{
-            //    result[i] = (char)(ParseHexDigit(msg[hexIndex++]) * 16 + ParseHexDigit(msg[hexIndex++]));
-            //}
-            //ReceivedMessage = new string(result);
-        }
-
-        static int ParseHexDigit(char c)
-        {
-            if (c >= '0' && c <= '9')
-            {
-                return c - '0';
-            }
-            if (c >= 'a' && c <= 'f')
-            {
-                return c - 'a' + 10;
-            }
-            if (c >= 'A' && c <= 'F')
-            {
-                return c - 'A' + 10;
-            }
-            return 45;
-            //throw new ArgumentException("Invalid hex character");
+            ReceivedMessage = _tableBuilderService.ToString(msgBytes, "ccpr", "Interval", "GPS timeout", "GPS stable time", "comm connection timeout", "comm retry count", "accel upper", "Cut Off Voltage");
+            ReceivedRawMessage = BitConverter.ToString(msgBytes);
         }
 
         private void SocketAsyncError(string error)
@@ -233,6 +205,19 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 if (_recievedMessage != null)
                 {
                     _recievedMessage = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string ReceivedRawMessage
+        {
+            get { return _recievedRawMessage; }
+            set
+            {
+                if (_recievedRawMessage != null)
+                {
+                    _recievedRawMessage = value;
                     OnPropertyChanged();
                 }
             }
