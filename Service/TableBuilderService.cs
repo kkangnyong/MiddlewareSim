@@ -5,7 +5,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
 {
     public class TableBuilderService : ITableBuilderService
     {
-        public string ToString(byte[] values, params string[] headers)
+        public string ToString(string[] values, params string[] headers)
         {
             var columns = new List<string>();
             var datas = new List<object>();

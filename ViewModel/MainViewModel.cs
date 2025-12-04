@@ -3,17 +3,13 @@ using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
+using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9;
-using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10;
 using System.ComponentModel;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
-using System.Text;
-using Mythosia.Security.Cryptography;
-using Mythosia;
-using System.Linq;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel
 {
@@ -70,6 +66,22 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
         public MainViewModel() { }
 
+        //private string _ccpr = "CCPR";
+        //private string _Interval = "Interval";
+        //private string _gpsTimeout = "GPS Timeout";
+        //private string _gpsStableTime = "GPS Stable Time";
+        //private string _wireConnectionTimeout = "Wire Connection Timeout";
+        //private string _commRetryCount = "Comm Retry Count";
+        //private string _rcCount = "RcCount";
+        //private string _totalStandbyCount = "Total Standby Count";
+        //private string _accelShockUpper = "Accel Shock Upper";
+        //private string _setTempLower = "Set Temp Lower";
+        //private string _setTempUpper = "Set Temp Upper";
+        //private string _humidLower = "Humid Lower";
+        //private string _humidUpper = "Humid Upper";
+        //private string _stateChangedAlarm = "State Changed Alarm";
+        //private string _cutOffVoltage = "Cut Off Voltage";
+
         public MainViewModel(INavigationService navigationService,
             IMessageBoxService messageBoxService,
             ITcpSocketService tcpSocketService,
@@ -88,10 +100,47 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             _navigationService = navigationService;
             _navigationService.Navigate(NaviType.ProtocolView, ProtocolVersion);
 
-            //byte[] msgBytes = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x03, 0x02 };
-            //string test = _tableBuilderService.ToString(msgBytes, "ccpr", "Interval", "GPS timeout", "GPS stable time", "comm connection timeout", "comm retry count", "accel upper", "Cut Off Voltage");
-            //ReceivedMessage = test;
-            //ReceivedRawMessage = BitConverter.ToString(msgBytes);
+
+            //byte[] msgBytes = new byte[] { 0, 1, 0, 30, 120, 30, 60, 3, 6, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 40, 98 };
+            //string[] msgString = new string[] {
+            //                    _ccpr, //1
+            //                    _Interval, //0,30
+            //                    _gpsTimeout, //120
+            //                    _gpsStableTime, //30
+            //                    _wireConnectionTimeout, //60
+            //                    _commRetryCount, //3
+            //                    _rcCount, //6
+            //                    _totalStandbyCount, //0,0
+            //                    _accelShockUpper, //9
+            //                    _setTempLower, //0,0
+            //                    _setTempUpper, //0,0
+            //                    _humidLower, //0,0
+            //                    _humidUpper, //0,0
+            //                    _stateChangedAlarm, //0,0
+            //                    _cutOffVoltage }; //3,40 
+
+            //IDictionary<string, string> syncDataDics = new Dictionary<string, string>();
+
+            //for (int i = 0; i < msgString.Length; i++)
+            //{
+            //    if (msgString[i].ToUpper().Equals(_ccpr.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[1].ToString()); }
+            //    else if (msgString[i].ToUpper().Equals(_Interval.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[3].ToString()); }
+            //    else if (msgString[i].ToUpper().Equals(_gpsTimeout.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[4].ToString()); }
+            //    else if (msgString[i].ToUpper().Equals(_gpsStableTime.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[5].ToString()); }
+            //    else if (msgString[i].ToUpper().Equals(_wireConnectionTimeout.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[6].ToString()); }
+            //    else if (msgString[i].ToUpper().Equals(_commRetryCount.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[7].ToString()); }
+            //    else if (msgString[i].ToUpper().Equals(_rcCount.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[8].ToString()); }
+            //    else if (msgString[i].ToUpper().Equals(_totalStandbyCount.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[10].ToString()); }
+            //    else if (msgString[i].ToUpper().Equals(_accelShockUpper.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[11].ToString()); }
+            //    else if (msgString[i].ToUpper().Equals(_setTempLower.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[13].ToString()); }
+            //    else if (msgString[i].ToUpper().Equals(_setTempUpper.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[15].ToString()); }
+            //    else if (msgString[i].ToUpper().Equals(_humidLower.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[17].ToString()); }
+            //    else if (msgString[i].ToUpper().Equals(_humidUpper.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[19].ToString()); }
+            //    else if (msgString[i].ToUpper().Equals(_stateChangedAlarm.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[21].ToString()); }
+            //    else if (msgString[i].ToUpper().Equals(_cutOffVoltage.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[22] + "." + msgBytes[23]); }
+            //}
+
+            //SynchronizationSetupInfo(syncDataDics, msgBytes);
         }
 
         private void Initialize()
@@ -131,19 +180,14 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ProtocolVer10.IsStartDataEnabled = true;
         }
 
-        private void SynchronizationSetupInfo(byte[] msgBytes)
+        private void SynchronizationSetupInfo(IDictionary<string, string> syncDataDics, byte[] originData)
         {
             ProtocolVer8.IsSetupInfoEnabled = true;
             ProtocolVer9.IsSetupInfoEnabled = true;
             ProtocolVer10.IsSetupInfoEnabled = true;
 
-            IDictionary<string, string> syncDataDics = new Dictionary<string, string>();
-
-
-            //msgBytes.ToDictionary();
-            //"ccpr", "Interval", "GPS Timeout", "GPS Stable Time", "wire Connection Timeout", "comm Retry Count", "rcCount", "total Standby Count", "accel Shock Upper", "set Temp Lower", "set Temp Upper", "humid Lower", "humid Upper", "state Changed Alarm", "Cut Off Voltage"
-            ReceivedMessage = _tableBuilderService.ToString(syncDataDics.Values, syncDataDics.Keys);
-            ReceivedRawMessage = BitConverter.ToString(msgBytes);
+            ReceivedMessage = _tableBuilderService.ToString(syncDataDics.Values.ToArray(), syncDataDics.Keys.ToArray());
+            ReceivedRawMessage = BitConverter.ToString(originData);
         }
 
         private void RecievedByteToString(byte[] msgBytes)
