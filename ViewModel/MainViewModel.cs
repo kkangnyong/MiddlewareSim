@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Text;
 using Mythosia.Security.Cryptography;
 using Mythosia;
+using System.Linq;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel
 {
@@ -125,13 +126,28 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
         private void NoSynchronizationSetupInfo()
         {
+            ProtocolVer8.IsStartDataEnabled = true;
+            ProtocolVer9.IsStartDataEnabled = true;
+            ProtocolVer10.IsStartDataEnabled = true;
         }
 
-        private void SynchronizationSetupInfo()
+        private void SynchronizationSetupInfo(byte[] msgBytes)
         {
             ProtocolVer8.IsSetupInfoEnabled = true;
             ProtocolVer9.IsSetupInfoEnabled = true;
             ProtocolVer10.IsSetupInfoEnabled = true;
+
+            IDictionary<string, string> syncDataDics = new Dictionary<string, string>();
+
+
+            //msgBytes.ToDictionary();
+            //"ccpr", "Interval", "GPS Timeout", "GPS Stable Time", "wire Connection Timeout", "comm Retry Count", "rcCount", "total Standby Count", "accel Shock Upper", "set Temp Lower", "set Temp Upper", "humid Lower", "humid Upper", "state Changed Alarm", "Cut Off Voltage"
+            ReceivedMessage = _tableBuilderService.ToString(syncDataDics.Values, syncDataDics.Keys);
+            ReceivedRawMessage = BitConverter.ToString(msgBytes);
+        }
+
+        private void RecievedByteToString(byte[] msgBytes)
+        {
         }
 
         private void SocketAsyncConnected()
@@ -171,18 +187,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             IsEnabled = true;
             ProtocolVer8.Dispose();
             ProtocolVer9.Dispose();
-        }
-        protected byte[] SeedKey { get; } = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5];
-
-        private void RecievedByteToString(byte[] msgBytes)
-        {
-            //byte[] msgBytes = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x03, 0x02 };
-            //string test = _tableBuilderService.ToString(msgBytes, "ccpr", "Interval", "GPS timeout", "GPS stable time", "comm connection timeout", "comm retry count", "accel upper", "Cut Off Voltage");
-            //ReceivedMessage = test;
-            //ReceivedRawMessage = BitConverter.ToString(msgBytes);
-
-            ReceivedMessage = _tableBuilderService.ToString(msgBytes, "ccpr", "Interval", "GPS timeout", "GPS stable time", "comm connection timeout", "comm retry count", "accel upper", "Cut Off Voltage");
-            ReceivedRawMessage = BitConverter.ToString(msgBytes);
         }
 
         private void SocketAsyncError(string error)

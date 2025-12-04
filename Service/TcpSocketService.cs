@@ -18,7 +18,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
         public Action? SocketAsyncDisconnected { get; set; }
         public Action<string>? SocketAsyncError { get; set; }
         public Action? NoSynchronizationSetupInfo { get; set; }
-        public Action? SynchronizationSetupInfo { get; set; }
+        public Action<byte[]>? SynchronizationSetupInfo { get; set; }
         public Action<byte[]>? RecievedByteToString { get; set; }
 
         public void Connection(string _ip, ushort _port)
@@ -110,7 +110,8 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     byte[] bytes = Encoding.UTF8.GetBytes(recvData);
                     string recvDataBytesToString = BitConverter.ToString(bytes);
 
-                    if (!string.IsNullOrEmpty(recvDataBytesToString))
+                    //최초 프로토콜 버전을 전송할 때 Ack: 01을 받은 후 진입 해당응답은 SeedKey 적용이 안되어있음(Protocol을 정해야하는 최초 시퀀스이기에 SeedKey적용이 없는것으로 판단)
+                    if (recvDataBytesToString.Equals("01"))
                     {
                         byte[] recvBytes = new byte[1000];
                         int recv = _connectSocket.Receive(recvBytes);
@@ -121,22 +122,15 @@ namespace SimReeferMiddlewareSystemWPF.Service
                             recvRaw[i] = recvBytes[i];
                         }
                         var datas = recvRaw.DecryptSEED(SeedKey).ToArray();
-                        RecievedByteToString?.Invoke(datas);
-                    }
-                    //BeginInvokeWork(txt_recievedmsg, () => { txt_recievedmsg.Text = recvDataBytesToString; });
-                    //최초 프로토콜 버전을 전송할 때 Ack: 01을 받은 후 진입 해당응답은 SeedKey 적용이 안되어있음(Protocol을 정해야하는 최초 시퀀스이기에 SeedKey적용이 없는것으로 판단)
-                    if (recvDataBytesToString.Equals("01"))
-                    {
-                        //BeginInvokeWork(cbBoxMWProtocolVerList, () =>
-                        //{
-                        //    cbBoxMWProtocolVerList.Enabled = false;
-                        //    btn_send_protocolVer.Enabled = false;
-                        //});
-                        //BeginInvokeWork(pnlProtocolVer, () =>
-                        //{
-                        //    uCtrlVer.SetEnable(true);
-                        //    uCtrlVer.SetEnableDeviceInfoControl(true);
-                        //});
+
+                        if (datas.Length <= 2 && datas.Sum(x => x) == 0)
+                        {
+                            NoSynchronizationSetupInfo?.Invoke();
+                        }
+                        else
+                        {
+                            SynchronizationSetupInfo?.Invoke(datas);
+                        }
                     }
                     //동기화가 필요할 경우 진입
                     else if (!recvDataBytesToString.Equals(ACK_00) && recvDataBytesToString.Length > 2)
@@ -146,8 +140,6 @@ namespace SimReeferMiddlewareSystemWPF.Service
                         //    uCtrlVer.SetEnableDeviceInfoControl(false);
                         //    uCtrlVer.SetEnableSetupInfoControl(true);
                         //});
-                        SynchronizationSetupInfo?.Invoke();
-
                     }
                     //동기화가 필요없거나 Ack로 00을 받았을 때 진입
                     else if (recvDataBytesToString.Equals(ACK_00))
@@ -158,7 +150,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                         //    uCtrlVer.SetEnableSetupInfoControl(false);
                         //    uCtrlVer.SetEnableStartDataControl(true);
                         //});
-                        NoSynchronizationSetupInfo?.Invoke();
+                        //NoSynchronizationSetupInfo?.Invoke();
                     }
 
                     //반자동 시뮬레이터 진행이 아닌 수동으로 바이트 적어서 보내는 경우 진입, 수동 시뮬레이터
