@@ -4,6 +4,7 @@ using SimReeferMiddlewareSystemWPF.Interface;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Windows;
 
 namespace SimReeferMiddlewareSystemWPF.Service
 {
@@ -16,7 +17,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
         public Action? SocketAsyncConnected { get; set; }
         public Action? SocketAsyncDisconnected { get; set; }
         public Action<string>? SocketAsyncError { get; set; }
-        public Action? NoSynchronizationSetupInfo { get; set; }
+        public Action<byte[]>? NoSynchronizationSetupInfo { get; set; }
         public Action<IDictionary<string, string>, byte[]>? SynchronizationSetupInfo { get; set; }
         public Action<byte[]>? RecievedByteToString { get; set; }
 
@@ -59,14 +60,9 @@ namespace SimReeferMiddlewareSystemWPF.Service
                 args.RemoteEndPoint = clientEndPoint;
 
                 _connectSocket.ConnectAsync(args);
-                //BeginInvokeWork(txt_recievedmsg, () =>
-                //{
-                //    txt_recievedmsg.Text = string.Empty;
-                //});
             }
             catch (SocketException ex)
             {
-                //MessageBox.Show($"Socket 연결 정보가 잘 못 되었습니다.\r\n{ex.ToString()}", "Server disconnected", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Console.WriteLine($"Socket Exception: {ex.ToString()}");
                 SocketAsyncError?.Invoke($"Socket Exception: {ex.ToString()}");
             }
@@ -81,11 +77,6 @@ namespace SimReeferMiddlewareSystemWPF.Service
         {
             if (args.SocketError != SocketError.Success)
             {
-                Console.WriteLine(args.SocketError.ToString());
-                //BeginInvokeWork(btn_connect, () =>
-                //{
-                //    btn_connect.Enabled = true;
-                //});
                 SocketAsyncError?.Invoke(args.SocketError.ToString());
                 return;
             }
@@ -103,14 +94,6 @@ namespace SimReeferMiddlewareSystemWPF.Service
             {
                 ReceiveArgs_Completed(null, receiveArgs);
             }
-            //BeginInvokeWork(btn_connect, () => { btn_connect.Enabled = false; });
-            //BeginInvokeWork(btn_send_protocolVer, () =>
-            //{
-            //    if (cbBoxMWProtocolVerList.SelectedItem.ToString().ToUpper().StartsWith("0"))
-            //    {
-            //        btn_send_protocolVer.Enabled = true;
-            //    }
-            //});
         }
 
         private bool IsFotaTest = false;
@@ -123,23 +106,15 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     string recvData = Encoding.UTF8.GetString(args.Buffer, args.Offset, args.BytesTransferred);
                     byte[] bytes = Encoding.UTF8.GetBytes(recvData);
                     string recvDataBytesToString = BitConverter.ToString(bytes);
-
+                    byte[] recvOriginData = null;
                     //최초 프로토콜 버전을 전송할 때 Ack: 01을 받은 후 진입 해당응답은 SeedKey 적용이 안되어있음(Protocol을 정해야하는 최초 시퀀스이기에 SeedKey적용이 없는것으로 판단)
                     if (recvDataBytesToString.Equals("01"))
                     {
-                        byte[] recvBytes = new byte[1000];
-                        int recv = _connectSocket.Receive(recvBytes);
+                        recvOriginData = DecryptReceivedMsg(args.Buffer);
 
-                        byte[] recvRaw = new byte[recv];
-                        for (int i = 0; i < recv; i++)
+                        if (recvOriginData.Length <= 2 && recvOriginData.Sum(x => x) == 0)
                         {
-                            recvRaw[i] = recvBytes[i];
-                        }
-                        var datas = recvRaw.DecryptSEED(SeedKey).ToArray();
-
-                        if (datas.Length <= 2 && datas.Sum(x => x) == 0)
-                        {
-                            NoSynchronizationSetupInfo?.Invoke();
+                            NoSynchronizationSetupInfo?.Invoke(recvOriginData);
                         }
                         else
                         {
@@ -164,45 +139,26 @@ namespace SimReeferMiddlewareSystemWPF.Service
 
                             for (int i = 0; i < msgString.Length; i++)
                             {
-                                if (msgString[i].ToUpper().Equals(_ccpr.ToUpper())) { syncDataDics.Add(msgString[i], datas[1].ToString()); }
-                                else if (msgString[i].ToUpper().Equals(_Interval.ToUpper())) { syncDataDics.Add(msgString[i], datas[3].ToString()); }
-                                else if (msgString[i].ToUpper().Equals(_gpsTimeout.ToUpper())) { syncDataDics.Add(msgString[i], datas[4].ToString()); }
-                                else if (msgString[i].ToUpper().Equals(_gpsStableTime.ToUpper())) { syncDataDics.Add(msgString[i], datas[5].ToString()); }
-                                else if (msgString[i].ToUpper().Equals(_wireConnectionTimeout.ToUpper())) { syncDataDics.Add(msgString[i], datas[6].ToString()); }
-                                else if (msgString[i].ToUpper().Equals(_commRetryCount.ToUpper())) { syncDataDics.Add(msgString[i], datas[7].ToString()); }
-                                else if (msgString[i].ToUpper().Equals(_rcCount.ToUpper())) { syncDataDics.Add(msgString[i], datas[8].ToString()); }
-                                else if (msgString[i].ToUpper().Equals(_totalStandbyCount.ToUpper())) { syncDataDics.Add(msgString[i], datas[10].ToString()); }
-                                else if (msgString[i].ToUpper().Equals(_accelShockUpper.ToUpper())) { syncDataDics.Add(msgString[i], datas[11].ToString()); }
-                                else if (msgString[i].ToUpper().Equals(_setTempLower.ToUpper())) { syncDataDics.Add(msgString[i], datas[13].ToString()); }
-                                else if (msgString[i].ToUpper().Equals(_setTempUpper.ToUpper())) { syncDataDics.Add(msgString[i], datas[15].ToString()); }
-                                else if (msgString[i].ToUpper().Equals(_humidLower.ToUpper())) { syncDataDics.Add(msgString[i], datas[17].ToString()); }
-                                else if (msgString[i].ToUpper().Equals(_humidUpper.ToUpper())) { syncDataDics.Add(msgString[i], datas[19].ToString()); }
-                                else if (msgString[i].ToUpper().Equals(_stateChangedAlarm.ToUpper())) { syncDataDics.Add(msgString[i], datas[21].ToString()); }
-                                else if (msgString[i].ToUpper().Equals(_cutOffVoltage.ToUpper())) { syncDataDics.Add(msgString[i], datas[22] + "." + datas[23]); }
+                                if (msgString[i].ToUpper().Equals(_ccpr.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[1].ToString()); }
+                                else if (msgString[i].ToUpper().Equals(_Interval.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[3].ToString()); }
+                                else if (msgString[i].ToUpper().Equals(_gpsTimeout.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[4].ToString()); }
+                                else if (msgString[i].ToUpper().Equals(_gpsStableTime.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[5].ToString()); }
+                                else if (msgString[i].ToUpper().Equals(_wireConnectionTimeout.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[6].ToString()); }
+                                else if (msgString[i].ToUpper().Equals(_commRetryCount.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[7].ToString()); }
+                                else if (msgString[i].ToUpper().Equals(_rcCount.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[8].ToString()); }
+                                else if (msgString[i].ToUpper().Equals(_totalStandbyCount.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[10].ToString()); }
+                                else if (msgString[i].ToUpper().Equals(_accelShockUpper.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[11].ToString()); }
+                                else if (msgString[i].ToUpper().Equals(_setTempLower.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[13].ToString()); }
+                                else if (msgString[i].ToUpper().Equals(_setTempUpper.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[15].ToString()); }
+                                else if (msgString[i].ToUpper().Equals(_humidLower.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[17].ToString()); }
+                                else if (msgString[i].ToUpper().Equals(_humidUpper.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[19].ToString()); }
+                                else if (msgString[i].ToUpper().Equals(_stateChangedAlarm.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[21].ToString()); }
+                                else if (msgString[i].ToUpper().Equals(_cutOffVoltage.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[22] + "." + recvOriginData[23]); }
                             }
 
-                            SynchronizationSetupInfo?.Invoke(syncDataDics, datas);
+                            SynchronizationSetupInfo?.Invoke(syncDataDics, recvOriginData);
                         }
-                    }
-                    //동기화가 필요할 경우 진입
-                    else if (!recvDataBytesToString.Equals(ACK_00) && recvDataBytesToString.Length > 2)
-                    {
-                        //BeginInvokeWork(pnlProtocolVer, () =>
-                        //{
-                        //    uCtrlVer.SetEnableDeviceInfoControl(false);
-                        //    uCtrlVer.SetEnableSetupInfoControl(true);
-                        //});
-                    }
-                    //동기화가 필요없거나 Ack로 00을 받았을 때 진입
-                    else if (recvDataBytesToString.Equals(ACK_00))
-                    {
-                        //BeginInvokeWork(pnlProtocolVer, () =>
-                        //{
-                        //    uCtrlVer.SetEnableDeviceInfoControl(false);
-                        //    uCtrlVer.SetEnableSetupInfoControl(false);
-                        //    uCtrlVer.SetEnableStartDataControl(true);
-                        //});
-                        //NoSynchronizationSetupInfo?.Invoke();
+
                     }
 
                     //반자동 시뮬레이터 진행이 아닌 수동으로 바이트 적어서 보내는 경우 진입, 수동 시뮬레이터
@@ -283,32 +239,30 @@ namespace SimReeferMiddlewareSystemWPF.Service
                         SendMsg(msgBytes, false, false);
                     }
 
-
-                    bool pending = _connectSocket.ReceiveAsync(args);
-                    if (!pending)
-                    {
-                        ReceiveArgs_Completed(null, args);
-                        //MessageBox.Show($"응답 값이 없습니다. 프로토콜 버전 또는 전송 데이터를 확인해주세요.", "Server disconnected", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    recvOriginData = DecryptReceivedMsg(args.Buffer);
+                    RecievedByteToString?.Invoke(recvOriginData);
+                    ReceiveArgs_Completed(null, args);
                 }
-                else
-                {
-                    //if (_manualSendForm != null)
-                    //{
-                    //    BeginInvokeWork(_manualSendForm.GetRecievedmsgBox, () => { _manualSendForm.GetRecievedmsgBox.Text = "Disconnected to server!!!\r\nPlease reconnect to the server."; });
-                    //}
-                    //BeginInvokeWork(txt_recievedmsg, () => { txt_recievedmsg.Text = "Disconnected to server!!!\r\nPlease reconnect to the server."; });
-                    SocketAsyncDisconnected?.Invoke();
-                    Disconnection();
-                }
+                //else
+                //{
+                //    SocketAsyncDisconnected?.Invoke();
+                //    Disconnection();
+                //}
             }
             catch (SocketException e)
             {
+                //SocketAsyncError?.Invoke(e.Message);
                 Console.WriteLine(e.ToString());
             }
             catch (Exception ex)
             {
+                SocketAsyncError?.Invoke(ex.Message);
                 Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                SocketAsyncDisconnected?.Invoke();
+                Disconnection();
             }
         }
 
@@ -318,6 +272,18 @@ namespace SimReeferMiddlewareSystemWPF.Service
             {
                 sendArgs.BufferList = null;
             }
+        }
+
+        private byte[] DecryptReceivedMsg(byte[] receivedBytes)
+        {
+            byte[] recvBytes = receivedBytes;
+            int recv = _connectSocket.Receive(recvBytes);
+            byte[] recvRaw = new byte[recv];
+            for (int i = 0; i < recv; i++)
+            {
+                recvRaw[i] = recvBytes[i];
+            }
+            return recvRaw.DecryptSEED(SeedKey).ToArray();
         }
 
         public bool BuildSendMessage(int totalDataBytesLength, List<byte[]> dataBytesList)
@@ -381,23 +347,6 @@ namespace SimReeferMiddlewareSystemWPF.Service
             _connectSocket?.Close();
             _connectSocket?.Dispose();
 
-            //BeginInvokeWork(this, () =>
-            //{
-            //    btn_connect.Enabled = true;
-            //    btn_send_protocolVer.Enabled = false;
-            //    cbBoxMWProtocolVerList.Enabled = true;
-            //});
-
-            //if (uCtrlVer == null) { return; }
-
-            //uCtrlVer.SetEnableAllControl(false);
-            //uCtrlVer.SetEnable(false);
-
-            //Button startDC = uCtrlVer.StartDataCtrl ?? new Button();
-            //Button startCC = uCtrlVer.StartCommandCtrl ?? new Button();
-
-            //startDC.Enabled = false;
-            //startCC.Enabled = false;
             IsFotaTest = false;
         }
 

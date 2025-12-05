@@ -10,7 +10,7 @@
         Action? SocketAsyncConnected { get; set; }
         Action? SocketAsyncDisconnected { get; set; }
         Action<string>? SocketAsyncError { get; set; }
-        Action? NoSynchronizationSetupInfo { get; set; }
+        Action<byte[]>? NoSynchronizationSetupInfo { get; set; }
         Action<IDictionary<string, string>, byte[]>? SynchronizationSetupInfo { get; set; }
         Action<byte[]>? RecievedByteToString { get; set; }
     }

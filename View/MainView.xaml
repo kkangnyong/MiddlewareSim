@@ -174,8 +174,8 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0" VerticalAlignment="Top" Background="Blue" Height="170">
-                    <Border BorderBrush="Black" BorderThickness="1"/>
+                <Grid Grid.Row="0" VerticalAlignment="Top" Height="170">
+                    <Border BorderBrush="LightSkyBlue" BorderThickness="2"/>
                     <RichTextBox Margin="5" IsReadOnly="True" Style="{StaticResource MyRichTextBoxStyle}">
                         <FlowDocument>
                             <Paragraph>
@@ -184,8 +184,8 @@
                         </FlowDocument>
                     </RichTextBox>
                 </Grid>
-                <Grid Grid.Row="1" VerticalAlignment="Stretch" Background="Red">
-                    <Border BorderBrush="Black" BorderThickness="1"/>
+                <Grid Grid.Row="1" VerticalAlignment="Stretch">
+                    <Border BorderBrush="LightBlue" BorderThickness="2"/>
                     <RichTextBox Margin="5" IsReadOnly="True" Style="{StaticResource MyRichTextBoxStyle}">
                         <FlowDocument>
                             <Paragraph>

@@ -156,8 +156,15 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ToDisconnectCommand = new RelayCommand<object>(ToDisconnect);
         }
 
+        private void InitReceivedMessage()
+        {
+            ReceivedMessage = "Message";
+            ReceivedRawMessage = "Raw Message";
+        }
+
         private void ToConnect(object _)
         {
+            InitReceivedMessage();
             ToLoadImage = "/Resources/Spinner_3.gif";
             _tcpSocketService.Connection(ServerConnectionModel.IP, ServerConnectionModel.Port);
             IsEnabled = false;
@@ -173,15 +180,20 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ProtocolVer10.Dispose();
         }
 
-        private void NoSynchronizationSetupInfo()
+        private void NoSynchronizationSetupInfo(byte[] originData)
         {
+            InitReceivedMessage();
             ProtocolVer8.IsStartDataEnabled = true;
             ProtocolVer9.IsStartDataEnabled = true;
             ProtocolVer10.IsStartDataEnabled = true;
+
+            ReceivedMessage = (originData.Length <= 2 && originData.Sum(x => x) == 0) ? "OK" : "FAILED";
+            ReceivedRawMessage = BitConverter.ToString(originData);
         }
 
         private void SynchronizationSetupInfo(IDictionary<string, string> syncDataDics, byte[] originData)
         {
+            InitReceivedMessage();
             ProtocolVer8.IsSetupInfoEnabled = true;
             ProtocolVer9.IsSetupInfoEnabled = true;
             ProtocolVer10.IsSetupInfoEnabled = true;
@@ -190,8 +202,11 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ReceivedRawMessage = BitConverter.ToString(originData);
         }
 
-        private void RecievedByteToString(byte[] msgBytes)
+        private void RecievedByteToString(byte[] originData)
         {
+            InitReceivedMessage();
+            ReceivedMessage = (originData.Length <= 2 && originData.Sum(x => x) == 0) ? "OK" : "FAILED";
+            ReceivedRawMessage = BitConverter.ToString(originData);
         }
 
         private void SocketAsyncConnected()
@@ -231,6 +246,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             IsEnabled = true;
             ProtocolVer8.Dispose();
             ProtocolVer9.Dispose();
+            ProtocolVer10.Dispose();
         }
 
         private void SocketAsyncError(string error)
