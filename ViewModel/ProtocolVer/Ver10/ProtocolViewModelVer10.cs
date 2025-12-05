@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
 {
-    public class ProtocolViewModelVer10 : ViewModelBase
+    public class ProtocolViewModelVer10 : ViewModelBase, IProtocolVer
     {
         private readonly IMessageBoxService _messageBoxService;
         private readonly IModelDataService _modelDataService;
@@ -80,6 +80,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
         private List<short> _countSensorDataList { get; set; } = new List<short>() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         private short? _countSensorData { get; set; } = 0;
         public ObservableCollection<INotifyPropertyChanged> ItemsCollection { get; set; }
+        public short ProtocolVersion { get { return 10; } }
 
         public ProtocolViewModelVer10() { }
 
@@ -381,7 +382,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
 
             _modelDataService.SetDataJsonValues(_modelDataService._dataValuesList, (short)DataType.Sensor);
 
-            _tcpSocketService.RepeatDataSendOption(Encoding.UTF8.GetBytes(_modelDataService._dataValuesToJsonString));
+            _tcpSocketService.RepeatDataSendOption(this, _modelDataService, MainView.IsRepeatChecked, MainView.RepeatCount, MainView.Code);
 
             if (CurrentDeviceBodyModel.Code == 1) IsDeviceDataEnabled = true;
             IsSensorDataEnabled = false;

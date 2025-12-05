@@ -60,27 +60,16 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private string _imagePath { get; set; } = string.Empty;
         private string _companyImagePath { get; set; } = string.Empty;
         private bool _isEnabled { get; set; } = true;
+        private bool _isRepeatChecked { get; set; } = false;
         private List<string> _protocolVerList { get; set; } = new List<string>() { "0.8.0.0", "0.9.0.0", "0.10.0.0" };
         private string _recievedMessage { get; set; } = "Message";
         private string _recievedRawMessage { get; set; } = "Raw Message";
+        private List<short> _codeList { get; set; } = new List<short>() { (short)CodeType.CommonData, (short)CodeType.LastData };
+        private short _code { get; set; } = 17;
+        private short _count { get; set; } = 1;
+        private short _repeatCount { get; set; } = 1;
 
         public MainViewModel() { }
-
-        //private string _ccpr = "CCPR";
-        //private string _Interval = "Interval";
-        //private string _gpsTimeout = "GPS Timeout";
-        //private string _gpsStableTime = "GPS Stable Time";
-        //private string _wireConnectionTimeout = "Wire Connection Timeout";
-        //private string _commRetryCount = "Comm Retry Count";
-        //private string _rcCount = "RcCount";
-        //private string _totalStandbyCount = "Total Standby Count";
-        //private string _accelShockUpper = "Accel Shock Upper";
-        //private string _setTempLower = "Set Temp Lower";
-        //private string _setTempUpper = "Set Temp Upper";
-        //private string _humidLower = "Humid Lower";
-        //private string _humidUpper = "Humid Upper";
-        //private string _stateChangedAlarm = "State Changed Alarm";
-        //private string _cutOffVoltage = "Cut Off Voltage";
 
         public MainViewModel(INavigationService navigationService,
             IMessageBoxService messageBoxService,
@@ -99,48 +88,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             Initialize();
             _navigationService = navigationService;
             _navigationService.Navigate(NaviType.ProtocolView, ProtocolVersion);
-
-
-            //byte[] msgBytes = new byte[] { 0, 1, 0, 30, 120, 30, 60, 3, 6, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 40, 98 };
-            //string[] msgString = new string[] {
-            //                    _ccpr, //1
-            //                    _Interval, //0,30
-            //                    _gpsTimeout, //120
-            //                    _gpsStableTime, //30
-            //                    _wireConnectionTimeout, //60
-            //                    _commRetryCount, //3
-            //                    _rcCount, //6
-            //                    _totalStandbyCount, //0,0
-            //                    _accelShockUpper, //9
-            //                    _setTempLower, //0,0
-            //                    _setTempUpper, //0,0
-            //                    _humidLower, //0,0
-            //                    _humidUpper, //0,0
-            //                    _stateChangedAlarm, //0,0
-            //                    _cutOffVoltage }; //3,40 
-
-            //IDictionary<string, string> syncDataDics = new Dictionary<string, string>();
-
-            //for (int i = 0; i < msgString.Length; i++)
-            //{
-            //    if (msgString[i].ToUpper().Equals(_ccpr.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[1].ToString()); }
-            //    else if (msgString[i].ToUpper().Equals(_Interval.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[3].ToString()); }
-            //    else if (msgString[i].ToUpper().Equals(_gpsTimeout.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[4].ToString()); }
-            //    else if (msgString[i].ToUpper().Equals(_gpsStableTime.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[5].ToString()); }
-            //    else if (msgString[i].ToUpper().Equals(_wireConnectionTimeout.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[6].ToString()); }
-            //    else if (msgString[i].ToUpper().Equals(_commRetryCount.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[7].ToString()); }
-            //    else if (msgString[i].ToUpper().Equals(_rcCount.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[8].ToString()); }
-            //    else if (msgString[i].ToUpper().Equals(_totalStandbyCount.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[10].ToString()); }
-            //    else if (msgString[i].ToUpper().Equals(_accelShockUpper.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[11].ToString()); }
-            //    else if (msgString[i].ToUpper().Equals(_setTempLower.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[13].ToString()); }
-            //    else if (msgString[i].ToUpper().Equals(_setTempUpper.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[15].ToString()); }
-            //    else if (msgString[i].ToUpper().Equals(_humidLower.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[17].ToString()); }
-            //    else if (msgString[i].ToUpper().Equals(_humidUpper.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[19].ToString()); }
-            //    else if (msgString[i].ToUpper().Equals(_stateChangedAlarm.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[21].ToString()); }
-            //    else if (msgString[i].ToUpper().Equals(_cutOffVoltage.ToUpper())) { syncDataDics.Add(msgString[i], msgBytes[22] + "." + msgBytes[23]); }
-            //}
-
-            //SynchronizationSetupInfo(syncDataDics, msgBytes);
         }
 
         private void Initialize()
@@ -260,7 +207,73 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         {
             CurrentViewModel = _mainNavigationStore?.CurrentViewModel;
         }
-        
+
+        public bool IsRepeatChecked
+        {
+            get { return _isRepeatChecked; }
+            set
+            {
+                if (_isRepeatChecked != null)
+                {
+                    _isRepeatChecked = value;
+                    OnPropertyChanged();
+                }
+            }
+        } 
+
+        public List<short> CodeList
+        {
+            get { return _codeList; }
+            set
+            {
+                if (_codeList != null)
+                {
+                    _codeList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public short Code
+        {
+            get { return _code; }
+            set
+            {
+                if (_code != null)
+                {
+                    _code = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public short Count
+        {
+            get { return _count; }
+            set
+            {
+                if (_count != null)
+                {
+                    _count = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public short RepeatCount
+        {
+            get { return _repeatCount; }
+
+            set
+            {
+                if (_repeatCount != null)
+                {
+                    _repeatCount = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public string ReceivedMessage
         {
             get { return _recievedMessage; }

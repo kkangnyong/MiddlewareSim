@@ -1,9 +1,14 @@
 ﻿using Mythosia.Integrity.CRC;
 using Mythosia.Security.Cryptography;
 using SimReeferMiddlewareSystemWPF.Interface;
+using SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver8;
+using SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver9;
 using System.Net;
 using System.Net.Sockets;
+using System.Printing.IndexedProperties;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Windows;
 
 namespace SimReeferMiddlewareSystemWPF.Service
@@ -350,81 +355,140 @@ namespace SimReeferMiddlewareSystemWPF.Service
             IsFotaTest = false;
         }
 
-        public void RepeatDataSendOption(byte[] msgBytes)
+        public void RepeatDataSendOption(IProtocolVer ownVer, IModelDataService modelData, bool isRepeat, short repeatCnt, short code)
         {
-            SendMsg(msgBytes, false, true);
-            //if (!chkBoxRepeat.Checked || numRepeatCnt.Value <= 0)
-            //{
-            //    SendMsg(msgBytes, false, true);
-            //}
-            //else
-            //{
-            //    if (cbBoxRepeatType.SelectedIndex == 0) return;
-            //    lblRepeatCnt.Text = "0";
+            byte[] msgBytes = null;
+            if (ownVer.ProtocolVersion == 8)
+            {
+                msgBytes = modelData._resultDataValuesToBytes;
+            }
+            else
+            {
+                msgBytes = Encoding.UTF8.GetBytes(modelData._dataValuesToJsonString);
+            }
 
-            //    if (cbBoxRepeatType.SelectedIndex == (int)ProtocolCodeType.LastDataCode) SendMsg(msgBytes, false, true);
+            if (!isRepeat || repeatCnt <= 0)
+            {
+                SendMsg(msgBytes, false, true);
+            }
+            else
+            {
 
-            //    uCtrlVer.SetEnable(false);
+                if (code == 17) SendMsg(msgBytes, false, true);
 
-            //    string codeText = MiddlewareRepeatCodeTypes[cbBoxRepeatType.SelectedIndex];
-            //    msgBytes = CodeValuesModifyMethod(msgBytes, codeText, verType);
+                //uCtrlVer.SetEnable(false);
 
-            //    for (int i = 1; i <= numRepeatCnt.Value; i++)
-            //    {
-            //        if (i == numRepeatCnt.Value && cbBoxRepeatType.SelectedIndex == (int)ProtocolCodeType.CommonDataCode)
-            //        {
-            //            string lastCodeText = MiddlewareRepeatCodeTypes[(int)ProtocolCodeType.LastDataCode];
-            //            msgBytes = CodeValuesModifyMethod(msgBytes, lastCodeText, verType);
-            //        }
+                msgBytes = CodeValuesModifyMethod(msgBytes, code, ownVer.ProtocolVersion);
 
-            //        DateTime now = DateTime.Now;
-            //        if (verType == typeof(ProtocolV8))
-            //        {
-            //            msgBytes[2] = Convert.ToByte(i);
-            //            msgBytes[7] = Convert.ToByte(now.ToString("yy"));
-            //            msgBytes[8] = Convert.ToByte(now.Month);
-            //            msgBytes[9] = Convert.ToByte(now.Day);
-            //            msgBytes[10] = Convert.ToByte(now.Hour);
-            //            msgBytes[11] = Convert.ToByte(now.Minute);
-            //            msgBytes[12] = Convert.ToByte(now.Second);
-            //        }
-            //        else if (verType == typeof(ProtocolV9))
-            //        {
-            //            string jsonDatas = DeviceBodyMsgBytesToJsonString;
-            //            CTRGenericPacket jsonValue = JsonSerializer.Deserialize<CTRGenericPacket>(msgBytes);
+                for (int i = 1; i <= repeatCnt; i++)
+                {
+                    if (i == repeatCnt && code == 1)
+                    {
+                        msgBytes = CodeValuesModifyMethod(msgBytes, 17, ownVer.ProtocolVersion);
+                    }
 
-            //            string fromDeviceBody = jsonValue.DeviceBase64;
+                    DateTime now = DateTime.Now;
+                    if (ownVer.ProtocolVersion == 8)
+                    {
+                        msgBytes[2] = Convert.ToByte(i);
+                        msgBytes[7] = Convert.ToByte(now.ToString("yy"));
+                        msgBytes[8] = Convert.ToByte(now.Month);
+                        msgBytes[9] = Convert.ToByte(now.Day);
+                        msgBytes[10] = Convert.ToByte(now.Hour);
+                        msgBytes[11] = Convert.ToByte(now.Minute);
+                        msgBytes[12] = Convert.ToByte(now.Second);
+                    }
+                    else if (ownVer.ProtocolVersion == 9)
+                    {
+                        string jsonDatas = Encoding.UTF8.GetString(msgBytes);
+                        CTRGenericPacket jsonValue = JsonSerializer.Deserialize<CTRGenericPacket>(msgBytes);
 
-            //            byte[] jsonToByte = Convert.FromBase64String(fromDeviceBody);
+                        string fromDeviceBody = jsonValue.DeviceBase64;
 
-            //            jsonToByte[1] = Convert.ToByte(i);
-            //            jsonToByte[6] = Convert.ToByte(now.ToString("yy"));
-            //            jsonToByte[7] = Convert.ToByte(now.Month);
-            //            jsonToByte[8] = Convert.ToByte(now.Day);
-            //            jsonToByte[9] = Convert.ToByte(now.Hour);
-            //            jsonToByte[10] = Convert.ToByte(now.Minute);
-            //            jsonToByte[11] = Convert.ToByte(now.Second);
+                        byte[] jsonToByte = Convert.FromBase64String(fromDeviceBody);
 
-            //            string toDeviceBody = Convert.ToBase64String(jsonToByte);
+                        jsonToByte[1] = Convert.ToByte(i);
+                        jsonToByte[6] = Convert.ToByte(now.ToString("yy"));
+                        jsonToByte[7] = Convert.ToByte(now.Month);
+                        jsonToByte[8] = Convert.ToByte(now.Day);
+                        jsonToByte[9] = Convert.ToByte(now.Hour);
+                        jsonToByte[10] = Convert.ToByte(now.Minute);
+                        jsonToByte[11] = Convert.ToByte(now.Second);
 
-            //            DeviceBodyMsgBytesToJsonString = DeviceBodyMsgBytesToJsonString.Replace(fromDeviceBody, toDeviceBody);
-            //            msgBytes = Encoding.UTF8.GetBytes(DeviceBodyMsgBytesToJsonString);
-            //        }
-            //        Thread.Sleep(800);
+                        string toDeviceBody = Convert.ToBase64String(jsonToByte);
 
-            //        if (cbBoxRepeatType.SelectedIndex == (int)ProtocolCodeType.LastDataCode) BuildSendMessage(((IEvent)uCtrlVer).EventDatas);
-            //        if (cbBoxRepeatType.SelectedIndex == (int)ProtocolCodeType.LastDataCode) Thread.Sleep(500);
-            //        if (uCtrlVer.ReeferBody != null) SendMsg(msgBytes, false, true);
-            //        Thread.Sleep(500);
+                        jsonDatas = jsonDatas.Replace(fromDeviceBody, toDeviceBody);
+                        msgBytes = Encoding.UTF8.GetBytes(jsonDatas);
+                    }
+                    else if (ownVer.ProtocolVersion == 10)
+                    {
+                    }
+                    Thread.Sleep(800);
 
-            //        BeginInvokeWork(lblRepeatCnt, () =>
-            //        {
-            //            lblRepeatCnt.Refresh();
-            //            lblRepeatCnt.Text = i.ToString();
-            //        });
-            //    }
-            //    SocketClose();
-            //}
+                    if (code == 17)
+                    {
+                        BuildSendMessage(modelData._totalDataBytesLength, modelData._dataValuesList);
+                        Thread.Sleep(500);
+                    }
+
+                    SendMsg(msgBytes, false, true);
+                    Thread.Sleep(500);
+
+                    //BeginInvokeWork(lblRepeatCnt, () =>
+                    //{
+                    //    lblRepeatCnt.Refresh();
+                    //    lblRepeatCnt.Text = i.ToString();
+                    //});
+                }
+                Disconnection();
+            }
         }
+
+        private byte[] CodeValuesModifyMethod(byte[] msgBytes, short code, short ver)
+        {
+            if (ver == 8)
+            {
+                msgBytes[0] = Convert.ToByte(code);
+            }
+            else if (ver == 9)
+            {
+                string jsonDatas = Encoding.UTF8.GetString(msgBytes);
+                jsonDatas = jsonDatas.Substring(jsonDatas.IndexOf("{") + 1, jsonDatas.IndexOf(",") - 1).Trim();
+
+                jsonDatas = jsonDatas.Replace(jsonDatas, $"\"cod\": {code}");
+                msgBytes = Encoding.UTF8.GetBytes(jsonDatas);
+            }
+            else if (ver == 10)
+            {
+            }
+            return msgBytes;
+        }
+    }
+
+    public class CTRGenericPacket
+    {
+        [JsonPropertyName("cod")]
+        public byte HeaderValue { get; set; }
+
+        [JsonPropertyName("dev")]
+        public string DeviceBase64 { get; set; } = string.Empty;
+
+        [JsonPropertyName("ref")]
+        public string ReeferBase64 { get; set; } = string.Empty;
+
+        [JsonPropertyName("sen")]
+        public SensorPacket[] Sensors { get; set; }
+    }
+
+    public class SensorPacket
+    {
+        [JsonPropertyName("i")]
+        public byte Index { get; set; }
+
+        [JsonPropertyName("t")]
+        public byte SensorType { get; set; }
+
+        [JsonPropertyName("d")]
+        public string DataBase64 { get; set; } = string.Empty;
     }
 }

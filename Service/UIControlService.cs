@@ -4,15 +4,7 @@ using System.Windows.Controls;
 
 namespace SimReeferMiddlewareSystemWPF.Service
 {
-    public class UIControlService : IUIControlService
+    public class UIControlService
     {
-        public UserControl GetLoadingControl() 
-        {
-            return new LoadingControl();
-        }
-        public UserControl GetCompleteControl()
-        {
-            return new CompleteControl();
-        }
     }
 }

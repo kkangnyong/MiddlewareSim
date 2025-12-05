@@ -63,9 +63,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Update="UIControl\CompleteControl.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\ProtocolVer\Ver10\DeviceBodyVer10.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

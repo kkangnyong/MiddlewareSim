@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
 {
-    public class ProtocolViewModelVer8 : ViewModelBase
+    public class ProtocolViewModelVer8 : ViewModelBase, IProtocolVer
     {
         private readonly IMessageBoxService _messageBoxService;
         private readonly IModelDataService _modelDataService;
@@ -66,6 +66,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
         public MainViewModel MainView { get { if (_mainView == null) _mainView = new MainViewModel(); return _mainView.Instance; } }
 
         private ITcpSocketService _tcpSocketService { get { return MainView._tcpSocketService; } }
+
+        public short ProtocolVersion { get { return 8; } }
 
         public ProtocolViewModelVer8() { }
 
@@ -294,7 +296,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 _modelDataService.GetStringsToByteArray(CurrentReeferBodyModel.EtcCode.ToString().Trim(), 1)
             }, (short)DataType.Reefer);
 
-            _tcpSocketService.RepeatDataSendOption(_modelDataService._resultDataValuesToBytes);
+            _tcpSocketService.RepeatDataSendOption(this, _modelDataService, MainView.IsRepeatChecked, MainView.RepeatCount, MainView.Code);
 
             if (CurrentDeviceBodyModel.Code == 1) IsDeviceDataEnabled = true;
             IsReeferDataEnabled = false;

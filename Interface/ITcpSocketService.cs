@@ -6,7 +6,7 @@
         void Disconnection();
         bool SendMsg(byte[] messages, bool isVer, bool isAddCrc);
         bool BuildSendMessage(int totalDataBytesLength, List<byte[]> dataBytesList);
-        void RepeatDataSendOption(byte[] msgBytes);
+        void RepeatDataSendOption(IProtocolVer ownVer, IModelDataService modelData, bool isRepeat, short repeatCnt, short code);
         Action? SocketAsyncConnected { get; set; }
         Action? SocketAsyncDisconnected { get; set; }
         Action<string>? SocketAsyncError { get; set; }

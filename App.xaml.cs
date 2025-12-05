@@ -45,7 +45,6 @@ namespace SimReeferMiddlewareSystemWPF
             services.AddSingleton<IMessageBoxService, MessageBoxService>();
             services.AddSingleton<IModelDataService, ModelDataService>();
             services.AddScoped<ITcpSocketService, TcpSocketService>();
-            services.AddSingleton<IUIControlService, UIControlService>();
             services.AddSingleton<ITableBuilderService, TableBuilderService>();
 
             //ViewModels

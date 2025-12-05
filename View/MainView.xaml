@@ -9,7 +9,7 @@
         xmlns:viewmodel9="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9"
         xmlns:local10="clr-namespace:SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver10"
         xmlns:viewmodel10="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10"
-        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com" xmlns:uicontrol="clr-namespace:SimReeferMiddlewareSystemWPF.UIControl"
         mc:Ignorable="d"
         Title="{Binding TitleVersion}" Height="800" MinWidth="1850">
     <Window.Resources>
@@ -70,6 +70,11 @@
             <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
         <Style x:Key="MyTextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+        <Style x:Key="MyCheckBoxStyle" TargetType="{x:Type CheckBox}">
             <Setter Property="FontSize" Value="17"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
@@ -137,9 +142,13 @@
                     <ColumnDefinition Width="90"/>
                     <ColumnDefinition Width="110"/>
                     <ColumnDefinition Width="60"/>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="40"/>
                     <ColumnDefinition />
                     <ColumnDefinition Width="220"/>
                 </Grid.ColumnDefinitions>
@@ -152,7 +161,15 @@
                 <Button Grid.Column="6" Command="{Binding ToConnectCommand}" IsEnabled="{Binding IsEnabled}" Content="Connect" Style="{StaticResource MyButtonStyle}" Margin="3,0,3,0"/>
                 <Button Grid.Column="7" Command="{Binding ToDisconnectCommand}" Content="Disconnect" Style="{StaticResource MyButtonStyle}" Margin="3,0,3,0"/>
                 <Image Grid.Column="8" gif:ImageBehavior.AnimatedSource="{Binding ToLoadImage}" Margin="3,0,3,0"/>
-                <Image Grid.Column="13" Source="{Binding ToCompanyImage}"/>
+                <Image Grid.Column="17" Source="{Binding ToCompanyImage}"/>
+
+                <CheckBox Grid.Column="9" Content=":반복 전송" IsChecked="{Binding IsRepeatChecked}" FlowDirection="RightToLeft" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyCheckBoxStyle}"/>
+                <TextBlock Grid.Column="10" Text="반복 코드 종류:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
+                <ComboBox Grid.Column="11" SelectedItem="{Binding Code}" ItemsSource="{Binding CodeList}" Style="{StaticResource MyComboBoxStyle}" BorderThickness="1" BorderBrush="Black" Margin="3,0,3,0"/>
+                <TextBlock Grid.Column="12" Text="횟수:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
+                <uicontrol:NumberTextBox Grid.Column="13" Text="{Binding RepeatCount}" Width="35" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
+                <TextBlock Grid.Column="14" Text="수행 횟수:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
+                <TextBlock Grid.Column="15" Text="{Binding Count}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1" Background="AliceBlue">
