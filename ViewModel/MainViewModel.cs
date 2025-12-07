@@ -61,13 +61,15 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private string _companyImagePath { get; set; } = string.Empty;
         private bool _isEnabled { get; set; } = true;
         private bool _isRepeatChecked { get; set; } = false;
+        private bool _isCommPeriodChecked { get; set; } = false;
         private List<string> _protocolVerList { get; set; } = new List<string>() { "0.8.0.0", "0.9.0.0", "0.10.0.0" };
         private string _recievedMessage { get; set; } = "Message";
         private string _recievedRawMessage { get; set; } = "Raw Message";
         private List<short> _codeList { get; set; } = new List<short>() { (short)CodeType.CommonData, (short)CodeType.LastData };
         private short _code { get; set; } = 17;
-        private short _count { get; set; } = 1;
+        private short _count { get; set; } = 0;
         private short _repeatCount { get; set; } = 1;
+        private short _commPeriod { get; set; } = 1;
 
         public MainViewModel() { }
 
@@ -206,6 +208,33 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private void CurrentViewModelChanged()
         {
             CurrentViewModel = _mainNavigationStore?.CurrentViewModel;
+        }
+
+        public bool IsCommPeriodChecked
+        {
+            get { return _isCommPeriodChecked; }
+            set
+            {
+                if (_isCommPeriodChecked != null)
+                {
+                    _isCommPeriodChecked = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public short CommPeriod
+        {
+            get { return _commPeriod; }
+
+            set
+            {
+                if (_commPeriod != null)
+                {
+                    _commPeriod = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public bool IsRepeatChecked
