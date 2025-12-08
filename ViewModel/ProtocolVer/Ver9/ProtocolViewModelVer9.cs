@@ -377,7 +377,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
 
             _tcpSocketService.RepeatDataSendOption(this, _modelDataService, MainView.IsRepeatChecked, MainView.RepeatCount, MainView.Code);
 
-            if (CurrentDeviceBodyModel.Code == 1) IsDeviceDataEnabled = true;
+            if (CurrentDeviceBodyModel.Code == (short)ProtocolCode.Continue) IsDeviceDataEnabled = true;
             IsSensorDataEnabled = false;
             IsStartCommandEnabled = true;
         }
@@ -398,7 +398,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         {
             InitButtonContent();
             ContentSendStartCommand = "(End) " + ContentSendStartCommand;
-            if (code == 1)
+            if (code == (short)ProtocolCode.Continue)
             {
                 if (IsDeviceDataEnabled) IsStartDataEnabled = false;
                 ContentSendDeviceData = "(1) " + ContentSendDeviceData;

@@ -1,15 +1,15 @@
 ﻿using Mythosia.Integrity.CRC;
 using Mythosia.Security.Cryptography;
 using SimReeferMiddlewareSystemWPF.Interface;
-using SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver8;
-using SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver9;
+using SimReeferMiddlewareSystemWPF.View;
+using SimReeferMiddlewareSystemWPF.ViewModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Net;
 using System.Net.Sockets;
-using System.Printing.IndexedProperties;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Windows;
 
 namespace SimReeferMiddlewareSystemWPF.Service
 {
@@ -25,6 +25,9 @@ namespace SimReeferMiddlewareSystemWPF.Service
         public Action<byte[]>? NoSynchronizationSetupInfo { get; set; }
         public Action<IDictionary<string, string>, byte[]>? SynchronizationSetupInfo { get; set; }
         public Action<byte[]>? RecievedByteToString { get; set; }
+
+        private MainViewModel _mainView;
+        public MainViewModel MainView { get { if (_mainView == null) _mainView = new MainViewModel(); return _mainView.Instance; } }
 
         private string _ccpr = "CCPR";
         private string _Interval = "Interval";
@@ -355,10 +358,10 @@ namespace SimReeferMiddlewareSystemWPF.Service
             IsFotaTest = false;
         }
 
-        public void RepeatDataSendOption(IProtocolVer ownVer, IModelDataService modelData, bool isRepeat, short repeatCnt, short code)
+        public void RepeatDataSendOption(IProtocolVer ownVer, IModelDataService modelData, bool isRepeat, int repeatCnt, short code)
         {
             byte[] msgBytes = null;
-            if (ownVer.ProtocolVersion == 8)
+            if (ownVer.ProtocolVersion == (short)ProtocolVerType.V8)
             {
                 msgBytes = modelData._resultDataValuesToBytes;
             }
@@ -373,24 +376,28 @@ namespace SimReeferMiddlewareSystemWPF.Service
             }
             else
             {
-
-                if (code == 17) SendMsg(msgBytes, false, true);
-
-                //uCtrlVer.SetEnable(false);
+                if (code == (short)ProtocolCode.Last)
+                {
+                    SendMsg(msgBytes, false, true);
+                    repeatCnt -= 1;
+                }
 
                 msgBytes = CodeValuesModifyMethod(msgBytes, code, ownVer.ProtocolVersion);
-
+                int index = 0;
                 for (int i = 1; i <= repeatCnt; i++)
                 {
-                    if (i == repeatCnt && code == 1)
+                    index = i;
+                    if (i == repeatCnt && code == (short)ProtocolCode.Continue)
                     {
-                        msgBytes = CodeValuesModifyMethod(msgBytes, 17, ownVer.ProtocolVersion);
+                        msgBytes = CodeValuesModifyMethod(msgBytes, (short)ProtocolCode.Last, ownVer.ProtocolVersion);
                     }
 
+                    if (code == (short)ProtocolCode.Last) index += 1;
+
                     DateTime now = DateTime.Now;
-                    if (ownVer.ProtocolVersion == 8)
+                    if (ownVer.ProtocolVersion == (short)ProtocolVerType.V8)
                     {
-                        msgBytes[2] = Convert.ToByte(i);
+                        msgBytes[2] = Convert.ToByte(index);
                         msgBytes[7] = Convert.ToByte(now.ToString("yy"));
                         msgBytes[8] = Convert.ToByte(now.Month);
                         msgBytes[9] = Convert.ToByte(now.Day);
@@ -398,7 +405,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                         msgBytes[11] = Convert.ToByte(now.Minute);
                         msgBytes[12] = Convert.ToByte(now.Second);
                     }
-                    else if (ownVer.ProtocolVersion == 9)
+                    else
                     {
                         string jsonDatas = Encoding.UTF8.GetString(msgBytes);
                         CTRGenericPacket jsonValue = JsonSerializer.Deserialize<CTRGenericPacket>(msgBytes);
@@ -407,7 +414,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
 
                         byte[] jsonToByte = Convert.FromBase64String(fromDeviceBody);
 
-                        jsonToByte[1] = Convert.ToByte(i);
+                        jsonToByte[1] = Convert.ToByte(index);
                         jsonToByte[6] = Convert.ToByte(now.ToString("yy"));
                         jsonToByte[7] = Convert.ToByte(now.Month);
                         jsonToByte[8] = Convert.ToByte(now.Day);
@@ -420,25 +427,21 @@ namespace SimReeferMiddlewareSystemWPF.Service
                         jsonDatas = jsonDatas.Replace(fromDeviceBody, toDeviceBody);
                         msgBytes = Encoding.UTF8.GetBytes(jsonDatas);
                     }
-                    else if (ownVer.ProtocolVersion == 10)
-                    {
-                    }
-                    Thread.Sleep(800);
+                    Thread.Sleep(500);
 
-                    if (code == 17)
+                    MainView.Count = index;
+
+                    if (code == (short)ProtocolCode.Last)
                     {
+                        modelData.InitGenericData();
+                        string sequence = "start data";
+                        modelData.SetDataValues(new List<byte[]> { modelData.GetStringsToByteArray(sequence, (ushort)sequence.Length, false, true) });
                         BuildSendMessage(modelData._totalDataBytesLength, modelData._dataValuesList);
-                        Thread.Sleep(500);
+                        Thread.Sleep(200);
                     }
 
                     SendMsg(msgBytes, false, true);
-                    Thread.Sleep(500);
-
-                    //BeginInvokeWork(lblRepeatCnt, () =>
-                    //{
-                    //    lblRepeatCnt.Refresh();
-                    //    lblRepeatCnt.Text = i.ToString();
-                    //});
+                    Thread.Sleep(200);
                 }
                 Disconnection();
             }
@@ -446,20 +449,18 @@ namespace SimReeferMiddlewareSystemWPF.Service
 
         private byte[] CodeValuesModifyMethod(byte[] msgBytes, short code, short ver)
         {
-            if (ver == 8)
+            if (ver == (short)ProtocolVerType.V8)
             {
                 msgBytes[0] = Convert.ToByte(code);
             }
-            else if (ver == 9)
+            else
             {
-                string jsonDatas = Encoding.UTF8.GetString(msgBytes);
+                string tempJson = Encoding.UTF8.GetString(msgBytes);
+                string jsonDatas = tempJson;
                 jsonDatas = jsonDatas.Substring(jsonDatas.IndexOf("{") + 1, jsonDatas.IndexOf(",") - 1).Trim();
 
-                jsonDatas = jsonDatas.Replace(jsonDatas, $"\"cod\": {code}");
-                msgBytes = Encoding.UTF8.GetBytes(jsonDatas);
-            }
-            else if (ver == 10)
-            {
+                tempJson = tempJson.Replace(jsonDatas, $"\"cod\": {code}");
+                msgBytes = Encoding.UTF8.GetBytes(tempJson);
             }
             return msgBytes;
         }
@@ -490,5 +491,25 @@ namespace SimReeferMiddlewareSystemWPF.Service
 
         [JsonPropertyName("d")]
         public string DataBase64 { get; set; } = string.Empty;
+    }
+
+    public enum ProtocolVerType
+    { 
+        None = 0,
+        [Description("Protocol Ver8")]
+        V8 = 8,
+        [Description("Protocol Ver9")]
+        V9 = 9,
+        [Description("Protocol Ver10")]
+        V10 = 10
+    }
+
+    public enum ProtocolCode
+    { 
+        Unknown = 0,
+        [Description("Continue Code")]
+        Continue = 1,
+        [Description("Last Code")]
+        Last = 17
     }
 }

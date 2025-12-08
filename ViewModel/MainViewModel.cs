@@ -61,14 +61,16 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private string _companyImagePath { get; set; } = string.Empty;
         private bool _isEnabled { get; set; } = true;
         private bool _isRepeatChecked { get; set; } = false;
+        private bool _isRepeatEnabled { get; set; } = false;
         private bool _isCommPeriodChecked { get; set; } = false;
+        private bool _isCommPeriodEnabled { get; set; } = false;
         private List<string> _protocolVerList { get; set; } = new List<string>() { "0.8.0.0", "0.9.0.0", "0.10.0.0" };
         private string _recievedMessage { get; set; } = "Message";
         private string _recievedRawMessage { get; set; } = "Raw Message";
         private List<short> _codeList { get; set; } = new List<short>() { (short)CodeType.CommonData, (short)CodeType.LastData };
         private short _code { get; set; } = 17;
-        private short _count { get; set; } = 0;
-        private short _repeatCount { get; set; } = 1;
+        private int _count { get; set; } = 0;
+        private int _repeatCount { get; set; } = 1;
         private short _commPeriod { get; set; } = 1;
 
         public MainViewModel() { }
@@ -219,6 +221,20 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 {
                     _isCommPeriodChecked = value;
                     OnPropertyChanged();
+                    IsCommPeriodEnabled = _isCommPeriodChecked;
+                }
+            }
+        }
+
+        public bool IsCommPeriodEnabled
+        {
+            get { return _isCommPeriodEnabled; }
+            set
+            {
+                if (_isCommPeriodEnabled != null)
+                {
+                    _isCommPeriodEnabled = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -246,9 +262,23 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 {
                     _isRepeatChecked = value;
                     OnPropertyChanged();
+                    IsRepeatEnabled = _isRepeatChecked;
                 }
             }
-        } 
+        }
+
+        public bool IsRepeatEnabled
+        {
+            get { return _isRepeatEnabled; }
+            set
+            {
+                if (_isRepeatEnabled != null)
+                {
+                    _isRepeatEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public List<short> CodeList
         {
@@ -276,7 +306,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
-        public short Count
+        public int Count
         {
             get { return _count; }
             set
@@ -289,7 +319,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
-        public short RepeatCount
+        public int RepeatCount
         {
             get { return _repeatCount; }
 
