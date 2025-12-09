@@ -421,7 +421,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     }
                     Thread.Sleep(500);
 
-                    MainView.Count = index;
+                    //MainView.Count = index;
 
                     if (code == (short)ProtocolCode.Last)
                     {

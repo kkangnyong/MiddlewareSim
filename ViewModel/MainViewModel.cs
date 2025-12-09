@@ -67,12 +67,14 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private bool _isRepeatEnabled { get; set; } = false;
         private bool _isCommPeriodChecked { get; set; } = false;
         private bool _isCommPeriodEnabled { get; set; } = false;
+        private string _visibleCommPeriod { get; set; } = "Collapsed";
+        private string _visibleRepeat { get; set; } = "Collapsed";//"Visible";
         private List<string> _protocolVerList { get; set; } = new List<string>() { ProtocolVerType.V8.ToDescription(), ProtocolVerType.V9.ToDescription(), ProtocolVerType.V10.ToDescription() };
         private string _recievedMessage { get; set; } = "Message";
         private string _recievedRawMessage { get; set; } = "Raw Message";
         private List<short> _codeList { get; set; } = new List<short>() { (short)CodeType.CommonData, (short)CodeType.LastData };
         private short _code { get; set; } = 17;
-        private int _count { get; set; } = 0;
+        //private int _count { get; set; } = 0;
         private int _repeatCount { get; set; } = 1;
         private short _commPeriod { get; set; } = 1;
 
@@ -249,6 +251,34 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             CurrentViewModel = _mainNavigationStore?.CurrentViewModel;
         }
 
+        public string VisibleCommPeriod
+        {
+            get { return _visibleCommPeriod; }
+
+            set
+            {
+                if (_visibleCommPeriod != null)
+                {
+                    _visibleCommPeriod = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string VisibleRepeat
+        {
+            get { return _visibleRepeat; }
+
+            set
+            {
+                if (_visibleRepeat != null)
+                {
+                    _visibleRepeat = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public bool IsCommPeriodChecked
         {
             get { return _isCommPeriodChecked; }
@@ -268,6 +298,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                             _timer.Stop();
                         }
                     }
+
+                    VisibleCommPeriod = !_isCommPeriodChecked ? "Collapsed" : "Visible";
                 }
             }
         }
@@ -309,6 +341,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                     _isRepeatChecked = value;
                     OnPropertyChanged();
                     IsRepeatEnabled = _isRepeatChecked;
+                    VisibleRepeat = !_isRepeatChecked ? "Collapsed" : "Visible";
                 }
             }
         }
@@ -352,18 +385,18 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
-        public int Count
-        {
-            get { return _count; }
-            set
-            {
-                if (_count != null)
-                {
-                    _count = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        //public int Count
+        //{
+        //    get { return _count; }
+        //    set
+        //    {
+        //        if (_count != null)
+        //        {
+        //            _count = value;
+        //            OnPropertyChanged();
+        //        }
+        //    }
+        //}
 
         public int RepeatCount
         {

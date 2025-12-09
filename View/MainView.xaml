@@ -142,16 +142,7 @@
                     <ColumnDefinition Width="90"/>
                     <ColumnDefinition Width="110"/>
                     <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="140"/>
-                    <ColumnDefinition Width="110"/>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="120"/>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="850"/>
                     <ColumnDefinition Width="220"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="IP:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
@@ -164,18 +155,20 @@
                 <Button Grid.Column="7" Command="{Binding ToDisconnectCommand}" IsEnabled="{Binding IsDisconnectEnabled}" Content="Disconnect" Style="{StaticResource MyButtonStyle}" Margin="3,0,3,0"/>
                 <Image Grid.Column="8" gif:ImageBehavior.AnimatedSource="{Binding ToLoadImage}" Margin="3,0,3,0"/>
 
-                <CheckBox Grid.Column="9" Content=":통신 주기 사용" IsChecked="{Binding IsCommPeriodChecked}" FlowDirection="RightToLeft" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyCheckBoxStyle}"/>
-                <TextBlock Grid.Column="10" Text="통신 주기(분):" IsEnabled="{Binding IsCommPeriodEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
-                <uicontrol:NumberTextBox Grid.Column="11" Text="{Binding CommPeriod}" IsEnabled="{Binding IsCommPeriodEnabled}" Width="35" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
-                <CheckBox Grid.Column="12" Content=":반복 전송" IsChecked="{Binding IsRepeatChecked}" FlowDirection="RightToLeft" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyCheckBoxStyle}"/>
-                <TextBlock Grid.Column="13" Text="반복 코드 종류:" IsEnabled="{Binding IsRepeatEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
-                <ComboBox Grid.Column="14" SelectedItem="{Binding Code}" ItemsSource="{Binding CodeList}" IsEnabled="{Binding IsRepeatEnabled}" Style="{StaticResource MyComboBoxStyle}" BorderThickness="1" BorderBrush="Black" Margin="3,0,3,0"/>
-                <TextBlock Grid.Column="15" Text="반복 횟수:" IsEnabled="{Binding IsRepeatEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
-                <uicontrol:NumberTextBox Grid.Column="16" Text="{Binding RepeatCount}" IsEnabled="{Binding IsRepeatEnabled}" Width="35" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
-                <TextBlock Grid.Column="17" Text="수행 횟수:" IsEnabled="{Binding IsRepeatEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
-                <TextBlock Grid.Column="18" Text="{Binding Count}" IsEnabled="{Binding IsRepeatEnabled}" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
+                <StackPanel Grid.Column="9" Orientation="Horizontal" >
+                    <CheckBox Content=":통신 주기 사용" IsChecked="{Binding IsCommPeriodChecked}" FlowDirection="RightToLeft" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyCheckBoxStyle}"/>
+                    <TextBlock Text="통신 주기(분):" Visibility="{Binding VisibleCommPeriod}" IsEnabled="{Binding IsCommPeriodEnabled}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
+                    <uicontrol:NumberTextBox Visibility="{Binding VisibleCommPeriod}" Text="{Binding CommPeriod}" IsEnabled="{Binding IsCommPeriodEnabled}" Width="35" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
+                    <CheckBox Content=":음영 데이터 사용" IsChecked="{Binding IsRepeatChecked}" FlowDirection="RightToLeft" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyCheckBoxStyle}"/>
+                    <TextBlock Text="코드 종류:" Visibility="{Binding VisibleRepeat}" IsEnabled="{Binding IsRepeatEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
+                    <ComboBox Visibility="{Binding VisibleRepeat}" SelectedItem="{Binding Code}" ItemsSource="{Binding CodeList}" IsEnabled="{Binding IsRepeatEnabled}" Style="{StaticResource MyComboBoxStyle}" BorderThickness="1" BorderBrush="Black" Margin="0,0,5,0"/>
+                    <TextBlock Text="음영 데이터 갯수:" Visibility="{Binding VisibleRepeat}" IsEnabled="{Binding IsRepeatEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
+                    <uicontrol:NumberTextBox Visibility="{Binding VisibleRepeat}" Text="{Binding RepeatCount}" IsEnabled="{Binding IsRepeatEnabled}" Width="35" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
+                    <!--<TextBlock Text="수행 횟수:" Visibility="{Binding VisibleRepeat}" IsEnabled="{Binding IsRepeatEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
+                    <TextBlock Text="{Binding Count}" Visibility="{Binding VisibleRepeat}" IsEnabled="{Binding IsRepeatEnabled}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>-->
+                </StackPanel>
 
-                <Image Grid.Column="19" Source="{Binding ToCompanyImage}"/>
+                <Image Grid.Column="10" Source="{Binding ToCompanyImage}"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1" Background="AliceBlue">
