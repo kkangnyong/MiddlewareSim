@@ -141,6 +141,24 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
             ContentSendStartCommand = "Send Start Command\n Packet";
         }
 
+        public void AutoStart()
+        {
+            Thread.Sleep(300);
+            ToDeviceInfoCommand.Execute(this);
+            Thread.Sleep(300);
+            ToSetupInfoCommand.Execute(this);
+            Thread.Sleep(300);
+            ToStartDataCommand.Execute(this);
+            Thread.Sleep(300);
+            ToDeviceBodyCommand.Execute(this);
+            Thread.Sleep(300);
+            ToReeferBodyCommand.Execute(this);
+            Thread.Sleep(300);
+            ToSensorBodyCommand.Execute(this);
+            Thread.Sleep(300);
+            _tcpSocketService.Disconnection();
+        }
+
         private void ToAddSensorData(object _)
         {
             ItemsCollection.Clear();
@@ -159,6 +177,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
                 {
                     _countSensorData = value;
                     OnPropertyChanged();
+                    _modelDataService.InitSensorData();
                 }
             }
         }

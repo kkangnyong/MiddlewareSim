@@ -488,11 +488,11 @@ namespace SimReeferMiddlewareSystemWPF.Service
     public enum ProtocolVerType
     { 
         None = 0,
-        [Description("Protocol Ver8")]
+        [Description("0.8.0.0")]
         V8 = 8,
-        [Description("Protocol Ver9")]
+        [Description("0.9.0.0")]
         V9 = 9,
-        [Description("Protocol Ver10")]
+        [Description("0.10.0.0")]
         V10 = 10
     }
 

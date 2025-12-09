@@ -1,4 +1,5 @@
-﻿using SimReeferMiddlewareSystemWPF.Command;
+﻿using Mythosia;
+using SimReeferMiddlewareSystemWPF.Command;
 using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Service;
@@ -60,11 +61,13 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private string _imagePath { get; set; } = string.Empty;
         private string _companyImagePath { get; set; } = string.Empty;
         private bool _isEnabled { get; set; } = true;
+        private bool _isConnectEnabled { get; set; } = true;
+        private bool _isDisconnectEnabled { get; set; } = true;
         private bool _isRepeatChecked { get; set; } = false;
         private bool _isRepeatEnabled { get; set; } = false;
         private bool _isCommPeriodChecked { get; set; } = false;
         private bool _isCommPeriodEnabled { get; set; } = false;
-        private List<string> _protocolVerList { get; set; } = new List<string>() { "0.8.0.0", "0.9.0.0", "0.10.0.0" };
+        private List<string> _protocolVerList { get; set; } = new List<string>() { ProtocolVerType.V8.ToDescription(), ProtocolVerType.V9.ToDescription(), ProtocolVerType.V10.ToDescription() };
         private string _recievedMessage { get; set; } = "Message";
         private string _recievedRawMessage { get; set; } = "Raw Message";
         private List<short> _codeList { get; set; } = new List<short>() { (short)CodeType.CommonData, (short)CodeType.LastData };
@@ -123,6 +126,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ToLoadImage = "/Resources/Spinner_3.gif";
             _tcpSocketService.Connection(ServerConnectionModel.IP, ServerConnectionModel.Port);
             IsEnabled = false;
+            IsConnectEnabled = false;
         }
 
         private void ToDisconnect(object _)
@@ -130,6 +134,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             _tcpSocketService.Disconnection();
             ToLoadImage = string.Empty;
             IsEnabled = true;
+            IsConnectEnabled = true;
             ProtocolVer8.Dispose();
             ProtocolVer9.Dispose();
             ProtocolVer10.Dispose();
@@ -166,8 +171,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
         private void SocketAsyncConnected()
         {
-            CurrentViewModel = null;
-            _navigationService.Navigate(NaviType.ProtocolView, ProtocolVersion);
+            //CurrentViewModel = null;
+            //_navigationService.Navigate(NaviType.ProtocolView, ProtocolVersion);
             string[] strings = ProtocolVersion.Split(new string[] { ",", ".", "\t", " " }, StringSplitOptions.RemoveEmptyEntries);
             byte[] msgBytes = new byte[strings.Length];
 
@@ -199,6 +204,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         {
             ToLoadImage = string.Empty;
             IsEnabled = true;
+            IsConnectEnabled = true;
             ProtocolVer8.Dispose();
             ProtocolVer9.Dispose();
             ProtocolVer10.Dispose();
@@ -215,13 +221,26 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         {
             ToConnectCommand.Execute(this);
             Thread.Sleep(1000);
-            ProtocolVer8.AutoStart();
+            if (ProtocolVersion.Equals(ProtocolVerType.V8.ToDescription()))
+            {
+                ProtocolVer8.AutoStart();
+            }
+            else if (ProtocolVersion.Equals(ProtocolVerType.V9.ToDescription()))
+            {
+                ProtocolVer9.AutoStart();
+            }
+            else if (ProtocolVersion.Equals(ProtocolVerType.V10.ToDescription()))
+            {
+                ProtocolVer10.AutoStart();
+            }
+
         }
 
         private void SocketAsyncError(string error)
         {
             ToLoadImage = "/Resources/Cancel.png";
             IsEnabled = true;
+            IsConnectEnabled = true;
             _messageBoxService.ShowError($"Connect Error!! - {error}", "Server");
         }
 
@@ -240,6 +259,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                     _isCommPeriodChecked = value;
                     OnPropertyChanged();
                     IsCommPeriodEnabled = _isCommPeriodChecked;
+
                     if (!_isCommPeriodChecked)
                     {
                         if (_timer != null && _timer.Enabled)
@@ -406,6 +426,32 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 if (_protocolVerList != null)
                 {
                     _protocolVerList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsConnectEnabled
+        {
+            get { return _isConnectEnabled; }
+            set
+            {
+                if (_isConnectEnabled != null)
+                {
+                    _isConnectEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsDisconnectEnabled
+        {
+            get { return _isDisconnectEnabled; }
+            set
+            {
+                if (_isDisconnectEnabled != null)
+                {
+                    _isDisconnectEnabled = value;
                     OnPropertyChanged();
                 }
             }

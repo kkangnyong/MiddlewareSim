@@ -21,6 +21,10 @@ namespace SimReeferMiddlewareSystemWPF.Service
                 _dataValuesList.Clear();
                 _totalDataBytesLength = 0;
             }
+        }
+
+        public void InitSensorData()
+        {
             if (_sensorBodyList != null && _sensorBodyList.Count > 0)
             {
                 _sensorBodyList.Clear();
