@@ -154,7 +154,7 @@
                 <Button Grid.Column="6" Command="{Binding ToConnectCommand}" IsEnabled="{Binding IsConnectEnabled}" Content="Connect" Style="{StaticResource MyButtonStyle}" Margin="3,0,3,0"/>
                 <Button Grid.Column="7" Command="{Binding ToDisconnectCommand}" IsEnabled="{Binding IsDisconnectEnabled}" Content="Disconnect" Style="{StaticResource MyButtonStyle}" Margin="3,0,3,0"/>
                 <Image Grid.Column="8" gif:ImageBehavior.AnimatedSource="{Binding ToLoadImage}" Margin="3,0,3,0"/>
-
+                
                 <StackPanel Grid.Column="9" Orientation="Horizontal" >
                     <CheckBox Content=":통신 주기 사용" IsChecked="{Binding IsCommPeriodChecked}" FlowDirection="RightToLeft" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyCheckBoxStyle}"/>
                     <TextBlock Text="통신 주기(분):" Visibility="{Binding VisibleCommPeriod}" IsEnabled="{Binding IsCommPeriodEnabled}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>

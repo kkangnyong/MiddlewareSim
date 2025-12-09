@@ -1,0 +1,127 @@
+﻿<UserControl x:Class="SimReeferMiddlewareSystemWPF.UIControl.ToggleButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimReeferMiddlewareSystemWPF.UIControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="60"
+             x:Name="ThisToggleSwitchControl">
+    
+    <UserControl.Resources>
+        <!-- ToggleSwitch 스타일 -->
+        <Style x:Key="ToggleSwitchButtonStyle" TargetType="ToggleButton">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <!-- 시각적 상태 정의 -->
+                                <VisualStateGroup Name="CheckStates">
+                                    <VisualState Name="Checked">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="SwitchThumb" 
+                                                         Storyboard.TargetProperty="(Canvas.Left)" To="28" Duration="0:0:0.2"/>
+                                            <ColorAnimation Storyboard.TargetName="SwitchBackground" 
+                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#4CAF50" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState Name="Unchecked">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="SwitchThumb" 
+                                                         Storyboard.TargetProperty="(Canvas.Left)" To="4" Duration="0:0:0.2"/>
+                                            <ColorAnimation Storyboard.TargetName="SwitchBackground" 
+                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#E0E0E0" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                            <!-- 배경 및 트랙 -->
+                            <Border x:Name="SwitchBackground" CornerRadius="10" Background="#E0E0E0" 
+                                Height="20" Width="50" VerticalAlignment="Center" 
+                                HorizontalAlignment="Left" BorderThickness="1" BorderBrush="#CCCCCC"/>
+
+                            <!-- 엄지(Thumb) -->
+                            <Canvas Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Ellipse x:Name="SwitchThumb" Fill="White" 
+                                     Width="12" Height="12" Canvas.Left="4" 
+                                     VerticalAlignment="Center">
+                                    <Ellipse.Effect>
+                                        <DropShadowEffect Color="#FFB0B0B0" ShadowDepth="1" BlurRadius="2" Opacity="0.5"/>
+                                    </Ellipse.Effect>
+                                </Ellipse>
+                            </Canvas>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <!-- 실제 토글 로직을 수행할 숨겨진 ToggleButton -->
+        <ToggleButton x:Name="InternalToggleButton" 
+                      Checked="InternalToggleButton_Checked" 
+                      Unchecked="InternalToggleButton_Unchecked"
+                      Style="{StaticResource ToggleSwitchButtonStyle}"
+                      IsChecked="{Binding ElementName=ThisToggleSwitchControl, Path=IsToggled, Mode=Default}"/>
+
+        <!-- 위 1단계 예제에서 사용한 Style을 App.xaml에 추가했다는 가정하에 사용합니다. -->
+        <!-- 만약 스타일 없이 직접 디자인을 UserControl 안에 넣으려면 Grid 아래에 디자인 요소를 직접 배치하세요. -->
+
+        <!-- 예시를 위해 스타일을 직접 UserControl 내에 포함시키는 방법 (App.xaml 수정 불필요): -->
+        <!--<ToggleButton x:Name="InternalToggleButton" Content="t">
+            <ToggleButton.Style>
+                <Style TargetType="ToggleButton">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ToggleButton">
+                                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent">
+                                    <VisualStateManager.VisualStateGroups>
+                                        --><!-- 시각적 상태 정의 --><!--
+                                        <VisualStateGroup Name="CheckStates">
+                                            <VisualState Name="Checked">
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetName="SwitchThumb" 
+                                                         Storyboard.TargetProperty="(Canvas.Left)" To="28" Duration="0:0:0.2"/>
+                                                    <ColorAnimation Storyboard.TargetName="SwitchBackground" 
+                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#4CAF50" Duration="0:0:0.2"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState Name="Unchecked">
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetName="SwitchThumb" 
+                                                         Storyboard.TargetProperty="(Canvas.Left)" To="4" Duration="0:0:0.2"/>
+                                                    <ColorAnimation Storyboard.TargetName="SwitchBackground" 
+                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#E0E0E0" Duration="0:0:0.2"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+
+                                    --><!-- 배경 및 트랙 --><!--
+                                    <Border x:Name="SwitchBackground" CornerRadius="10" Background="#E0E0E0" 
+                                Height="20" Width="50" VerticalAlignment="Center" 
+                                HorizontalAlignment="Left" BorderThickness="1" BorderBrush="#CCCCCC"/>
+
+                                    --><!-- 엄지(Thumb) --><!--
+                                    <Canvas Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <Ellipse x:Name="SwitchThumb" Fill="White" 
+                                     Width="12" Height="12" Canvas.Left="4" 
+                                     VerticalAlignment="Center">
+                                            <Ellipse.Effect>
+                                                <DropShadowEffect Color="#FFB0B0B0" ShadowDepth="1" BlurRadius="2" Opacity="0.5"/>
+                                            </Ellipse.Effect>
+                                        </Ellipse>
+                                    </Canvas>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ToggleButton.Style>
+        </ToggleButton>-->
+    </Grid>
+</UserControl>
