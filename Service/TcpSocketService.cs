@@ -1,9 +1,7 @@
 ﻿using Mythosia.Integrity.CRC;
 using Mythosia.Security.Cryptography;
 using SimReeferMiddlewareSystemWPF.Interface;
-using SimReeferMiddlewareSystemWPF.View;
 using SimReeferMiddlewareSystemWPF.ViewModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Net;
 using System.Net.Sockets;
@@ -251,15 +249,9 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     RecievedByteToString?.Invoke(recvOriginData);
                     ReceiveArgs_Completed(null, args);
                 }
-                //else
-                //{
-                //    SocketAsyncDisconnected?.Invoke();
-                //    Disconnection();
-                //}
             }
             catch (SocketException e)
             {
-                //SocketAsyncError?.Invoke(e.Message);
                 Console.WriteLine(e.ToString());
             }
             catch (Exception ex)

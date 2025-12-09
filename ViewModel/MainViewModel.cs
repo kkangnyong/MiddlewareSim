@@ -73,6 +73,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private int _repeatCount { get; set; } = 1;
         private short _commPeriod { get; set; } = 1;
 
+        private System.Timers.Timer _timer = null;
+
         public MainViewModel() { }
 
         public MainViewModel(INavigationService navigationService,
@@ -92,6 +94,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             Initialize();
             _navigationService = navigationService;
             _navigationService.Navigate(NaviType.ProtocolView, ProtocolVersion);
+
+            _timer = new System.Timers.Timer();
         }
 
         private void Initialize()
@@ -198,6 +202,20 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ProtocolVer8.Dispose();
             ProtocolVer9.Dispose();
             ProtocolVer10.Dispose();
+
+            if (IsCommPeriodChecked && _timer != null && !_timer.Enabled)
+            {
+                _timer.Interval = CommPeriod * (1000 * 60);
+                _timer.Elapsed += _timer_Elapsed;
+                _timer.Start();
+            }
+        }
+
+        private void _timer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+        {
+            ToConnectCommand.Execute(this);
+            Thread.Sleep(1000);
+            ProtocolVer8.AutoStart();
         }
 
         private void SocketAsyncError(string error)
@@ -222,6 +240,14 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                     _isCommPeriodChecked = value;
                     OnPropertyChanged();
                     IsCommPeriodEnabled = _isCommPeriodChecked;
+                    if (!_isCommPeriodChecked)
+                    {
+                        if (_timer != null && _timer.Enabled)
+                        {
+                            _timer.Elapsed -= _timer_Elapsed;
+                            _timer.Stop();
+                        }
+                    }
                 }
             }
         }

@@ -80,7 +80,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
         private List<short> _countSensorDataList { get; set; } = new List<short>() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         private short? _countSensorData { get; set; } = 0;
         public ObservableCollection<INotifyPropertyChanged> ItemsCollection { get; set; }
-        public short ProtocolVersion { get { return 10; } }
+        public short ProtocolVersion { get { return (short)ProtocolVerType.V10; } }
 
         public ProtocolViewModelVer10() { }
 

@@ -5,7 +5,6 @@ using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Text;
 using System.Windows.Input;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
@@ -80,7 +79,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         private List<short> _countSensorDataList { get; set; } = new List<short>() { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         private short? _countSensorData { get; set; } = 0;
         public ObservableCollection<INotifyPropertyChanged> ItemsCollection { get; set; }
-        public short ProtocolVersion { get { return 9; } }
+        public short ProtocolVersion { get { return (short)ProtocolVerType.V9; } }
 
         public ProtocolViewModelVer9() { }
 

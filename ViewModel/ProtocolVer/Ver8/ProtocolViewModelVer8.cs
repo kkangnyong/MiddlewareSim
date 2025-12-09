@@ -4,7 +4,6 @@ using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
 using System.ComponentModel;
-using System.Text;
 using System.Windows.Input;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
@@ -67,7 +66,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
 
         private ITcpSocketService _tcpSocketService { get { return MainView._tcpSocketService; } }
 
-        public short ProtocolVersion { get { return 8; } }
+        public short ProtocolVersion { get { return (short)ProtocolVerType.V8; } }
 
         public ProtocolViewModelVer8() { }
 
@@ -118,6 +117,22 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
             ContentSendDeviceData = "Send Device Data Packet";
             ContentSendReeferData = "Send Reefer Data Packet";
             ContentSendStartCommand = "Send Start Command Packet";
+        }
+
+        public void AutoStart()
+        {
+            Thread.Sleep(300);
+            ToDeviceInfoCommand.Execute(this);
+            Thread.Sleep(300);
+            ToSetupInfoCommand.Execute(this);
+            Thread.Sleep(300);
+            ToStartDataCommand.Execute(this);
+            Thread.Sleep(300);
+            ToDeviceBodyCommand.Execute(this);
+            Thread.Sleep(300);
+            ToReeferBodyCommand.Execute(this);
+            Thread.Sleep(300);
+            _tcpSocketService.Disconnection();
         }
 
         private void ToDeviceInfo(object _)
