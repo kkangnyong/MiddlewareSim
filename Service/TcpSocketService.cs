@@ -1,4 +1,5 @@
-﻿using Mythosia.Integrity.CRC;
+﻿using Mythosia;
+using Mythosia.Integrity.CRC;
 using Mythosia.Security.Cryptography;
 using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.ViewModel;
@@ -8,6 +9,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 
 namespace SimReeferMiddlewareSystemWPF.Service
 {
@@ -299,6 +301,76 @@ namespace SimReeferMiddlewareSystemWPF.Service
             return SendMsg(msgBytes, false, true);
         }
 
+        private (byte[], bool) BuildManualSendMessage(string sendMsg)
+        {
+            try
+            {
+                string msg = sendMsg;
+                string concatMsg = string.Concat(msg.Where(x => !Char.IsWhiteSpace(x)));
+                concatMsg = concatMsg.ToLower().Trim();
+                byte[] msgEncodingBytes = Encoding.Default.GetBytes(msg);
+
+                string[] strings = msg.Split(new string[] { ",", ".", "\t", " " }, StringSplitOptions.RemoveEmptyEntries);
+                byte[] msgBytes = new byte[strings.Length];
+                bool _isver = false;
+
+                //Command 명령 전송 시
+                if (Regex.IsMatch(concatMsg, @"^[a-z]*$"))
+                {
+                    return (msgEncodingBytes, false);
+                }
+
+                //프로토콜 버전 전송 시
+                if (Regex.IsMatch(concatMsg, @"^[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}$"))
+                {
+                    byte[] stringsTobytes = strings.Select(byte.Parse).ToArray();
+                    Array.Copy(stringsTobytes, 0, msgBytes, 0, stringsTobytes.Length);
+                    _isver = true;
+                    return (msgBytes, _isver);
+                }
+
+                //일반 바이트 배열 전송 시
+                for (int i = 0; i < strings.Length; i++)
+                {
+                    string txt = strings[i];
+
+                    byte[] res = Enumerable.Range(0, txt.Length).Where(x => x % 2 == 0).Select(x => Convert.ToByte(txt.Substring(x, 2), 16)).ToArray();
+                    msgBytes[i] = res[0];
+                }
+
+                return (msgBytes, _isver);
+            }
+            catch (Exception ex)
+            {
+                return (null, false);
+            }
+        }
+
+        public bool SendHexMessage(string sendMsg)
+        {
+            return SendMsg(BuildManualSendMessage(sendMsg).Item1, BuildManualSendMessage(sendMsg).Item2, false);
+        }
+
+        public bool SendJsonMessage(string sendJsonMsg)
+        {
+            string sendMsg = sendJsonMsg;
+            string[] sendMsgBytes = sendMsg.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            List<byte> sendJsonBytes = null;
+            if (sendMsgBytes[0].Equals("deviceandfirmwareinfo"))
+            {
+                int deviceNo = 0;
+                int type = 0;
+                if (!int.TryParse(sendMsgBytes[4].Trim(), out deviceNo)) deviceNo = 0;
+                if (!int.TryParse(sendMsgBytes[2].Trim(), out type)) type = 0;
+
+                DeviceAndFirmwareInfo device = new DeviceAndFirmwareInfo { Result = sendMsgBytes[1].Trim(), ReqType = (RequestType)type, IoTDeviceType = sendMsgBytes[3].Trim(), DeviceNumber = deviceNo, FWVersion = sendMsgBytes[5].Trim(), ContainerType = sendMsgBytes[6].Trim(), ProtocolVersion = sendMsgBytes[7].Trim(), SequenceType = sendMsgBytes[8].Trim() };
+                sendJsonBytes = JsonSerializer.Serialize(device).ToUTF8Array().ToList();
+                sendJsonBytes.Add(0x1A);
+                return SendMsg(sendJsonBytes.ToArray(), false, false);
+            }
+            return false;
+        }
+
         public bool SendMsg(byte[] messages, bool isVer, bool isAddCrc)
         {
             try
@@ -503,5 +575,55 @@ namespace SimReeferMiddlewareSystemWPF.Service
         Continue = 1,
         [Description("Last Code")]
         Last = 17
+    }
+
+    public enum RequestType
+    {
+        FOTA = 0,
+        GetFWList,
+        GetRawData,
+        GetGeofenceList,
+    }
+
+    public class DeviceAndFirmwareInfo
+    {
+        [JsonPropertyName("result")]
+        public string Result { get; set; } = string.Empty;
+
+        [JsonPropertyName("req_type")]
+        public RequestType ReqType { get; set; }
+
+        [JsonPropertyName("device_type")]
+        public string IoTDeviceType { get; set; } = string.Empty;
+
+        [JsonPropertyName("device_number")]
+        public int DeviceNumber { get; set; }
+
+        [JsonPropertyName("fw_version")]
+        public string FWVersion { get; set; } = string.Empty;
+
+        [JsonPropertyName("container_type")]
+        public string ContainerType { get; set; } = string.Empty;
+
+        [JsonPropertyName("protocol_version")]
+        public string ProtocolVersion { get; set; } = string.Empty;
+
+        [JsonPropertyName("sequence_type")]
+        public string SequenceType { get; set; } = string.Empty;
+
+        [JsonPropertyName("end_index")]
+        public ushort EndIndex { get; set; }
+
+        [JsonPropertyName("container_number")]
+        public string ContainerName { get; set; } = string.Empty;
+
+        [JsonPropertyName("download_date")]
+        public string DownloadDate { get; set; } = string.Empty;
+
+        [JsonPropertyName("extension")]
+        public string Extension { get; set; } = string.Empty;
+
+
+        public DeviceAndFirmwareInfo() { }
     }
 }

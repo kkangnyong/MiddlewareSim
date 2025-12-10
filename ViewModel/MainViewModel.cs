@@ -4,13 +4,13 @@ using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
+using SimReeferMiddlewareSystemWPF.View.Menu;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9;
 using System.ComponentModel;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using System.Windows;
 using System.Windows.Input;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel
@@ -38,6 +38,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private readonly MainNavigationStore? _mainNavigationStore;
         public ICommand ToConnectCommand { get; set; }
         public ICommand ToDisconnectCommand { get; set; }
+        public ICommand ToSendManualMenuCommand { get; set; }
+        public ICommand ToIDGenerateMenuCommand { get; set; }
+        public ICommand ToFOTAMenuCommand { get; set; }
+        public ICommand ToMiddlewareMenuCommand { get; set; }
 
         public static MainViewModel _instance { get; set; }
         public MainViewModel Instance { get { if (_instance == null) _instance = new MainViewModel(); return _instance; } }
@@ -56,6 +60,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private ProtocolViewModelVer10 _protocolver10;
         public ProtocolViewModelVer10 ProtocolVer10 { get { if (_protocolver10 == null) _protocolver10 = new ProtocolViewModelVer10(); return _protocolver10.Instance; } }
 
+        public static SendManual _sendManualMenu { get; set; }
+        public SendManual SendManualMenu { get { if (_sendManualMenu == null) _sendManualMenu = new SendManual(); return _sendManualMenu; } }
+
 
         private static Version? _fileVersion = Assembly.GetExecutingAssembly().GetName().Version;
         private string _title { get; set; } = $"EyeCargo Reefer Middleware Simulator - v{_fileVersion?.Major}.{_fileVersion?.Minor}.{_fileVersion?.Build}";
@@ -69,7 +76,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private bool _isCommPeriodChecked { get; set; } = false;
         private bool _isCommPeriodEnabled { get; set; } = false;
         private string _visibleCommPeriod { get; set; } = "Collapsed";
-        private string _visibleRepeat { get; set; } = "Collapsed";//"Visible";
+        private string _visibleRepeat { get; set; } = "Collapsed";
+        private string _visibleMenuOption { get; set; } = "Visible";
         private List<string> _protocolVerList { get; set; } = new List<string>() { ProtocolVerType.V8.ToDescription(), ProtocolVerType.V9.ToDescription(), ProtocolVerType.V10.ToDescription() };
         private string _recievedMessage { get; set; } = "Message";
         private string _recievedRawMessage { get; set; } = "Raw Message";
@@ -115,6 +123,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             _mainNavigationStore.CurrentViewModelChanged += CurrentViewModelChanged;
             ToConnectCommand = new RelayCommand<object>(ToConnect);
             ToDisconnectCommand = new RelayCommand<object>(ToDisconnect);
+            ToSendManualMenuCommand = new RelayCommand<object>(ToSendManualMenu);
+            ToIDGenerateMenuCommand = new RelayCommand<object>(ToIDGenerateMenu);
+            ToFOTAMenuCommand = new RelayCommand<object>(ToFOTAMenu);
+            ToMiddlewareMenuCommand = new RelayCommand<object>(ToMiddlewareMenu);
         }
 
         private void InitReceivedMessage()
@@ -141,6 +153,30 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ProtocolVer8.Dispose();
             ProtocolVer9.Dispose();
             ProtocolVer10.Dispose();
+        }
+
+        private void ToSendManualMenu(object _)
+        {
+            VisibleMenuOption = "Collapsed";
+            VisibleCommPeriod = "Collapsed";
+            VisibleRepeat = "Collapsed";
+            IsCommPeriodChecked = false;
+            IsRepeatChecked = false;
+            _navigationService.Navigate(NaviType.SendManualView);
+        }
+
+        private void ToIDGenerateMenu(object _)
+        {
+        }
+
+        private void ToFOTAMenu(object _) 
+        {
+        }
+
+        private void ToMiddlewareMenu(object _)
+        {
+            VisibleMenuOption = "Visible";
+            _navigationService.Navigate(NaviType.ProtocolView, ProtocolVersion);
         }
 
         private void NoSynchronizationSetupInfo(byte[] originData)
@@ -251,6 +287,20 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private void CurrentViewModelChanged()
         {
             CurrentViewModel = _mainNavigationStore?.CurrentViewModel;
+        }
+
+        public string VisibleMenuOption
+        {
+            get { return _visibleMenuOption; }
+
+            set
+            {
+                if (_visibleMenuOption != null)
+                {
+                    _visibleMenuOption = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public string VisibleCommPeriod

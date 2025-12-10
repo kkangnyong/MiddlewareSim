@@ -8,6 +8,9 @@
         DeviceInfoView, 
         ReeferBodyView, 
         SetupInfoView,
-        SensorBodyView
+        SensorBodyView,
+        SendManualView,
+        IDGenerateView,
+        FOTAView
     }
 }

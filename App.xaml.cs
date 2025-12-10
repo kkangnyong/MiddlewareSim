@@ -4,9 +4,10 @@ using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
 using SimReeferMiddlewareSystemWPF.View;
 using SimReeferMiddlewareSystemWPF.ViewModel;
+using SimReeferMiddlewareSystemWPF.ViewModel.Menu;
+using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9;
-using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10;
 using System.Windows;
 
 namespace SimReeferMiddlewareSystemWPF
@@ -69,6 +70,8 @@ namespace SimReeferMiddlewareSystemWPF
             services.AddTransient<DeviceBodyViewModelVer10>();
             services.AddTransient<ReeferBodyViewModelVer10>();
             services.AddTransient<SensorBodyViewModelVer10>();
+
+            services.AddTransient<SendManualViewModel>();
 
             //Views
             services.AddSingleton(s => new MainView()

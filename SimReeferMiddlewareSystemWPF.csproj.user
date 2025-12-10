@@ -5,6 +5,9 @@
     <Compile Update="UIControl\NumberTextBox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Menu\SendManual.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\ProtocolVer\Ver8\DeviceBodyVer8.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

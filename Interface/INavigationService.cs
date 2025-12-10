@@ -4,6 +4,6 @@ namespace SimReeferMiddlewareSystemWPF.Interface
 {
     public interface INavigationService
     {
-        void Navigate(NaviType type, string protocolVer);
+        void Navigate(NaviType type, string protocolVer = "");
     }
 }

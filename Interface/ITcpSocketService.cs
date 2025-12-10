@@ -6,6 +6,8 @@
         void Disconnection();
         bool SendMsg(byte[] messages, bool isVer, bool isAddCrc);
         bool BuildSendMessage(int totalDataBytesLength, List<byte[]> dataBytesList);
+        bool SendHexMessage(string sendMsg);
+        bool SendJsonMessage(string sendJsonMsg);
         void RepeatDataSendOption(IProtocolVer ownVer, IModelDataService modelData, bool isRepeat, int repeatCnt, short code);
         Action? SocketAsyncConnected { get; set; }
         Action? SocketAsyncDisconnected { get; set; }

@@ -6,6 +6,8 @@ using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10;
 using System.ComponentModel;
 using Mythosia;
+using SimReeferMiddlewareSystemWPF.View.Menu;
+using SimReeferMiddlewareSystemWPF.ViewModel.Menu;
 
 namespace SimReeferMiddlewareSystemWPF.Service
 {
@@ -18,7 +20,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
             _mainNavigationProperty = mainNavi;
         }
 
-        public void Navigate(NaviType type, string protocolVer)
+        public void Navigate(NaviType type, string protocolVer = "")
         {
             switch (type)
             {
@@ -87,6 +89,9 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     {
                         CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(SensorBodyViewModelVer10));
                     }
+                    break;
+                case NaviType.SendManualView:
+                      CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(SendManualViewModel));
                     break;
                 default:
                     if (protocolVer.Equals(ProtocolVerType.V8.ToDescription()))

@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="SimReeferMiddlewareSystemWPF.View.Menu.SendManual"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimReeferMiddlewareSystemWPF.View.Menu"
+        xmlns:uicontrol="clr-namespace:SimReeferMiddlewareSystemWPF.UIControl"
+        mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="MyButtonTextStyle" TargetType="{x:Type Button}">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+        <Style x:Key="MyTextStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+        <Style x:Key="MyRichTextBoxStyle" TargetType="{x:Type RichTextBox}">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="AliceBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Top" Background="LightBlue">
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <TextBlock Text="Send Manual Packet" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <RichTextBox Margin="5" Name="MyRichTextBox" IsReadOnly="False" GotFocus="MyRichTextBox_GotFocus" Style="{StaticResource MyRichTextBoxStyle}">
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text="{Binding SendMessageText}"/>
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+            </Grid>
+            <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Button Command="{Binding ToSendHexMessageCommand}" Content="Send Hex Data Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Button Command="{Binding ToSendJsonMessageCommand}" Content="Send Json Data Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
