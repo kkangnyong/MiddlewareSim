@@ -4,7 +4,6 @@ using SimReeferMiddlewareSystemWPF.Store;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
 {
@@ -22,7 +21,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
         public ICommand ToSendJsonMessageCommand { get; set; }
         public ICommand ToRichTextChangedCommand { get; set; }
 
-        private string _sendMessageText { get; set; } = "Please Input Send Packet Data!!!";
+        private static readonly string _welcomeMessage = "Please Input Send Packet Data!!!";
+
+        private string _sendMessageText { get; set; } = _welcomeMessage;
         //public FlowDocument MyFlowDocument { get; set; }
 
         public SendManualViewModel() { }
@@ -50,9 +51,12 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
             string text = string.Empty;
             if (parameter is RichTextBox rtb)
             {
-                TextRange tr = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
-                Console.WriteLine(text);
-                text = tr.Text;
+                text = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd).Text.TrimEnd();
+
+                if (!string.IsNullOrEmpty(text) && text.Contains(_welcomeMessage))
+                {
+                    rtb.Document.Blocks.Clear();
+                }
             }
             SendMessageText = text;
         }

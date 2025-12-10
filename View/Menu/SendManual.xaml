@@ -42,20 +42,19 @@
                 <TextBlock Text="Send Manual Packet" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
             </Grid>
             <Grid Grid.Row="1">
-                <!--<RichTextBox uicontrol:RichTextBoxHelper.DocumentXaml="{Binding SendMessageText}" Margin="5" Name="MyRichTextBox" IsReadOnly="False" GotFocus="MyRichTextBox_GotFocus" Style="{StaticResource MyRichTextBoxStyle}">
-                    <FlowDocument>
-                        <Paragraph>
-                            <Run Text="{Binding SendMessageText}"/>
-                        </Paragraph>
-                    </FlowDocument>
-                </RichTextBox>-->
                 <RichTextBox x:Name="MyRichTextBox" VerticalScrollBarVisibility="Auto" IsReadOnly="False" Style="{StaticResource MyRichTextBoxStyle}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="TextChanged">
                             <i:InvokeCommandAction Command="{Binding ToRichTextChangedCommand}" CommandParameter="{Binding ElementName=MyRichTextBox}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
+                    <FlowDocument>
+                        <Paragraph>
+                            Please Input Send Packet Data!!!
+                        </Paragraph>
+                    </FlowDocument>
                 </RichTextBox>
+
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
                 <Grid.ColumnDefinitions>
