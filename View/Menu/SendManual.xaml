@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:SimReeferMiddlewareSystemWPF.View.Menu"
         xmlns:uicontrol="clr-namespace:SimReeferMiddlewareSystemWPF.UIControl"
         mc:Ignorable="d">
@@ -41,12 +42,19 @@
                 <TextBlock Text="Send Manual Packet" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
             </Grid>
             <Grid Grid.Row="1">
-                <RichTextBox Margin="5" Name="MyRichTextBox" IsReadOnly="False" GotFocus="MyRichTextBox_GotFocus" Style="{StaticResource MyRichTextBoxStyle}">
+                <!--<RichTextBox uicontrol:RichTextBoxHelper.DocumentXaml="{Binding SendMessageText}" Margin="5" Name="MyRichTextBox" IsReadOnly="False" GotFocus="MyRichTextBox_GotFocus" Style="{StaticResource MyRichTextBoxStyle}">
                     <FlowDocument>
                         <Paragraph>
                             <Run Text="{Binding SendMessageText}"/>
                         </Paragraph>
                     </FlowDocument>
+                </RichTextBox>-->
+                <RichTextBox x:Name="MyRichTextBox" VerticalScrollBarVisibility="Auto" IsReadOnly="False" Style="{StaticResource MyRichTextBoxStyle}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding ToRichTextChangedCommand}" CommandParameter="{Binding ElementName=MyRichTextBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </RichTextBox>
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">

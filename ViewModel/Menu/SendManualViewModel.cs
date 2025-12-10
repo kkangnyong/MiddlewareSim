@@ -1,7 +1,10 @@
 ﻿using SimReeferMiddlewareSystemWPF.Command;
 using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Store;
+using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
 {
@@ -17,7 +20,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
 
         public ICommand ToSendHexMessageCommand { get; set; }
         public ICommand ToSendJsonMessageCommand { get; set; }
+        public ICommand ToRichTextChangedCommand { get; set; }
+
         private string _sendMessageText { get; set; } = "Please Input Send Packet Data!!!";
+        //public FlowDocument MyFlowDocument { get; set; }
 
         public SendManualViewModel() { }
 
@@ -36,6 +42,19 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
             _navigationService = navigationService;
             ToSendHexMessageCommand = new RelayCommand<object>(ToSendHexMessage);
             ToSendJsonMessageCommand = new RelayCommand<object>(ToSendJsonMessage);
+            ToRichTextChangedCommand = new RelayCommand<object>(ToRichTextChanged);
+        }
+
+        private void ToRichTextChanged(object parameter)
+        {
+            string text = string.Empty;
+            if (parameter is RichTextBox rtb)
+            {
+                TextRange tr = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
+                Console.WriteLine(text);
+                text = tr.Text;
+            }
+            SendMessageText = text;
         }
 
         private void ToSendHexMessage(object _)

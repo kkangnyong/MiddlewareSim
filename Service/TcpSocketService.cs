@@ -375,33 +375,38 @@ namespace SimReeferMiddlewareSystemWPF.Service
         {
             try
             {
-                if (messages.Length > 0)
+                if (messages == null)
                 {
-                    IEnumerable<byte> datas = messages;
-
-                    if (!isVer && isAddCrc)
-                    {
-                        byte[] tempArray = datas.ToArray();
-
-                        uint crc = tempArray.CRC32();
-                        byte[] crcBytes = BitConverter.GetBytes(crc);
-
-                        Array.Reverse(crcBytes);
-
-                        byte[] sumArray = new byte[tempArray.Length + crcBytes.Length];
-
-                        Array.Copy(tempArray, 0, sumArray, 0, tempArray.Length);
-                        Array.Copy(crcBytes, 0, sumArray, tempArray.Length, crcBytes.Length);
-
-                        datas = sumArray.EncryptSEED(SeedKey);
-
-                        messages = datas.ToArray();
-                    }
-
-                    sendArgs.SetBuffer(messages, 0, messages.Length);
-                    _connectSocket.SendAsync(sendArgs);
-                    return true;
+                    return false;
                 }
+                if (messages.Length <= 0)
+                {
+                    return false;
+                }
+                IEnumerable<byte> datas = messages;
+
+                if (!isVer && isAddCrc)
+                {
+                    byte[] tempArray = datas.ToArray();
+
+                    uint crc = tempArray.CRC32();
+                    byte[] crcBytes = BitConverter.GetBytes(crc);
+
+                    Array.Reverse(crcBytes);
+
+                    byte[] sumArray = new byte[tempArray.Length + crcBytes.Length];
+
+                    Array.Copy(tempArray, 0, sumArray, 0, tempArray.Length);
+                    Array.Copy(crcBytes, 0, sumArray, tempArray.Length, crcBytes.Length);
+
+                    datas = sumArray.EncryptSEED(SeedKey);
+
+                    messages = datas.ToArray();
+                }
+
+                sendArgs.SetBuffer(messages, 0, messages.Length);
+                _connectSocket.SendAsync(sendArgs);
+                return true;
             }
             catch (SocketException se)
             {

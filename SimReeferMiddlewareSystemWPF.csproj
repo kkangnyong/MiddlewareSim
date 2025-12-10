@@ -38,6 +38,7 @@
   <ItemGroup>
     <PackageReference Include="ConsoleTableExt" Version="3.3.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.10" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
     <PackageReference Include="Mythosia.Integrity" Version="1.2.0" />
     <PackageReference Include="Mythosia.Security.Cryptography" Version="1.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
