@@ -10,6 +10,7 @@ using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9;
 using System.ComponentModel;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Input;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel
@@ -216,6 +217,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 _timer.Interval = CommPeriod * (1000 * 60);
                 _timer.Elapsed += _timer_Elapsed;
                 _timer.Start();
+                _messageBoxService.ShowInfo($"전송 주기 {CommPeriod}분이 적용되어 동작 중 입니다.", "Period Send");
             }
         }
 
@@ -384,19 +386,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 }
             }
         }
-
-        //public int Count
-        //{
-        //    get { return _count; }
-        //    set
-        //    {
-        //        if (_count != null)
-        //        {
-        //            _count = value;
-        //            OnPropertyChanged();
-        //        }
-        //    }
-        //}
 
         public int RepeatCount
         {

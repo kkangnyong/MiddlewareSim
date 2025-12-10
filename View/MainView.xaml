@@ -142,8 +142,8 @@
                     <ColumnDefinition Width="90"/>
                     <ColumnDefinition Width="110"/>
                     <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="850"/>
-                    <ColumnDefinition Width="220"/>
+                    <ColumnDefinition Width="900"/>
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="IP:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
                 <TextBox Grid.Column="1" Text="{Binding IP}" IsEnabled="{Binding IsEnabled}" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
@@ -156,19 +156,19 @@
                 <Image Grid.Column="8" gif:ImageBehavior.AnimatedSource="{Binding ToLoadImage}" Margin="3,0,3,0"/>
                 
                 <StackPanel Grid.Column="9" Orientation="Horizontal" >
-                    <CheckBox Content=":통신 주기 사용" IsChecked="{Binding IsCommPeriodChecked}" FlowDirection="RightToLeft" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyCheckBoxStyle}"/>
-                    <TextBlock Text="통신 주기(분):" Visibility="{Binding VisibleCommPeriod}" IsEnabled="{Binding IsCommPeriodEnabled}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
+                    <TextBlock Text="전송 주기 사용" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
+                    <uicontrol:ToggleButton IsToggled="{Binding IsCommPeriodChecked, Mode=TwoWay}" HorizontalAlignment="Left" Margin="0,0,5,0"/>
+                    <TextBlock Text="전송 주기(분):" Visibility="{Binding VisibleCommPeriod}" IsEnabled="{Binding IsCommPeriodEnabled}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
                     <uicontrol:NumberTextBox Visibility="{Binding VisibleCommPeriod}" Text="{Binding CommPeriod}" IsEnabled="{Binding IsCommPeriodEnabled}" Width="35" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
-                    <CheckBox Content=":음영 데이터 사용" IsChecked="{Binding IsRepeatChecked}" FlowDirection="RightToLeft" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyCheckBoxStyle}"/>
+                    <TextBlock Text="음영 데이터 사용" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
+                    <uicontrol:ToggleButton IsToggled="{Binding IsRepeatChecked, Mode=TwoWay}" HorizontalAlignment="Left" Margin="0,0,5,0"/>
                     <TextBlock Text="코드 종류:" Visibility="{Binding VisibleRepeat}" IsEnabled="{Binding IsRepeatEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
                     <ComboBox Visibility="{Binding VisibleRepeat}" SelectedItem="{Binding Code}" ItemsSource="{Binding CodeList}" IsEnabled="{Binding IsRepeatEnabled}" Style="{StaticResource MyComboBoxStyle}" BorderThickness="1" BorderBrush="Black" Margin="0,0,5,0"/>
                     <TextBlock Text="음영 데이터 갯수:" Visibility="{Binding VisibleRepeat}" IsEnabled="{Binding IsRepeatEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
                     <uicontrol:NumberTextBox Visibility="{Binding VisibleRepeat}" Text="{Binding RepeatCount}" IsEnabled="{Binding IsRepeatEnabled}" Width="35" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
-                    <!--<TextBlock Text="수행 횟수:" Visibility="{Binding VisibleRepeat}" IsEnabled="{Binding IsRepeatEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
-                    <TextBlock Text="{Binding Count}" Visibility="{Binding VisibleRepeat}" IsEnabled="{Binding IsRepeatEnabled}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>-->
                 </StackPanel>
 
-                <Image Grid.Column="10" Source="{Binding ToCompanyImage}"/>
+                <Image Grid.Column="10" Source="{Binding ToCompanyImage}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1" Background="AliceBlue">

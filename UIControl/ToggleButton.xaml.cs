@@ -20,7 +20,8 @@ namespace SimReeferMiddlewareSystemWPF.UIControl
                 "IsToggled",
                 typeof(bool),
                 typeof(ToggleButton),
-                new PropertyMetadata(false, OnIsToggledChanged));
+                new PropertyMetadata(false));
+              //new PropertyMetadata(false, OnIsToggledChanged));
 
         // 2. C# 속성 래퍼 (Wrapper)
         public bool IsToggled
