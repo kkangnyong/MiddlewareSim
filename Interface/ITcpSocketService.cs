@@ -9,6 +9,7 @@
         bool SendHexMessage(string sendMsg);
         bool SendJsonMessage(string sendJsonMsg);
         void RepeatDataSendOption(IProtocolVer ownVer, IModelDataService modelData, bool isRepeat, int repeatCnt, short code);
+        bool IsConnceted { get; }
         Action? SocketAsyncConnected { get; set; }
         Action? SocketAsyncDisconnected { get; set; }
         Action<string>? SocketAsyncError { get; set; }

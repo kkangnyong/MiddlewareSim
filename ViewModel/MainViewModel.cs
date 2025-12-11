@@ -154,7 +154,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private void ToConnect(object _)
         {
             InitReceivedMessage();
-            ToLoadImage = "/Resources/Spinner_3.gif";
+            if (_timer != null && !_timer.Enabled) ToLoadImage = "/Resources/Spinner_3.gif";
             _tcpSocketService.Connection(ServerConnectionModel.IP, ServerConnectionModel.Port);
             IsEnabled = false;
             IsConnectEnabled = false;
@@ -169,6 +169,13 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ProtocolVer8.Dispose();
             ProtocolVer9.Dispose();
             ProtocolVer10.Dispose();
+
+            if (_timer != null && _timer.Enabled)
+            {
+                ToLoadImage = string.Empty;
+                _timer.Elapsed -= _timer_Elapsed;
+                _timer.Stop();
+            }
         }
 
         private void ToSendManualMenu(object _)
@@ -232,7 +239,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
         private void SocketAsyncConnected()
         {
-            ToLoadImage = "/Resources/Check_Mark.png";
+            if (_timer != null && !_timer.Enabled) ToLoadImage = "/Resources/Check_Mark.png";
             if (CurrentViewModel.GetType().Name.Equals(typeof(SendManualViewModel).Name))   //추후 ID Server, FOTA Server 메뉴도 조건에 추가
             {
                 return;
@@ -267,7 +274,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
         private void SocketAsyncDisconnected()
         {
-            ToLoadImage = string.Empty;
+            //ToLoadImage = string.Empty;
             IsEnabled = true;
             IsConnectEnabled = true;
             ProtocolVer8.Dispose();
@@ -279,6 +286,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 _timer.Interval = CommPeriod * (1000 * 60);
                 _timer.Elapsed += _timer_Elapsed;
                 _timer.Start();
+                ToLoadImage = "/Resources/SendPeriod5.gif";
                 _messageBoxService.ShowInfo($"전송 주기 {CommPeriod}분이 적용되어 동작 중 입니다.", "Period Send");
             }
         }
@@ -372,6 +380,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                     {
                         if (_timer != null && _timer.Enabled)
                         {
+                            ToLoadImage = string.Empty;
                             _timer.Elapsed -= _timer_Elapsed;
                             _timer.Stop();
                         }
