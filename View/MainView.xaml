@@ -9,8 +9,8 @@
         xmlns:viewmodel9="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9"
         xmlns:local10="clr-namespace:SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver10"
         xmlns:viewmodel10="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10"
-        xmlns:localsendmanual="clr-namespace:SimReeferMiddlewareSystemWPF.View.Menu"
-        xmlns:viewmodelsendmanual="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.Menu"
+        xmlns:localmenu="clr-namespace:SimReeferMiddlewareSystemWPF.View.Menu"
+        xmlns:viewmodelmenu="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.Menu"
         xmlns:gif="http://wpfanimatedgif.codeplex.com" 
         xmlns:uicontrol="clr-namespace:SimReeferMiddlewareSystemWPF.UIControl"
         mc:Ignorable="d"
@@ -67,8 +67,11 @@
         <DataTemplate DataType="{x:Type viewmodel10:SensorBodyViewModelVer10}">
             <local10:SensorBodyVer10/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodelsendmanual:SendManualViewModel}">
-            <localsendmanual:SendManual/>
+        <DataTemplate DataType="{x:Type viewmodelmenu:SendManualViewModel}">
+            <localmenu:SendManual/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodelmenu:FOTAServerViewModel}">
+            <localmenu:FOTAServer/>
         </DataTemplate>
         <Style x:Key="MyMenuStyle" TargetType="{x:Type MenuItem}">
             <Setter Property="FontSize" Value="15"/>
@@ -135,7 +138,7 @@
                         <Separator/>
                         <MenuItem Header="FOTA Server" Command="{Binding ToFOTAMenuCommand}"/>
                         <Separator/>
-                        <MenuItem Header="Send Manual Packet" Command="{Binding ToSendManualMenuCommand}"/>
+                        <MenuItem Header="Send Manual Data" Command="{Binding ToSendManualMenuCommand}"/>
                     </MenuItem>
                 </Menu>
             </Grid>

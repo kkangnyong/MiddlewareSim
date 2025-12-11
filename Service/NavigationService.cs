@@ -93,6 +93,12 @@ namespace SimReeferMiddlewareSystemWPF.Service
                 case NaviType.SendManualView:
                       CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(SendManualViewModel));
                     break;
+                case NaviType.IDGenerateView:
+                    //CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(SendManualViewModel));
+                    break;
+                case NaviType.FOTAView:
+                    CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(FOTAServerViewModel));
+                    break;
                 default:
                     if (protocolVer.Equals(ProtocolVerType.V8.ToDescription()))
                     {

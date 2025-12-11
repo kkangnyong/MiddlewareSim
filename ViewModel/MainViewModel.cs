@@ -141,6 +141,16 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ReceivedRawMessage = "Raw Message";
         }
 
+        private void InitMenuChanged()
+        {
+            VisibleMenuOption = Collapsed;
+            VisibleCommPeriod = Collapsed;
+            VisibleRepeat = Collapsed;
+            IsCommPeriodChecked = false;
+            IsRepeatChecked = false;
+            _tcpSocketService.Disconnection();
+        }
+
         private void ToConnect(object _)
         {
             InitReceivedMessage();
@@ -163,23 +173,20 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
         private void ToSendManualMenu(object _)
         {
-            VisibleMenuOption = Collapsed;
-            VisibleCommPeriod = Collapsed;
-            VisibleRepeat = Collapsed;
-            IsCommPeriodChecked = false;
-            IsRepeatChecked = false;
-            _tcpSocketService.Disconnection();
+            InitMenuChanged();
             _navigationService.Navigate(NaviType.SendManualView);
         }
 
         private void ToIDGenerateMenu(object _)
         {
-            _tcpSocketService.Disconnection();
+            InitMenuChanged();
+            _navigationService.Navigate(NaviType.IDGenerateView);
         }
 
         private void ToFOTAMenu(object _)
         {
-            _tcpSocketService.Disconnection();
+            InitMenuChanged();
+            _navigationService.Navigate(NaviType.FOTAView);
         }
 
         private void ToMiddlewareMenu(object _)

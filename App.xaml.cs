@@ -72,6 +72,7 @@ namespace SimReeferMiddlewareSystemWPF
             services.AddTransient<SensorBodyViewModelVer10>();
 
             services.AddTransient<SendManualViewModel>();
+            services.AddTransient<FOTAServerViewModel>();
 
             //Views
             services.AddSingleton(s => new MainView()
