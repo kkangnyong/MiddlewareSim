@@ -40,6 +40,7 @@ namespace SimReeferMiddlewareSystemWPF
             services.AddSingleton<ReeferBodyStore>();
             services.AddSingleton<SensorBodyStore>();
             services.AddSingleton<ServerConnectionStore>();
+            services.AddSingleton<DeviceFirmwareInfoStore>();
 
             //Service
             services.AddSingleton<INavigationService, NavigationService>();
@@ -73,6 +74,7 @@ namespace SimReeferMiddlewareSystemWPF
 
             services.AddTransient<SendManualViewModel>();
             services.AddTransient<FOTAServerViewModel>();
+            services.AddTransient<FOTAServerPacketViewModel>();
 
             //Views
             services.AddSingleton(s => new MainView()
