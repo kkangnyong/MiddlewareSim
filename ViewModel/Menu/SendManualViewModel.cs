@@ -22,9 +22,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
         public ICommand ToRichTextChangedCommand { get; set; }
 
         private static readonly string _welcomeMessage = "Please Input Send Packet Data!!!";
-
         private string _sendMessageText { get; set; } = _welcomeMessage;
-        //public FlowDocument MyFlowDocument { get; set; }
 
         public SendManualViewModel() { }
 

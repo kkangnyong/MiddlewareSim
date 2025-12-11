@@ -5,6 +5,7 @@ using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
 using SimReeferMiddlewareSystemWPF.View.Menu;
+using SimReeferMiddlewareSystemWPF.ViewModel.Menu;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9;
@@ -31,6 +32,11 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 }
             }
         }
+
+        private static readonly string OK = "OK";
+        private static readonly string FAILED = "FAILED";
+        private static readonly string Collapsed = "Collapsed";
+        private static readonly string Visible = "Visible";
         private readonly INavigationService _navigationService;
         private readonly IMessageBoxService _messageBoxService;
         public readonly ITcpSocketService _tcpSocketService;
@@ -75,9 +81,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private bool _isRepeatEnabled { get; set; } = false;
         private bool _isCommPeriodChecked { get; set; } = false;
         private bool _isCommPeriodEnabled { get; set; } = false;
-        private string _visibleCommPeriod { get; set; } = "Collapsed";
-        private string _visibleRepeat { get; set; } = "Collapsed";
-        private string _visibleMenuOption { get; set; } = "Visible";
+        private string _visibleCommPeriod { get; set; } = Collapsed;
+        private string _visibleRepeat { get; set; } = Collapsed;
+        private string _visibleMenuOption { get; set; } = Visible;
         private List<string> _protocolVerList { get; set; } = new List<string>() { ProtocolVerType.V8.ToDescription(), ProtocolVerType.V9.ToDescription(), ProtocolVerType.V10.ToDescription() };
         private string _recievedMessage { get; set; } = "Message";
         private string _recievedRawMessage { get; set; } = "Raw Message";
@@ -157,25 +163,29 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
         private void ToSendManualMenu(object _)
         {
-            VisibleMenuOption = "Collapsed";
-            VisibleCommPeriod = "Collapsed";
-            VisibleRepeat = "Collapsed";
+            VisibleMenuOption = Collapsed;
+            VisibleCommPeriod = Collapsed;
+            VisibleRepeat = Collapsed;
             IsCommPeriodChecked = false;
             IsRepeatChecked = false;
+            _tcpSocketService.Disconnection();
             _navigationService.Navigate(NaviType.SendManualView);
         }
 
         private void ToIDGenerateMenu(object _)
         {
+            _tcpSocketService.Disconnection();
         }
 
-        private void ToFOTAMenu(object _) 
+        private void ToFOTAMenu(object _)
         {
+            _tcpSocketService.Disconnection();
         }
 
         private void ToMiddlewareMenu(object _)
         {
-            VisibleMenuOption = "Visible";
+            VisibleMenuOption = Visible;
+            _tcpSocketService.Disconnection();
             _navigationService.Navigate(NaviType.ProtocolView, ProtocolVersion);
         }
 
@@ -186,7 +196,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ProtocolVer9.IsStartDataEnabled = true;
             ProtocolVer10.IsStartDataEnabled = true;
 
-            ReceivedMessage = (originData.Length <= 2 && originData.Sum(x => x) == 0) ? "OK" : "FAILED";
+            ReceivedMessage = (originData.Length <= 2 && originData.Sum(x => x) == 0) ? OK : FAILED;
             ReceivedRawMessage = BitConverter.ToString(originData);
         }
 
@@ -204,12 +214,22 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private void RecievedByteToString(byte[] originData)
         {
             InitReceivedMessage();
-            ReceivedMessage = (originData.Length <= 2 && originData.Sum(x => x) == 0) ? "OK" : "FAILED";
+            ReceivedMessage = (originData.Length <= 2 && originData.Sum(x => x) == 0) ? OK : FAILED;
+
+            if (CurrentViewModel.GetType().Name.Equals(typeof(SendManualViewModel).Name))   //추후 ID Server, FOTA Server 메뉴도 조건에 추가
+            {
+                ReceivedMessage = (originData.Length > 0 && originData[0] == 255) ? OK : originData[0].ToString();
+            }
             ReceivedRawMessage = BitConverter.ToString(originData);
         }
 
         private void SocketAsyncConnected()
         {
+            ToLoadImage = "/Resources/Check_Mark.png";
+            if (CurrentViewModel.GetType().Name.Equals(typeof(SendManualViewModel).Name))   //추후 ID Server, FOTA Server 메뉴도 조건에 추가
+            {
+                return;
+            }
             //CurrentViewModel = null;
             //_navigationService.Navigate(NaviType.ProtocolView, ProtocolVersion);
             string[] strings = ProtocolVersion.Split(new string[] { ",", ".", "\t", " " }, StringSplitOptions.RemoveEmptyEntries);
@@ -224,7 +244,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
             if (!_tcpSocketService.SendMsg(msgBytes, true, false)) return;
 
-            ToLoadImage = "/Resources/Check_Mark.png";
             if (ProtocolVersion.Equals(_protocolVerList[0]))
             {
                 ProtocolVer8.Instance.IsDeviceInfoEnabled = true;
