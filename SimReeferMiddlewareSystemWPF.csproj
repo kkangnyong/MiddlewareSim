@@ -69,7 +69,16 @@
     <Compile Update="View\Menu\FOTAServer.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Menu\IDGenerateServerRegistPacket.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Menu\IDGenerateServerCreatePacket.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Menu\FOTAServerPacket.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Menu\IDGenerateServer.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\ProtocolVer\Ver10\DeviceBodyVer10.xaml.cs">

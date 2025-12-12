@@ -41,6 +41,7 @@ namespace SimReeferMiddlewareSystemWPF
             services.AddSingleton<SensorBodyStore>();
             services.AddSingleton<ServerConnectionStore>();
             services.AddSingleton<DeviceFirmwareInfoStore>();
+            services.AddSingleton<IDGenerateInfoStore>();
 
             //Service
             services.AddSingleton<INavigationService, NavigationService>();
@@ -75,6 +76,9 @@ namespace SimReeferMiddlewareSystemWPF
             services.AddTransient<SendManualViewModel>();
             services.AddTransient<FOTAServerViewModel>();
             services.AddTransient<FOTAServerPacketViewModel>();
+            services.AddTransient<IDGenerateServerViewModel>();
+            services.AddTransient<IDGenerateServerCreatePacketViewModel>();
+            services.AddTransient<IDGenerateServerRegistPacketViewModel>();
 
             //Views
             services.AddSingleton(s => new MainView()

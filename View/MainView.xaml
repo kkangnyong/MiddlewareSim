@@ -76,6 +76,15 @@
         <DataTemplate DataType="{x:Type viewmodelmenu:FOTAServerPacketViewModel}">
             <localmenu:FOTAServerPacket/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodelmenu:IDGenerateServerViewModel}">
+            <localmenu:IDGenerateServer/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodelmenu:IDGenerateServerCreatePacketViewModel}">
+            <localmenu:IDGenerateServerCreatePacket/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodelmenu:IDGenerateServerRegistPacketViewModel}">
+            <localmenu:IDGenerateServerRegistPacket/>
+        </DataTemplate>
         <Style x:Key="MyMenuStyle" TargetType="{x:Type MenuItem}">
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontWeight" Value="Bold"/>
