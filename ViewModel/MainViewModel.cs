@@ -4,6 +4,7 @@ using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
+using SimReeferMiddlewareSystemWPF.View;
 using SimReeferMiddlewareSystemWPF.View.Menu;
 using SimReeferMiddlewareSystemWPF.ViewModel.Menu;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10;
@@ -233,7 +234,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ReceivedMessage = (originData.Length <= 2 && originData.Sum(x => x) == 0) ? OK : FAILED;
 
             if (CurrentViewModel.GetType().Name.Equals(typeof(SendManualViewModel).Name)
-                || CurrentViewModel.GetType().Name.Equals(typeof(FOTAServerViewModel).Name))   //추후 ID Server, FOTA Server 메뉴도 조건에 추가
+                || CurrentViewModel.GetType().Name.Equals(typeof(FOTAServerViewModel).Name)
+                || CurrentViewModel.GetType().Name.Equals(typeof(IDGenerateServerViewModel).Name))   //추후 ID Server, FOTA Server 메뉴도 조건에 추가
             {
                 ReceivedMessage = (originData.Length > 0 && originData[0] == 255) ? OK : originData[0].ToString();
             }
@@ -244,7 +246,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         {
             if (_timer != null && !_timer.Enabled) ToLoadImage = "/Resources/Check_Mark.png";
             if (CurrentViewModel.GetType().Name.Equals(typeof(SendManualViewModel).Name)
-                || CurrentViewModel.GetType().Name.Equals(typeof(FOTAServerViewModel).Name)) return;   //추후 ID Server, FOTA Server 메뉴도 조건에 추가
+                || CurrentViewModel.GetType().Name.Equals(typeof(FOTAServerViewModel).Name)
+                || CurrentViewModel.GetType().Name.Equals(typeof(IDGenerateServerViewModel).Name)) return;   //추후 ID Server, FOTA Server 메뉴도 조건에 추가
 
             //CurrentViewModel = null;
             //_navigationService.Navigate(NaviType.ProtocolView, ProtocolVersion);

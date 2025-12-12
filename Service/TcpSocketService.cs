@@ -121,7 +121,8 @@ namespace SimReeferMiddlewareSystemWPF.Service
                 if (args.BytesTransferred > 0 && args.SocketError == SocketError.Success)
                 {
                     if (MainView.CurrentViewModel.GetType().Name.Equals(typeof(SendManualViewModel).Name) 
-                        || MainView.CurrentViewModel.GetType().Name.Equals(typeof(FOTAServerViewModel).Name))
+                        || MainView.CurrentViewModel.GetType().Name.Equals(typeof(FOTAServerViewModel).Name)
+                        || MainView.CurrentViewModel.GetType().Name.Equals(typeof(IDGenerateServerViewModel).Name))
                     {
                         //SendManual Menu Received
                         byte[] recvBytes = args.Buffer;

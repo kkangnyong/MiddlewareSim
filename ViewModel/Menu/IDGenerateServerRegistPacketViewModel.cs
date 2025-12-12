@@ -8,6 +8,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
         private static IDGenerateServerRegistPacketViewModel _instance;
         public IDGenerateServerRegistPacketViewModel Instance { get { if (_instance == null) _instance = new IDGenerateServerRegistPacketViewModel(); return _instance; } }
 
+        private static IDGenerateServerCreatePacketViewModel _createPacketViewModel;
+        public IDGenerateServerCreatePacketViewModel CreatePacketViewModel { get { if (_createPacketViewModel == null) _createPacketViewModel = new IDGenerateServerCreatePacketViewModel(); return _createPacketViewModel; } }
+
         private IDGenerateInfoStore _idGenerateInfoStore;
 
         private IDGenerateInfoModel _idGenerateInfoModel;

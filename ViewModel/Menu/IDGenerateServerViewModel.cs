@@ -74,33 +74,45 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
             $" \"{_device_type}\": \"{CurrentIDGenerateInfoModel.DeviceType}\"",
             $" \"{_hd_ver}\": \"{CurrentIDGenerateInfoModel.HwVer}\"",
             $" \"{_mobile_imei}\": \"{CurrentIDGenerateInfoModel.MobileIMEI}\"",
-            $" \"{_request_type}\": {CurrentIDGenerateInfoModel.RequestType}" + "}" + $"{0x1A}"
+            $" \"{_request_type}\": {CurrentIDGenerateInfoModel.RequestType}" + "}"
             });
+
             string sendMsg = BitConverter.ToString(Encoding.UTF8.GetBytes(sb.ToString().Trim())).Replace('-', ' ');
+            sendMsg = sendMsg.PadRight(sendMsg.Length + 1) + string.Format("{0:X2}", 0x1A);
 
             _tcpSocketService.SendHexMessage(sendMsg);
+            IsIDCreateEnabled = false;
+            IsIDRegistEnabled = true;
         }
 
         private void ToSendIDRegistPacket(object _)
         {
-            //StringBuilder sb = new StringBuilder();
-            //sb.AppendJoin(COMMA, new string[] {
-            //"deviceandfirmwareinfo",
-            //CurrentIDGenerateInfoModel.Result,
-            //CurrentIDGenerateInfoModel.ReqType.ToString(),
-            //CurrentIDGenerateInfoModel.DeviceType,
-            //CurrentIDGenerateInfoModel.DeviceNumber.ToString(),
-            //CurrentIDGenerateInfoModel.FwVersion,
-            //CurrentIDGenerateInfoModel.ContainerType,
-            //CurrentIDGenerateInfoModel.ProtocolVersion,
-            //CurrentIDGenerateInfoModel.SequenceType,
-            //CurrentIDGenerateInfoModel.ContainerNumber,
-            //CurrentIDGenerateInfoModel.DownloadDate,
-            //CurrentIDGenerateInfoModel.Extension
-            //});
+            StringBuilder sb = new StringBuilder();
+            sb.AppendJoin(COMMA, new string[] {
+            "{" + $"\"{_apn}\": \"{CurrentIDGenerateInfoModel.APN}\"",
+            $" \"{_device_type}\": \"{CurrentIDGenerateInfoModel.DeviceType}\"",
+            $" \"{_hd_ver}\": \"{CurrentIDGenerateInfoModel.HwVer}\"",
+            $" \"{_sw_ver}\": \"{CurrentIDGenerateInfoModel.SwVer}\"",
+            $" \"{_mcu}\": \"{CurrentIDGenerateInfoModel.Mcu}\"",
+            $" \"{_mobile}\": \"{CurrentIDGenerateInfoModel.Mobile}\"",
+            $" \"{_mobile_imei}\": \"{CurrentIDGenerateInfoModel.MobileIMEI}\"",
+            $" \"{_period}\": {CurrentIDGenerateInfoModel.Period}",
+            $" \"{_usim}\": \"{CurrentIDGenerateInfoModel.Usim}\"",
+            $" \"{_gps_timeout}\": {CurrentIDGenerateInfoModel.GpsTimeout}",
+            $" \"{_gps_stable_time}\": {CurrentIDGenerateInfoModel.GpsStableTime}",
+            $" \"{_wire_conn_timeout}\": {CurrentIDGenerateInfoModel.WireConnTimeout}",
+            $" \"{_comm_retry_cnt}\": {CurrentIDGenerateInfoModel.CommRetryCount}",
+            $" \"{_shock_upper}\": {CurrentIDGenerateInfoModel.ShockUpper}" + "}"
+            });
 
-            _tcpSocketService.SendHexMessage("sb.ToString().Trim()");
+            string sendMsg = BitConverter.ToString(Encoding.UTF8.GetBytes(sb.ToString().Trim())).Replace('-', ' ');
+            sendMsg = sendMsg.PadRight(sendMsg.Length + 1) + string.Format("{0:X2}", 0x1A);
+
+            _tcpSocketService.SendHexMessage(sendMsg);
+            IsIDRegistEnabled = false;
+            IsIDCreateEnabled = true;
         }
+
         public bool IsIDCreateEnabled
         {
             get { return _isIDCreateEnabled; }
