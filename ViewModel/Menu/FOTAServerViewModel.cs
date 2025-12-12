@@ -1,65 +1,66 @@
 ﻿using SimReeferMiddlewareSystemWPF.Command;
 using SimReeferMiddlewareSystemWPF.Interface;
+using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Store;
 using System.ComponentModel;
+using System.Text;
 using System.Windows.Input;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
 {
     public class FOTAServerViewModel : ViewModelBase
     {
-        private readonly INavigationService _navigationService;
+        private readonly char COMMA = ',';
         private readonly IMessageBoxService _messageBoxService;
         public readonly ITcpSocketService _tcpSocketService;
-        public readonly ITableBuilderService _tableBuilderService;
-        private readonly MainNavigationStore? _mainNavigationStore;
-        public static FOTAServerViewModel _instance { get; set; }
-        public FOTAServerViewModel Instance { get { if (_instance == null) _instance = new FOTAServerViewModel(); return _instance; } }
+        private readonly DeviceFirmwareInfoStore _deviceFirmwareInfoStore;
+        private DeviceFirmwareInfoModel CurrentDeviceFirmwareInfoModel => _deviceFirmwareInfoStore._currentDeviceFirmwareInfo;
 
         public ICommand ToSendRawDataPacketCommand { get; set; }
 
-        public INotifyPropertyChanged? CurrentFOTAServerPacketViewModel
+        public INotifyPropertyChanged? CurrentRawDataViewModel
         {
             get { return (ViewModelBase)App.Current.Services.GetService(typeof(FOTAServerPacketViewModel)); }
         }
+        public static FOTAServerViewModel _instance { get; set; }
+        public FOTAServerViewModel Instance { get { if (_instance == null) _instance = new FOTAServerViewModel(); return _instance; } }
 
         private string _sendMessageText { get; set; } = string.Empty;
 
         public FOTAServerViewModel() { }
 
-        public FOTAServerViewModel(INavigationService navigationService,
-            IMessageBoxService messageBoxService,
+        public FOTAServerViewModel(IMessageBoxService messageBoxService,
             ITcpSocketService tcpSocketService,
-            ITableBuilderService tableBuilderService,
-            MainNavigationStore mainNavigationStore,
-            ServerConnectionStore serverConnectionStore)
+            ServerConnectionStore serverConnectionStore,
+            DeviceFirmwareInfoStore deviceFirmwareInfoStore)
         {
             _instance = this;
             _messageBoxService = messageBoxService;
             _tcpSocketService = tcpSocketService;
-            _tableBuilderService = tableBuilderService;
-            _mainNavigationStore = mainNavigationStore;
-            _navigationService = navigationService;
+            _deviceFirmwareInfoStore = deviceFirmwareInfoStore;
             ToSendRawDataPacketCommand = new RelayCommand<object>(ToSendRawDataPacket);
         }
 
 
         private void ToSendRawDataPacket(object _)
         {
-            _tcpSocketService.SendJsonMessage(SendMessageText);
-        }
+            StringBuilder sb = new StringBuilder();
+            sb.AppendJoin(COMMA, new string[] {
+            "deviceandfirmwareinfo",
+            CurrentDeviceFirmwareInfoModel.Result,
+            CurrentDeviceFirmwareInfoModel.ReqType.ToString(),
+            CurrentDeviceFirmwareInfoModel.DeviceType,
+            CurrentDeviceFirmwareInfoModel.DeviceNumber.ToString(),
+            CurrentDeviceFirmwareInfoModel.FwVersion,
+            CurrentDeviceFirmwareInfoModel.ContainerType,
+            CurrentDeviceFirmwareInfoModel.ProtocolVersion,
+            CurrentDeviceFirmwareInfoModel.SequenceType,
+            CurrentDeviceFirmwareInfoModel.ContainerNumber,
+            CurrentDeviceFirmwareInfoModel.DownloadDate,
+            CurrentDeviceFirmwareInfoModel.Extension
+            });
 
-        public string SendMessageText 
-        { 
-            get { return _sendMessageText; }
-            set 
-            {
-                if (_sendMessageText != null)
-                {
-                    _sendMessageText = value;
-                    OnPropertyChanged();
-                }
-            }
+            _tcpSocketService.SendJsonMessage(sb.ToString().Trim());
         }
     }
 }

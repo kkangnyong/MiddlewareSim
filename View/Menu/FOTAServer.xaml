@@ -45,7 +45,7 @@
                 <ContentControl Content="{Binding CurrentRawDataViewModel}" Margin="0,0,0,0"/>                
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
-                <Button Command="{Binding ToSendRawDataPacket}" Content="Send Raw Data Test Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
+                <Button Command="{Binding ToSendRawDataPacketCommand}" Content="Send Raw Data Test Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
     </Grid>

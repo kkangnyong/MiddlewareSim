@@ -120,7 +120,8 @@ namespace SimReeferMiddlewareSystemWPF.Service
             {
                 if (args.BytesTransferred > 0 && args.SocketError == SocketError.Success)
                 {
-                    if (MainView.CurrentViewModel.GetType().Name.Equals(typeof(SendManualViewModel).Name))
+                    if (MainView.CurrentViewModel.GetType().Name.Equals(typeof(SendManualViewModel).Name) 
+                        || MainView.CurrentViewModel.GetType().Name.Equals(typeof(FOTAServerViewModel).Name))
                     {
                         //SendManual Menu Received
                         byte[] recvBytes = args.Buffer;
@@ -304,7 +305,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
         public bool SendJsonMessage(string sendJsonMsg)
         {
             string sendMsg = sendJsonMsg;
-            string[] sendMsgBytes = sendMsg.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            string[] sendMsgBytes = sendMsg.Split(',', StringSplitOptions.None);
             List<byte> sendJsonBytes = null;
             if (sendMsgBytes[0].Equals("deviceandfirmwareinfo"))
             {
@@ -313,7 +314,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                 if (!int.TryParse(sendMsgBytes[4].Trim(), out deviceNo)) deviceNo = 0;
                 if (!int.TryParse(sendMsgBytes[2].Trim(), out type)) type = 0;
 
-                DeviceAndFirmwareInfo device = new DeviceAndFirmwareInfo { Result = sendMsgBytes[1].Trim(), ReqType = (RequestType)type, IoTDeviceType = sendMsgBytes[3].Trim(), DeviceNumber = deviceNo, FWVersion = sendMsgBytes[5].Trim(), ContainerType = sendMsgBytes[6].Trim(), ProtocolVersion = sendMsgBytes[7].Trim(), SequenceType = sendMsgBytes[8].Trim() };
+                DeviceAndFirmwareInfo device = new DeviceAndFirmwareInfo { Result = sendMsgBytes[1].Trim(), ReqType = (RequestType)type, IoTDeviceType = sendMsgBytes[3].Trim(), DeviceNumber = deviceNo, FWVersion = sendMsgBytes[5].Trim(), ContainerType = sendMsgBytes[6].Trim(), ProtocolVersion = sendMsgBytes[7].Trim(), SequenceType = sendMsgBytes[8].Trim(), ContainerNumber = sendMsgBytes[9].Trim(), DownloadDate = sendMsgBytes[10].Trim(), Extension = sendMsgBytes[11].Trim() };
                 sendJsonBytes = JsonSerializer.Serialize(device).ToUTF8Array().ToList();
                 sendJsonBytes.Add(0x1A);
                 return SendMsg(sendJsonBytes.ToArray(), false, false);
@@ -566,7 +567,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
         public ushort EndIndex { get; set; }
 
         [JsonPropertyName("container_number")]
-        public string ContainerName { get; set; } = string.Empty;
+        public string ContainerNumber { get; set; } = string.Empty;
 
         [JsonPropertyName("download_date")]
         public string DownloadDate { get; set; } = string.Empty;

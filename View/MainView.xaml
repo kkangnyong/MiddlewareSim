@@ -73,6 +73,9 @@
         <DataTemplate DataType="{x:Type viewmodelmenu:FOTAServerViewModel}">
             <localmenu:FOTAServer/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodelmenu:FOTAServerPacketViewModel}">
+            <localmenu:FOTAServerPacket/>
+        </DataTemplate>
         <Style x:Key="MyMenuStyle" TargetType="{x:Type MenuItem}">
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -159,7 +162,7 @@
                 <StackPanel Grid.Column="4" Orientation="Horizontal" >
                     <TextBlock Text="Protocol Version:" Visibility="{Binding VisibleMenuOption}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
                     <ComboBox Visibility="{Binding VisibleMenuOption}" IsEnabled="{Binding IsEnabled}" SelectedItem="{Binding ProtocolVersion}" ItemsSource="{Binding ProtocolVerList}" Style="{StaticResource MyComboBoxStyle}" BorderThickness="1" BorderBrush="Black" Margin="0,0,5,0"/>
-                    <Button Command="{Binding ToConnectCommand}" MinWidth="80" IsEnabled="{Binding IsConnectEnabled}" Content="Connect" Style="{StaticResource MyButtonStyle}" Margin="0,0,5,0"/>
+                    <Button Command="{Binding ToConnectCommand}" MinWidth="80" Visibility="{Binding VisibleConnect}" IsEnabled="{Binding IsConnectEnabled}" Content="Connect" Style="{StaticResource MyButtonStyle}" Margin="0,0,5,0"/>
                     <Button Command="{Binding ToDisconnectCommand}" MinWidth="100" IsEnabled="{Binding IsDisconnectEnabled}" Content="Disconnect" Style="{StaticResource MyButtonStyle}" Margin="0,0,5,0"/>
                     <Image gif:ImageBehavior.AnimatedSource="{Binding ToLoadImage}" MinWidth="50" Margin="0,0,5,0"/>
 

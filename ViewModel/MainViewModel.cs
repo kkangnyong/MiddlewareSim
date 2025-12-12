@@ -84,6 +84,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private string _visibleCommPeriod { get; set; } = Collapsed;
         private string _visibleRepeat { get; set; } = Collapsed;
         private string _visibleMenuOption { get; set; } = Visible;
+        private string _visibleConnect { get; set; } = Visible;
         private List<string> _protocolVerList { get; set; } = new List<string>() { ProtocolVerType.V8.ToDescription(), ProtocolVerType.V9.ToDescription(), ProtocolVerType.V10.ToDescription() };
         private string _recievedMessage { get; set; } = "Message";
         private string _recievedRawMessage { get; set; } = "Raw Message";
@@ -172,6 +173,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
             if (_timer != null && _timer.Enabled)
             {
+                VisibleConnect = Visible;
                 ToLoadImage = string.Empty;
                 _timer.Elapsed -= _timer_Elapsed;
                 _timer.Stop();
@@ -230,7 +232,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             InitReceivedMessage();
             ReceivedMessage = (originData.Length <= 2 && originData.Sum(x => x) == 0) ? OK : FAILED;
 
-            if (CurrentViewModel.GetType().Name.Equals(typeof(SendManualViewModel).Name))   //추후 ID Server, FOTA Server 메뉴도 조건에 추가
+            if (CurrentViewModel.GetType().Name.Equals(typeof(SendManualViewModel).Name)
+                || CurrentViewModel.GetType().Name.Equals(typeof(FOTAServerViewModel).Name))   //추후 ID Server, FOTA Server 메뉴도 조건에 추가
             {
                 ReceivedMessage = (originData.Length > 0 && originData[0] == 255) ? OK : originData[0].ToString();
             }
@@ -240,10 +243,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private void SocketAsyncConnected()
         {
             if (_timer != null && !_timer.Enabled) ToLoadImage = "/Resources/Check_Mark.png";
-            if (CurrentViewModel.GetType().Name.Equals(typeof(SendManualViewModel).Name))   //추후 ID Server, FOTA Server 메뉴도 조건에 추가
-            {
-                return;
-            }
+            if (CurrentViewModel.GetType().Name.Equals(typeof(SendManualViewModel).Name)
+                || CurrentViewModel.GetType().Name.Equals(typeof(FOTAServerViewModel).Name)) return;   //추후 ID Server, FOTA Server 메뉴도 조건에 추가
+
             //CurrentViewModel = null;
             //_navigationService.Navigate(NaviType.ProtocolView, ProtocolVersion);
             string[] strings = ProtocolVersion.Split(new string[] { ",", ".", "\t", " " }, StringSplitOptions.RemoveEmptyEntries);
@@ -283,6 +285,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
             if (IsCommPeriodChecked && _timer != null && !_timer.Enabled)
             {
+                VisibleConnect = Collapsed;
                 _timer.Interval = CommPeriod * (1000 * 60);
                 _timer.Elapsed += _timer_Elapsed;
                 _timer.Start();
@@ -321,6 +324,20 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private void CurrentViewModelChanged()
         {
             CurrentViewModel = _mainNavigationStore?.CurrentViewModel;
+        }
+
+        public string VisibleConnect
+        {
+            get { return _visibleConnect; }
+
+            set
+            {
+                if (_visibleConnect != null)
+                {
+                    _visibleConnect = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public string VisibleMenuOption
@@ -380,13 +397,14 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                     {
                         if (_timer != null && _timer.Enabled)
                         {
+                            VisibleConnect = Visible;
                             ToLoadImage = string.Empty;
                             _timer.Elapsed -= _timer_Elapsed;
                             _timer.Stop();
                         }
                     }
 
-                    VisibleCommPeriod = !_isCommPeriodChecked ? "Collapsed" : "Visible";
+                    VisibleCommPeriod = !_isCommPeriodChecked ? Collapsed : Visible;
                 }
             }
         }
