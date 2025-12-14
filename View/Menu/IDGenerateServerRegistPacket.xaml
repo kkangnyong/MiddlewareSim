@@ -13,9 +13,9 @@
             <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
     </UserControl.Resources>
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <Binding Source="{StaticResource IDGenerateServerRegistPacketViewModel}"/>
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
         <Grid Background="White">
 
