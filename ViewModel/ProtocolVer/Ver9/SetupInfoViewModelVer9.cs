@@ -18,7 +18,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         public SetupInfoViewModelVer9(SetupInfoStore setupInfoStore)
         {
             _instance = this;
-            Instance._setupInfoStore = setupInfoStore;
+            _setupInfoStore = setupInfoStore;
         }
 
         public int Code

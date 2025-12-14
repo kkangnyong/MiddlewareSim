@@ -22,7 +22,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         public SensorBodyViewModelVer9(SensorBodyStore sensorBodyStore)
         {
             _instance = this;
-            Instance._sensorBodyStore = sensorBodyStore;
+            _sensorBodyStore = sensorBodyStore;
         }
 
         public string Date

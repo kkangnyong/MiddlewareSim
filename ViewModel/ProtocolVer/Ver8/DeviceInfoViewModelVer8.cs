@@ -18,7 +18,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
         public DeviceInfoViewModelVer8(DeviceInfoStore deviceInfoStore) 
         {
             _instance = this;
-            Instance._deviceInfoStore = deviceInfoStore;
+            _deviceInfoStore = deviceInfoStore;
         }
 
 

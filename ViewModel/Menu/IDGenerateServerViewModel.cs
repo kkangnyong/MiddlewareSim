@@ -28,10 +28,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
         private readonly string _shock_upper = "shock_upper";
         private readonly IMessageBoxService _messageBoxService;
         public readonly ITcpSocketService _tcpSocketService;
-        private readonly IDGenerateInfoStore _idGenerateInfoStore;
-
 
         private IDGenerateInfoCreateStore _idGenerateInfoCreateStore;
+        private IDGenerateInfoRegistStore _idGenerateInfoRegistStore;
         private IDGenerateInfoModel CurrentIDGenerateInfoCreateModel => Instance._idGenerateInfoCreateStore._currentIDGenerateInfo;
 
         private static IDGenerateServerRegistPacketViewModel _createPacketViewModel;
@@ -61,14 +60,14 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
         public IDGenerateServerViewModel(IMessageBoxService messageBoxService,
             ITcpSocketService tcpSocketService,
             ServerConnectionStore serverConnectionStore,
-            IDGenerateInfoStore idGenerateInfoStore,
-            IDGenerateInfoCreateStore idGenerateInfoCreateStore)
+            IDGenerateInfoCreateStore idGenerateInfoCreateStore,
+            IDGenerateInfoRegistStore idGenerateInfoRegistStore)
         {
             _instance = this;
             _messageBoxService = messageBoxService;
             _tcpSocketService = tcpSocketService;
-            _idGenerateInfoStore = idGenerateInfoStore;
-            Instance._idGenerateInfoCreateStore = idGenerateInfoCreateStore;
+            _idGenerateInfoCreateStore = idGenerateInfoCreateStore;
+            _idGenerateInfoRegistStore = idGenerateInfoRegistStore;
             ToSendIDCreatePacketCommand = new RelayCommand<object>(ToSendIDCreatePacket);
             ToSendIDRegistPacketCommand = new RelayCommand<object>(ToSendIDRegistPacket);
         }
@@ -92,27 +91,13 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
             IsIDCreateEnabled = false;
             IsIDRegistEnabled = true;
 
-            CreatePacketViewModel.APN = CurrentIDGenerateInfoCreateModel.APN;
-            CreatePacketViewModel.DeviceType = CurrentIDGenerateInfoCreateModel.DeviceType;
-            CreatePacketViewModel.HwVer = CurrentIDGenerateInfoCreateModel.HwVer;
-            CreatePacketViewModel.MobileIMEI = CurrentIDGenerateInfoCreateModel.MobileIMEI;
-            //CreatePacketViewModel.IDGenerateInfoModel = new IDGenerateInfoModel()
-            //{
-            //    APN = CurrentIDGenerateInfoCreateModel.APN,
-            //    DeviceType = CurrentIDGenerateInfoCreateModel.DeviceType,
-            //    HwVer = CurrentIDGenerateInfoCreateModel.HwVer,
-            //    SwVer = CurrentIDGenerateInfoCreateModel.SwVer,
-            //    MCU = CurrentIDGenerateInfoCreateModel.MCU,
-            //    Mobile = CurrentIDGenerateInfoCreateModel.Mobile,
-            //    MobileIMEI = CurrentIDGenerateInfoCreateModel.MobileIMEI,
-            //    Period = CurrentIDGenerateInfoCreateModel.Period,
-            //    Usim = CurrentIDGenerateInfoCreateModel.Usim,
-            //    GpsTimeout = CurrentIDGenerateInfoCreateModel.GpsTimeout,
-            //    GpsStableTime = CurrentIDGenerateInfoCreateModel.GpsStableTime,
-            //    WireConnTimeout = CurrentIDGenerateInfoCreateModel.WireConnTimeout,
-            //    CommRetryCount = CurrentIDGenerateInfoCreateModel.CommRetryCount,
-            //    ShockUpper = CurrentIDGenerateInfoCreateModel.ShockUpper
-            //};
+            _idGenerateInfoRegistStore.CurrentIDGenerateInfo = new IDGenerateInfoModel()
+            {
+                APN = CurrentIDGenerateInfoCreateModel.APN,
+                DeviceType = CurrentIDGenerateInfoCreateModel.DeviceType,
+                HwVer = CurrentIDGenerateInfoCreateModel.HwVer,
+                MobileIMEI = CurrentIDGenerateInfoCreateModel.MobileIMEI
+            };
         }
 
         private void ToSendIDRegistPacket(object _)

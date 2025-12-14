@@ -18,7 +18,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         public ReeferBodyViewModelVer9(ReeferBodyStore reeferBodyStore)
         {
             _instance = this;
-            Instance._reeferBodyStore = reeferBodyStore;
+            _reeferBodyStore = reeferBodyStore;
         }
 
         public string ContainerSN

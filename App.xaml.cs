@@ -41,7 +41,6 @@ namespace SimReeferMiddlewareSystemWPF
             services.AddSingleton<SensorBodyStore>();
             services.AddSingleton<ServerConnectionStore>();
             services.AddSingleton<DeviceFirmwareInfoStore>();
-            services.AddSingleton<IDGenerateInfoStore>();
             services.AddSingleton<IDGenerateInfoCreateStore>();
             services.AddSingleton<IDGenerateInfoRegistStore>();
 

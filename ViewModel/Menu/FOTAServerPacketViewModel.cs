@@ -18,7 +18,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
         public FOTAServerPacketViewModel(DeviceFirmwareInfoStore deviceFirmwareInfoStore)
         {
             _instance = this;
-            Instance._deviceFirmwareInfoStore = deviceFirmwareInfoStore;
+            _deviceFirmwareInfoStore = deviceFirmwareInfoStore;
         }
 
         public string Result

@@ -24,7 +24,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         public DeviceBodyViewModelVer9(DeviceBodyStore deviceBodyStore)
         {
             _instance = this;
-            Instance._deviceBodyStore = deviceBodyStore;
+            _deviceBodyStore = deviceBodyStore;
         }
 
         public List<short> CodeList
