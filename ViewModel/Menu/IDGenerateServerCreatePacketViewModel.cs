@@ -11,17 +11,17 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
         private static IDGenerateServerRegistPacketViewModel _registPacketViewModel;
         public IDGenerateServerRegistPacketViewModel RegistPacketViewModel { get { if (_registPacketViewModel == null) _registPacketViewModel = new IDGenerateServerRegistPacketViewModel(); return _registPacketViewModel; } }
 
-        private IDGenerateInfoStore _idGenerateInfoStore;
+        private IDGenerateInfoCreateStore _idGenerateInfoCreateStore;
 
         private IDGenerateInfoModel _idGenerateInfoModel;
-        public IDGenerateInfoModel IDGenerateInfoModel { get { if (_idGenerateInfoModel == null) _idGenerateInfoModel = Instance._idGenerateInfoStore._currentIDGenerateInfo = new IDGenerateInfoModel(); return _idGenerateInfoModel; } }
+        public IDGenerateInfoModel IDGenerateInfoModel { get { if (_idGenerateInfoModel == null) _idGenerateInfoModel = Instance._idGenerateInfoCreateStore._currentIDGenerateInfo = new IDGenerateInfoModel(); return _idGenerateInfoModel; } }
 
         public IDGenerateServerCreatePacketViewModel() { }
 
-        public IDGenerateServerCreatePacketViewModel(IDGenerateInfoStore idGenerateInfoStore)
+        public IDGenerateServerCreatePacketViewModel(IDGenerateInfoCreateStore idGenerateInfoCreateStore)
         {
             _instance = this;
-            Instance._idGenerateInfoStore = idGenerateInfoStore;
+            Instance._idGenerateInfoCreateStore = idGenerateInfoCreateStore;
         }
 
         public string APN

@@ -27,9 +27,12 @@
     <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="350"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Border BorderBrush="Black" BorderThickness="1"/>
+        </Grid>
         <Grid Grid.Column="1" Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -37,16 +40,20 @@
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Top" Background="LightBlue">
+            <Grid Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Top" Height="30" Background="LightBlue">
                 <Border BorderBrush="Black" BorderThickness="1"/>
                 <TextBlock Text="FOTA Server" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
             </Grid>
             <Grid Grid.Row="1">
-                <ContentControl Content="{Binding CurrentRawDataViewModel}" Margin="0,0,0,0"/>                
+                <ContentControl Content="{Binding CurrentRawDataViewModel}" HorizontalAlignment="Center" VerticalAlignment="Top"/>                
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Border BorderBrush="Black" BorderThickness="1"/>
                 <Button Command="{Binding ToSendRawDataPacketCommand}" Content="Send Raw Data Test Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
+        </Grid>
+        <Grid Grid.Column="2">
+            <Border BorderBrush="Black" BorderThickness="1"/>
         </Grid>
     </Grid>
 </UserControl>

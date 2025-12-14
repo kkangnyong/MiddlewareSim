@@ -30,6 +30,9 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Border BorderBrush="Black" BorderThickness="1"/>
+        </Grid>
         <Grid Grid.Column="1" Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -37,7 +40,7 @@
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Top" Background="LightBlue">
+            <Grid Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Top" Height="30" Background="LightBlue">
                 <Border BorderBrush="Black" BorderThickness="1"/>
                 <TextBlock Text="Send Manual Data" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
             </Grid>
@@ -62,12 +65,17 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
+                    <Border BorderBrush="Black" BorderThickness="1"/>
                     <Button Command="{Binding ToSendHexMessageCommand}" Content="Send Hex Data Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
                 </Grid>
                 <Grid Grid.Column="1">
+                    <Border BorderBrush="Black" BorderThickness="1"/>
                     <Button Command="{Binding ToSendJsonMessageCommand}" Content="Send Json Data Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
                 </Grid>
             </Grid>
+        </Grid>
+        <Grid Grid.Column="2">
+            <Border BorderBrush="Black" BorderThickness="1"/>
         </Grid>
     </Grid>
 </UserControl>

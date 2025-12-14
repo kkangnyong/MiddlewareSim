@@ -42,6 +42,8 @@ namespace SimReeferMiddlewareSystemWPF
             services.AddSingleton<ServerConnectionStore>();
             services.AddSingleton<DeviceFirmwareInfoStore>();
             services.AddSingleton<IDGenerateInfoStore>();
+            services.AddSingleton<IDGenerateInfoCreateStore>();
+            services.AddSingleton<IDGenerateInfoRegistStore>();
 
             //Service
             services.AddSingleton<INavigationService, NavigationService>();

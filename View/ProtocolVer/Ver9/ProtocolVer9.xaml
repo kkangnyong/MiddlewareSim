@@ -40,7 +40,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+            <Grid Grid.Row="0" VerticalAlignment="Top" Height="30" Background="LightBlue">
                 <Border BorderBrush="Black" BorderThickness="1"/>
                 <TextBlock Text="1. Device Info" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
             </Grid>
@@ -48,6 +48,7 @@
                 <ContentControl Content="{Binding CurrentDeviceInfoViewModel}" Margin="0,0,0,0"/>
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Border BorderBrush="Black" BorderThickness="1"/>
                 <Button IsEnabled="{Binding IsDeviceInfoEnabled}" Command="{Binding ToDeviceInfoCommand}" Content="Send Device Info Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
@@ -57,7 +58,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+            <Grid Grid.Row="0" VerticalAlignment="Top" Height="30" Background="LightBlue">
                 <Border BorderBrush="Black" BorderThickness="1"/>
                 <TextBlock Text="2. Setup Info" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
             </Grid>
@@ -65,6 +66,7 @@
                 <ContentControl Content="{Binding CurrentSetupInfoViewModel}" Margin="0,0,0,0"/>
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Border BorderBrush="Black" BorderThickness="1"/>
                 <Button IsEnabled="{Binding IsSetupInfoEnabled}" Command="{Binding ToSetupInfoCommand}" Content="Send Setup Info Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
@@ -73,7 +75,7 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+            <Grid Grid.Row="0" VerticalAlignment="Top" Height="30" Background="LightBlue">
                 <Border BorderBrush="Black" BorderThickness="1"/>
                 <TextBlock Text="3. Start Data" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
             </Grid>
@@ -88,7 +90,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+            <Grid Grid.Row="0" VerticalAlignment="Top" Height="30" Background="LightBlue">
                 <Border BorderBrush="Black" BorderThickness="1"/>
                 <TextBlock Text="4. Device Data" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
             </Grid>
@@ -96,6 +98,7 @@
                 <ContentControl Content="{Binding CurrentDeviceBodyViewModel}"/>
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Border BorderBrush="Black" BorderThickness="1"/>
                 <Button IsEnabled="{Binding IsDeviceDataEnabled}" Command="{Binding ToDeviceBodyCommand}" Content="{Binding ContentSendDeviceData}" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
@@ -105,7 +108,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+            <Grid Grid.Row="0" VerticalAlignment="Top" Height="30" Background="LightBlue">
                 <Border BorderBrush="Black" BorderThickness="1"/>
                 <TextBlock Text="5. Reefer Data" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
             </Grid>
@@ -113,6 +116,7 @@
                 <ContentControl Content="{Binding CurrentReeferBodyViewModel}"/>
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Border BorderBrush="Black" BorderThickness="1"/>
                 <Button IsEnabled="{Binding IsReeferDataEnabled}" Command="{Binding ToReeferBodyCommand}" Content="{Binding ContentSendReeferData}" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
@@ -123,7 +127,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+            <Grid Grid.Row="0" VerticalAlignment="Top" Height="30" Background="LightBlue">
                 <Border BorderBrush="Black" BorderThickness="1"/>
                 <TextBlock Text="6. Sensor Data" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
             </Grid>
@@ -147,6 +151,7 @@
                 </ScrollViewer>
             </Grid>
             <Grid Grid.Row="3" VerticalAlignment="Bottom">
+                <Border BorderBrush="Black" BorderThickness="1"/>
                 <Button IsEnabled="{Binding IsSensorDataEnabled}" Command="{Binding ToSensorBodyCommand}" Content="{Binding ContentSendSensorData}" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
@@ -155,7 +160,7 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+            <Grid Grid.Row="0" VerticalAlignment="Top" Height="30" Background="LightBlue">
                 <Border BorderBrush="Black" BorderThickness="1"/>
                 <TextBlock Text="7. Start Command" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
             </Grid>

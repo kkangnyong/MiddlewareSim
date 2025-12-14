@@ -84,7 +84,7 @@
                 }
             }
         }
-        public string Mcu
+        public string MCU
         {
             get { return _mcu; }
             set

@@ -17,44 +17,56 @@
             <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
     </UserControl.Resources>
-    <Grid Margin="0,0,0,0" Background="White">
+    <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="350"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
+            <Border BorderBrush="Black" BorderThickness="1"/>
+        </Grid>
+        <Grid Grid.Column="1" Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+            <Grid Grid.Row="0" VerticalAlignment="Top" Height="30" Background="LightBlue">
                 <Border BorderBrush="Black" BorderThickness="1"/>
                 <TextBlock Text="1. ID Create" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
             </Grid>
             <Grid Grid.Row="1">
-                <ContentControl Content="{Binding CurrentIDGenerateServerCreatePacketViewModel}" Margin="0,0,0,0"/>
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <ContentControl Content="{Binding CurrentIDGenerateServerCreatePacketViewModel}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Border BorderBrush="Black" BorderThickness="1"/>
                 <Button IsEnabled="{Binding IsIDCreateEnabled}" Command="{Binding ToSendIDCreatePacketCommand}" Content="Send ID Create Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="2" Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+            <Grid Grid.Row="0" VerticalAlignment="Top" Height="30" Background="LightBlue">
                 <Border BorderBrush="Black" BorderThickness="1"/>
                 <TextBlock Text="2. ID Regist" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MyTextStyle}"/>
             </Grid>
             <Grid Grid.Row="1">
-                <ContentControl Content="{Binding CurrentIDGenerateServerRegistPacketViewModel}" Margin="0,0,0,0"/>
+                <Border BorderBrush="Black" BorderThickness="1"/>
+                <ContentControl Content="{Binding CurrentIDGenerateServerRegistPacketViewModel}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Border BorderBrush="Black" BorderThickness="1"/>
                 <Button IsEnabled="{Binding IsIDRegistEnabled}" Command="{Binding ToSendIDRegistPacketCommand}" Content="Send ID Regist Packet" VerticalAlignment="Bottom" Margin="5" Height="40" Style="{StaticResource MyButtonTextStyle}"/>
             </Grid>
+        </Grid>
+        <Grid Grid.Column="3">
+            <Border BorderBrush="Black" BorderThickness="1"/>
         </Grid>
     </Grid>
 </UserControl>

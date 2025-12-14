@@ -29,7 +29,13 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
         private readonly IMessageBoxService _messageBoxService;
         public readonly ITcpSocketService _tcpSocketService;
         private readonly IDGenerateInfoStore _idGenerateInfoStore;
-        private IDGenerateInfoModel CurrentIDGenerateInfoModel => _idGenerateInfoStore._currentIDGenerateInfo;
+
+
+        private IDGenerateInfoCreateStore _idGenerateInfoCreateStore;
+        private IDGenerateInfoModel CurrentIDGenerateInfoCreateModel => Instance._idGenerateInfoCreateStore._currentIDGenerateInfo;
+
+        private static IDGenerateServerRegistPacketViewModel _createPacketViewModel;
+        public IDGenerateServerRegistPacketViewModel CreatePacketViewModel { get { if (_createPacketViewModel == null) _createPacketViewModel = new IDGenerateServerRegistPacketViewModel(); return _createPacketViewModel.Instance; } }
 
         public ICommand ToSendIDCreatePacketCommand { get; set; }
         public ICommand ToSendIDRegistPacketCommand { get; set; }
@@ -55,12 +61,14 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
         public IDGenerateServerViewModel(IMessageBoxService messageBoxService,
             ITcpSocketService tcpSocketService,
             ServerConnectionStore serverConnectionStore,
-            IDGenerateInfoStore idGenerateInfoStore)
+            IDGenerateInfoStore idGenerateInfoStore,
+            IDGenerateInfoCreateStore idGenerateInfoCreateStore)
         {
             _instance = this;
             _messageBoxService = messageBoxService;
             _tcpSocketService = tcpSocketService;
             _idGenerateInfoStore = idGenerateInfoStore;
+            Instance._idGenerateInfoCreateStore = idGenerateInfoCreateStore;
             ToSendIDCreatePacketCommand = new RelayCommand<object>(ToSendIDCreatePacket);
             ToSendIDRegistPacketCommand = new RelayCommand<object>(ToSendIDRegistPacket);
         }
@@ -70,11 +78,11 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendJoin(COMMA, new string[] {
-            "{" + $"\"{_apn}\": \"{CurrentIDGenerateInfoModel.APN}\"",
-            $" \"{_device_type}\": \"{CurrentIDGenerateInfoModel.DeviceType}\"",
-            $" \"{_hd_ver}\": \"{CurrentIDGenerateInfoModel.HwVer}\"",
-            $" \"{_mobile_imei}\": \"{CurrentIDGenerateInfoModel.MobileIMEI}\"",
-            $" \"{_request_type}\": {CurrentIDGenerateInfoModel.RequestType}" + "}"
+            "{" + $"\"{_apn}\": \"{CurrentIDGenerateInfoCreateModel.APN}\"",
+            $" \"{_device_type}\": \"{CurrentIDGenerateInfoCreateModel.DeviceType}\"",
+            $" \"{_hd_ver}\": \"{CurrentIDGenerateInfoCreateModel.HwVer}\"",
+            $" \"{_mobile_imei}\": \"{CurrentIDGenerateInfoCreateModel.MobileIMEI}\"",
+            $" \"{_request_type}\": {CurrentIDGenerateInfoCreateModel.RequestType}" + "}"
             });
 
             string sendMsg = BitConverter.ToString(Encoding.UTF8.GetBytes(sb.ToString().Trim())).Replace('-', ' ');
@@ -83,26 +91,48 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
             _tcpSocketService.SendHexMessage(sendMsg);
             IsIDCreateEnabled = false;
             IsIDRegistEnabled = true;
+
+            CreatePacketViewModel.APN = CurrentIDGenerateInfoCreateModel.APN;
+            CreatePacketViewModel.DeviceType = CurrentIDGenerateInfoCreateModel.DeviceType;
+            CreatePacketViewModel.HwVer = CurrentIDGenerateInfoCreateModel.HwVer;
+            CreatePacketViewModel.MobileIMEI = CurrentIDGenerateInfoCreateModel.MobileIMEI;
+            //CreatePacketViewModel.IDGenerateInfoModel = new IDGenerateInfoModel()
+            //{
+            //    APN = CurrentIDGenerateInfoCreateModel.APN,
+            //    DeviceType = CurrentIDGenerateInfoCreateModel.DeviceType,
+            //    HwVer = CurrentIDGenerateInfoCreateModel.HwVer,
+            //    SwVer = CurrentIDGenerateInfoCreateModel.SwVer,
+            //    MCU = CurrentIDGenerateInfoCreateModel.MCU,
+            //    Mobile = CurrentIDGenerateInfoCreateModel.Mobile,
+            //    MobileIMEI = CurrentIDGenerateInfoCreateModel.MobileIMEI,
+            //    Period = CurrentIDGenerateInfoCreateModel.Period,
+            //    Usim = CurrentIDGenerateInfoCreateModel.Usim,
+            //    GpsTimeout = CurrentIDGenerateInfoCreateModel.GpsTimeout,
+            //    GpsStableTime = CurrentIDGenerateInfoCreateModel.GpsStableTime,
+            //    WireConnTimeout = CurrentIDGenerateInfoCreateModel.WireConnTimeout,
+            //    CommRetryCount = CurrentIDGenerateInfoCreateModel.CommRetryCount,
+            //    ShockUpper = CurrentIDGenerateInfoCreateModel.ShockUpper
+            //};
         }
 
         private void ToSendIDRegistPacket(object _)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendJoin(COMMA, new string[] {
-            "{" + $"\"{_apn}\": \"{CurrentIDGenerateInfoModel.APN}\"",
-            $" \"{_device_type}\": \"{CurrentIDGenerateInfoModel.DeviceType}\"",
-            $" \"{_hd_ver}\": \"{CurrentIDGenerateInfoModel.HwVer}\"",
-            $" \"{_sw_ver}\": \"{CurrentIDGenerateInfoModel.SwVer}\"",
-            $" \"{_mcu}\": \"{CurrentIDGenerateInfoModel.Mcu}\"",
-            $" \"{_mobile}\": \"{CurrentIDGenerateInfoModel.Mobile}\"",
-            $" \"{_mobile_imei}\": \"{CurrentIDGenerateInfoModel.MobileIMEI}\"",
-            $" \"{_period}\": {CurrentIDGenerateInfoModel.Period}",
-            $" \"{_usim}\": \"{CurrentIDGenerateInfoModel.Usim}\"",
-            $" \"{_gps_timeout}\": {CurrentIDGenerateInfoModel.GpsTimeout}",
-            $" \"{_gps_stable_time}\": {CurrentIDGenerateInfoModel.GpsStableTime}",
-            $" \"{_wire_conn_timeout}\": {CurrentIDGenerateInfoModel.WireConnTimeout}",
-            $" \"{_comm_retry_cnt}\": {CurrentIDGenerateInfoModel.CommRetryCount}",
-            $" \"{_shock_upper}\": {CurrentIDGenerateInfoModel.ShockUpper}" + "}"
+            "{" + $"\"{_apn}\": \"{CreatePacketViewModel.APN}\"",
+            $" \"{_device_type}\": \"{CreatePacketViewModel.DeviceType}\"",
+            $" \"{_hd_ver}\": \"{CreatePacketViewModel.HwVer}\"",
+            $" \"{_sw_ver}\": \"{CreatePacketViewModel.SwVer}\"",
+            $" \"{_mcu}\": \"{CreatePacketViewModel.MCU}\"",
+            $" \"{_mobile}\": \"{CreatePacketViewModel.Mobile}\"",
+            $" \"{_mobile_imei}\": \"{CreatePacketViewModel.MobileIMEI}\"",
+            $" \"{_period}\": {CreatePacketViewModel.Period}",
+            $" \"{_usim}\": \"{CreatePacketViewModel.Usim}\"",
+            $" \"{_gps_timeout}\": {CreatePacketViewModel.GpsTimeout}",
+            $" \"{_gps_stable_time}\": {CreatePacketViewModel.GpsStableTime}",
+            $" \"{_wire_conn_timeout}\": {CreatePacketViewModel.WireConnTimeout}",
+            $" \"{_comm_retry_cnt}\": {CreatePacketViewModel.CommRetryCount}",
+            $" \"{_shock_upper}\": {CreatePacketViewModel.ShockUpper}" + "}"
             });
 
             string sendMsg = BitConverter.ToString(Encoding.UTF8.GetBytes(sb.ToString().Trim())).Replace('-', ' ');

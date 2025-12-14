@@ -5,189 +5,223 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
 {
     public class IDGenerateServerRegistPacketViewModel : ViewModelBase
     {
+        private string _apn = "onomondo";
+        private string _deviceType = "CTR-S200B";
+        private string _hwVer = "9.9.9";
+        private string _mobileIMEI = "862771047956522";
+        private string _swVer = "1.5.0";
+        private string _mcu = "STM32L152VE";
+        private string _mobile = "";
+        private short _period = 720;
+        private string _usim = "234500084386601";
+        private short _gpsTimeout = 90;
+        private short _gpsStableTime = 30;
+        private short _wireConnTimeout = 120;
+        private short _commRetryCount = 3;
+        private byte _shockUpper = 9;
+
         private static IDGenerateServerRegistPacketViewModel _instance;
         public IDGenerateServerRegistPacketViewModel Instance { get { if (_instance == null) _instance = new IDGenerateServerRegistPacketViewModel(); return _instance; } }
 
         private static IDGenerateServerCreatePacketViewModel _createPacketViewModel;
-        public IDGenerateServerCreatePacketViewModel CreatePacketViewModel { get { if (_createPacketViewModel == null) _createPacketViewModel = new IDGenerateServerCreatePacketViewModel(); return _createPacketViewModel; } }
+        public IDGenerateServerCreatePacketViewModel CreatePacketViewModel { get { if (_createPacketViewModel == null) _createPacketViewModel = new IDGenerateServerCreatePacketViewModel(); return _createPacketViewModel.Instance; } }
 
-        private IDGenerateInfoStore _idGenerateInfoStore;
+        private IDGenerateInfoRegistStore _idGenerateInfoRegistStore;
 
         private IDGenerateInfoModel _idGenerateInfoModel;
-        public IDGenerateInfoModel IDGenerateInfoModel { get { if (_idGenerateInfoModel == null) _idGenerateInfoModel = Instance._idGenerateInfoStore._currentIDGenerateInfo = new IDGenerateInfoModel(); return _idGenerateInfoModel; } }
+        public IDGenerateInfoModel IDGenerateInfoModel { get { return _instance._idGenerateInfoModel = new IDGenerateInfoModel(); } set { if (_instance._idGenerateInfoModel != null) _instance._idGenerateInfoModel = value; } }
 
         public IDGenerateServerRegistPacketViewModel() { }
 
-        public IDGenerateServerRegistPacketViewModel(IDGenerateInfoStore idGenerateInfoStore)
+        public IDGenerateServerRegistPacketViewModel(IDGenerateInfoRegistStore idGenerateInfoRegistStore)
         {
             _instance = this;
-            Instance._idGenerateInfoStore = idGenerateInfoStore;
+            _instance._idGenerateInfoRegistStore = idGenerateInfoRegistStore;
+            _instance._idGenerateInfoRegistStore.CurrentIDGenerateInfoChanged += OnCurrentIDGenerateInfoChanged;
+        }
+
+        private void OnCurrentIDGenerateInfoChanged(IDGenerateInfoModel model)
+        {
+            Instance.APN = model.APN;
+            Instance.DeviceType = model.DeviceType;
+            Instance.HwVer = model.HwVer;
+            Instance.MobileIMEI = model.MobileIMEI;
+            Instance.SwVer = model.SwVer;
+            Instance.MCU = model.MCU;
+            Instance.Mobile = model.Mobile;
+            Instance.Period = model.Period;
+            Instance.Usim = model.Usim;
+            Instance.GpsTimeout = model.GpsTimeout;
+            Instance.GpsStableTime = model.GpsStableTime;
+            Instance.WireConnTimeout = model.WireConnTimeout;
+            Instance.CommRetryCount = model.CommRetryCount;
+            Instance.ShockUpper = model.ShockUpper;
         }
 
         public string APN
         {
-            get { return IDGenerateInfoModel.APN; }
+            get { return Instance._apn; }
             set
             {
-                if (IDGenerateInfoModel.APN != null)
+                if (Instance._apn != null)
                 {
-                    IDGenerateInfoModel.APN = value;
+                    Instance._apn = value;
                     OnPropertyChanged();
                 }
             }
         }
         public string DeviceType
         {
-            get { return IDGenerateInfoModel.DeviceType; }
+            get { return Instance._deviceType; }
             set
             {
-                if (IDGenerateInfoModel.DeviceType != null)
+                if (Instance._deviceType != null)
                 {
-                    IDGenerateInfoModel.DeviceType = value;
+                    Instance._deviceType = value;
                     OnPropertyChanged();
                 }
             }
         }
         public string HwVer
         {
-            get { return IDGenerateInfoModel.HwVer; }
+            get { return Instance._hwVer; }
             set
             {
-                if (IDGenerateInfoModel.HwVer != null)
+                if (Instance._hwVer != null)
                 {
-                    IDGenerateInfoModel.HwVer = value;
+                    Instance._hwVer = value;
                     OnPropertyChanged();
                 }
             }
         }
         public string SwVer
         {
-            get { return IDGenerateInfoModel.SwVer; }
+            get { return Instance._swVer; }
             set
             {
-                if (IDGenerateInfoModel.SwVer != null)
+                if (Instance._swVer != null)
                 {
-                    IDGenerateInfoModel.SwVer = value;
+                    Instance._swVer = value;
                     OnPropertyChanged();
                 }
             }
         }
         public string MCU
         {
-            get { return IDGenerateInfoModel.Mcu; }
+            get { return Instance._mcu; }
             set
             {
-                if (IDGenerateInfoModel.Mcu != null)
+                if (Instance._mcu != null)
                 {
-                    IDGenerateInfoModel.Mcu = value;
+                    Instance._mcu = value;
                     OnPropertyChanged();
                 }
             }
         }
         public string Mobile
         {
-            get { return IDGenerateInfoModel.Mobile; }
+            get { return Instance._mobile; }
             set
             {
-                if (IDGenerateInfoModel.Mobile != null)
+                if (Instance._mobile != null)
                 {
-                    IDGenerateInfoModel.Mobile = value;
+                    Instance._mobile = value;
                     OnPropertyChanged();
                 }
             }
         }
         public string MobileIMEI
         {
-            get { return IDGenerateInfoModel.MobileIMEI; }
+            get { return Instance._mobileIMEI; }
             set
             {
-                if (IDGenerateInfoModel.MobileIMEI != null)
+                if (Instance._mobileIMEI != null)
                 {
-                    IDGenerateInfoModel.MobileIMEI = value;
+                    Instance._mobileIMEI = value;
                     OnPropertyChanged();
                 }
             }
         }
         public short Period
         {
-            get { return IDGenerateInfoModel.Period; }
+            get { return Instance._period; }
             set
             {
-                if (IDGenerateInfoModel.Period != null)
+                if (Instance._period != null)
                 {
-                    IDGenerateInfoModel.Period = value;
+                    Instance._period = value;
                     OnPropertyChanged();
                 }
             }
         }
         public string Usim
         {
-            get { return IDGenerateInfoModel.Usim; }
+            get { return Instance._usim; }
             set
             {
-                if (IDGenerateInfoModel.Usim != null)
+                if (Instance._usim != null)
                 {
-                    IDGenerateInfoModel.Usim = value;
+                    Instance._usim = value;
                     OnPropertyChanged();
                 }
             }
         }
         public short GpsTimeout
         {
-            get { return IDGenerateInfoModel.GpsTimeout; }
+            get { return Instance._gpsTimeout; }
             set
             {
-                if (IDGenerateInfoModel.GpsTimeout != null)
+                if (Instance._gpsTimeout != null)
                 {
-                    IDGenerateInfoModel.GpsTimeout = value;
+                    Instance._gpsTimeout = value;
                     OnPropertyChanged();
                 }
             }
         }
         public short GpsStableTime
         {
-            get { return IDGenerateInfoModel.GpsStableTime; }
+            get { return Instance._gpsStableTime; }
             set
             {
-                if (IDGenerateInfoModel.GpsStableTime != null)
+                if (Instance._gpsStableTime != null)
                 {
-                    IDGenerateInfoModel.GpsStableTime = value;
+                    Instance._gpsStableTime = value;
                     OnPropertyChanged();
                 }
             }
         }
         public short WireConnTimeout
         {
-            get { return IDGenerateInfoModel.WireConnTimeout; }
+            get { return Instance._wireConnTimeout; }
             set
             {
-                if (IDGenerateInfoModel.WireConnTimeout != null)
+                if (Instance._wireConnTimeout != null)
                 {
-                    IDGenerateInfoModel.WireConnTimeout = value;
+                    Instance._wireConnTimeout = value;
                     OnPropertyChanged();
                 }
             }
         }
         public short CommRetryCount
         {
-            get { return IDGenerateInfoModel.CommRetryCount; }
+            get { return Instance._commRetryCount; }
             set
             {
-                if (IDGenerateInfoModel.CommRetryCount != null)
+                if (Instance._commRetryCount != null)
                 {
-                    IDGenerateInfoModel.CommRetryCount = value;
+                    Instance._commRetryCount = value;
                     OnPropertyChanged();
                 }
             }
         }
         public byte ShockUpper
         {
-            get { return IDGenerateInfoModel.ShockUpper; }
+            get { return Instance._shockUpper; }
             set
             {
-                if (IDGenerateInfoModel.ShockUpper != null)
+                if (Instance._shockUpper != null)
                 {
-                    IDGenerateInfoModel.ShockUpper = value;
+                    Instance._shockUpper = value;
                     OnPropertyChanged();
                 }
             }

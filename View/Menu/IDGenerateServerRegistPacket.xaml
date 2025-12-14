@@ -17,7 +17,7 @@
         <Binding Source="{StaticResource IDGenerateServerRegistPacketViewModel}"/>
     </UserControl.DataContext>
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
-        <Grid Margin="0,0,540,0" Background="White">
+        <Grid Background="White">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -56,13 +56,13 @@
             <TextBlock Grid.Row="12" Grid.Column="0" Text="commRetryCnt" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="13" Grid.Column="0" Text="shockUpper" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
 
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding APN}" Margin="3"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding DeviceType}" Margin="3"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding HwVer}" Margin="3"/>
+            <TextBox Grid.Row="0" Grid.Column="1" IsEnabled="False" Text="{Binding APN}" Margin="3"/>
+            <TextBox Grid.Row="1" Grid.Column="1" IsEnabled="False" Text="{Binding DeviceType}" Margin="3"/>
+            <TextBox Grid.Row="2" Grid.Column="1" IsEnabled="False" Text="{Binding HwVer}" Margin="3"/>
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SwVer}" Margin="3"/>
             <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding MCU}" Margin="3"/>
             <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Mobile}" Margin="3"/>
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding MobileIMEI}" Margin="3"/>
+            <TextBox Grid.Row="6" Grid.Column="1" IsEnabled="False" Text="{Binding MobileIMEI}" Margin="3"/>
             <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Period}" Margin="3"/>
             <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Usim}" Margin="3"/>
             <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding GpsTimeout}" Margin="3"/>

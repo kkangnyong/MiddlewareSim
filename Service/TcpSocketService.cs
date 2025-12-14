@@ -335,6 +335,10 @@ namespace SimReeferMiddlewareSystemWPF.Service
                 {
                     return false;
                 }
+                if (sendArgs == null)
+                {
+                    return false;
+                }
                 IEnumerable<byte> datas = messages;
 
                 if (!isVer && isAddCrc)
