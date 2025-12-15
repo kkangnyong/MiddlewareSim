@@ -18,7 +18,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
     {
         private Socket _connectSocket { get; set; }
         private SocketAsyncEventArgs sendArgs { get; set; }
-        private readonly string ACK_00 = "2B-56-EF-BF-BD-36-EF-BF-BD-72-6E-5D-EF-BF-BD-EF-BF-BD-74-EF-BF-BD-D6-A2";
+        //private readonly string ACK_00 = "2B-56-EF-BF-BD-36-EF-BF-BD-72-6E-5D-EF-BF-BD-EF-BF-BD-74-EF-BF-BD-D6-A2";
         protected byte[] SeedKey { get; } = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5];
         public Action? SocketAsyncConnected { get; set; }
         public Action? SocketAsyncDisconnected { get; set; }

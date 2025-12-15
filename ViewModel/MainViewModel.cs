@@ -243,7 +243,11 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 || CurrentViewModel.GetType().Name.Equals(typeof(FOTAServerViewModel).Name)
                 || CurrentViewModel.GetType().Name.Equals(typeof(IDGenerateServerViewModel).Name))   //추후 ID Server, FOTA Server 메뉴도 조건에 추가
             {
-                ReceivedMessage = (originData.Length > 0 && originData[0] == 255) ? OK : originData[0].ToString();
+                byte[] result = new byte[sizeof(int)];
+                Array.Copy(originData, 0, result, 0, sizeof(int));
+                string decimalValue = BitConverter.ToInt32(result).ToString();
+
+                ReceivedMessage = (originData.Length > 0 && originData[0] == 255) ? OK : decimalValue;
             }
             ReceivedRawMessage = BitConverter.ToString(originData);
         }
