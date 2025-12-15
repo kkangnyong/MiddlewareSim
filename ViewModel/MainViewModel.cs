@@ -67,12 +67,17 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         private ProtocolViewModelVer10 _protocolver10;
         public ProtocolViewModelVer10 ProtocolVer10 { get { if (_protocolver10 == null) _protocolver10 = new ProtocolViewModelVer10(); return _protocolver10.Instance; } }
 
+
+        private IDGenerateServerViewModel _idGenerateServer;
+        public IDGenerateServerViewModel IdGenerateServer { get { if (_idGenerateServer == null) _idGenerateServer = new IDGenerateServerViewModel(); return _idGenerateServer.Instance; } }
+
         public static SendManual _sendManualMenu { get; set; }
         public SendManual SendManualMenu { get { if (_sendManualMenu == null) _sendManualMenu = new SendManual(); return _sendManualMenu; } }
 
 
         private static Version? _fileVersion = Assembly.GetExecutingAssembly().GetName().Version;
         private string _title { get; set; } = $"EyeCargo Reefer Middleware Simulator - v{_fileVersion?.Major}.{_fileVersion?.Minor}.{_fileVersion?.Build}";
+        private string _periodImagePath { get; set; } = string.Empty;
         private string _imagePath { get; set; } = string.Empty;
         private string _companyImagePath { get; set; } = string.Empty;
         private bool _isEnabled { get; set; } = true;
@@ -171,11 +176,12 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ProtocolVer8.Dispose();
             ProtocolVer9.Dispose();
             ProtocolVer10.Dispose();
+            IdGenerateServer.Dispose();
 
             if (_timer != null && _timer.Enabled)
             {
                 VisibleConnect = Visible;
-                ToLoadImage = string.Empty;
+                ToPeriodImage = string.Empty;
                 _timer.Elapsed -= _timer_Elapsed;
                 _timer.Stop();
             }
@@ -279,12 +285,13 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
         private void SocketAsyncDisconnected()
         {
-            //ToLoadImage = string.Empty;
+            ToLoadImage = string.Empty;
             IsEnabled = true;
             IsConnectEnabled = true;
             ProtocolVer8.Dispose();
             ProtocolVer9.Dispose();
             ProtocolVer10.Dispose();
+            IdGenerateServer.Dispose();
 
             if (IsCommPeriodChecked && _timer != null && !_timer.Enabled)
             {
@@ -292,7 +299,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 _timer.Interval = CommPeriod * (1000 * 60);
                 _timer.Elapsed += _timer_Elapsed;
                 _timer.Start();
-                ToLoadImage = "/Resources/SendPeriod5.gif";
+                ToPeriodImage = "/Resources/SendPeriod5.gif";
                 _messageBoxService.ShowInfo($"전송 주기 {CommPeriod}분이 적용되어 동작 중 입니다.", "Period Send");
             }
         }
@@ -401,7 +408,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                         if (_timer != null && _timer.Enabled)
                         {
                             VisibleConnect = Visible;
-                            ToLoadImage = string.Empty;
+                            ToPeriodImage = string.Empty;
                             _timer.Elapsed -= _timer_Elapsed;
                             _timer.Stop();
                         }
@@ -619,6 +626,19 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 if (_imagePath != null)
                 {
                     _imagePath = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string ToPeriodImage
+        {
+            get { return _periodImagePath; }
+            set
+            {
+                if (_periodImagePath != null)
+                {
+                    _periodImagePath = value;
                     OnPropertyChanged();
                 }
             }

@@ -1,6 +1,7 @@
 ﻿using SimReeferMiddlewareSystemWPF.Command;
 using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Model;
+using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
 using System.ComponentModel;
 using System.Text;
@@ -70,6 +71,12 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
             _idGenerateInfoRegistStore = idGenerateInfoRegistStore;
             ToSendIDCreatePacketCommand = new RelayCommand<object>(ToSendIDCreatePacket);
             ToSendIDRegistPacketCommand = new RelayCommand<object>(ToSendIDRegistPacket);
+        }
+
+        public void Dispose()
+        {
+            IsIDCreateEnabled = true;
+            IsIDRegistEnabled = false;
         }
 
 

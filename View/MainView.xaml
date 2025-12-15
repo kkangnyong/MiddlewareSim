@@ -174,6 +174,7 @@
                     <Button Command="{Binding ToConnectCommand}" MinWidth="80" Visibility="{Binding VisibleConnect}" IsEnabled="{Binding IsConnectEnabled}" Content="Connect" Style="{StaticResource MyButtonStyle}" Margin="0,0,5,0"/>
                     <Button Command="{Binding ToDisconnectCommand}" MinWidth="100" IsEnabled="{Binding IsDisconnectEnabled}" Content="Disconnect" Style="{StaticResource MyButtonStyle}" Margin="0,0,5,0"/>
                     <Image gif:ImageBehavior.AnimatedSource="{Binding ToLoadImage}" MinWidth="50" Margin="0,0,5,0"/>
+                    <Image gif:ImageBehavior.AnimatedSource="{Binding ToPeriodImage}" MinWidth="50" Margin="0,0,5,0"/>
 
                     <TextBlock Text="전송 주기 사용" Visibility="{Binding VisibleMenuOption}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
                     <uicontrol:ToggleButton IsToggled="{Binding IsCommPeriodChecked, Mode=TwoWay}" Visibility="{Binding VisibleMenuOption}" HorizontalAlignment="Left" Margin="0,0,5,0"/>
