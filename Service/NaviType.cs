@@ -3,10 +3,10 @@
     public enum NaviType
     {
         None,
-        ProtocolView, 
-        DeviceBodyView, 
-        DeviceInfoView, 
-        ReeferBodyView, 
+        ProtocolView,
+        DeviceBodyView,
+        DeviceInfoView,
+        ReeferBodyView,
         SetupInfoView,
         SensorBodyView,
         SendManualView,

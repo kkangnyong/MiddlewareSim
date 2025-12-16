@@ -6,7 +6,7 @@ namespace SimReeferMiddlewareSystemWPF.Interface
     {
         void InitGenericData();
         void InitSensorData();
-        void SetDataValues(List<byte[]> dataList); 
+        void SetDataValues(List<byte[]> dataList);
         void SetDataByteValues(List<byte[]> dataList, short type);
         void SetDataJsonValues(List<byte[]> dataList, short type, short? code = (short)CodeType.LastData);
         string ConvertToByteString(string msg, ushort length, bool isString);

@@ -13,9 +13,9 @@
             <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
     </UserControl.Resources>
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <Binding Source="{StaticResource SetupInfoViewModelVer8}"/>
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
         <Grid Margin="0,0,540,0" Background="White">
 
@@ -60,22 +60,22 @@
             <TextBlock Grid.Row="14" Grid.Column="0" Text="stateChangeAlarm" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="15" Grid.Column="0" Text="cutOffVoltage" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
 
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Code}" Margin="3"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CCPR}" Margin="3"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CommPeriod}" Margin="3"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding GpsTimeout}" Margin="3"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding GpsStableTime}" Margin="3"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding WireConnTimeOut}" Margin="3"/>
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding RetryCount}" Margin="3"/>
-            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding RcCount}" Margin="3"/>
-            <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding TotalStandbyCount}" Margin="3"/>
-            <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding AccelShockUpper}" Margin="3"/>
-            <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding SetTempLower}" Margin="3"/>
-            <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding SetTempUpper}" Margin="3"/>
-            <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding HumidLower}" Margin="3"/>
-            <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding HumidUpper}" Margin="3"/>
-            <TextBox Grid.Row="14" Grid.Column="1" Text="{Binding StateChangeAlarm}" Margin="3"/>
-            <TextBox Grid.Row="15" Grid.Column="1" Text="{Binding CutOffVoltage}" Margin="3"/>
+            <TextBox Grid.Row="0" Grid.Column="1" IsEnabled="False" Text="{Binding Code}" Margin="3"/>
+            <TextBox Grid.Row="1" Grid.Column="1" IsEnabled="False" Text="{Binding CCPR}" Margin="3"/>
+            <TextBox Grid.Row="2" Grid.Column="1" IsEnabled="False" Text="{Binding CommPeriod}" Margin="3"/>
+            <TextBox Grid.Row="3" Grid.Column="1" IsEnabled="False" Text="{Binding GpsTimeout}" Margin="3"/>
+            <TextBox Grid.Row="4" Grid.Column="1" IsEnabled="False" Text="{Binding GpsStableTime}" Margin="3"/>
+            <TextBox Grid.Row="5" Grid.Column="1" IsEnabled="False" Text="{Binding WireConnTimeOut}" Margin="3"/>
+            <TextBox Grid.Row="6" Grid.Column="1" IsEnabled="False" Text="{Binding RetryCount}" Margin="3"/>
+            <TextBox Grid.Row="7" Grid.Column="1" IsEnabled="False" Text="{Binding RcCount}" Margin="3"/>
+            <TextBox Grid.Row="8" Grid.Column="1" IsEnabled="False" Text="{Binding TotalStandbyCount}" Margin="3"/>
+            <TextBox Grid.Row="9" Grid.Column="1" IsEnabled="False" Text="{Binding AccelShockUpper}" Margin="3"/>
+            <TextBox Grid.Row="10" Grid.Column="1" IsEnabled="False" Text="{Binding SetTempLower}" Margin="3"/>
+            <TextBox Grid.Row="11" Grid.Column="1" IsEnabled="False" Text="{Binding SetTempUpper}" Margin="3"/>
+            <TextBox Grid.Row="12" Grid.Column="1" IsEnabled="False" Text="{Binding HumidLower}" Margin="3"/>
+            <TextBox Grid.Row="13" Grid.Column="1" IsEnabled="False" Text="{Binding HumidUpper}" Margin="3"/>
+            <TextBox Grid.Row="14" Grid.Column="1" IsEnabled="False" Text="{Binding StateChangeAlarm}" Margin="3"/>
+            <TextBox Grid.Row="15" Grid.Column="1" IsEnabled="False" Text="{Binding CutOffVoltage}" Margin="3"/>
 
         </Grid>
     </ScrollViewer>

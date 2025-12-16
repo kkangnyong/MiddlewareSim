@@ -1,8 +1,6 @@
 ﻿using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
-using SimReeferMiddlewareSystemWPF.View.ProtocolVer.Ver9;
-using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
 {
@@ -27,6 +25,12 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
         {
             _instance = this;
             _deviceBodyStore = deviceBodyStore;
+            _deviceBodyStore.CurrentDeviceBodyChanged += OnCurrentDeviceBodyChanged;
+        }
+
+        private void OnCurrentDeviceBodyChanged(DeviceBodyModel model)
+        {
+            DeviceNumber = model.DeviceNumber;
         }
 
         public List<short> CodeList
@@ -46,8 +50,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
         {
             get
             {
-                ProtocolVer8.SetButtonContent(DeviceBodyModel.Code); 
-                return DeviceBodyModel.Code; 
+                ProtocolVer8.SetButtonContent(DeviceBodyModel.Code);
+                return DeviceBodyModel.Code;
             }
             set
             {

@@ -33,7 +33,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
             get
             {
                 if (_connectSocket != null) return _connectSocket.Connected;
-                
+
                 return false;
             }
         }
@@ -42,20 +42,20 @@ namespace SimReeferMiddlewareSystemWPF.Service
         public MainViewModel MainView { get { if (_mainView == null) _mainView = new MainViewModel(); return _mainView.Instance; } }
 
         private string _ccpr = "CCPR";
-        private string _Interval = "Interval";
-        private string _gpsTimeout = "GPS Timeout";
-        private string _gpsStableTime = "GPS Stable Time";
-        private string _wireConnectionTimeout = "Wire Connection Timeout";
-        private string _commRetryCount = "Comm Retry Count";
+        private string _commPeriod = "CommPeriod";
+        private string _gpsTimeout = "GpsTimeout";
+        private string _gpsStableTime = "GpsStableTime";
+        private string _wireConnectionTimeout = "WireConnTimeOut";
+        private string _commRetryCount = "RetryCount";
         private string _rcCount = "RcCount";
-        private string _totalStandbyCount = "Total Standby Count";
-        private string _accelShockUpper = "Accel Shock Upper";
-        private string _setTempLower = "Set Temp Lower";
-        private string _setTempUpper = "Set Temp Upper";
-        private string _humidLower = "Humid Lower";
-        private string _humidUpper = "Humid Upper";
-        private string _stateChangedAlarm = "State Changed Alarm";
-        private string _cutOffVoltage = "Cut Off Voltage";
+        private string _totalStandbyCount = "TotalStandbyCount";
+        private string _accelShockUpper = "AccelShockUpper";
+        private string _setTempLower = "SetTempLower";
+        private string _setTempUpper = "SetTempUpper";
+        private string _humidLower = "HumidLower";
+        private string _humidUpper = "HumidUpper";
+        private string _stateChangedAlarm = "StateChangeAlarm";
+        private string _cutOffVoltage = "CutOffVoltage";
 
         public void Connection(string _ip, ushort _port)
         {
@@ -121,7 +121,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
             {
                 if (args.BytesTransferred > 0 && args.SocketError == SocketError.Success)
                 {
-                    if (MainView.CurrentViewModel.GetType().Name.Equals(typeof(SendManualViewModel).Name) 
+                    if (MainView.CurrentViewModel.GetType().Name.Equals(typeof(SendManualViewModel).Name)
                         || MainView.CurrentViewModel.GetType().Name.Equals(typeof(FOTAServerViewModel).Name)
                         || MainView.CurrentViewModel.GetType().Name.Equals(typeof(IDGenerateServerViewModel).Name))
                     {
@@ -158,7 +158,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                             {
                                 string[] msgString = new string[] {
                                 _ccpr, //1
-                                _Interval, //0,30
+                                _commPeriod, //0,30
                                 _gpsTimeout, //120
                                 _gpsStableTime, //30
                                 _wireConnectionTimeout, //60
@@ -178,7 +178,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                                 for (int i = 0; i < msgString.Length; i++)
                                 {
                                     if (msgString[i].ToUpper().Equals(_ccpr.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[1].ToString()); }
-                                    else if (msgString[i].ToUpper().Equals(_Interval.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[3].ToString()); }
+                                    else if (msgString[i].ToUpper().Equals(_commPeriod.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[3].ToString()); }
                                     else if (msgString[i].ToUpper().Equals(_gpsTimeout.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[4].ToString()); }
                                     else if (msgString[i].ToUpper().Equals(_gpsStableTime.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[5].ToString()); }
                                     else if (msgString[i].ToUpper().Equals(_wireConnectionTimeout.ToUpper())) { syncDataDics.Add(msgString[i], recvOriginData[6].ToString()); }

@@ -25,6 +25,12 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
         {
             _instance = this;
             _deviceBodyStore = deviceBodyStore;
+            _deviceBodyStore.CurrentDeviceBodyChanged += OnCurrentDeviceBodyChanged;
+        }
+
+        private void OnCurrentDeviceBodyChanged(DeviceBodyModel model)
+        {
+            DeviceNumber = model.DeviceNumber;
         }
 
         public List<short> CodeList
@@ -46,7 +52,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
             {
                 ProtocolVer10.SetButtonContent(DeviceBodyModel.Code);
 
-                return DeviceBodyModel.Code; 
+                return DeviceBodyModel.Code;
             }
             set
             {

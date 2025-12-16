@@ -1,5 +1,4 @@
-﻿using SimReeferMiddlewareSystemWPF.Interface;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace SimReeferMiddlewareSystemWPF.UIControl
@@ -21,7 +20,7 @@ namespace SimReeferMiddlewareSystemWPF.UIControl
                 typeof(bool),
                 typeof(ToggleButton),
                 new PropertyMetadata(false));
-              //new PropertyMetadata(false, OnIsToggledChanged));
+        //new PropertyMetadata(false, OnIsToggledChanged));
 
         // 2. C# 속성 래퍼 (Wrapper)
         public bool IsToggled
@@ -46,7 +45,7 @@ namespace SimReeferMiddlewareSystemWPF.UIControl
         private void InternalToggleButton_Checked(object sender, RoutedEventArgs e)
         {
             // IsToggled 속성을 true로 업데이트 (XAML TwoWay 바인딩이 없으면 필요)
-            IsToggled = true; 
+            IsToggled = true;
             if (ToggleOn != null) ToggleOn.Invoke();
         }
 

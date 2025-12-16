@@ -27,7 +27,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         public ICommand ToReeferBodyCommand { get; set; }
         public ICommand ToSensorBodyCommand { get; set; }
         public ICommand ToStartDataCommand { get; set; }
-        public ICommand ToStartCommandCommand { get; set; }        
+        public ICommand ToStartCommandCommand { get; set; }
         public ICommand ToAddSensorDataCommand { get; set; }
 
         public INotifyPropertyChanged? CurrentDeviceInfoViewModel

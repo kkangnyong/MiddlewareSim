@@ -402,7 +402,7 @@
                 }
             }
         }
-        public short Rscp 
+        public short Rscp
         {
             get { return _rscp; }
             set

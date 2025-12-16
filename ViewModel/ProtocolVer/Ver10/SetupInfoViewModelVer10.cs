@@ -19,6 +19,26 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
         {
             _instance = this;
             _setupInfoStore = setupInfoStore;
+            _setupInfoStore.CurrentSetupInfoChanged += OnCurrentSetupInfoChanged;
+        }
+
+        private void OnCurrentSetupInfoChanged(SetupInfoModel model)
+        {
+            CCPR = model.CCPR;
+            CommPeriod = model.CommPeriod;
+            GpsTimeout = model.GpsTimeout;
+            GpsStableTime = model.GpsStableTime;
+            WireConnTimeOut = model.WireConnTimeOut;
+            RetryCount = model.RetryCount;
+            RcCount = model.RcCount;
+            TotalStandbyCount = model.TotalStandbyCount;
+            AccelShockUpper = model.AccelShockUpper;
+            SetTempLower = model.SetTempLower;
+            SetTempUpper = model.SetTempUpper;
+            HumidLower = model.HumidLower;
+            HumidUpper = model.HumidUpper;
+            StateChangeAlarm = model.StateChangeAlarm;
+            CutOffVoltage = model.CutOffVoltage;
         }
 
         public int Code

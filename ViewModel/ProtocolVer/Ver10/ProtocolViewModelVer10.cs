@@ -5,7 +5,6 @@ using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Text;
 using System.Windows.Input;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
@@ -28,7 +27,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
         public ICommand ToReeferBodyCommand { get; set; }
         public ICommand ToSensorBodyCommand { get; set; }
         public ICommand ToStartDataCommand { get; set; }
-        public ICommand ToStartCommandCommand { get; set; }        
+        public ICommand ToStartCommandCommand { get; set; }
         public ICommand ToAddSensorDataCommand { get; set; }
 
         public INotifyPropertyChanged? CurrentDeviceInfoViewModel

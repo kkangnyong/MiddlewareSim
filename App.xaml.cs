@@ -22,7 +22,7 @@ namespace SimReeferMiddlewareSystemWPF
         public IServiceProvider Services { get; }
 
         public App()
-        { 
+        {
             Services = ConfigureServices();
             var mainView = Services.GetRequiredService<MainView>();
             mainView.Show();

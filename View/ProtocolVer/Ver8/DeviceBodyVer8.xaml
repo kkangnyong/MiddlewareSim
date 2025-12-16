@@ -13,9 +13,9 @@
             <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
     </UserControl.Resources>
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <Binding Source="{StaticResource DeviceBodyViewModelVer8}"/>
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
         <Grid Margin="0,0,540,0" Background="White">
 
@@ -94,7 +94,7 @@
 
             <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding Code}" ItemsSource="{Binding CodeList}" Margin="3"/>
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Index}" Margin="3"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding DeviceNumber}" Margin="3"/>
+            <TextBox Grid.Row="2" Grid.Column="1" IsEnabled="False" Text="{Binding DeviceNumber}" Margin="3"/>
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Year}" Margin="3"/>
             <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Month}" Margin="3"/>
             <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Day}" Margin="3"/>

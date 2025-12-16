@@ -6,7 +6,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
     public class DeviceInfoViewModelVer9 : ViewModelBase
     {
         private static DeviceInfoViewModelVer9 _instance;
-        public DeviceInfoViewModelVer9 Instance { get { if (_instance == null) _instance = new DeviceInfoViewModelVer9(); return _instance; }  }
+        public DeviceInfoViewModelVer9 Instance { get { if (_instance == null) _instance = new DeviceInfoViewModelVer9(); return _instance; } }
+
+        private DeviceBodyStore _deviceBodyStore;
 
         private DeviceInfoStore _deviceInfoStore;
 
@@ -15,10 +17,11 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
 
         public DeviceInfoViewModelVer9() { }
 
-        public DeviceInfoViewModelVer9(DeviceInfoStore deviceInfoStore) 
+        public DeviceInfoViewModelVer9(DeviceInfoStore deviceInfoStore, DeviceBodyStore deviceBodyStore)
         {
             _instance = this;
             _deviceInfoStore = deviceInfoStore;
+            _deviceBodyStore = deviceBodyStore;
         }
 
 
@@ -43,6 +46,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
                 {
                     DeviceInfoModel.DeviceNumber = value;
                     OnPropertyChanged();
+                    Instance._deviceBodyStore.CurrentDeviceBodyChanged?.Invoke(new DeviceBodyModel() { DeviceNumber = value });
                 }
             }
         }

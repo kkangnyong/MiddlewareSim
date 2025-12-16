@@ -1,13 +1,12 @@
-﻿using SimReeferMiddlewareSystemWPF.Interface;
+﻿using Mythosia;
+using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Store;
 using SimReeferMiddlewareSystemWPF.ViewModel;
+using SimReeferMiddlewareSystemWPF.ViewModel.Menu;
+using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9;
-using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10;
 using System.ComponentModel;
-using Mythosia;
-using SimReeferMiddlewareSystemWPF.View.Menu;
-using SimReeferMiddlewareSystemWPF.ViewModel.Menu;
 
 namespace SimReeferMiddlewareSystemWPF.Service
 {
@@ -91,7 +90,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     }
                     break;
                 case NaviType.SendManualView:
-                      CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(SendManualViewModel));
+                    CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(SendManualViewModel));
                     break;
                 case NaviType.IDGenerateView:
                     CurrentViewModel = (ViewModelBase)App.Current.Services.GetService(typeof(IDGenerateServerViewModel));

@@ -52,6 +52,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         public static MainViewModel _instance { get; set; }
         public MainViewModel Instance { get { if (_instance == null) _instance = new MainViewModel(); return _instance; } }
 
+        private SetupInfoStore _setupInfoStore;
+
         private ServerConnectionStore _serverConnectionInfoStore;
 
         private ServerConnectionModel _serverConnectionModel;
@@ -108,10 +110,12 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ITcpSocketService tcpSocketService,
             ITableBuilderService tableBuilderService,
             MainNavigationStore mainNavigationStore,
-            ServerConnectionStore serverConnectionStore)
+            ServerConnectionStore serverConnectionStore,
+            SetupInfoStore setupInfoStore)
         {
             _instance = this;
             ToCompanyImage = "/Resources/Swinnus.png";
+            _setupInfoStore = setupInfoStore;
             _serverConnectionInfoStore = serverConnectionStore;
             _messageBoxService = messageBoxService;
             _tcpSocketService = tcpSocketService;
@@ -275,6 +279,26 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
             ReceivedMessage = _tableBuilderService.ToString(syncDataDics.Values.ToArray(), syncDataDics.Keys.ToArray());
             ReceivedRawMessage = BitConverter.ToString(originData);
+
+            SetupInfoModel model = null;
+            _setupInfoStore.CurrentSetupInfoChanged?.Invoke(model = new SetupInfoModel()
+            {
+                CCPR = byte.Parse(syncDataDics[nameof(model.CCPR)]),
+                CommPeriod = ushort.Parse(syncDataDics[nameof(model.CommPeriod)]),
+                GpsTimeout = byte.Parse(syncDataDics[nameof(model.GpsTimeout)]),
+                GpsStableTime = byte.Parse(syncDataDics[nameof(model.GpsStableTime)]),
+                WireConnTimeOut = byte.Parse(syncDataDics[nameof(model.WireConnTimeOut)]),
+                RetryCount = byte.Parse(syncDataDics[nameof(model.RetryCount)]),
+                RcCount = byte.Parse(syncDataDics[nameof(model.RcCount)]),
+                TotalStandbyCount = ushort.Parse(syncDataDics[nameof(model.TotalStandbyCount)]),
+                AccelShockUpper = byte.Parse(syncDataDics[nameof(model.AccelShockUpper)]),
+                SetTempLower = short.Parse(syncDataDics[nameof(model.SetTempLower)]),
+                SetTempUpper = short.Parse(syncDataDics[nameof(model.SetTempUpper)]),
+                HumidLower = short.Parse(syncDataDics[nameof(model.HumidLower)]),
+                HumidUpper = ushort.Parse(syncDataDics[nameof(model.HumidUpper)]),
+                StateChangeAlarm = ushort.Parse(syncDataDics[nameof(model.StateChangeAlarm)]),
+                CutOffVoltage = syncDataDics[nameof(model.CutOffVoltage)]
+            });
         }
 
         /// <summary>
@@ -541,7 +565,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 }
             }
         }
-        
+
         /// <summary>
         /// 음영구역 데이터 옵션 선택 Toggle버튼 Checked 처리 Binding 변수
         /// </summary>
@@ -656,7 +680,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 }
             }
         }
-        
+
         /// <summary>
         /// 메인화면 Title Binding 변수
         /// </summary>
@@ -676,10 +700,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         /// <summary>
         /// 프로토콜 종류 값 ComboBox Biding 변수
         /// </summary>
-        public List<string> ProtocolVerList 
+        public List<string> ProtocolVerList
         {
             get { return _protocolVerList; }
-            set 
+            set
             {
                 if (_protocolVerList != null)
                 {
@@ -758,7 +782,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
         /// </summary>
         public string ToLoadImage
         {
-            get  { return _imagePath; }
+            get { return _imagePath; }
             set
             {
                 if (_imagePath != null)

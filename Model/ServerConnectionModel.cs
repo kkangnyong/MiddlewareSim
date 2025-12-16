@@ -6,13 +6,13 @@
         private ushort _port { get; set; } = 14000;
         private string _protocolVersion { get; set; } = "0.8.0.0";
 
-        public string IP 
-        { 
-            get { return _ip; } 
-            set 
-            { 
-                if (_ip != null) 
-                    _ip = value; 
+        public string IP
+        {
+            get { return _ip; }
+            set
+            {
+                if (_ip != null)
+                    _ip = value;
             }
         }
 

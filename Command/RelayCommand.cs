@@ -7,13 +7,13 @@ namespace SimReeferMiddlewareSystemWPF.Command
         private readonly Action<T>? _execute;
         private readonly Predicate<T>? _canExecute;
 
-        public RelayCommand(Action<T>? execute, Predicate<T>? canExecute = null) 
+        public RelayCommand(Action<T>? execute, Predicate<T>? canExecute = null)
         {
             this._execute = execute;
             this._canExecute = canExecute;
         }
 
-        public event EventHandler? CanExecuteChanged 
+        public event EventHandler? CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }

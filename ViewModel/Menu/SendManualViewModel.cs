@@ -69,10 +69,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.Menu
             _tcpSocketService.SendJsonMessage(SendMessageText);
         }
 
-        public string SendMessageText 
-        { 
+        public string SendMessageText
+        {
             get { return _sendMessageText; }
-            set 
+            set
             {
                 if (_sendMessageText != null)
                 {

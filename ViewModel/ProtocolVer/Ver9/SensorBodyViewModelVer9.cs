@@ -1,8 +1,5 @@
-﻿using SimReeferMiddlewareSystemWPF.Command;
-using SimReeferMiddlewareSystemWPF.Model;
+﻿using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Store;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
 {
