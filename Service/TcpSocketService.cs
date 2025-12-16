@@ -26,6 +26,8 @@ namespace SimReeferMiddlewareSystemWPF.Service
         public Action<byte[]>? NoSynchronizationSetupInfo { get; set; }
         public Action<IDictionary<string, string>, byte[]>? SynchronizationSetupInfo { get; set; }
         public Action<byte[]>? RecievedByteToString { get; set; }
+        public Action? StartCommPeriodSendTimer { get; set; }
+
         public bool IsConnceted
         {
             get
@@ -38,7 +40,6 @@ namespace SimReeferMiddlewareSystemWPF.Service
 
         private MainViewModel _mainView;
         public MainViewModel MainView { get { if (_mainView == null) _mainView = new MainViewModel(); return _mainView.Instance; } }
-
 
         private string _ccpr = "CCPR";
         private string _Interval = "Interval";
@@ -464,6 +465,7 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     SendMsg(msgBytes, false, true);
                     Thread.Sleep(200);
                 }
+                StartCommPeriodSendTimer?.Invoke();
                 Disconnection();
             }
         }

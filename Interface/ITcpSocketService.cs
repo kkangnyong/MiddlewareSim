@@ -16,5 +16,6 @@
         Action<byte[]>? NoSynchronizationSetupInfo { get; set; }
         Action<IDictionary<string, string>, byte[]>? SynchronizationSetupInfo { get; set; }
         Action<byte[]>? RecievedByteToString { get; set; }
+        Action? StartCommPeriodSendTimer { get; set; }
     }
 }

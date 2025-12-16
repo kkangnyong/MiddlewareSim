@@ -133,6 +133,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             _tcpSocketService.NoSynchronizationSetupInfo += NoSynchronizationSetupInfo;
             _tcpSocketService.SynchronizationSetupInfo += SynchronizationSetupInfo;
             _tcpSocketService.RecievedByteToString += RecievedByteToString;
+            _tcpSocketService.StartCommPeriodSendTimer += StartCommPeriodSendTimer;
             _mainNavigationStore.CurrentViewModelChanged += CurrentViewModelChanged;
             ToConnectCommand = new RelayCommand<object>(ToConnect);
             ToDisconnectCommand = new RelayCommand<object>(ToDisconnect);
@@ -180,6 +181,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
 
             if (_timer != null && _timer.Enabled)
             {
+                IsCommPeriodEnabled = true;
                 VisibleConnect = Visible;
                 ToPeriodImage = string.Empty;
                 _timer.Elapsed -= _timer_Elapsed;
@@ -287,6 +289,20 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        private void StartCommPeriodSendTimer()
+        {
+            if (_tcpSocketService.IsConnceted && IsCommPeriodChecked && _timer != null && !_timer.Enabled)
+            {
+                IsCommPeriodEnabled = false;
+                VisibleConnect = Collapsed;
+                _timer.Interval = CommPeriod * (1000 * 60);
+                _timer.Elapsed += _timer_Elapsed;
+                _timer.Start();
+                ToPeriodImage = "/Resources/SendPeriod5.gif";
+                _messageBoxService.ShowInfo($"전송 주기 {CommPeriod}분이 적용되어 동작 중 입니다.", "Period Send");
+            }
+        }
+
         private void SocketAsyncDisconnected()
         {
             ToLoadImage = string.Empty;
@@ -296,16 +312,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ProtocolVer9.Dispose();
             ProtocolVer10.Dispose();
             IdGenerateServer.Dispose();
-
-            if (IsCommPeriodChecked && _timer != null && !_timer.Enabled)
-            {
-                VisibleConnect = Collapsed;
-                _timer.Interval = CommPeriod * (1000 * 60);
-                _timer.Elapsed += _timer_Elapsed;
-                _timer.Start();
-                ToPeriodImage = "/Resources/SendPeriod5.gif";
-                _messageBoxService.ShowInfo($"전송 주기 {CommPeriod}분이 적용되어 동작 중 입니다.", "Period Send");
-            }
         }
 
         private void _timer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
@@ -324,14 +330,12 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             {
                 ProtocolVer10.AutoStart();
             }
-
         }
 
         private void SocketAsyncError(string error)
         {
             ToLoadImage = "/Resources/Cancel.png";
-            IsEnabled = true;
-            IsConnectEnabled = true;
+            ToDisconnect(null);
             _messageBoxService.ShowError($"Connect Error!! - {error}", "Server");
         }
 
@@ -411,6 +415,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                     {
                         if (_timer != null && _timer.Enabled)
                         {
+                            IsCommPeriodEnabled = true;
                             VisibleConnect = Visible;
                             ToPeriodImage = string.Empty;
                             _timer.Elapsed -= _timer_Elapsed;
