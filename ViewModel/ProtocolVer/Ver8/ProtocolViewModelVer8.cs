@@ -132,7 +132,8 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
             Thread.Sleep(300);
             ToReeferBodyCommand.Execute(this);
             Thread.Sleep(300);
-            _tcpSocketService.Disconnection();
+            ToStartCommandCommand.Execute(this);
+            //_tcpSocketService.Disconnection();
         }
 
         private void ToDeviceInfo(object _)
@@ -327,6 +328,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 _modelDataService.GetStringsToByteArray(sequence, (ushort)sequence.Length, false, true)
             });
             _tcpSocketService.BuildSendMessage(_modelDataService._totalDataBytesLength, _modelDataService._dataValuesList);
+            _tcpSocketService.StartCommPeriodSendTimer?.Invoke();
             _tcpSocketService.Disconnection();
         }
 

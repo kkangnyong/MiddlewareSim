@@ -4,7 +4,6 @@ using SimReeferMiddlewareSystemWPF.Interface;
 using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
-using SimReeferMiddlewareSystemWPF.View;
 using SimReeferMiddlewareSystemWPF.View.Menu;
 using SimReeferMiddlewareSystemWPF.ViewModel.Menu;
 using SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10;

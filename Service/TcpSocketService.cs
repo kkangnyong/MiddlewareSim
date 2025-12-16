@@ -465,8 +465,8 @@ namespace SimReeferMiddlewareSystemWPF.Service
                     SendMsg(msgBytes, false, true);
                     Thread.Sleep(200);
                 }
-                StartCommPeriodSendTimer?.Invoke();
-                Disconnection();
+                //StartCommPeriodSendTimer?.Invoke();
+                //Disconnection();
             }
         }
 

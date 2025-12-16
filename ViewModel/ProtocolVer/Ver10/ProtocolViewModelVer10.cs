@@ -156,7 +156,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
             Thread.Sleep(300);
             ToSensorBodyCommand.Execute(this);
             Thread.Sleep(300);
-            _tcpSocketService.Disconnection();
+            ToStartCommandCommand.Execute(this);
+            //Thread.Sleep(300);
+            //_tcpSocketService.Disconnection();
         }
 
         private void ToAddSensorData(object _)
@@ -417,6 +419,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
                 _modelDataService.GetStringsToByteArray(sequence, (ushort)sequence.Length, false, true)
             });
             _tcpSocketService.BuildSendMessage(_modelDataService._totalDataBytesLength, _modelDataService._dataValuesList);
+            _tcpSocketService.StartCommPeriodSendTimer?.Invoke();
             _tcpSocketService.Disconnection();
         }
 
