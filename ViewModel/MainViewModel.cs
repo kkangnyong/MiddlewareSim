@@ -125,6 +125,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             _timer = new System.Timers.Timer();
         }
 
+        /// <summary>
+        /// 각 종 Command 또는 이벤트들 초기화
+        /// </summary>
         private void Initialize()
         {
             _tcpSocketService.SocketAsyncConnected += SocketAsyncConnected;
@@ -143,12 +146,18 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ToMiddlewareMenuCommand = new RelayCommand<object>(ToMiddlewareMenu);
         }
 
+        /// <summary>
+        /// Received Message Panel의 기본 메시지
+        /// </summary>
         private void InitReceivedMessage()
         {
             ReceivedMessage = "Message";
             ReceivedRawMessage = "Raw Message";
         }
 
+        /// <summary>
+        /// 다른 메뉴 페이지 선택 시 현재 연결 중이던 socket 끊고 옵션 UI 초기화 진행
+        /// </summary>
         private void InitMenuChanged()
         {
             VisibleMenuOption = Collapsed;
@@ -159,6 +168,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             _tcpSocketService.Disconnection();
         }
 
+        /// <summary>
+        /// Socket 연결 버튼 Command, 해당 Command에서는 Received Panel 기본 메시지 변경, Socket 연결 진행 중 gif실행, Socket 연결
+        /// </summary>
+        /// <param name="_"></param>
         private void ToConnect(object _)
         {
             InitReceivedMessage();
@@ -168,6 +181,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             IsConnectEnabled = false;
         }
 
+        /// <summary>
+        /// Socket 연결 해제 버튼 Command, Socket 연결 해제, 각 종 컨트롤 초기화, 현재 실행 중인 주기전송 Timer 존재 시 종료
+        /// </summary>
+        /// <param name="_"></param>
         private void ToDisconnect(object _)
         {
             _tcpSocketService.Disconnection();
@@ -189,24 +206,40 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// SendManual 메뉴 선택 Command
+        /// </summary>
+        /// <param name="_"></param>
         private void ToSendManualMenu(object _)
         {
             InitMenuChanged();
             _navigationService.Navigate(NaviType.SendManualView);
         }
 
+        /// <summary>
+        /// IDGenerate 서버 메뉴 선택
+        /// </summary>
+        /// <param name="_"></param>
         private void ToIDGenerateMenu(object _)
         {
             InitMenuChanged();
             _navigationService.Navigate(NaviType.IDGenerateView);
         }
 
+        /// <summary>
+        /// FOTA 서버 메뉴 선택
+        /// </summary>
+        /// <param name="_"></param>
         private void ToFOTAMenu(object _)
         {
             InitMenuChanged();
             _navigationService.Navigate(NaviType.FOTAView);
         }
 
+        /// <summary>
+        /// Middleware 서버 메뉴 선택
+        /// </summary>
+        /// <param name="_"></param>
         private void ToMiddlewareMenu(object _)
         {
             VisibleMenuOption = Visible;
@@ -214,6 +247,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             _navigationService.Navigate(NaviType.ProtocolView, ProtocolVersion);
         }
 
+        /// <summary>
+        /// Middleware 서버에서 장비 동기화가 필요 없을 시 동작하며 서버로 부터 응답 받은 메시지 Received Panel에 표시
+        /// </summary>
+        /// <param name="originData"></param>
         private void NoSynchronizationSetupInfo(byte[] originData)
         {
             InitReceivedMessage();
@@ -225,6 +262,11 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ReceivedRawMessage = BitConverter.ToString(originData);
         }
 
+        /// <summary>
+        /// Middleware 서버에서 장비 동기화가 필요 시 동작하며 서버로 부터 응답 받은 메시지 Received Panel에 표시
+        /// </summary>
+        /// <param name="syncDataDics"></param>
+        /// <param name="originData"></param>
         private void SynchronizationSetupInfo(IDictionary<string, string> syncDataDics, byte[] originData)
         {
             InitReceivedMessage();
@@ -236,6 +278,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ReceivedRawMessage = BitConverter.ToString(originData);
         }
 
+        /// <summary>
+        /// 각 서버 메뉴에서 응답 받은 데이터를 Received Panel에 표시
+        /// </summary>
+        /// <param name="originData"></param>
         private void RecievedByteToString(byte[] originData)
         {
             InitReceivedMessage();
@@ -254,6 +300,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             ReceivedRawMessage = BitConverter.ToString(originData);
         }
 
+        /// <summary>
+        /// Socket에 연결이 정상적으로 완료 된 후 동작하며, Middleware서버가 아닐 시 진행 상태 애니메이션만 갱신하고 바로 반환, Middleware서버 일 시 연결 직후 선택 된 프로토콜 버전을 바로 송신
+        /// </summary>
         private void SocketAsyncConnected()
         {
             if (_timer != null && !_timer.Enabled) ToLoadImage = "/Resources/Check_Mark.png";
@@ -289,6 +338,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// 주기전송 Timer 실행 함수이며, 해당 옵션 실행은 한 주기가 끝나는 시점에 함수 발동
+        /// </summary>
         private void StartCommPeriodSendTimer()
         {
             if (_tcpSocketService.IsConnceted && IsCommPeriodChecked && _timer != null && !_timer.Enabled)
@@ -303,6 +355,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// Socket 연결이 완전이 해제 된 후 발동
+        /// </summary>
         private void SocketAsyncDisconnected()
         {
             ToLoadImage = string.Empty;
@@ -314,6 +369,11 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             IdGenerateServer.Dispose();
         }
 
+        /// <summary>
+        /// 주기전송 Timer Elapsed 이벤트이며 각 프로토콜에 해당하는 모든 패킷을 자동으로 순차 실행
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void _timer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             ToConnectCommand.Execute(this);
@@ -332,6 +392,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// Socket 연결 에러 발생 시 발동
+        /// </summary>
+        /// <param name="error"></param>
         private void SocketAsyncError(string error)
         {
             ToLoadImage = "/Resources/Cancel.png";
@@ -339,11 +403,17 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             _messageBoxService.ShowError($"Connect Error!! - {error}", "Server");
         }
 
+        /// <summary>
+        /// 메인 화면의 주요 Conetent Panel에 현재 선택된 ViewModel객체에 할당
+        /// </summary>
         private void CurrentViewModelChanged()
         {
             CurrentViewModel = _mainNavigationStore?.CurrentViewModel;
         }
 
+        /// <summary>
+        /// Socket Connect 버튼 Visible 처리 Binding 변수
+        /// </summary>
         public string VisibleConnect
         {
             get { return _visibleConnect; }
@@ -358,6 +428,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// Middleware 서버 메뉴에서 필요한 옵션 컨트롤 Visible 처리 Binding 변수
+        /// </summary>
         public string VisibleMenuOption
         {
             get { return _visibleMenuOption; }
@@ -372,6 +445,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// 전송주기 옵션 컨트롤 Visible 처리 Binding 변수
+        /// </summary>
         public string VisibleCommPeriod
         {
             get { return _visibleCommPeriod; }
@@ -386,6 +462,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// 음영구역 데이터 전송 옵션 컨트롤 Visible 처리 Binding 변수
+        /// </summary>
         public string VisibleRepeat
         {
             get { return _visibleRepeat; }
@@ -400,6 +479,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// 전송주기 옵션 선택 Toggle버튼 Checked 처리 Binding 변수이며 해당 변수 set시 전송주기 Timer 여부보고 종료
+        /// </summary>
         public bool IsCommPeriodChecked
         {
             get { return _isCommPeriodChecked; }
@@ -428,6 +510,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// 전송주기 옵션 컨트롤 Enabled 처리 Binding 변수
+        /// </summary>
         public bool IsCommPeriodEnabled
         {
             get { return _isCommPeriodEnabled; }
@@ -441,6 +526,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// 전송주기 값 Binding 변수
+        /// </summary>
         public short CommPeriod
         {
             get { return _commPeriod; }
@@ -454,7 +542,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 }
             }
         }
-
+        
+        /// <summary>
+        /// 음영구역 데이터 옵션 선택 Toggle버튼 Checked 처리 Binding 변수
+        /// </summary>
         public bool IsRepeatChecked
         {
             get { return _isRepeatChecked; }
@@ -470,6 +561,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// 음영구역 옵션 컨트롤 Enabled 처리 Binding 변수
+        /// </summary>
         public bool IsRepeatEnabled
         {
             get { return _isRepeatEnabled; }
@@ -483,6 +577,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// 전송 코드(마지막 패킷여부 결정) 종류 List ComboBox Binding 변수
+        /// </summary>
         public List<short> CodeList
         {
             get { return _codeList; }
@@ -496,6 +593,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// 전송 코드(마지막 패킷여부 결정) 선택 SelectItem Binding 변수
+        /// </summary>
         public short Code
         {
             get { return _code; }
@@ -509,6 +609,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// 음영구역 데이터 횟수 값 Binding 변수
+        /// </summary>
         public int RepeatCount
         {
             get { return _repeatCount; }
@@ -523,6 +626,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// 서버로 부터 수신 한 Received 평문 메시지 데이터 값 Binding 변수
+        /// </summary>
         public string ReceivedMessage
         {
             get { return _recievedMessage; }
@@ -536,6 +642,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// 서버로 부터 수신 한 Received 메시지 Raw 데이터 값 Binding 변수
+        /// </summary>
         public string ReceivedRawMessage
         {
             get { return _recievedRawMessage; }
@@ -548,7 +657,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 }
             }
         }
-
+        
+        /// <summary>
+        /// 메인화면 Title Binding 변수
+        /// </summary>
         public string TitleVersion
         {
             get { return _title; }
@@ -562,6 +674,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// 프로토콜 종류 값 ComboBox Biding 변수
+        /// </summary>
         public List<string> ProtocolVerList 
         {
             get { return _protocolVerList; }
@@ -575,6 +690,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// Socket 연결 버튼 Enabled 처리 Binding 변수
+        /// </summary>
         public bool IsConnectEnabled
         {
             get { return _isConnectEnabled; }
@@ -588,6 +706,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// Socket 연결 해제 버튼 Enabled 처리 Binding 변수
+        /// </summary>
         public bool IsDisconnectEnabled
         {
             get { return _isDisconnectEnabled; }
@@ -601,6 +722,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// 전반적인 옵션 컨트롤 Enabled 처리 Binding 변수
+        /// </summary>
         public bool IsEnabled
         {
             get { return _isEnabled; }
@@ -613,7 +737,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
                 }
             }
         }
-        
+
+        /// <summary>
+        /// 회사 로고 이미지 경로 Binding 변수
+        /// </summary>
         public string ToCompanyImage
         {
             get { return _companyImagePath; }
@@ -627,6 +754,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// Socket 연결 여부 이미지 경로 Binding 변수
+        /// </summary>
         public string ToLoadImage
         {
             get  { return _imagePath; }
@@ -640,6 +770,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// 전송주기 동작 여부 이미지 경로 Binding 변수
+        /// </summary>
         public string ToPeriodImage
         {
             get { return _periodImagePath; }
@@ -653,6 +786,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// Socket 연결 IP 값 Binding 변수
+        /// </summary>
         public string IP
         {
             get { return ServerConnectionModel.IP; }
@@ -666,6 +802,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// Socket 연결 Port 값 Binding 변수
+        /// </summary>
         public ushort Port
         {
             get { return ServerConnectionModel.Port; }
@@ -679,6 +818,9 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel
             }
         }
 
+        /// <summary>
+        /// 프로토콜 버전 ComboBox SelectItem 값 Binding 변수
+        /// </summary>
         public string ProtocolVersion
         {
             get { return ServerConnectionModel.ProtocolVersion; }
