@@ -129,17 +129,17 @@
     </Window.Resources>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="150"/>
+                <RowDefinition Height="110"/>
                 <RowDefinition />
                 <RowDefinition Height="3"/>
                 <RowDefinition Height="270"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Top" Background="AliceBlue">
+            <Grid Grid.Row="0" Height="110" VerticalAlignment="Top" Background="AliceBlue">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Height="55" VerticalAlignment="Top" Background="AliceBlue" >
+                <Grid Grid.Row="0" Height="30" VerticalAlignment="Top" Background="AliceBlue" >
                     <Menu x:Name="menu1" VerticalAlignment="Top" Background="AliceBlue">
                         <Menu.BitmapEffect>
                             <DropShadowBitmapEffect ShadowDepth="1" Softness="1" Opacity="50" Color="LightBlue"/>
@@ -155,14 +155,14 @@
                         </MenuItem>
                     </Menu>
             </Grid>
-            <ScrollViewer Grid.Row="1" Height="75" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
-                <Grid Grid.Row="1" VerticalAlignment="Stretch" Background="AliceBlue">
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+                <Grid Grid.Row="1" Height="35" VerticalAlignment="Top" Background="AliceBlue">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30"/>
                         <ColumnDefinition Width="210"/>
                         <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="70"/>
-                        <ColumnDefinition Width="1400"/>
+                        <ColumnDefinition Width="1450"/>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="IP:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
