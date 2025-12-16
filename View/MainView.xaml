@@ -14,7 +14,8 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com" 
         xmlns:uicontrol="clr-namespace:SimReeferMiddlewareSystemWPF.UIControl"
         mc:Ignorable="d"
-        Title="{Binding TitleVersion}" Height="800" MinWidth="1920">
+        Title="{Binding TitleVersion}">
+    <!--Height="800" MinWidth="1920">-->
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewmodel8:ProtocolViewModelVer8}">
             <local8:ProtocolVer8/>
@@ -126,111 +127,113 @@
             <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
     </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="75"/>
-            <RowDefinition />
-            <RowDefinition Height="3"/>
-            <RowDefinition Height="270"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Height="72" VerticalAlignment="Top" Background="AliceBlue">
+    <!--<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">-->
+        <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
                 <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="270"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Height="55" VerticalAlignment="Top" Background="AliceBlue" >
-                <Menu x:Name="menu1" VerticalAlignment="Top" Background="AliceBlue">
-                    <Menu.BitmapEffect>
-                        <DropShadowBitmapEffect ShadowDepth="1" Softness="1" Opacity="50" Color="LightBlue"/>
-                    </Menu.BitmapEffect>
-                    <MenuItem Header="Menu" Background="AliceBlue" VerticalAlignment="Top" Style="{StaticResource MyMenuStyle}">
-                        <MenuItem Header="Middleware Server" Command="{Binding ToMiddlewareMenuCommand}"/>
-                        <Separator/>
-                        <MenuItem Header="ID Server" Command="{Binding ToIDGenerateMenuCommand}"/>
-                        <Separator/>
-                        <MenuItem Header="FOTA Server" Command="{Binding ToFOTAMenuCommand}"/>
-                        <Separator/>
-                        <MenuItem Header="Send Manual Data" Command="{Binding ToSendManualMenuCommand}"/>
-                    </MenuItem>
-                </Menu>
-            </Grid>
-            <Grid Grid.Row="1" VerticalAlignment="Stretch" Background="AliceBlue">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30"/>
-                    <ColumnDefinition Width="210"/>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="1450"/>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="IP:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
-                <TextBox Grid.Column="1" Text="{Binding IP}" IsEnabled="{Binding IsEnabled}" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
-                <TextBlock Grid.Column="2" Text="Port:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
-                <TextBox Grid.Column="3" Text="{Binding Port}" IsEnabled="{Binding IsEnabled}" Margin="0,0,5,0" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
-
-                <StackPanel Grid.Column="4" Orientation="Horizontal" >
-                    <TextBlock Text="Protocol Version:" Visibility="{Binding VisibleMenuOption}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
-                    <ComboBox Visibility="{Binding VisibleMenuOption}" IsEnabled="{Binding IsEnabled}" SelectedItem="{Binding ProtocolVersion}" ItemsSource="{Binding ProtocolVerList}" Style="{StaticResource MyComboBoxStyle}" BorderThickness="1" BorderBrush="Black" Margin="0,0,5,0"/>
-                    <Button Command="{Binding ToConnectCommand}" MinWidth="80" Visibility="{Binding VisibleConnect}" IsEnabled="{Binding IsConnectEnabled}" Content="Connect" Style="{StaticResource MyButtonStyle}" Margin="0,0,5,0"/>
-                    <Button Command="{Binding ToDisconnectCommand}" MinWidth="100" IsEnabled="{Binding IsDisconnectEnabled}" Content="Disconnect" Style="{StaticResource MyButtonStyle}" Margin="0,0,5,0"/>
-                    <Image gif:ImageBehavior.AnimatedSource="{Binding ToLoadImage}" MinWidth="50" Margin="0,0,5,0"/>
-                    <Image gif:ImageBehavior.AnimatedSource="{Binding ToPeriodImage}" MinWidth="50" Margin="0,0,5,0"/>
-
-                    <TextBlock Text="전송 주기 사용" Visibility="{Binding VisibleMenuOption}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
-                    <uicontrol:ToggleButton IsToggled="{Binding IsCommPeriodChecked, Mode=TwoWay}" Visibility="{Binding VisibleMenuOption}" HorizontalAlignment="Left" Margin="0,0,5,0"/>
-                    <TextBlock Text="전송 주기(분):" Visibility="{Binding VisibleCommPeriod}" IsEnabled="{Binding IsCommPeriodEnabled}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
-                    <uicontrol:NumberTextBox Visibility="{Binding VisibleCommPeriod}" Text="{Binding CommPeriod}" IsEnabled="{Binding IsCommPeriodEnabled}" Width="35" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
-                    <TextBlock Text="음영 데이터 사용" Visibility="{Binding VisibleMenuOption}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
-                    <uicontrol:ToggleButton IsToggled="{Binding IsRepeatChecked, Mode=TwoWay}" Visibility="{Binding VisibleMenuOption}" HorizontalAlignment="Left" Margin="0,0,5,0"/>
-                    <TextBlock Text="코드 종류:" Visibility="{Binding VisibleRepeat}" IsEnabled="{Binding IsRepeatEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
-                    <ComboBox Visibility="{Binding VisibleRepeat}" SelectedItem="{Binding Code}" ItemsSource="{Binding CodeList}" IsEnabled="{Binding IsRepeatEnabled}" Style="{StaticResource MyComboBoxStyle}" BorderThickness="1" BorderBrush="Black" Margin="0,0,5,0"/>
-                    <TextBlock Text="음영 데이터 갯수:" Visibility="{Binding VisibleRepeat}" IsEnabled="{Binding IsRepeatEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
-                    <uicontrol:NumberTextBox Visibility="{Binding VisibleRepeat}" Text="{Binding RepeatCount}" IsEnabled="{Binding IsRepeatEnabled}" Width="35" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
-                </StackPanel>
-
-                <Image Grid.Column="5" Source="{Binding ToCompanyImage}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-            </Grid>
-        </Grid>
-        <Grid Grid.Row="1" Background="AliceBlue">
-            <ContentControl Content="{Binding CurrentViewModel}"/>
-        </Grid>
-        <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" Height="3" Margin="0" Background="AliceBlue" />
-        <Grid Grid.Row="3" HorizontalAlignment="Stretch" Background="LightGoldenrodYellow">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
-                <Border BorderBrush="Black" BorderThickness="1"/>
-                <TextBlock Text=" Received Message" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource MyTextBlockStyle}"/>
-            </Grid>
-            <Grid Grid.Row="1" Background="AliceBlue">
+            <Grid Grid.Row="0" Height="72" VerticalAlignment="Top" Background="AliceBlue">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="170"/>
+                    <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0" VerticalAlignment="Top" Height="170">
-                    <Border BorderBrush="LightSkyBlue" BorderThickness="2"/>
-                    <RichTextBox Margin="5" IsReadOnly="True" Style="{StaticResource MyRichTextBoxStyle}">
-                        <FlowDocument>
-                            <Paragraph>
-                                <Run Text="{Binding ReceivedMessage}"/>
-                            </Paragraph>
-                        </FlowDocument>
-                    </RichTextBox>
+                <Grid Grid.Row="0" Height="55" VerticalAlignment="Top" Background="AliceBlue" >
+                    <Menu x:Name="menu1" VerticalAlignment="Top" Background="AliceBlue">
+                        <Menu.BitmapEffect>
+                            <DropShadowBitmapEffect ShadowDepth="1" Softness="1" Opacity="50" Color="LightBlue"/>
+                        </Menu.BitmapEffect>
+                        <MenuItem Header="Menu" Background="AliceBlue" VerticalAlignment="Top" Style="{StaticResource MyMenuStyle}">
+                            <MenuItem Header="Middleware Server" Command="{Binding ToMiddlewareMenuCommand}"/>
+                            <Separator/>
+                            <MenuItem Header="ID Server" Command="{Binding ToIDGenerateMenuCommand}"/>
+                            <Separator/>
+                            <MenuItem Header="FOTA Server" Command="{Binding ToFOTAMenuCommand}"/>
+                            <Separator/>
+                            <MenuItem Header="Send Manual Data" Command="{Binding ToSendManualMenuCommand}"/>
+                        </MenuItem>
+                    </Menu>
                 </Grid>
-                <Grid Grid.Row="1" VerticalAlignment="Stretch">
-                    <Border BorderBrush="LightBlue" BorderThickness="2"/>
-                    <RichTextBox Margin="5" IsReadOnly="True" Style="{StaticResource MyRichTextBoxStyle}">
-                        <FlowDocument>
-                            <Paragraph>
-                                <Run Text="{Binding ReceivedRawMessage}"/>
-                            </Paragraph>
-                        </FlowDocument>
-                    </RichTextBox>                    
+            <Grid Grid.Row="1" VerticalAlignment="Stretch" Background="AliceBlue">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="210"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="1400"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="IP:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
+                    <TextBox Grid.Column="1" Text="{Binding IP}" IsEnabled="{Binding IsEnabled}" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
+                    <TextBlock Grid.Column="2" Text="Port:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
+                    <TextBox Grid.Column="3" Text="{Binding Port}" IsEnabled="{Binding IsEnabled}" Margin="0,0,5,0" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
+
+                    <StackPanel Grid.Column="4" Orientation="Horizontal" >
+                        <TextBlock Text="Protocol Version:" Visibility="{Binding VisibleMenuOption}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
+                        <ComboBox Visibility="{Binding VisibleMenuOption}" IsEnabled="{Binding IsEnabled}" SelectedItem="{Binding ProtocolVersion}" ItemsSource="{Binding ProtocolVerList}" Style="{StaticResource MyComboBoxStyle}" BorderThickness="1" BorderBrush="Black" Margin="0,0,5,0"/>
+                        <Button Command="{Binding ToConnectCommand}" MinWidth="80" Visibility="{Binding VisibleConnect}" IsEnabled="{Binding IsConnectEnabled}" Content="Connect" Style="{StaticResource MyButtonStyle}" Margin="0,0,5,0"/>
+                        <Button Command="{Binding ToDisconnectCommand}" MinWidth="100" IsEnabled="{Binding IsDisconnectEnabled}" Content="Disconnect" Style="{StaticResource MyButtonStyle}" Margin="0,0,5,0"/>
+                        <Image gif:ImageBehavior.AnimatedSource="{Binding ToLoadImage}" MinWidth="50" Margin="0,0,5,0"/>
+                        <Image gif:ImageBehavior.AnimatedSource="{Binding ToPeriodImage}" MinWidth="50" Margin="0,0,5,0"/>
+
+                        <TextBlock Text="전송 주기 사용" Visibility="{Binding VisibleMenuOption}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
+                        <uicontrol:ToggleButton IsToggled="{Binding IsCommPeriodChecked, Mode=TwoWay}" Visibility="{Binding VisibleMenuOption}" HorizontalAlignment="Left" Margin="0,0,5,0"/>
+                        <TextBlock Text="전송 주기(분):" Visibility="{Binding VisibleCommPeriod}" IsEnabled="{Binding IsCommPeriodEnabled}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
+                        <uicontrol:NumberTextBox Visibility="{Binding VisibleCommPeriod}" Text="{Binding CommPeriod}" IsEnabled="{Binding IsCommPeriodEnabled}" Width="35" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
+                        <TextBlock Text="음영 데이터 사용" Visibility="{Binding VisibleMenuOption}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
+                        <uicontrol:ToggleButton IsToggled="{Binding IsRepeatChecked, Mode=TwoWay}" Visibility="{Binding VisibleMenuOption}" HorizontalAlignment="Left" Margin="0,0,5,0"/>
+                        <TextBlock Text="코드 종류:" Visibility="{Binding VisibleRepeat}" IsEnabled="{Binding IsRepeatEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
+                        <ComboBox Visibility="{Binding VisibleRepeat}" SelectedItem="{Binding Code}" ItemsSource="{Binding CodeList}" IsEnabled="{Binding IsRepeatEnabled}" Style="{StaticResource MyComboBoxStyle}" BorderThickness="1" BorderBrush="Black" Margin="0,0,5,0"/>
+                        <TextBlock Text="음영 데이터 갯수:" Visibility="{Binding VisibleRepeat}" IsEnabled="{Binding IsRepeatEnabled}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
+                        <uicontrol:NumberTextBox Visibility="{Binding VisibleRepeat}" Text="{Binding RepeatCount}" IsEnabled="{Binding IsRepeatEnabled}" Width="35" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
+                    </StackPanel>
+
+                    <Image Grid.Column="5" Source="{Binding ToCompanyImage}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                </Grid>
+        </Grid>
+            <Grid Grid.Row="1" Background="AliceBlue">
+                <ContentControl Content="{Binding CurrentViewModel}"/>
+            </Grid>
+            <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" Height="3" Margin="0" Background="AliceBlue" />
+            <Grid Grid.Row="3" HorizontalAlignment="Stretch" Background="LightGoldenrodYellow">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" VerticalAlignment="Top" Background="LightBlue">
+                    <Border BorderBrush="Black" BorderThickness="1"/>
+                    <TextBlock Text=" Received Message" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource MyTextBlockStyle}"/>
+                </Grid>
+                <Grid Grid.Row="1" Background="AliceBlue">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="170"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" VerticalAlignment="Top" Height="170">
+                        <Border BorderBrush="LightSkyBlue" BorderThickness="2"/>
+                        <RichTextBox Margin="5" IsReadOnly="True" Style="{StaticResource MyRichTextBoxStyle}">
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Run Text="{Binding ReceivedMessage}"/>
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+                    </Grid>
+                    <Grid Grid.Row="1" VerticalAlignment="Stretch">
+                        <Border BorderBrush="LightBlue" BorderThickness="2"/>
+                        <RichTextBox Margin="5" IsReadOnly="True" Style="{StaticResource MyRichTextBoxStyle}">
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Run Text="{Binding ReceivedRawMessage}"/>
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
-    </Grid>
+    <!--</ScrollViewer>-->
 </Window>
