@@ -11,17 +11,17 @@
         private byte _hour = 8;
         private byte _min = 48;
         private byte _second = 49;
-        private char _gpsEnable = 'A';
+        private string _gpsEnable = "A";
         private byte _latDegree = 35;
         private byte _latDegreePoint1 = 10;
         private byte _latDegreePoint2 = 30;
         private byte _latDegreePoint3 = 97;
-        private char _ns = 'N';
+        private string _ns = "N";
         private byte _longDegree = 129;
         private byte _longDegreePoint1 = 8;
         private byte _longDegreePoint2 = 0;
         private byte _longDegreePoint3 = 82;
-        private char _ew = 'E';
+        private string _ew = "E";
         private string _speed = "32.96";
         private string _maxSpeed = "34.26";
         private bool _isCharging = true;
@@ -33,7 +33,7 @@
         private int _alarm = 0;
         private short _geofenceInOutIndex = -1;
         private byte _geofenceInOutState = 0;
-        private char _commCode = '2';
+        private string _commCode = "2";
         private short _rsrp = -55;
         private short _rscp = 0;
         private short _rssi = 0;
@@ -138,7 +138,7 @@
                 }
             }
         }
-        public char GPSEnable
+        public string GPSEnable
         {
             get { return _gpsEnable; }
             set
@@ -193,7 +193,7 @@
                 }
             }
         }
-        public char NS
+        public string NS
         {
             get { return _ns; }
             set
@@ -248,7 +248,7 @@
                 }
             }
         }
-        public char EW
+        public string EW
         {
             get { return _ew; }
             set
@@ -380,7 +380,7 @@
                 }
             }
         }
-        public char CommCode
+        public string CommCode
         {
             get { return _commCode; }
             set

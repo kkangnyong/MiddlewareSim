@@ -15,7 +15,7 @@ namespace SimReeferMiddlewareSystemWPF.UIControl
 
         private void TextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+"); // 숫자, 마이너스 기호, 소수점만 허용
+            Regex regex = new Regex("[^0-9.-]+"); // 숫자, 마이너스 기호, 소수점만 허용
             e.Handled = regex.IsMatch(e.Text);
         }
     }

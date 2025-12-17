@@ -1,6 +1,7 @@
 ﻿using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
+using SimReeferMiddlewareSystemWPF.Utils;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
 {
@@ -18,6 +19,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
         public ProtocolViewModelVer8 ProtocolVer8 { get { if (_protocolver8 == null) _protocolver8 = new ProtocolViewModelVer8(); return _protocolver8.Instance; } }
 
         private List<short> _codeList { get; set; } = new List<short>() { (short)CodeType.CommonData, (short)CodeType.LastData };
+        private List<string> _gpsEnableTypeList { get; set; } = new List<string>() { GPSEnableType.A.ToDescription(), GPSEnableType.V.ToDescription() };
+        private List<string> _nsList { get; set; } = new List<string>() { NSType.North.ToDescription(), NSType.South.ToDescription() };
+        private List<string> _ewList { get; set; } = new List<string>() { EWType.East.ToDescription(), EWType.West.ToDescription() };
+        private List<bool> _isChargeList { get; set; } = new List<bool>() { false, true };
 
         public DeviceBodyViewModelVer8() { }
 
@@ -31,6 +36,58 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
         private void OnCurrentDeviceBodyChanged(DeviceBodyModel model)
         {
             DeviceNumber = model.DeviceNumber;
+        }
+
+        public List<string> NSList
+        {
+            get { return _nsList; }
+            set
+            {
+                if (_nsList != null)
+                {
+                    _nsList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public List<string> EWList
+        {
+            get { return _ewList; }
+            set
+            {
+                if (_ewList != null)
+                {
+                    _ewList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public List<bool> ChargeList
+        {
+            get { return _isChargeList; }
+            set
+            {
+                if (_isChargeList != null)
+                {
+                    _isChargeList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public List<string> GPSEnableList
+        {
+            get { return _gpsEnableTypeList; }
+            set
+            {
+                if (_gpsEnableTypeList != null)
+                {
+                    _gpsEnableTypeList = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public List<short> CodeList
@@ -160,7 +217,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 }
             }
         }
-        public char GPSEnable
+        public string GPSEnable
         {
             get { return DeviceBodyModel.GPSEnable; }
             set
@@ -220,7 +277,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 }
             }
         }
-        public char NS
+        public string NS
         {
             get { return DeviceBodyModel.NS; }
             set
@@ -280,7 +337,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 }
             }
         }
-        public char EW
+        public string EW
         {
             get { return DeviceBodyModel.EW; }
             set
@@ -424,7 +481,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
                 }
             }
         }
-        public char CommCode
+        public string CommCode
         {
             get { return DeviceBodyModel.CommCode; }
             set

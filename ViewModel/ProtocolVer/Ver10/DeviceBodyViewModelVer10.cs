@@ -160,7 +160,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
                 }
             }
         }
-        public char GPSEnable
+        public string GPSEnable
         {
             get { return DeviceBodyModel.GPSEnable; }
             set
@@ -220,7 +220,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
                 }
             }
         }
-        public char NS
+        public string NS
         {
             get { return DeviceBodyModel.NS; }
             set
@@ -280,7 +280,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
                 }
             }
         }
-        public char EW
+        public string EW
         {
             get { return DeviceBodyModel.EW; }
             set
@@ -424,7 +424,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
                 }
             }
         }
-        public char CommCode
+        public string CommCode
         {
             get { return DeviceBodyModel.CommCode; }
             set

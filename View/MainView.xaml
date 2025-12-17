@@ -168,7 +168,7 @@
                     <TextBlock Grid.Column="0" Text="IP:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
                     <TextBox Grid.Column="1" Text="{Binding IP}" IsEnabled="{Binding IsEnabled}" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
                     <TextBlock Grid.Column="2" Text="Port:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
-                    <TextBox Grid.Column="3" Text="{Binding Port}" IsEnabled="{Binding IsEnabled}" Margin="0,0,5,0" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
+                    <uicontrol:NumberTextBox Grid.Column="3" Text="{Binding Port}" IsEnabled="{Binding IsEnabled}" Margin="0,0,5,0" Style="{StaticResource MyTextBoxStyle}" BorderThickness="1" BorderBrush="Black"/>
 
                     <StackPanel Grid.Column="4" Orientation="Horizontal" >
                         <TextBlock Text="Protocol Version:" Visibility="{Binding VisibleMenuOption}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,5,0" Style="{StaticResource MyTextBlockStyle}"/>
