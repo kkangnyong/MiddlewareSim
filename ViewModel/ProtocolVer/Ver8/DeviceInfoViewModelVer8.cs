@@ -38,7 +38,6 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver8
             }
         }
 
-
         public int Code
         {
             get { return DeviceInfoModel.Code; }

@@ -14,6 +14,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
 
         private DeviceInfoModel _deviceInfoModel;
         public DeviceInfoModel DeviceInfoModel { get { if (_deviceInfoModel == null) _deviceInfoModel = Instance._deviceInfoStore._currentDeviceInfo = new DeviceInfoModel(); return _deviceInfoModel; } }
+        private List<bool> _isChargeList { get; set; } = new List<bool>() { false, true };
 
         public DeviceInfoViewModelVer10() { }
 
@@ -24,6 +25,18 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
             _deviceBodyStore = deviceBodyStore;
         }
 
+        public List<bool> ChargeList
+        {
+            get { return _isChargeList; }
+            set
+            {
+                if (_isChargeList != null)
+                {
+                    _isChargeList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public int Code
         {

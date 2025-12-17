@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9"
+             xmlns:uicontrol="clr-namespace:SimReeferMiddlewareSystemWPF.UIControl"
              mc:Ignorable="d">
     <!--xmlns:m="clr-namespace:SimReeferMiddlewareSystemWPF.Model"-->
     <UserControl.Resources>
@@ -107,44 +108,44 @@
             <TextBlock Grid.Row="38" Grid.Column="0" Text="etcCode" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
 
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ContainerSN}" Margin="3"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Sp}" Margin="3"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Ss}" Margin="3"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Dss}" Margin="3"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Rs}" Margin="3"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Eos}" Margin="3"/>
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Ambs}" Margin="3"/>
-            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Dchs}" Margin="3"/>
-            <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Sgs}" Margin="3"/>
-            <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Tintern}" Margin="3"/>
-            <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Tfc}" Margin="3"/>
-            <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding AirExchange}" Margin="3"/>
-            <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding TotalCurrent}" Margin="3"/>
-            <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding Usda1}" Margin="3"/>
-            <TextBox Grid.Row="14" Grid.Column="1" Text="{Binding Usda2}" Margin="3"/>
-            <TextBox Grid.Row="15" Grid.Column="1" Text="{Binding Usda3}" Margin="3"/>
-            <TextBox Grid.Row="16" Grid.Column="1" Text="{Binding Cts}" Margin="3"/>
-            <TextBox Grid.Row="17" Grid.Column="1" Text="{Binding Humid}" Margin="3"/>
-            <TextBox Grid.Row="18" Grid.Column="1" Text="{Binding HumiditySet}" Margin="3"/>
-            <TextBox Grid.Row="19" Grid.Column="1" Text="{Binding O2}" Margin="3"/>
-            <TextBox Grid.Row="20" Grid.Column="1" Text="{Binding O2Set}" Margin="3"/>
-            <TextBox Grid.Row="21" Grid.Column="1" Text="{Binding Co2}" Margin="3"/>
-            <TextBox Grid.Row="22" Grid.Column="1" Text="{Binding Co2Set}" Margin="3"/>
-            <TextBox Grid.Row="23" Grid.Column="1" Text="{Binding ModeType}" Margin="3"/>
-            <TextBox Grid.Row="24" Grid.Column="1" Text="{Binding Hrp}" Margin="3"/>
-            <TextBox Grid.Row="25" Grid.Column="1" Text="{Binding Lrp}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="1" Grid.Column="1" Text="{Binding Sp}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="2" Grid.Column="1" Text="{Binding Ss}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="3" Grid.Column="1" Text="{Binding Dss}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="4" Grid.Column="1" Text="{Binding Rs}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="5" Grid.Column="1" Text="{Binding Eos}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="6" Grid.Column="1" Text="{Binding Ambs}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="7" Grid.Column="1" Text="{Binding Dchs}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="8" Grid.Column="1" Text="{Binding Sgs}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="9" Grid.Column="1" Text="{Binding Tintern}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="10" Grid.Column="1" Text="{Binding Tfc}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="11" Grid.Column="1" Text="{Binding AirExchange}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="12" Grid.Column="1" Text="{Binding TotalCurrent}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="13" Grid.Column="1" Text="{Binding Usda1}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="14" Grid.Column="1" Text="{Binding Usda2}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="15" Grid.Column="1" Text="{Binding Usda3}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="16" Grid.Column="1" Text="{Binding Cts}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="17" Grid.Column="1" Text="{Binding Humid}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="18" Grid.Column="1" Text="{Binding HumiditySet}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="19" Grid.Column="1" Text="{Binding O2}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="20" Grid.Column="1" Text="{Binding O2Set}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="21" Grid.Column="1" Text="{Binding Co2}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="22" Grid.Column="1" Text="{Binding Co2Set}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="23" Grid.Column="1" Text="{Binding ModeType}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="24" Grid.Column="1" Text="{Binding Hrp}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="25" Grid.Column="1" Text="{Binding Lrp}" Margin="3"/>
             <TextBox Grid.Row="26" Grid.Column="1" Text="{Binding Phase3Voltage}" Margin="3"/>
             <TextBox Grid.Row="27" Grid.Column="1" Text="{Binding Phase3Current}" Margin="3"/>
-            <TextBox Grid.Row="28" Grid.Column="1" Text="{Binding Pt}" Margin="3"/>
-            <TextBox Grid.Row="29" Grid.Column="1" Text="{Binding Ifc}" Margin="3"/>
-            <TextBox Grid.Row="30" Grid.Column="1" Text="{Binding DefrostInter}" Margin="3"/>
-            <TextBox Grid.Row="31" Grid.Column="1" Text="{Binding IsoStatus}" Margin="3"/>
-            <TextBox Grid.Row="32" Grid.Column="1" Text="{Binding Status}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="28" Grid.Column="1" Text="{Binding Pt}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="29" Grid.Column="1" Text="{Binding Ifc}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="30" Grid.Column="1" Text="{Binding DefrostInter}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="31" Grid.Column="1" Text="{Binding IsoStatus}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="32" Grid.Column="1" Text="{Binding Status}" Margin="3"/>
             <TextBox Grid.Row="33" Grid.Column="1" Text="{Binding Alarms}" Margin="3"/>
             <TextBox Grid.Row="34" Grid.Column="1" Text="{Binding PrivateAlarms}" Margin="3"/>
-            <TextBox Grid.Row="35" Grid.Column="1" Text="{Binding Controller}" Margin="3"/>
-            <TextBox Grid.Row="36" Grid.Column="1" Text="{Binding HwVer}" Margin="3"/>
-            <TextBox Grid.Row="37" Grid.Column="1" Text="{Binding SwVer}" Margin="3"/>
-            <TextBox Grid.Row="38" Grid.Column="1" Text="{Binding EtcCode}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="35" Grid.Column="1" Text="{Binding Controller}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="36" Grid.Column="1" Text="{Binding HwVer}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="37" Grid.Column="1" Text="{Binding SwVer}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="38" Grid.Column="1" Text="{Binding EtcCode}" Margin="3"/>
         </Grid>
     </ScrollViewer>
 </UserControl>

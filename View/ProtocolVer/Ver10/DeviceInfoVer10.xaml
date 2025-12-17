@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10"
+             xmlns:uicontrol="clr-namespace:SimReeferMiddlewareSystemWPF.UIControl"
              mc:Ignorable="d">
              <!--xmlns:m="clr-namespace:SimReeferMiddlewareSystemWPF.Model"-->
     <UserControl.Resources>
@@ -110,47 +111,47 @@
             <TextBlock Grid.Row="39" Grid.Column="0" Text="voltage" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="40" Grid.Column="0" Text="isCharging" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
 
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Code}" Margin="3"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding DeviceNumber}" Margin="3"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Major}" Margin="3"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Minor}" Margin="3"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Revision}" Margin="3"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding BLEMajor}" Margin="3"/>
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding BLEMinor}" Margin="3"/>
-            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding BLERevision}" Margin="3"/>
-            <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding DbgIdCode}" Margin="3"/>
-            <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding PwrCSR}" Margin="3"/>
-            <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding RccCSR}" Margin="3"/>
-            <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding FlashSR}" Margin="3"/>
-            <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding FlashOBR}" Margin="3"/>
-            <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding LwdgSR}" Margin="3"/>
-            <TextBox Grid.Row="14" Grid.Column="1" Text="{Binding CurStandbyCount}" Margin="3"/>
-            <TextBox Grid.Row="15" Grid.Column="1" Text="{Binding LastGeofenceIndex}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="0" Grid.Column="1" Text="{Binding Code}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="1" Grid.Column="1" Text="{Binding DeviceNumber}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="2" Grid.Column="1" Text="{Binding Major}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="3" Grid.Column="1" Text="{Binding Minor}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="4" Grid.Column="1" Text="{Binding Revision}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="5" Grid.Column="1" Text="{Binding BLEMajor}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="6" Grid.Column="1" Text="{Binding BLEMinor}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="7" Grid.Column="1" Text="{Binding BLERevision}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="8" Grid.Column="1" Text="{Binding DbgIdCode}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="9" Grid.Column="1" Text="{Binding PwrCSR}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="10" Grid.Column="1" Text="{Binding RccCSR}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="11" Grid.Column="1" Text="{Binding FlashSR}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="12" Grid.Column="1" Text="{Binding FlashOBR}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="13" Grid.Column="1" Text="{Binding LwdgSR}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="14" Grid.Column="1" Text="{Binding CurStandbyCount}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="15" Grid.Column="1" Text="{Binding LastGeofenceIndex}" Margin="3"/>
             <TextBox Grid.Row="16" Grid.Column="1" Text="{Binding UsimIMSI}" Margin="3"/>
             <TextBox Grid.Row="17" Grid.Column="1" Text="{Binding Iccid}" Margin="3"/>
-            <TextBox Grid.Row="18" Grid.Column="1" Text="{Binding MCCMNC}" Margin="3"/>
-            <TextBox Grid.Row="19" Grid.Column="1" Text="{Binding Lac}" Margin="3"/>
-            <TextBox Grid.Row="20" Grid.Column="1" Text="{Binding CellID}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="18" Grid.Column="1" Text="{Binding MCCMNC}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="19" Grid.Column="1" Text="{Binding Lac}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="20" Grid.Column="1" Text="{Binding CellID}" Margin="3"/>
             <TextBox Grid.Row="21" Grid.Column="1" Text="{Binding WireType}" Margin="3"/>
             <TextBox Grid.Row="22" Grid.Column="1" Text="{Binding ActiveBand}" Margin="3"/>
             <TextBox Grid.Row="23" Grid.Column="1" Text="{Binding CellOperator}" Margin="3"/>
-            <TextBox Grid.Row="24" Grid.Column="1" Text="{Binding Ccpr}" Margin="3"/>
-            <TextBox Grid.Row="25" Grid.Column="1" Text="{Binding CommPeriod}" Margin="3"/>
-            <TextBox Grid.Row="26" Grid.Column="1" Text="{Binding GpsTimeout}" Margin="3"/>
-            <TextBox Grid.Row="27" Grid.Column="1" Text="{Binding GpsStableTime}" Margin="3"/>
-            <TextBox Grid.Row="28" Grid.Column="1" Text="{Binding WireConnTimeout}" Margin="3"/>
-            <TextBox Grid.Row="29" Grid.Column="1" Text="{Binding RetryCount}" Margin="3"/>
-            <TextBox Grid.Row="30" Grid.Column="1" Text="{Binding RcCount}" Margin="3"/>
-            <TextBox Grid.Row="31" Grid.Column="1" Text="{Binding TotalStandbyCount}" Margin="3"/>
-            <TextBox Grid.Row="32" Grid.Column="1" Text="{Binding AccelShockUpper}" Margin="3"/>
-            <TextBox Grid.Row="33" Grid.Column="1" Text="{Binding SetTempLower}" Margin="3"/>
-            <TextBox Grid.Row="34" Grid.Column="1" Text="{Binding SetTempUpper}" Margin="3"/>
-            <TextBox Grid.Row="35" Grid.Column="1" Text="{Binding HumidLower}" Margin="3"/>
-            <TextBox Grid.Row="36" Grid.Column="1" Text="{Binding HumidUpper}" Margin="3"/>
-            <TextBox Grid.Row="37" Grid.Column="1" Text="{Binding StateChangedAlarm}" Margin="3"/>
-            <TextBox Grid.Row="38" Grid.Column="1" Text="{Binding CutOffVoltage}" Margin="3"/>
-            <TextBox Grid.Row="39" Grid.Column="1" Text="{Binding Voltage}" Margin="3"/>
-            <TextBox Grid.Row="40" Grid.Column="1" Text="{Binding IsCharging}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="24" Grid.Column="1" Text="{Binding Ccpr}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="25" Grid.Column="1" Text="{Binding CommPeriod}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="26" Grid.Column="1" Text="{Binding GpsTimeout}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="27" Grid.Column="1" Text="{Binding GpsStableTime}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="28" Grid.Column="1" Text="{Binding WireConnTimeout}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="29" Grid.Column="1" Text="{Binding RetryCount}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="30" Grid.Column="1" Text="{Binding RcCount}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="31" Grid.Column="1" Text="{Binding TotalStandbyCount}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="32" Grid.Column="1" Text="{Binding AccelShockUpper}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="33" Grid.Column="1" Text="{Binding SetTempLower}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="34" Grid.Column="1" Text="{Binding SetTempUpper}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="35" Grid.Column="1" Text="{Binding HumidLower}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="36" Grid.Column="1" Text="{Binding HumidUpper}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="37" Grid.Column="1" Text="{Binding StateChangedAlarm}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="38" Grid.Column="1" Text="{Binding CutOffVoltage}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="39" Grid.Column="1" Text="{Binding Voltage}" Margin="3"/>
+            <ComboBox Grid.Row="40" Grid.Column="1" SelectedItem="{Binding IsCharging}" ItemsSource="{Binding ChargeList}" Margin="3"/>
         </Grid>
     </ScrollViewer>
 </UserControl>

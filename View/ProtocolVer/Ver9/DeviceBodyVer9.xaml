@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9"
+             xmlns:uicontrol="clr-namespace:SimReeferMiddlewareSystemWPF.UIControl"
              mc:Ignorable="d">
     <UserControl.Resources>
         <vm:DeviceBodyViewModelVer9 x:Key="DeviceBodyViewModelVer9"/>
@@ -92,36 +93,36 @@
             <TextBlock Grid.Row="31" Grid.Column="0" Text="commCode" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
 
             <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding Code}" ItemsSource="{Binding CodeList}" Margin="3"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Index}" Margin="3"/>
-            <TextBox Grid.Row="2" Grid.Column="1" IsEnabled="False" Text="{Binding DeviceNumber}" Margin="3"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Year}" Margin="3"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Month}" Margin="3"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Day}" Margin="3"/>
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Hour}" Margin="3"/>
-            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Min}" Margin="3"/>
-            <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Second}" Margin="3"/>
-            <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding GPSEnable}" Margin="3"/>
-            <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding LatDegree}" Margin="3"/>
-            <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding LatDegreePoint1}" Margin="3"/>
-            <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding LatDegreePoint2}" Margin="3"/>
-            <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding LatDegreePoint3}" Margin="3"/>
-            <TextBox Grid.Row="14" Grid.Column="1" Text="{Binding NS}" Margin="3"/>
-            <TextBox Grid.Row="15" Grid.Column="1" Text="{Binding LongDegree}" Margin="3"/>
-            <TextBox Grid.Row="16" Grid.Column="1" Text="{Binding LongDegreePoint1}" Margin="3"/>
-            <TextBox Grid.Row="17" Grid.Column="1" Text="{Binding LongDegreePoint2}" Margin="3"/>
-            <TextBox Grid.Row="18" Grid.Column="1" Text="{Binding LongDegreePoint3}" Margin="3"/>
-            <TextBox Grid.Row="19" Grid.Column="1" Text="{Binding EW}" Margin="3"/>
-            <TextBox Grid.Row="20" Grid.Column="1" Text="{Binding Speed}" Margin="3"/>
-            <TextBox Grid.Row="21" Grid.Column="1" Text="{Binding MaxSpeed}" Margin="3"/>
-            <TextBox Grid.Row="22" Grid.Column="1" Text="{Binding IsCharging}" Margin="3"/>
-            <TextBox Grid.Row="23" Grid.Column="1" Text="{Binding Battery}" Margin="3"/>
-            <TextBox Grid.Row="24" Grid.Column="1" Text="{Binding Temp}" Margin="3"/>
-            <TextBox Grid.Row="25" Grid.Column="1" Text="{Binding AcclX}" Margin="3"/>
-            <TextBox Grid.Row="26" Grid.Column="1" Text="{Binding AcclY}" Margin="3"/>
-            <TextBox Grid.Row="27" Grid.Column="1" Text="{Binding AcclZ}" Margin="3"/>
-            <TextBox Grid.Row="28" Grid.Column="1" Text="{Binding Alarm}" Margin="3"/>
-            <TextBox Grid.Row="29" Grid.Column="1" Text="{Binding GeofenceInOutIndex}" Margin="3"/>
-            <TextBox Grid.Row="30" Grid.Column="1" Text="{Binding GeofenceInOutState}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="1" Grid.Column="1" Text="{Binding Index}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="2" Grid.Column="1" IsEnabled="False" Text="{Binding DeviceNumber}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="3" Grid.Column="1" Text="{Binding Year}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="4" Grid.Column="1" Text="{Binding Month}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="5" Grid.Column="1" Text="{Binding Day}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="6" Grid.Column="1" Text="{Binding Hour}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="7" Grid.Column="1" Text="{Binding Min}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="8" Grid.Column="1" Text="{Binding Second}" Margin="3"/>
+            <ComboBox Grid.Row="9" Grid.Column="1" SelectedItem="{Binding GPSEnable}" ItemsSource="{Binding GPSEnableList}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="10" Grid.Column="1" Text="{Binding LatDegree}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="11" Grid.Column="1" Text="{Binding LatDegreePoint1}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="12" Grid.Column="1" Text="{Binding LatDegreePoint2}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="13" Grid.Column="1" Text="{Binding LatDegreePoint3}" Margin="3"/>
+            <ComboBox Grid.Row="14" Grid.Column="1" SelectedItem="{Binding NS}" ItemsSource="{Binding NSList}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="15" Grid.Column="1" Text="{Binding LongDegree}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="16" Grid.Column="1" Text="{Binding LongDegreePoint1}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="17" Grid.Column="1" Text="{Binding LongDegreePoint2}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="18" Grid.Column="1" Text="{Binding LongDegreePoint3}" Margin="3"/>
+            <ComboBox Grid.Row="19" Grid.Column="1" SelectedItem="{Binding EW}" ItemsSource="{Binding EWList}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="20" Grid.Column="1" Text="{Binding Speed}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="21" Grid.Column="1" Text="{Binding MaxSpeed}" Margin="3"/>
+            <ComboBox Grid.Row="22" Grid.Column="1" SelectedItem="{Binding IsCharging}" ItemsSource="{Binding ChargeList}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="23" Grid.Column="1" Text="{Binding Battery}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="24" Grid.Column="1" Text="{Binding Temp}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="25" Grid.Column="1" Text="{Binding AcclX}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="26" Grid.Column="1" Text="{Binding AcclY}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="27" Grid.Column="1" Text="{Binding AcclZ}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="28" Grid.Column="1" Text="{Binding Alarm}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="29" Grid.Column="1" Text="{Binding GeofenceInOutIndex}" Margin="3"/>
+            <uicontrol:NumberTextBox Grid.Row="30" Grid.Column="1" Text="{Binding GeofenceInOutState}" Margin="3"/>
             <TextBox Grid.Row="31" Grid.Column="1" Text="{Binding CommCode}" Margin="3"/>
 
         </Grid>

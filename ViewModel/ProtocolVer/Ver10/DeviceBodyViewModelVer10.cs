@@ -1,6 +1,7 @@
 ﻿using SimReeferMiddlewareSystemWPF.Model;
 using SimReeferMiddlewareSystemWPF.Service;
 using SimReeferMiddlewareSystemWPF.Store;
+using SimReeferMiddlewareSystemWPF.Utils;
 
 namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
 {
@@ -18,6 +19,10 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
         public ProtocolViewModelVer10 ProtocolVer10 { get { if (_protocolver10 == null) _protocolver10 = new ProtocolViewModelVer10(); return _protocolver10.Instance; } }
 
         private List<short> _codeList { get; set; } = new List<short>() { (short)CodeType.CommonData, (short)CodeType.LastData };
+        private List<string> _gpsEnableTypeList { get; set; } = new List<string>() { GPSEnableType.A.ToDescription(), GPSEnableType.V.ToDescription() };
+        private List<string> _nsList { get; set; } = new List<string>() { NSType.North.ToDescription(), NSType.South.ToDescription() };
+        private List<string> _ewList { get; set; } = new List<string>() { EWType.East.ToDescription(), EWType.West.ToDescription() };
+        private List<bool> _isChargeList { get; set; } = new List<bool>() { false, true };
 
         public DeviceBodyViewModelVer10() { }
 
@@ -31,6 +36,58 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver10
         private void OnCurrentDeviceBodyChanged(DeviceBodyModel model)
         {
             DeviceNumber = model.DeviceNumber;
+        }
+
+        public List<string> NSList
+        {
+            get { return _nsList; }
+            set
+            {
+                if (_nsList != null)
+                {
+                    _nsList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public List<string> EWList
+        {
+            get { return _ewList; }
+            set
+            {
+                if (_ewList != null)
+                {
+                    _ewList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public List<bool> ChargeList
+        {
+            get { return _isChargeList; }
+            set
+            {
+                if (_isChargeList != null)
+                {
+                    _isChargeList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public List<string> GPSEnableList
+        {
+            get { return _gpsEnableTypeList; }
+            set
+            {
+                if (_gpsEnableTypeList != null)
+                {
+                    _gpsEnableTypeList = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public List<short> CodeList
