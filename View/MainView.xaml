@@ -161,7 +161,7 @@
                         <ColumnDefinition Width="210"/>
                         <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="70"/>
-                        <ColumnDefinition Width="1400"/>
+                        <ColumnDefinition Width="1420"/>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="IP:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>
