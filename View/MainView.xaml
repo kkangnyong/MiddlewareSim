@@ -15,7 +15,6 @@
         xmlns:uicontrol="clr-namespace:SimReeferMiddlewareSystemWPF.UIControl"
         mc:Ignorable="d"
         Title="{Binding TitleVersion}">
-    <!--Height="800" MinWidth="1920">-->
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewmodel8:ProtocolViewModelVer8}">
             <local8:ProtocolVer8/>
@@ -162,7 +161,7 @@
                         <ColumnDefinition Width="210"/>
                         <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="70"/>
-                        <ColumnDefinition Width="1450"/>
+                        <ColumnDefinition Width="1400"/>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="IP:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource MyTextBlockStyle}"/>

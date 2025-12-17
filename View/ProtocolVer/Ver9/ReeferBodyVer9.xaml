@@ -63,39 +63,39 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="130"/>
-                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="containerSN" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="sp" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="ss" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="3" Grid.Column="0" Text="dss" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="4" Grid.Column="0" Text="rs" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="5" Grid.Column="0" Text="eos" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="6" Grid.Column="0" Text="ambs" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="7" Grid.Column="0" Text="dchs" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="8" Grid.Column="0" Text="sgs" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="9" Grid.Column="0" Text="tintern" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="10" Grid.Column="0" Text="tfc" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="sp(온도)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="ss(온도)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="dss(온도)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="rs(온도)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="eos(온도)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="ambs(온도)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="7" Grid.Column="0" Text="dchs(온도)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="8" Grid.Column="0" Text="sgs(온도)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="9" Grid.Column="0" Text="tintern(온도)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="10" Grid.Column="0" Text="tfc(온도)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="11" Grid.Column="0" Text="airExchange" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="12" Grid.Column="0" Text="totalCurrent" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="13" Grid.Column="0" Text="usda1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="14" Grid.Column="0" Text="usda2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="15" Grid.Column="0" Text="usda3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="16" Grid.Column="0" Text="cts" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="17" Grid.Column="0" Text="humid" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="18" Grid.Column="0" Text="humiditySet" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="19" Grid.Column="0" Text="o2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="20" Grid.Column="0" Text="o2Set" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="21" Grid.Column="0" Text="co2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="22" Grid.Column="0" Text="co2Set" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="12" Grid.Column="0" Text="totalCurrent(A)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="13" Grid.Column="0" Text="usda1(온도)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="14" Grid.Column="0" Text="usda2(온도)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="15" Grid.Column="0" Text="usda3(온도)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="16" Grid.Column="0" Text="cts(온도)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="17" Grid.Column="0" Text="humid(%)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="18" Grid.Column="0" Text="humiditySet(%)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="19" Grid.Column="0" Text="o2(%)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="20" Grid.Column="0" Text="o2Set(%)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="21" Grid.Column="0" Text="co2(%)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="22" Grid.Column="0" Text="co2Set(%)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="23" Grid.Column="0" Text="modeType" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="24" Grid.Column="0" Text="hrp" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="25" Grid.Column="0" Text="lrp" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="26" Grid.Column="0" Text="phase3Voltage" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="27" Grid.Column="0" Text="phase3Current" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="28" Grid.Column="0" Text="pt" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="24" Grid.Column="0" Text="hrp(kpa)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="25" Grid.Column="0" Text="lrp(kpa)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="26" Grid.Column="0" Text="phase3Voltage(v)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="27" Grid.Column="0" Text="phase3Current(A)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="28" Grid.Column="0" Text="pt(v)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="29" Grid.Column="0" Text="ifc" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="30" Grid.Column="0" Text="defrostInter" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="31" Grid.Column="0" Text="isoStatus" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>

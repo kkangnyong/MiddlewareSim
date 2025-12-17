@@ -37,27 +37,27 @@
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="130"/>
-                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="code" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="1" Grid.Column="0" Text="ccpr" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="commPeriod" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="3" Grid.Column="0" Text="gpsTimeOut" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="4" Grid.Column="0" Text="gpsStableTime" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="5" Grid.Column="0" Text="wireConnTimeOut" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="6" Grid.Column="0" Text="retryCount" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="7" Grid.Column="0" Text="rcCount" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="8" Grid.Column="0" Text="totalStandbyCount" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="9" Grid.Column="0" Text="accelShockUpper" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="commPeriod(분)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="gpsTimeOut(초)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="gpsStableTime(초)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="wireConnTimeOut(초)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="retryCount(회)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="7" Grid.Column="0" Text="rcCount(회)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="8" Grid.Column="0" Text="totalStandbyCount(분)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="9" Grid.Column="0" Text="accelShockUpper(G)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="10" Grid.Column="0" Text="setTempLower" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="11" Grid.Column="0" Text="setTempUpper" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="12" Grid.Column="0" Text="humidLower" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="13" Grid.Column="0" Text="humidUpper" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="14" Grid.Column="0" Text="stateChangeAlarm" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="15" Grid.Column="0" Text="cutOffVoltage" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="15" Grid.Column="0" Text="cutOffVoltage(v)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
 
             <TextBox Grid.Row="0" Grid.Column="1" IsEnabled="False" Text="{Binding Code}" Margin="3"/>
             <TextBox Grid.Row="1" Grid.Column="1" IsEnabled="False" Text="{Binding CCPR}" Margin="3"/>

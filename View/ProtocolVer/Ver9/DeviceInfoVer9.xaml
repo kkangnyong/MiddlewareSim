@@ -61,8 +61,8 @@
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="130"/>
-                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
 
@@ -77,10 +77,10 @@
             <TextBlock Grid.Row="8" Grid.Column="0" Text="flashSR" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="9" Grid.Column="0" Text="flashOBR" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="10" Grid.Column="0" Text="lwdgSR" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="11" Grid.Column="0" Text="curStandbyCount" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="11" Grid.Column="0" Text="curStandbyCount(분)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="12" Grid.Column="0" Text="lastGeofenceIndex" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="13" Grid.Column="0" Text="usimIMSI" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="14" Grid.Column="0" Text="rssi" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="14" Grid.Column="0" Text="rssi(dBm)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="15" Grid.Column="0" Text="mccmnc" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="16" Grid.Column="0" Text="lac" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="17" Grid.Column="0" Text="cellID" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
@@ -88,21 +88,21 @@
             <TextBlock Grid.Row="19" Grid.Column="0" Text="activeBand" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="20" Grid.Column="0" Text="cellOperator" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="21" Grid.Column="0" Text="ccpr" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="22" Grid.Column="0" Text="commPeriod" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="23" Grid.Column="0" Text="gpsTimeout" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="24" Grid.Column="0" Text="gpsStableTime" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="25" Grid.Column="0" Text="wireConnTimeout" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="26" Grid.Column="0" Text="retryCount" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="27" Grid.Column="0" Text="rcCount" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="28" Grid.Column="0" Text="totalStandbyCount" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="29" Grid.Column="0" Text="accelShockUpper" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="22" Grid.Column="0" Text="commPeriod(분)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="23" Grid.Column="0" Text="gpsTimeout(초)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="24" Grid.Column="0" Text="gpsStableTime(초)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="25" Grid.Column="0" Text="wireConnTimeout(초)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="26" Grid.Column="0" Text="retryCount(회)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="27" Grid.Column="0" Text="rcCount(회)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="28" Grid.Column="0" Text="totalStandbyCount(분)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="29" Grid.Column="0" Text="accelShockUpper(G)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="30" Grid.Column="0" Text="setTempLower" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="31" Grid.Column="0" Text="setTempUpper" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="32" Grid.Column="0" Text="humidLower" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="33" Grid.Column="0" Text="humidUpper" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="34" Grid.Column="0" Text="stateChangedAlarm" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="35" Grid.Column="0" Text="cutOffVoltage" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="36" Grid.Column="0" Text="voltage" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="35" Grid.Column="0" Text="cutOffVoltage(v)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="36" Grid.Column="0" Text="voltage(v)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="37" Grid.Column="0" Text="isCharging" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
 
 

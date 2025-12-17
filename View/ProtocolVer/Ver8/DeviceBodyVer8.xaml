@@ -54,15 +54,15 @@
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="130"/>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="code" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="1" Grid.Column="0" Text="index" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="2" Grid.Column="0" Text="deviceNumber" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="3" Grid.Column="0" Text="year" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="year(형식:yy)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="4" Grid.Column="0" Text="month" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="5" Grid.Column="0" Text="day" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="6" Grid.Column="0" Text="hour" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
@@ -82,14 +82,14 @@
             <TextBlock Grid.Row="20" Grid.Column="0" Text="speed" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="21" Grid.Column="0" Text="maxSpeed" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="22" Grid.Column="0" Text="isCharging" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="23" Grid.Column="0" Text="battery" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="24" Grid.Column="0" Text="temp" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="23" Grid.Column="0" Text="battery(v)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="24" Grid.Column="0" Text="temp(온도)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="25" Grid.Column="0" Text="acclX" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="26" Grid.Column="0" Text="acclY" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="27" Grid.Column="0" Text="acclZ" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="28" Grid.Column="0" Text="alarm" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="29" Grid.Column="0" Text="geofenceInOutIndex" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="30" Grid.Column="0" Text="geofenceInOutState" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="29" Grid.Column="0" Text="InOutIndex(0:out,1:in,2:err)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="30" Grid.Column="0" Text="InOutState(1:wifi,2:mobile)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="31" Grid.Column="0" Text="commCode" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
 
             <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding Code}" ItemsSource="{Binding CodeList}" Margin="3"/>
