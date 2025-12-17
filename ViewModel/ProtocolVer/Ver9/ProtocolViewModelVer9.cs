@@ -63,7 +63,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
         private bool _isSensorDataEnabled { get; set; } = false;
         private bool _isStartCommandEnabled { get; set; } = false;
 
-        private string _contentSendStartData { get; set; } = "Send Start Data Packet";
+        private string _contentSendStartData { get; set; } = "Send Start Data\n Packet";
         private string _contentSendDeviceData { get; set; } = "Send Device Data Packet";
         private string _contentSendReeferData { get; set; } = "Send Reefer Data Packet";
         private string _contentSendSensorData { get; set; } = "Send Sensor Data Packet";
@@ -133,7 +133,7 @@ namespace SimReeferMiddlewareSystemWPF.ViewModel.ProtocolVer.Ver9
 
         public void InitButtonContent()
         {
-            ContentSendStartData = "Send Start Data Packet";
+            ContentSendStartData = "Send Start Data\n Packet";
             ContentSendDeviceData = "Send Device Data Packet";
             ContentSendReeferData = "Send Reefer Data Packet";
             ContentSendSensorData = "Send Sensor Data Packet";

@@ -54,7 +54,7 @@
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="160"/>
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
@@ -88,8 +88,8 @@
             <TextBlock Grid.Row="26" Grid.Column="0" Text="acclY" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="27" Grid.Column="0" Text="acclZ" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="28" Grid.Column="0" Text="alarm" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="29" Grid.Column="0" Text="InOutIndex(0:out,1:in,2:err)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
-            <TextBlock Grid.Row="30" Grid.Column="0" Text="InOutState(1:wifi,2:mobile)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="29" Grid.Column="0" Text="geoIndex(0:out,1:in,2:err)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
+            <TextBlock Grid.Row="30" Grid.Column="0" Text="geoState(1:wifi,2:mobile)" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
             <TextBlock Grid.Row="31" Grid.Column="0" Text="commCode" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3" Style="{StaticResource MyTextBlockStyle}"/>
 
             <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding Code}" ItemsSource="{Binding CodeList}" Margin="3"/>
