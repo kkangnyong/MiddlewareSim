@@ -1,7 +1,5 @@
-﻿using Mythosia;
-using Mythosia.Integrity.CRC;
-using Mythosia.Security.Cryptography;
-using SimReeferMiddlewareSystemWPF.Interface;
+﻿using SimReeferMiddlewareSystemWPF.Interface;
+using SimReeferMiddlewareSystemWPF.Utils;
 using SimReeferMiddlewareSystemWPF.ViewModel;
 using SimReeferMiddlewareSystemWPF.ViewModel.Menu;
 using System.ComponentModel;
